@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//comentario add para teste
 public class Montar
 {
     public static Localizacao montarLocal()
