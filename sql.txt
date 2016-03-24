@@ -1,0 +1,88 @@
+create table localizacao
+(
+	id serial primary key,
+	txt_logradouro varchar(100),
+        txt_complemento varchar(100),
+	txt_bairro varchar(100),
+	txt_cep varchar(100),
+        txt_cidade varchar(100),
+        estado varchar(5),
+	numero_numero int 
+);
+
+create table buffet
+(
+	id serial primary key,
+	numero_valorTotal real	
+);
+
+create table cerimonia
+(
+	id serial primary key,	
+	dt_dataHora timestamp,       
+	
+	id_localizacao int references localizacao(id),
+	id_buffet int references buffet(id)
+);
+
+create table produtorDeMidia
+(
+	id serial primary key,
+	dt_dataEHoraChegada timestamp,
+	numero_preco real,
+	txt_email varchar(100),
+        categoria varchar(30),
+	txt_linkParaRedeSocial varchar(100),
+        id_cerimonia int references cerimonia(id)
+);
+
+create table presente
+(
+	id serial primary key,
+	txt_nome varchar(50),
+	categoria varchar(50),
+	txt_descricao varchar(50),	
+	txt_ondeEncontrar varchar(50),
+	id_cerimonia int references cerimonia(id)
+);
+
+create table noivo
+(
+	id serial primary key,
+	txt_nome varchar(100),
+	txt_email varchar(100),
+	txt_senha varchar(100),
+	txt_telefone varchar(30),
+	id_cerimonia int references cerimonia(id)
+);
+
+create table convidado
+(
+	id serial primary key,
+	txt_nome varchar(100),
+	txt_email varchar(100),
+        categoria varchar(30),
+	id_cerimonia int references cerimonia(id)        
+);
+
+create table telefone
+(
+	id serial primary key,
+	categoria varchar(30),
+	txt_ddd varchar(5),
+	txt_numero varchar(15),
+        id_convidado int references convidado(id),
+        id_produtorDeMidia int references produtorDeMidia(id)
+);
+
+create table loja
+(
+	id serial primary key,	
+	txt_nome varchar(50),       
+	
+	id_localizacao int references localizacao(id),
+	id_telefone int references telefone(id),
+        id_presente int references presente(id)
+);
+
+
