@@ -1,12 +1,6 @@
 package testes;
 
-import entidades.Buffet;
-import entidades.Cerimonia;
-import entidades.Convidado;
-import entidades.ProdutorDeMidia;
-import entidades.Localizacao;
-import entidades.Presente;
-import entidades.Noivo;
+import entidades.*;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,14 +26,14 @@ public class Main
         
         Localizacao l = Montar.montarLocal();
         Buffet b = Montar.montarBuffet();
-
+       
         Cerimonia c = new Cerimonia();
 
         List<Presente> presentes = Montar.montarListaPresentes(c);
         List<Noivo> casal = Montar.montarCasal(c);
         List<Convidado> convidados = Montar.convidarPessoas(c);
         List<ProdutorDeMidia> produtoresDeMidia = Montar.montarProdutorMidia(c);
-
+       
         c = Montar.montarCerimonia(c, l, b, produtoresDeMidia, presentes, casal, convidados);
 
         try

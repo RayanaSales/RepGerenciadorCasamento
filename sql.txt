@@ -62,6 +62,7 @@ create table convidado
 	txt_nome varchar(100),
 	txt_email varchar(100),
         categoria varchar(30),
+        numero_qntsenhas int,
 	id_cerimonia int references cerimonia(id)        
 );
 
@@ -85,4 +86,13 @@ create table loja
         id_presente int references presente(id)
 );
 
+create table comesBebes 
+(
+        id serial  primary key,
+        numero_qtd int,
+        numero_valor real,
+        categoria varchar(100),
+        id_buffet int references buffet(id),
+        id_loja int references loja(id)
+);
 

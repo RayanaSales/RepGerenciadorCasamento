@@ -1,4 +1,3 @@
-
 package entidades;
 
 import enumeracoes.ConvidadoCategoria;
@@ -44,17 +43,21 @@ public class Convidado implements Serializable
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones;
 
+    @Column(name = "numero_qntsenhas")
+    int qntSenhas;
+    
     public Convidado()
     {
         telefones = new ArrayList<Telefone>();
     }
 
-    public Convidado(Cerimonia c,String nome, String email, ConvidadoCategoria cc)
+    public Convidado(Cerimonia c,String nome, String email, ConvidadoCategoria cc, int quantidadeSenhas)
     {
         this.cerimonia = c;
         this.nome = nome;
         this.email = email;
         categoria = cc;
+        this.qntSenhas = quantidadeSenhas;
         
         telefones = new ArrayList<Telefone>();
     }

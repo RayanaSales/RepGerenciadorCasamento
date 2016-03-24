@@ -2,6 +2,7 @@ package testes;
 
 import entidades.Buffet;
 import entidades.Cerimonia;
+import entidades.ComesBebes;
 import entidades.Convidado;
 import entidades.ProdutorDeMidia;
 import entidades.Localizacao;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//comentario add para teste
 public class Montar
 {
     public static Localizacao montarLocal()
@@ -30,15 +30,30 @@ public class Montar
     }
 
     public static Buffet montarBuffet()
-    {
-        Telefone t1 = new Telefone(TelefoneCategoria.empresarial, "81", "87654328");          
-        Localizacao local = new Localizacao(EstadosDoBrasil.PE,"barroso", "recife", "predio", "wee", "345679", 504);        
-        Loja loja = new Loja("Delicata", t1, local);  
-        
-        Buffet b = new Buffet(200.0);
+    {               
+        Buffet b = new Buffet(200.0); 
+        List<ComesBebes> comidas = montarListaComesEBebes(b);
+        b.setComesBebes(comidas);
         return b;
     }
     
+    public static List<ComesBebes> montarListaComesEBebes(Buffet b)
+    {
+        List<ComesBebes> comidas = new ArrayList<>();
+        
+        Telefone t1 = new Telefone(TelefoneCategoria.empresarial, "81", "87654328");          
+        Localizacao local = new Localizacao(EstadosDoBrasil.PE,"barroso", "recife", "predio", "wee", "345679", 504);              
+        Loja loja = new Loja("Delicata cb", t1, local);        
+        ComesBebes ceb = new ComesBebes(b, loja, ComidaBebidaCategoria.coxinha, 800, 100.0);
+        comidas.add(ceb);
+        
+        Loja loja2 = new Loja("Padaria cb", t1, local);        
+        ComesBebes ceb2 = new ComesBebes(b, loja2, ComidaBebidaCategoria.brigadeiro, 1500, 150.0);
+        comidas.add(ceb2);
+        
+        return comidas;
+    }
+        
     public static List<Presente> montarListaPresentes(Cerimonia c)
     {
         Presente p = new Presente(c, "toalha", PresenteCategoria.camaMesaBanho, "capa vermelha", "amazon");
@@ -117,15 +132,13 @@ public class Montar
 
         return usuarios;
     }
-    
-    
 
     public static List<Convidado> convidarPessoas(Cerimonia c)
     {
-        Convidado u1 = new Convidado(c, "Douglas", "paulomenzs@gmail.com", ConvidadoCategoria.familia);
+        Convidado u1 = new Convidado(c, "Douglas", "paulomenzs@gmail.com", ConvidadoCategoria.familia, 3);
         u1.setTelefones(montarTelefones(u1));
         
-        Convidado u2 = new Convidado(c, "Edmilson", "rayanasls@gmail.com", ConvidadoCategoria.amigo);        
+        Convidado u2 = new Convidado(c, "Edmilson", "rayanasls@gmail.com", ConvidadoCategoria.amigo, 5);        
         u2.setTelefones(montarTelefones(u2));
         
         List<Convidado> convidados = new ArrayList<Convidado>();
