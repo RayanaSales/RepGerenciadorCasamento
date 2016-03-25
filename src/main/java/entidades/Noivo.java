@@ -1,6 +1,9 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Noivo implements Serializable
@@ -29,12 +33,17 @@ public class Noivo implements Serializable
     @Column(name = "txt_telefone")
     private String telefone; 
     
+    @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
+    cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RoupaDosNoivos> roupaDosNoivos;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     private Cerimonia cerimonia;
 
     public Noivo()
     {
+        roupaDosNoivos = new ArrayList<>();
     }
 
     public Noivo(Cerimonia c, String nome, String email, String senha)
@@ -43,8 +52,24 @@ public class Noivo implements Serializable
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        roupaDosNoivos = new ArrayList<>();
     }
 
+     public List<RoupaDosNoivos> getRoupaDosNoivos() {
+        return roupaDosNoivos;
+    }
+
+    public void setRoupaDosNoivos(List<RoupaDosNoivos> roupaDosNoivosNovas) {
+    
+        for ( RoupaDosNoivos roupa : roupaDosNoivosNovas ) {
+            
+            if(!roupaDosNoivos.contains(roupa))
+            {
+                roupaDosNoivos.add(roupa);
+            }
+        }
+    }
+    
     public int getId()
     {
         return id;

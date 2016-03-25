@@ -1,21 +1,7 @@
 package testes;
 
-import entidades.Buffet;
-import entidades.Cerimonia;
-import entidades.ComesBebes;
-import entidades.Convidado;
-import entidades.ProdutorDeMidia;
-import entidades.Localizacao;
-import entidades.Loja;
-import entidades.Presente;
-import entidades.Noivo;
-import entidades.Telefone;
-import enumeracoes.ComidaBebidaCategoria;
-import enumeracoes.ConvidadoCategoria;
-import enumeracoes.EstadosDoBrasil;
-import enumeracoes.PresenteCategoria;
-import enumeracoes.ProdutorDeMidiaCategoria;
-import enumeracoes.TelefoneCategoria;
+import entidades.*;
+import enumeracoes.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +21,19 @@ public class Montar
         List<ComesBebes> comidas = montarListaComesEBebes(b);
         b.setComesBebes(comidas);
         return b;
+    }
+    
+    public static List<RoupaDosNoivos> montarRoupaDosNoivos(Noivo noivo)
+    {
+        List<RoupaDosNoivos> roupas = new ArrayList<>();
+        
+        RoupaDosNoivos r1 = new RoupaDosNoivos(noivo, NoivoRoupas.Smoking );
+        RoupaDosNoivos r2 = new RoupaDosNoivos(noivo, NoivoRoupas.vestidoComRendas);
+        
+        roupas.add(r2);
+        roupas.add(r1);
+        
+        return roupas;
     }
     
     public static List<ComesBebes> montarListaComesEBebes(Buffet b)
@@ -123,7 +122,9 @@ public class Montar
     public static List<Noivo> montarCasal(Cerimonia c)
     {
         Noivo u1 = new Noivo(c, "Paulo", "paulomenzs@gmail.com", "1234");
+        u1.setRoupaDosNoivos(montarRoupaDosNoivos(u1));
         Noivo u2 = new Noivo(c, "Rayana", "rayanasls@gmail.com", "5678");
+        u1.setRoupaDosNoivos(montarRoupaDosNoivos(u2));
 
         List<Noivo> usuarios = new ArrayList<Noivo>();
 

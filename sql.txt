@@ -96,3 +96,9 @@ create table comesBebes
         id_loja int references loja(id)
 );
 
+create table roupaDosNoivos
+(
+    id serial primary key,
+    roupa varchar(100),
+    id_noivo int references noivo(id)
+);
