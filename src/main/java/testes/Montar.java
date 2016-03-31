@@ -123,8 +123,11 @@ public class Montar
     {
         Noivo u1 = new Noivo(c, "Paulo", "paulomenzs@gmail.com", "1234");
         u1.setRoupaDosNoivos(montarRoupaDosNoivos(u1));
+        u1.setTelefones(montarTelefones(u1));
+        
         Noivo u2 = new Noivo(c, "Rayana", "rayanasls@gmail.com", "5678");
-        u1.setRoupaDosNoivos(montarRoupaDosNoivos(u2));
+        u2.setRoupaDosNoivos(montarRoupaDosNoivos(u2));
+        u2.setTelefones(montarTelefones(u2));
 
         List<Noivo> usuarios = new ArrayList<Noivo>();
 
@@ -149,6 +152,18 @@ public class Montar
         return convidados;
     }
     
+    public static List<Telefone> montarTelefones(Noivo noivo)
+    {
+        Telefone t1 = new Telefone(noivo, TelefoneCategoria.celular, "81", "912344321");
+        Telefone t2 = new Telefone(noivo, TelefoneCategoria.residencial, "81", "10298734");
+        
+        List<Telefone> telefones = new ArrayList<Telefone>();
+        telefones.add(t1);
+        telefones.add(t2);        
+        
+        return telefones;
+    }
+  
     public static List<Telefone> montarTelefones(Convidado convidado)
     {
         Telefone t1 = new Telefone(convidado, TelefoneCategoria.celular, "81", "993250212");

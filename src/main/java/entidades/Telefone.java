@@ -34,6 +34,10 @@ public class Telefone implements Serializable
     private Convidado convidado;  
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_noivo", referencedColumnName = "id")
+    private Noivo noivo;  
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_produtorDeMidia", referencedColumnName = "id")
     private ProdutorDeMidia produtorDeMidia;  
 
@@ -62,6 +66,14 @@ public class Telefone implements Serializable
         this.ddd = ddd;
         this.numero = numero;
         this.produtorDeMidia = p;
+    }
+    
+    public Telefone(Noivo noivo, TelefoneCategoria categoria, String ddd, String numero)
+    {       
+        this.categoria = categoria;
+        this.ddd = ddd;
+        this.numero = numero;
+        this.noivo = noivo;
     }
     
     public int getId()
@@ -116,12 +128,34 @@ public class Telefone implements Serializable
 
     public ProdutorDeMidia getProdutorMidia()
     {
-        return produtorDeMidia;
+        return getProdutorDeMidia();
     }
 
     public void setProdutorMidia(ProdutorDeMidia produtorMidia)
     {
-        this.produtorDeMidia = produtorMidia;
+        this.setProdutorDeMidia(produtorMidia);
+    }
+
+    public Noivo getNoivo() {
+        return noivo;
+    }
+    
+    public void setNoivo(Noivo noivo) {
+        this.noivo = noivo;
+    }
+
+    /**
+     * @return the produtorDeMidia
+     */
+    public ProdutorDeMidia getProdutorDeMidia() {
+        return produtorDeMidia;
+    }
+
+    /**
+     * @param produtorDeMidia the produtorDeMidia to set
+     */
+    public void setProdutorDeMidia(ProdutorDeMidia produtorDeMidia) {
+        this.produtorDeMidia = produtorDeMidia;
     }
 
     

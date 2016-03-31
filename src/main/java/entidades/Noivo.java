@@ -28,10 +28,11 @@ public class Noivo implements Serializable
     private String email;
     
     @Column(name = "txt_senha")
-    private String senha;  
-    
-    @Column(name = "txt_telefone")
-    private String telefone; 
+    private String senha;      
+
+    @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Telefone> telefones;
     
     @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
     cascade = CascadeType.ALL, orphanRemoval = true)
@@ -44,6 +45,7 @@ public class Noivo implements Serializable
     public Noivo()
     {
         roupaDosNoivos = new ArrayList<>();
+        telefones = new ArrayList<Telefone>();
     }
 
     public Noivo(Cerimonia c, String nome, String email, String senha)
@@ -53,6 +55,8 @@ public class Noivo implements Serializable
         this.email = email;
         this.senha = senha;
         roupaDosNoivos = new ArrayList<>();
+        
+        telefones = new ArrayList<Telefone>();
     }
 
      public List<RoupaDosNoivos> getRoupaDosNoivos() {
@@ -110,16 +114,6 @@ public class Noivo implements Serializable
         this.senha = senha;
     }
 
-    public String getTelfone()
-    {
-        return telefone;
-    }
-
-    public void setTelfone(String telfone)
-    {
-        this.telefone = telfone;
-    }
-
     public Cerimonia getCerimonia()
     {
         return cerimonia;
@@ -129,7 +123,25 @@ public class Noivo implements Serializable
     {
         this.cerimonia = cerimonia;
     }
+
     
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+
+    //PADRAO EXPERT
+    public void setTelefones(List<Telefone> telefonesNovos)
+    {
+        
+        for (Telefone telefone : telefonesNovos)
+        {
+            if(!telefones.contains(telefone))
+            {
+                telefones.add(telefone);
+            }
+        }
+    }
     
     
     

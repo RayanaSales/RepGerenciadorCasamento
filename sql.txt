@@ -51,8 +51,7 @@ create table noivo
 	id serial primary key,
 	txt_nome varchar(100),
 	txt_email varchar(100),
-	txt_senha varchar(100),
-	txt_telefone varchar(30),
+	txt_senha varchar(100),	
 	id_cerimonia int references cerimonia(id)
 );
 
@@ -73,7 +72,8 @@ create table telefone
 	txt_ddd varchar(5),
 	txt_numero varchar(15),
         id_convidado int references convidado(id),
-        id_produtorDeMidia int references produtorDeMidia(id)
+        id_produtorDeMidia int references produtorDeMidia(id),
+        id_noivo int references noivo(id)
 );
 
 create table loja
