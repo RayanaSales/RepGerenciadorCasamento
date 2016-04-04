@@ -13,7 +13,17 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
     </properties>
     
-    <dependencies>          
+    <dependencies>   
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>  
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.4.3</version>
+        </dependency>     
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -23,12 +33,7 @@
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
             <version>2.5.2</version>
-        </dependency>        
-        <!--   <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency> -->
+        </dependency> 
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
@@ -40,29 +45,29 @@
     <build>
         <plugins>              
             <plugin>  <!-- Faz parte da configuracao do eclipselink.weaving static -->
-               <groupId>de.empulse.eclipselink</groupId>
-               <artifactId>staticweave-maven-plugin</artifactId>
-               <version>1.0.0</version>
-               <executions>
-                   <execution>
-                       <phase>process-classes</phase>
-                       <goals>
-                           <goal>weave</goal>
-                       </goals>
-                       <configuration>
-                           <persistenceXMLLocation>META-INF/persistence.xml</persistenceXMLLocation>
-                           <logLevel>FINE</logLevel>
-                       </configuration>
-                   </execution>
-               </executions>
-               <dependencies>
-                   <dependency>
-                       <groupId>org.eclipse.persistence</groupId>
-                       <artifactId>org.eclipse.persistence.jpa</artifactId>
-                       <version>2.5.2</version>
-                   </dependency>
-               </dependencies>
-           </plugin>
+                <groupId>de.empulse.eclipselink</groupId>
+                <artifactId>staticweave-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>weave</goal>
+                        </goals>
+                        <configuration>
+                            <persistenceXMLLocation>META-INF/persistence.xml</persistenceXMLLocation>
+                            <logLevel>FINE</logLevel>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.persistence</groupId>
+                        <artifactId>org.eclipse.persistence.jpa</artifactId>
+                        <version>2.5.2</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>         
     </build>
 </project>

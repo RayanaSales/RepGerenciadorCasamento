@@ -1,18 +1,46 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package testes;
 
-import entidades.*;
+import entidades.Buffet;
+import entidades.Cerimonia;
+import entidades.Convidado;
+import entidades.Localizacao;
+import entidades.Noivo;
+import entidades.Presente;
+import entidades.ProdutorDeMidia;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-public class Main
-{    
+public class TesteCerimonia
+{
     EntityManagerFactory emf = null;
     EntityManager em = null;
+    
+    public TesteCerimonia()
+    {
+    }
+    
+    @BeforeClass
+    public static void setUpClass()
+    {
+    }
+    
+    @AfterClass
+    public static void tearDownClass()
+    {
+    }
     
     @Before
     public void setUp()
@@ -32,7 +60,7 @@ public class Main
         {e.getMessage();}
 
     }
-    
+
     @Test // caso de teste, deve ser bem independente
     public void criarCerimonia()
     {   
