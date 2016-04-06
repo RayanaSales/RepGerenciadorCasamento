@@ -4,10 +4,10 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/casamento"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/t"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.password" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
             <property name="eclipselink.weaving" value="static"/>  <!-- Usamos isso para habilitar a funcao lazy no eclipse link, usando o maven --> 
             <!-- Sem o eclipselink.weaving dava um erro: Reverting the lazy setting on the OneToOne or ManyToOne attribute (q usava os relacionamentos), since weaving was not enabled or did not occur. -->
             <!-- eclipselink.weaving foi static pq usamos o maven, se fosse dinamico, teriamos que referenciar o .jar no buildpath, sendo static configuramos com o plug in no pom.xml-->

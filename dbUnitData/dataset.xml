@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+		<localizacao id="1" txt_logradouro="Rua Serinhaen" txt_complemento="B" txt_bairro="Jardim Atlantico" txt_cep="53140010" txt_cidade="olinda" estado="PE" numero_numero="157" />
+		<localizacao id="2" txt_logradouro="Rua Carlos de Lima Cavlcanti" txt_complemento="C" txt_bairro="Rio Doce" txt_cep="54156089" txt_cidade="olinda" estado="PE" numero_numero="1897" />
+		<localizacao id="3" txt_logradouro="Rua Richuelo" txt_complemento="B" txt_bairro="Jardim Atlantico" txt_cep="53144010" txt_cidade="olinda" estado="PE" numero_numero="100" />
+		<localizacao id="4" txt_logradouro="Avenida Arthur Lopes" txt_complemento="D" txt_bairro="Casa forte" txt_cep="54156879" txt_cidade="recife" estado="PE" numero_numero="56" />
+		<localizacao id="6" txt_logradouro="Rua Pedro Antônio" txt_complemento="A" txt_bairro="Espinheiro" txt_cep="53143874" txt_cidade="recife" estado="PE" numero_numero="23" />
+		<localizacao id="7" txt_logradouro="Avenida Getúlio Vargas" txt_complemento="C" txt_bairro="Jardim Atlantico" txt_cep="53141234" txt_cidade="olinda" estado="PE" numero_numero="87" />
+		<localizacao id="8" txt_logradouro="Rua Oswaldo barbosa" txt_complemento="D" txt_bairro="Jardim Atlantico" txt_cep="53142674" txt_cidade="olinda" estado="PE" numero_numero="87" />
+		<localizacao id="9" txt_logradouro="Rua José Almeida" txt_complemento="A" txt_bairro="Rio Doce" txt_cep="53140653" txt_cidade="olinda" estado="PE" numero_numero="12" />
+		<localizacao id="10" txt_logradouro="Avenida Agamenon magalhães" txt_complemento="C" txt_bairro="Jardim Atlantico" txt_cep="53146010" txt_cidade="olinda" estado="PE" numero_numero="344" />
+	    <buffet id="1" numero_valorTotal ="3000" />
+		<buffet id="2" numero_valorTotal ="3500" />
+		<buffet id="3" numero_valorTotal ="5200" />
+		<buffet id="4" numero_valorTotal ="7000" />
+		<buffet id="5" numero_valorTotal ="1200" />
+		<buffet id="6" numero_valorTotal ="4560" />
+		<buffet id="7" numero_valorTotal ="2320" />
+		<buffet id="8" numero_valorTotal ="8400" />
+		<buffet id="9" numero_valorTotal ="10000" />
+		<buffet id="10" numero_valorTotal ="6430" />
+		<cerimonia id="1" dt_dataHora="2001-09-28 22:00:00" id_localizacao="1" id_buffet="1"/>
+		<presente id="1" txt_nome="Microondas" categoria="cozinha" txt_descricao="Potência x"  txt_ondeEncontrar="Hiper" id_cerimonia="1"/>
+		<noivo id="1" txt_nome="Rayana" txt_email="rayana@gmail.com" txt_senha="123456" id_cerimonia="1"/>
+		<noivo id="2" txt_nome="Paulo" txt_email="paulo@gmail.com" txt_senha="654321" id_cerimonia="1"/>
+		<convidado id="1" txt_nome="Natália" txt_email="natalia@gmail.com" categoria="amigo" numero_qntsenhas="4" id_cerimonia="1"/>
+		<telefone id="1" categoria="celular" txt_ddd="81" txt_numero="997766965" id_convidado="1"/>
+		<loja id="1" txt_nome="Santa lola" id_localizacao="10" id_telefone="1" id_presente="1"/>
+		<comesBebes id="1" numero_qtd="700" numero_valor="1000" categoria="coxinha" id_buffet="1" id_loja="1"/>
+</dataset>
+
+

@@ -35,6 +35,7 @@ public class TesteCerimonia
     @BeforeClass
     public static void setUpClass()
     {
+        DbUnitUtil.inserirDados();
     }
     
     @AfterClass
