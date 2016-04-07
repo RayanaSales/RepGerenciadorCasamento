@@ -2,7 +2,7 @@ package enumeracoes;
 
 public enum ComidaBebidaCategoria
 {
-    brigadeiro, coxinha, salgadinho, bolo,
+    brigadeiro, coxinha, salgadinho, bolo, beijinho, canudinho,
     
     cocaCola2Litros, antartica2Litros, sprite2Litros,
     

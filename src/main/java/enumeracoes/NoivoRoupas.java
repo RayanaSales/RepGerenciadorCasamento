@@ -2,8 +2,7 @@ package enumeracoes;
 
 public enum NoivoRoupas 
 {
-
-    Smoking, sapato, terno, vestidoComRendas,
+    Smoking, sapato, terno, vestidoRendado,
     vestidoTomaraQueCaiaLiso, vestidoTomaraQueCaiaComRendas,
-    salto, gravata, grinalda
+    salto, gravata, gravataClassica, gravataBorboleta, grinalda, veuLongo;
 }
