@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package testes;
 
 import java.io.File;
@@ -15,10 +10,6 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 
-/**
- *
- * @author rayana
- */
 public class DbUnitUtil
 {
     private static final String XML_FILE = "dbUnitData/dataset.xml";
@@ -31,7 +22,7 @@ public class DbUnitUtil
         try
         {
             conn = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/casamento", "postgres", "root");
+                    "jdbc:postgresql://localhost:5432/casamento", "postgres", "postgres");
             db_conn = new DatabaseConnection(conn);
             FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
             builder.setColumnSensing(true);
