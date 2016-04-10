@@ -4,7 +4,7 @@ import entidades.Buffet;
 import entidades.Cerimonia;
 import entidades.Localizacao;
 import entidades.Noivo;
-import entidades.Presente;
+import entidades.Pessoa;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -114,37 +114,30 @@ public class TesteCerimonia
     @Test
     public void t05_testeAtualizarCerimonia() throws Exception
     {
-        //O IDEAL EH ABRIR OUTRA TRANSAÇÃO A PARTE PARA O UPDATE? Pq se eu n comitasse aq, n att o bd :( 
-        
         Query query = em.createQuery("UPDATE Cerimonia AS c SET c.dataHora = ?1 WHERE c.id = ?2");        
         Date dataEsperada = Calendar.getInstance().getTime();
         query.setParameter(1, dataEsperada);
         query.setParameter(2, 1);
         query.executeUpdate();
-        //et.commit(); //pq aq eu tive que comitar aq a transacao, para surtir efeito no banco.
-        
-        //et.begin(); //como comitei, tem q reabrir aq, para prossegir com os outros testes
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        System.out.println("Cerimonia retornado do bd: " + c.getId());
-        //et.commit(); // encerrando transação, precisa disso dps do find, ou não?
+        Cerimonia c = em.find(Cerimonia.class, 1);        
         assertEquals(dataEsperada, c.getData());
     }
     
     @Test
-    public void t06_buscarNoivosDeUmaCerimonia() throws Exception
+    public void t06_buscarPessoas() throws Exception
     {
-        TypedQuery<Noivo> query;
-        query = em.createQuery("SELECT n FROM Noivo n WHERE n.cerimonia.id = ?1 ORDER BY n.nome", Noivo.class);
+        TypedQuery<Pessoa> query;
+        query = em.createQuery("SELECT p FROM Pessoa p WHERE p.cerimonia.id = ?1 ORDER BY p.nome", Pessoa.class);
         query.setParameter(1, 1); //o id da cerimonia eh int entao n pode mandar string
-        List<Noivo> noivos = query.getResultList();
+        List<Pessoa> noivos = query.getResultList();
         
-        assertEquals(2, noivos.size());
+        assertEquals(9, noivos.size());
         
         List<String> nomes = new ArrayList<>();
         nomes.add("Rayana");
         nomes.add("Paulo");
         
-        for (Noivo noivo : noivos) { 
+        for (Pessoa noivo : noivos) { 
             nomes.contains(noivo.getNome());
         }        
     }

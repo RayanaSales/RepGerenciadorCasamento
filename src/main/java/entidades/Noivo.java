@@ -5,58 +5,47 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-public class Noivo implements Serializable //botar superclasse pessoa
+@DiscriminatorValue(value = "N")
+@PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
+public class Noivo extends Pessoa implements Serializable //botar superclasse pessoa
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(name = "txt_nome")
-    private String nome;
-    
-    @Column(name = "txt_email")
-    private String email;
-    
+     
     @Column(name = "txt_senha")
     private String senha;      
 
     @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Telefone> telefones;
-    
-    @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
     cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RoupaDosNoivos> roupaDosNoivos;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
-    private Cerimonia cerimonia;
-
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
+    private Pessoa pessoa;
+    
     public Noivo()
     {
         roupaDosNoivos = new ArrayList<>();
-        telefones = new ArrayList<Telefone>();
     }
 
-    public Noivo(Cerimonia c, String nome, String email, String senha)
+    public Noivo(String senha, Pessoa p)
     {
-        this.cerimonia = c;
-        this.nome = nome;
-        this.email = email;
         this.senha = senha;
-        roupaDosNoivos = new ArrayList<>();
-        
-        telefones = new ArrayList<Telefone>();
+        this.pessoa = p;
+        roupaDosNoivos = new ArrayList<>();        
     }
 
      public List<RoupaDosNoivos> getRoupaDosNoivos() {
@@ -83,27 +72,7 @@ public class Noivo implements Serializable //botar superclasse pessoa
     {
         this.id = id;
     }
-
-    public String getNome()
-    {
-        return nome;
-    }
-
-    public void setNome(String nome)
-    {
-        this.nome = nome;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
+    
     public String getSenha()
     {
         return senha;
@@ -114,35 +83,13 @@ public class Noivo implements Serializable //botar superclasse pessoa
         this.senha = senha;
     }
 
-    public Cerimonia getCerimonia()
+    public Pessoa getPessoa()
     {
-        return cerimonia;
+        return pessoa;
     }
 
-    public void setCerimonia(Cerimonia cerimonia)
+    public void setPessoa(Pessoa pessoa)
     {
-        this.cerimonia = cerimonia;
+        this.pessoa = pessoa;
     }
-
-    
-    public List<Telefone> getTelefones() {
-        return telefones;
-    }
-
-
-    //PADRAO EXPERT
-    public void setTelefones(List<Telefone> telefonesNovos)
-    {
-        
-        for (Telefone telefone : telefonesNovos)
-        {
-            if(!telefones.contains(telefone))
-            {
-                telefones.add(telefone);
-            }
-        }
-    }
-    
-    
-    
 }

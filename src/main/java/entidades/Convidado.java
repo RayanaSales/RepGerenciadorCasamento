@@ -2,10 +2,9 @@ package entidades;
 
 import enumeracoes.ConvidadoCategoria;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,52 +13,58 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-public class Convidado implements Serializable
+@DiscriminatorValue(value = "C")
+@PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
+public class Convidado extends Pessoa implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    
-    @Column(name = "txt_nome")
-    String nome;
-    
-    @Column(name = "txt_email")
-    String email;
+    int id; 
     
     @Enumerated(EnumType.STRING)
     ConvidadoCategoria categoria;
            
-    //muitos convidados vao a uma cerimonia
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
-    private Cerimonia cerimonia;
-    
-    //um convidado, possui muitos telefones
-    @OneToMany(mappedBy = "convidado", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Telefone> telefones;
-
     @Column(name = "numero_qntsenhas")
     int qntSenhas;
     
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
+    private Pessoa pessoa;
+    
     public Convidado()
     {
-        telefones = new ArrayList<Telefone>();
+      
     }
 
-    public Convidado(Cerimonia c,String nome, String email, ConvidadoCategoria cc, int quantidadeSenhas)
-    {
-        this.cerimonia = c;
-        this.nome = nome;
-        this.email = email;
+    public Convidado(ConvidadoCategoria cc, Pessoa p, int quantidadeSenhas)
+    {        
         categoria = cc;
-        this.qntSenhas = quantidadeSenhas;
-        
-        telefones = new ArrayList<Telefone>();
+        this.pessoa = p;
+        this.qntSenhas = quantidadeSenhas;        
+    }
+
+    public int getQntSenhas()
+    {
+        return qntSenhas;
+    }
+
+    public void setQntSenhas(int qntSenhas)
+    {
+        this.qntSenhas = qntSenhas;
+    }
+
+    public Pessoa getPessoa()
+    {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa)
+    {
+        this.pessoa = pessoa;
     }
 
     public ConvidadoCategoria getCategoria()
@@ -72,15 +77,6 @@ public class Convidado implements Serializable
         this.categoria = categoria;
     }
 
-    public Cerimonia getCerimonia()
-    {
-        return cerimonia;
-    }
-    
-    public void setCerimonia(Cerimonia cerimonia)
-    {
-        this.cerimonia = cerimonia;
-    }
     public int getId()
     {
         return id;
@@ -89,43 +85,5 @@ public class Convidado implements Serializable
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public String getNome()
-    {
-        return nome;
-    }
-
-    public void setNome(String nome)
-    {
-        this.nome = nome;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    //PADRAO EXPERT
-    public void setTelefones(List<Telefone> telefonesNovos)
-    {
-        
-        for (Telefone telefone : telefonesNovos)
-        {
-            if(!telefones.contains(telefone))
-            {
-                telefones.add(telefone);
-            }
-        }
-    }
-    
-    public List<Telefone> getTelegones()
-    {
-        return telefones;
     }
 }

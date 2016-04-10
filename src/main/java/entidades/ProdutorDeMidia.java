@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,13 +16,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class ProdutorDeMidia implements Serializable
+@DiscriminatorValue(value = "P")
+@PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
+public class ProdutorDeMidia extends Pessoa implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,39 +36,39 @@ public class ProdutorDeMidia implements Serializable
     @Column(name = "dt_dataEHoraChegada")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEHoraChegada; //mudar para date   
-        
-    @Column(name = "txt_email")
-    private String email;
-    
+
     @Column(name = "txt_linkParaRedeSocial")
     private String linkParaRedeSocial;
     
     @Enumerated(EnumType.STRING)
     ProdutorDeMidiaCategoria categoria;    
+ 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
+    private Pessoa pessoa;
     
-    @OneToMany(mappedBy = "produtorDeMidia", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Telefone> telefones;
-    
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
-    private Cerimonia cerimonia;
-
     public ProdutorDeMidia()
     {
-        telefones = new ArrayList<>();
+        
     }
 
-    public ProdutorDeMidia(Cerimonia c, ProdutorDeMidiaCategoria categoria, double preco, Date horaChegada, String email, String linkParaRedeSocial)
-    {
-        this.cerimonia = c;
+    public ProdutorDeMidia(ProdutorDeMidiaCategoria categoria, Pessoa p, double preco, Date horaChegada, String linkParaRedeSocial)
+    {       
         this.categoria = categoria;
+        this.pessoa = p;
         this.preco = preco;
-        this.dataEHoraChegada = horaChegada;
-        this.email = email;
-        this.linkParaRedeSocial = linkParaRedeSocial;
-        
-        telefones = new ArrayList<>();
+        this.dataEHoraChegada = horaChegada;       
+        this.linkParaRedeSocial = linkParaRedeSocial;     
+    }
+
+    public Pessoa getPessoa()
+    {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa)
+    {
+        this.pessoa = pessoa;
     }
 
     public int getId()
@@ -97,16 +100,6 @@ public class ProdutorDeMidia implements Serializable
     {
         this.dataEHoraChegada = dataEHoraChegada;
     }
-    
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
 
     public String getLinkParaRedeSocial()
     {
@@ -118,24 +111,6 @@ public class ProdutorDeMidia implements Serializable
         this.linkParaRedeSocial = linkParaRedeSocial;
     }
 
-    //PADRAO EXPERT
-    public void setTelefones(List<Telefone> telefonesNovos)
-    {
-        
-        for (Telefone telefone : telefonesNovos)
-        {
-            if(!telefones.contains(telefone))
-            {
-                telefones.add(telefone);
-            }
-        }
-    }
-    
-    public List<Telefone> getTelegones()
-    {
-        return telefones;
-    }
-
     public ProdutorDeMidiaCategoria getCategoria()
     {
         return categoria;
@@ -145,14 +120,4 @@ public class ProdutorDeMidia implements Serializable
     {
         this.categoria = categoria;
     }
-
-    public Cerimonia getCerimonia()
-    {
-        return cerimonia;
-    }
-
-    public void setCerimonia(Cerimonia cerimonia)
-    {
-        this.cerimonia = cerimonia;
-    } 
 }
