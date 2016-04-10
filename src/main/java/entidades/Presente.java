@@ -1,6 +1,5 @@
 package entidades;
 
-import enumeracoes.PresenteCategoria;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +26,6 @@ public class Presente implements Serializable
     @Column(name = "txt_nome")
     private String nome;
 
-    @Enumerated(EnumType.STRING)
-    PresenteCategoria categoria;
-
     @Column(name = "txt_descricao")
     private String descricao;
 
@@ -50,9 +46,8 @@ public class Presente implements Serializable
     {
     }
 
-    public Presente(Cerimonia c, String nome, PresenteCategoria categoria, String descricao, String ondeEncontrar)
-    {
-        this.categoria = categoria;
+    public Presente(Cerimonia c, String nome, String descricao, String ondeEncontrar)
+    {       
         this.cerimonia = c;
         this.nome = nome;
         this.descricao = descricao;
@@ -80,17 +75,7 @@ public class Presente implements Serializable
     {
         this.nome = nome;
     }
-
-    public PresenteCategoria getCategoria()
-    {
-        return categoria;
-    }
-
-    public void setCategoria(PresenteCategoria categoria)
-    {
-        this.categoria = categoria;
-    }
-
+   
     public String getDescricao()
     {
         return descricao;

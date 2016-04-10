@@ -1,6 +1,6 @@
 package entidades;
 
-import enumeracoes.ComidaBebidaCategoria;
+import enumeracoes.ComesBebesCategoria;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,8 +18,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class ComesBebes implements Serializable
 {
+    @Column(name = "txt_produto")
+    private String produto;
+    
     @Enumerated(EnumType.STRING)
-    ComidaBebidaCategoria categoria;
+    ComesBebesCategoria categoria;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
@@ -45,9 +48,10 @@ public class ComesBebes implements Serializable
         
     }
     
-    public ComesBebes(Buffet buffet, Loja loja, ComidaBebidaCategoria categoria, int qtd, double valor){
+    public ComesBebes(Buffet buffet, String produto, Loja loja, ComesBebesCategoria categoria, int qtd, double valor){
         
         this.qtd = qtd;
+        this.produto = produto;
         this.valor = valor;
         this.loja = loja;
         this.buffet = buffet;
@@ -70,11 +74,11 @@ public class ComesBebes implements Serializable
         this.qtd = qtd;
     }
 
-    public ComidaBebidaCategoria getCategoria() {
+    public ComesBebesCategoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(ComidaBebidaCategoria categoria) {
+    public void setCategoria(ComesBebesCategoria categoria) {
         this.categoria = categoria;
     }
 
@@ -102,6 +106,16 @@ public class ComesBebes implements Serializable
     public void setValor(double valor)
     {
         this.valor = valor;
+    }
+
+    public String getProduto()
+    {
+        return produto;
+    }
+
+    public void setProduto(String produto)
+    {
+        this.produto = produto;
     }
     
   

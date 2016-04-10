@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Noivo implements Serializable
+public class Noivo implements Serializable //botar superclasse pessoa
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

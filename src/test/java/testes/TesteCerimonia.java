@@ -2,17 +2,13 @@ package testes;
 
 import entidades.Buffet;
 import entidades.Cerimonia;
-import entidades.Convidado;
 import entidades.Localizacao;
 import entidades.Noivo;
 import entidades.Presente;
-import entidades.ProdutorDeMidia;
-import enumeracoes.PresenteCategoria;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -25,8 +21,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TesteCerimonia
 {
     private static EntityManagerFactory emf;   
@@ -41,7 +39,7 @@ public class TesteCerimonia
     public static void setUpClass()
     {        
         emf = Persistence.createEntityManagerFactory("casamento");
-        //DbUnitUtil.inserirDados(); //insiro antes de cada teste, para torna-los independentes.
+        DbUnitUtil.inserirDados(); //insiro antes de cada teste, para torna-los independentes.
     }
 
     @AfterClass
@@ -53,7 +51,7 @@ public class TesteCerimonia
     @Before
     public void setUp()
     {
-        DbUnitUtil.inserirDados(); //para q os testes fiquem independentes (sempre reinsira tudo de novo antes de rodar um teste)
+        //DbUnitUtil.inserirDados(); //para q os testes fiquem independentes (sempre reinsira tudo de novo antes de rodar um teste)
         em = emf.createEntityManager();
         et = em.getTransaction();
         et.begin();
@@ -78,23 +76,23 @@ public class TesteCerimonia
     }
 
     @Test
-    public void buscarLocalizacao() throws Exception
+    public void t01_buscarLocalizacao() throws Exception
     {
         TypedQuery<Localizacao> query = em.createQuery(
                 "SELECT l FROM Localizacao l WHERE l.id = 1", Localizacao.class);
-        Localizacao resultado = query.getSingleResult();
-        assertEquals(1, resultado.getId());
+        Localizacao l = query.getSingleResult();
+        assertEquals(1, l.getId());
     }
 
     @Test
-    public void buscarBuffet()
+    public void t02_buscarBuffet()
     {
         Buffet c = em.find(Buffet.class, 1);
         assertEquals(1, c.getId());
     }
 
     @Test
-    public void quantidadeCerimonias() throws Exception
+    public void t03_quantidadeCerimonias() throws Exception
     {
         TypedQuery<Long> query = em.createQuery(
                 "SELECT COUNT(c) FROM Cerimonia c WHERE c.id IS NOT NULL", Long.class);
@@ -103,18 +101,18 @@ public class TesteCerimonia
     }
 
     @Test
-    public void deletarBuffet() throws Exception
+    public void t04_deletarBuffet() throws Exception
     {
         Query query1 = em.createQuery(
                 "DELETE FROM Buffet c WHERE c.id = 10");
         query1.executeUpdate();
 
-        Buffet oferta = em.find(Buffet.class, 10);
-        assertNull(oferta);
+        Buffet b = em.find(Buffet.class, 10);
+        assertNull(b);
     }
 
     @Test
-    public void testeAtualizarCerimonia() throws Exception
+    public void t05_testeAtualizarCerimonia() throws Exception
     {
         //O IDEAL EH ABRIR OUTRA TRANSAÇÃO A PARTE PARA O UPDATE? Pq se eu n comitasse aq, n att o bd :( 
         
@@ -123,40 +121,45 @@ public class TesteCerimonia
         query.setParameter(1, dataEsperada);
         query.setParameter(2, 1);
         query.executeUpdate();
-        et.commit(); //pq aq eu tive que comitar aq a transacao, para surtir efeito no banco.
+        //et.commit(); //pq aq eu tive que comitar aq a transacao, para surtir efeito no banco.
         
-        et.begin(); //como comitei, tem q reabrir aq, para prossegir com os outros testes
-        Cerimonia vendedor = em.find(Cerimonia.class, 1);
-        System.out.println("Cerimonia retornado do bd: " + vendedor.getId());
+        //et.begin(); //como comitei, tem q reabrir aq, para prossegir com os outros testes
+        Cerimonia c = em.find(Cerimonia.class, 1);
+        System.out.println("Cerimonia retornado do bd: " + c.getId());
         //et.commit(); // encerrando transação, precisa disso dps do find, ou não?
-        assertEquals(dataEsperada, vendedor.getData());
+        assertEquals(dataEsperada, c.getData());
     }
     
     @Test
-    public void buscarNoivosDeUmaCerimonia() throws Exception
+    public void t06_buscarNoivosDeUmaCerimonia() throws Exception
     {
         TypedQuery<Noivo> query;
         query = em.createQuery("SELECT n FROM Noivo n WHERE n.cerimonia.id = ?1 ORDER BY n.nome", Noivo.class);
         query.setParameter(1, 1); //o id da cerimonia eh int entao n pode mandar string
         List<Noivo> noivos = query.getResultList();
         
-        for (Noivo noivo : noivos) {            
-            System.out.println("Noivo: " + noivo.getNome());
-            assertTrue(noivo.getCerimonia().getId() == 1);
+        assertEquals(2, noivos.size());
+        
+        List<String> nomes = new ArrayList<>();
+        nomes.add("Rayana");
+        nomes.add("Paulo");
+        
+        for (Noivo noivo : noivos) { 
+            nomes.contains(noivo.getNome());
         }        
     }
     
-    @Test
-    public void buscarCategoriaDePresentePorNome() throws Exception
-    {
-        TypedQuery<Presente> query = em.createQuery(
-                "SELECT p FROM Presente p WHERE p.categoria = :categoria ORDER BY p.id",
-                Presente.class); //nao usei o like pq ele so compara string, como ta comparando uma enum, o teste estava falhando       
-        query.setParameter("categoria", PresenteCategoria.camaMesaBanho); //n pode mandar como string, tem que mandar como um tipo da categoria
-        List<Presente> presentes = query.getResultList();
-
-        for (Presente presente : presentes) {
-            assertTrue(presente.getCategoria().toString().startsWith("cama"));
-        }
-    }
+//    @Test CATEGORIA N EXISTE MAIS - MAS SERVE COMO EXEMPLO PARA VER COMO BUSCAR COISA DE UMA ENUM
+//    public void t07_buscarCategoriaDePresentePorNome() throws Exception
+//    {
+//        TypedQuery<Presente> query = em.createQuery(
+//                "SELECT p FROM Presente p WHERE p.categoria = :categoria ORDER BY p.id",
+//                Presente.class); //nao usei o like pq ele so compara string, como ta comparando uma enum, o teste estava falhando       
+//        query.setParameter("categoria", PresenteCategoria.camaMesaBanho); //n pode mandar como string, tem que mandar como um tipo da categoria
+//        List<Presente> presentes = query.getResultList();
+//
+//        for (Presente presente : presentes) {
+//            assertTrue(presente.getCategoria().toString().startsWith("cama"));
+//        }
+//    }
 }

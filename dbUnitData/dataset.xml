@@ -23,9 +23,9 @@
 	
     <!-- Cerimonia 1 -->	
     <cerimonia id="1" dt_dataHora="2001-09-28 22:00:00" id_localizacao="1" id_buffet="1"/>
-    <presente id="1" txt_nome="Microondas" categoria="cozinha" txt_descricao="Potência x"  txt_ondeEncontrar="Hiper" id_cerimonia="1"/>
-    <presente id="2" txt_nome="Jogo de talheres" categoria="cozinha" txt_descricao="Prateado"  txt_ondeEncontrar="Casa de cor" id_cerimonia="1"/>
-    <presente id="3" txt_nome="Cortina" categoria="camaMesaBanho" txt_descricao="cor: bege"  txt_ondeEncontrar="Jurandir pires" id_cerimonia="1"/>    
+    <presente id="1" txt_nome="Microondas" txt_descricao="Potência x"  txt_ondeEncontrar="Hiper" id_cerimonia="1"/>
+    <presente id="2" txt_nome="Jogo de talheres" txt_descricao="Prateado"  txt_ondeEncontrar="Casa de cor" id_cerimonia="1"/>
+    <presente id="3" txt_nome="Cortina" txt_descricao="cor: bege"  txt_ondeEncontrar="Jurandir pires" id_cerimonia="1"/>    
     
     <noivo id="1" txt_nome="Rayana" txt_email="rayana@gmail.com" txt_senha="123456" id_cerimonia="1"/>
     <roupaDosNoivos id="1" roupa="vestidoRendado" id_noivo="1"/>
@@ -49,28 +49,29 @@
     
     <telefone id="5" categoria="empresarial" txt_ddd="81" txt_numero="37895432"/>   <!-- Telefone da loja (buffet) --> 
     <loja id="2" txt_nome="Delicatessen" id_localizacao="3" id_telefone="5"/> <!-- loja do buffet -->
-    <comesBebes id="1" numero_qtd="700" numero_valor="1000" categoria="coxinha" id_buffet="1" id_loja="2"/> 
-    <comesBebes id="2" numero_qtd="1000" numero_valor="1300" categoria="brigadeiro" id_buffet="1" id_loja="2"/>
-    <comesBebes id="3" numero_qtd="800" numero_valor="700" categoria="salgadinho" id_buffet="1" id_loja="2"/>
-    <comesBebes id="4" numero_qtd="10" numero_valor="200" categoria="sucoLaranja2Litros" id_buffet="1" id_loja="2"/>
-    <comesBebes id="5" numero_qtd="50" numero_valor="500" categoria="cocaCola2Litros" id_buffet="1" id_loja="2"/>
+    <comesBebes id="1" txt_produto="brigadeiro suiço" numero_qtd="700" numero_valor="1000" categoria="doce" id_buffet="1" id_loja="2"/> 
+    <comesBebes id="2" txt_produto="brigadeiro argentino" numero_qtd="1000" numero_valor="1300" categoria="doce" id_buffet="1" id_loja="2"/>
+    <comesBebes id="3" txt_produto="alfajor" numero_qtd="800" numero_valor="700" categoria="doce" id_buffet="1" id_loja="2"/>
+    <comesBebes id="4" txt_produto="empanado de camarão" numero_qtd="10" numero_valor="200" categoria="salgado" id_buffet="1" id_loja="2"/>
+    <comesBebes id="5" txt_produto="champagne" numero_qtd="50" numero_valor="500" categoria="bebida" id_buffet="1" id_loja="2"/>
    
     <produtorDeMidia id="1" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="1.000" txt_email="letranafoto@hotmail.com" categoria="fotografo" txt_linkParaRedeSocial="youtube.com.br/letranafoto" id_cerimonia="1"/>
     <produtorDeMidia id="2" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="1.500" txt_email="americospondinario@hotmail.com" categoria="fotografo" txt_linkParaRedeSocial="facebook.com.br/americospond" id_cerimonia="1"/>
     <produtorDeMidia id="3" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="1.900" txt_email="amandaBittencourt@hotmail.com" categoria="fotografo" txt_linkParaRedeSocial="youtube.com.br/amandaBittencourt" id_cerimonia="1"/>
     <produtorDeMidia id="4" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="2.000" txt_email="ciaDoVideo@hotmail.com" categoria="filmografia" txt_linkParaRedeSocial="youtube.com.br/ciaDoVideo" id_cerimonia="1"/>
-    <!-- TA DANDO PROBLEMA AO RELACIONAR COM O PRODUTOR DE MIDIA :/
-    <telefone id="6" categoria="celular" txt_ddd="81" txt_numero="998564321" id_produtorDeMidia="1"/> 
+      
+     <!-- TA DANDO PROBLEMA AO RELACIONAR COM O PRODUTOR DE MIDIA :/-->
+   <!-- <telefone id="6" categoria="celular" txt_ddd="81" txt_numero="998564321" id_produtorDeMidia="1"/> 
     <telefone id="7" categoria="celular" txt_ddd="81" txt_numero="997654324" id_produtorDeMidia="2"/>    
     <telefone id="8" categoria="celular" txt_ddd="81" txt_numero="993421577" id_produtorDeMidia="3"/>     
-    <telefone id="9" categoria="empresarial" txt_ddd="81" txt_numero="35643278" id_produtorDeMidia="4"/> -->
+    <telefone id="9" categoria="empresarial" txt_ddd="81" txt_numero="35643278" id_produtorDeMidia="4"/>  --> 
         
     <!-- Cerimonia 2 -->	
     <cerimonia id="2" dt_dataHora="2016-12-15 20:00:00" id_localizacao="4" id_buffet="2"/>
-    <presente id="4" txt_nome="Tapete" categoria="decoracao" txt_descricao="Cor: vinho"  txt_ondeEncontrar="Americanas" id_cerimonia="2"/>
-    <presente id="5" txt_nome="Jogo sabonetes" categoria="camaMesaBanho" txt_descricao="natura"  txt_ondeEncontrar="Revista" id_cerimonia="2"/>
-    <presente id="6" txt_nome="Roupa de cama" categoria="camaMesaBanho" txt_descricao="com edredon"  txt_ondeEncontrar="Hiper bompreço" id_cerimonia="2"/>    
-    
+    <presente id="4" txt_nome="Tapete" txt_descricao="Cor: vinho"  txt_ondeEncontrar="Americanas" id_cerimonia="2"/>
+    <presente id="5" txt_nome="Jogo sabonetes" txt_descricao="natura"  txt_ondeEncontrar="Revista" id_cerimonia="2"/>
+    <presente id="6" txt_nome="Roupa de cama" txt_descricao="com edredon"  txt_ondeEncontrar="Hiper bompreço" id_cerimonia="2"/>    
+     
     <noivo id="3" txt_nome="Thamires" txt_email="thamires@hotmail.com" txt_senha="09877" id_cerimonia="2"/>
     <telefone id="10" categoria="celular" txt_ddd="81" txt_numero="993562341" id_noivo="3"/>   <!-- Telefone da noiva --> 
     <roupaDosNoivos id="7" roupa="vestidoTomaraQueCaiaComRendas" id_noivo="3"/>
@@ -101,11 +102,11 @@
     
     <telefone id="18" categoria="empresarial" txt_ddd="81" txt_numero="34216753"/>   <!-- Telefone da loja (buffet) --> 
     <loja id="6" txt_nome="Casa refeições" id_localizacao="8" id_telefone="18"/> <!-- loja do buffet -->
-    <comesBebes id="6" numero_qtd="200" numero_valor="1000" categoria="salgadinho" id_buffet="2" id_loja="6"/> 
-    <comesBebes id="7" numero_qtd="100" numero_valor="1300" categoria="brigadeiro" id_buffet="2" id_loja="6"/>
-    <comesBebes id="8" numero_qtd="500" numero_valor="700" categoria="beijinho" id_buffet="2" id_loja="6"/>
-    <comesBebes id="9" numero_qtd="200" numero_valor="200" categoria="coxinha" id_buffet="2" id_loja="6"/>
-    <comesBebes id="10" numero_qtd="150" numero_valor="500" categoria="canudinho" id_buffet="2" id_loja="6"/>
+    <comesBebes id="6" txt_produto="empanado siri" numero_qtd="200" numero_valor="1000" categoria="salgado" id_buffet="2" id_loja="6"/> 
+    <comesBebes id="7" txt_produto="trufa morango" numero_qtd="100" numero_valor="1300" categoria="doce" id_buffet="2" id_loja="6"/>
+    <comesBebes id="8" txt_produto="suco laranja" numero_qtd="500" numero_valor="700" categoria="bebida" id_buffet="2" id_loja="6"/>
+    <comesBebes id="9" txt_produto="guarana antartica" numero_qtd="200" numero_valor="200" categoria="bebida" id_buffet="2" id_loja="6"/>
+    <comesBebes id="10" txt_produto="coca cola" numero_qtd="150" numero_valor="500" categoria="bebida" id_buffet="2" id_loja="6"/>
    
     <produtorDeMidia id="5" dt_dataEHoraChegada="2016-12-15 17:00:00" numero_preco="1.500" txt_email="jutrindande@hotmail.com" categoria="fotografo" txt_linkParaRedeSocial="youtube.com.br/jutrindade" id_cerimonia="2"/>
     <produtorDeMidia id="6" dt_dataEHoraChegada="2016-12-15 17:00:00" numero_preco="2.000" txt_email="amelia@hotmail.com" categoria="fotografo" txt_linkParaRedeSocial="facebook.com.br/amelia" id_cerimonia="2"/>

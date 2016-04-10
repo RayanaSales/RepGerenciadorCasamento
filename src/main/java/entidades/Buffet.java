@@ -14,20 +14,27 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Buffet implements Serializable
-{   
-    //nome, valor, qtd, tipo - enum, loja
-    
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;    
-    
+    private int id;
+
     @Column(name = "numero_valorTotal")
-    private double valorTotalGasto;    
-    
+    private double valorTotalGasto;
+
     @OneToMany(mappedBy = "buffet", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ComesBebes> comesBebes;
-    
+
+    public double calcularValorTotal()
+    {
+        for (ComesBebes produto : comesBebes)
+        {
+            valorTotalGasto += produto.getQtd() * produto.getValor();
+        }
+        return valorTotalGasto;
+    }
+
     public Buffet()
     {
         comesBebes = new ArrayList<>();
@@ -36,7 +43,6 @@ public class Buffet implements Serializable
     public Buffet(double valorTotalGasto)
     {
         this.valorTotalGasto = valorTotalGasto;
-        
         comesBebes = new ArrayList<>();
     }
 
@@ -59,22 +65,21 @@ public class Buffet implements Serializable
     {
         this.valorTotalGasto = valorTotalGasto;
     }
-    
+
     public void setComesBebes(List<ComesBebes> ComesBebesNovos)
     {
-        
+
         for (ComesBebes comesBebe : ComesBebesNovos)
         {
-            if(!comesBebes.contains(comesBebe))
+            if (!comesBebes.contains(comesBebe))
             {
                 comesBebes.add(comesBebe);
             }
         }
     }
-    
+
     public List<ComesBebes> getComesBebes()
     {
         return comesBebes;
     }
-
 }

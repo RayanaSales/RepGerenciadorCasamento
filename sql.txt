@@ -3,23 +3,23 @@ create table localizacao
 	id serial primary key,
 	txt_logradouro varchar(100),
         txt_complemento varchar(100),
-	txt_bairro varchar(100),
-	txt_cep varchar(100),
-        txt_cidade varchar(100),
-        estado varchar(5),
-	numero_numero int 
+	txt_bairro varchar(100) NOT NULL,
+	txt_cep varchar(100) NOT NULL,
+        txt_cidade varchar(100) NOT NULL,
+        estado varchar(5) NOT NULL,
+	numero_numero int NOT NULL
 );
 
 create table buffet
 (
 	id serial primary key,
-	numero_valorTotal real	
+	numero_valorTotal real NOT NULL	
 );
 
 create table cerimonia
 (
 	id serial primary key,	
-	dt_dataHora timestamp,       
+	dt_dataHora timestamp NOT NULL,       
 	
 	id_localizacao int references localizacao(id),
 	id_buffet int references buffet(id)
@@ -28,10 +28,10 @@ create table cerimonia
 create table produtorDeMidia
 (
 	id serial primary key,
-	dt_dataEHoraChegada timestamp,
-	numero_preco real,
-	txt_email varchar(100),
-        categoria varchar(30),
+	dt_dataEHoraChegada timestamp NOT NULL,
+	numero_preco real NOT NULL,
+	txt_email varchar(100) NOT NULL,
+        categoria varchar(30) NOT NULL,
 	txt_linkParaRedeSocial varchar(100),
         id_cerimonia int references cerimonia(id)
 );
@@ -39,38 +39,37 @@ create table produtorDeMidia
 create table presente
 (
 	id serial primary key,
-	txt_nome varchar(50),
-	categoria varchar(50),
+	txt_nome varchar(50) NOT NULL,	
 	txt_descricao varchar(50),	
-	txt_ondeEncontrar varchar(50),
+	txt_ondeEncontrar varchar(50) NOT NULL,
 	id_cerimonia int references cerimonia(id)
 );
 
 create table noivo
 (
 	id serial primary key,
-	txt_nome varchar(100),
-	txt_email varchar(100),
-	txt_senha varchar(100),	
+	txt_nome varchar(100) NOT NULL,
+	txt_email varchar(100) NOT NULL,
+	txt_senha varchar(100) NOT NULL,	
 	id_cerimonia int references cerimonia(id)
 );
 
 create table convidado
 (
 	id serial primary key,
-	txt_nome varchar(100),
-	txt_email varchar(100),
-        categoria varchar(30),
-        numero_qntsenhas int,
+	txt_nome varchar(100) NOT NULL,
+	txt_email varchar(100) NOT NULL,
+        categoria varchar(30) NOT NULL,
+        numero_qntsenhas int NOT NULL,
 	id_cerimonia int references cerimonia(id)        
 );
 
 create table telefone
 (
 	id serial primary key,
-	categoria varchar(30),
-	txt_ddd varchar(5),
-	txt_numero varchar(15),
+	categoria varchar(30) NOT NULL,
+	txt_ddd varchar(5) NOT NULL,
+	txt_numero varchar(15) NOT NULL,
         id_convidado int references convidado(id),
         id_produtorDeMidia int references produtorDeMidia(id),
         id_noivo int references noivo(id)
@@ -79,7 +78,7 @@ create table telefone
 create table loja
 (
 	id serial primary key,	
-	txt_nome varchar(50),       
+	txt_nome varchar(50) NOT NULL,       
 	
 	id_localizacao int references localizacao(id),
 	id_telefone int references telefone(id),
@@ -89,9 +88,10 @@ create table loja
 create table comesBebes 
 (
         id serial  primary key,
-        numero_qtd int,
-        numero_valor real,
-        categoria varchar(100),
+        txt_produto varchar(100) NOT NULL,
+        numero_qtd int NOT NULL,
+        numero_valor real NOT NULL,
+        categoria varchar(10) NOT NULL,
         id_buffet int references buffet(id),
         id_loja int references loja(id)
 );
@@ -99,6 +99,6 @@ create table comesBebes
 create table roupaDosNoivos
 (
     id serial primary key,
-    roupa varchar(100),
+    roupa varchar(100) NOT NULL,
     id_noivo int references noivo(id)
 );

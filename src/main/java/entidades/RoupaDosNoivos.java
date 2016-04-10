@@ -1,6 +1,5 @@
 package entidades;
 
-import enumeracoes.NoivoRoupas;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +23,18 @@ public class RoupaDosNoivos implements Serializable {
     Noivo noivo;
     
     @Column
-    NoivoRoupas roupa;
+    String roupa;
+    
+    public RoupaDosNoivos()
+    {
+    
+    }
+    
+    public RoupaDosNoivos( Noivo noivo, String roupa )
+    {
+        this.noivo = noivo;
+        this.roupa = roupa;
+    }
 
     public int getId() {
         return id;
@@ -42,23 +52,13 @@ public class RoupaDosNoivos implements Serializable {
         this.noivo = noivo;
     }
 
-    public NoivoRoupas getRoupa() {
+    public String getRoupa()
+    {
         return roupa;
     }
 
-    public void setRoupa(NoivoRoupas roupa) {
-        this.roupa = roupa;
-    }
-    
-    public RoupaDosNoivos()
+    public void setRoupa(String roupa)
     {
-    
-    }
-    
-    public RoupaDosNoivos( Noivo noivo, NoivoRoupas roupa )
-    {
-        this.noivo = noivo;
         this.roupa = roupa;
-    }
-
+    }  
 }
