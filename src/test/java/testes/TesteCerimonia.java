@@ -5,6 +5,7 @@ import entidades.Cerimonia;
 import entidades.Localizacao;
 import entidades.Noivo;
 import entidades.Pessoa;
+import entidades.Telefone;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,6 +16,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import org.eclipse.persistence.jpa.rs.QueryParameters;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -142,6 +144,22 @@ public class TesteCerimonia
         }        
     }
     
+    
+    
+    /** TENTEI FAZER, MAS NÃO FUNCIONOU - NATÁLIA AMÂNCIO
+    @Test
+    public void t07_testeAtualizarTelefone() throws Exception {
+    
+        Query query = em.createQuery("UPDATE Telefone AS t SET t.txt_numero = ?1 WHERE t.id = ?2 ");
+        String NovoNumeroTelefone = "998877665";
+        query.setParameter(1, NovoNumeroTelefone );
+        query.setParameter(2, 6);
+        query.executeUpdate();
+        Telefone t = em.find(Telefone.class, 6);
+        assertEquals(t.getNumero() , NovoNumeroTelefone);
+    }
+    */
+  
 //    @Test CATEGORIA N EXISTE MAIS - MAS SERVE COMO EXEMPLO PARA VER COMO BUSCAR COISA DE UMA ENUM
 //    public void t07_buscarCategoriaDePresentePorNome() throws Exception
 //    {

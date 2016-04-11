@@ -4,11 +4,13 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.dbunit.ext.postgresql.PostgresqlDataTypeFactory;
 
 public class DbUnitUtil
 {
@@ -22,8 +24,12 @@ public class DbUnitUtil
         try
         {
             conn = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/casamento", "postgres", "postgres");
+                    "jdbc:postgresql://localhost:5432/casamento", "postgres", "root");
             db_conn = new DatabaseConnection(conn);
+            
+             DatabaseConfig dbConfig = db_conn.getConfig();
+             dbConfig.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new PostgresqlDataTypeFactory());
+            
             FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
             builder.setColumnSensing(true);
             IDataSet dataSet = builder.build(new File(XML_FILE));
