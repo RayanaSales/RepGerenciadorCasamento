@@ -3,10 +3,9 @@ package testes;
 import entidades.Buffet;
 import entidades.Cerimonia;
 import entidades.Localizacao;
-import entidades.Noivo;
 import entidades.Pessoa;
 import entidades.Telefone;
-import java.util.ArrayList;
+import enumeracoes.TelefoneCategoria;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +15,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import org.eclipse.persistence.jpa.rs.QueryParameters;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,7 +39,7 @@ public class TesteCerimonia
     public static void setUpClass()
     {        
         emf = Persistence.createEntityManagerFactory("casamento");
-        DbUnitUtil.inserirDados(); //insiro antes de cada teste, para torna-los independentes.
+        DbUnitUtil.inserirDados(); 
     }
 
     @AfterClass
@@ -96,8 +94,7 @@ public class TesteCerimonia
     @Test
     public void t03_quantidadeCerimonias() throws Exception
     {
-        TypedQuery<Long> query = em.createQuery(
-                "SELECT COUNT(c) FROM Cerimonia c WHERE c.id IS NOT NULL", Long.class);
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM Cerimonia c WHERE c.id IS NOT NULL", Long.class);
         Long resultado = query.getSingleResult();
         assertEquals(new Long(2), resultado);
     }
@@ -105,11 +102,9 @@ public class TesteCerimonia
     @Test
     public void t04_deletarBuffet() throws Exception
     {
-        Query query1 = em.createQuery(
-                "DELETE FROM Buffet c WHERE c.id = 10");
-        query1.executeUpdate();
-
         Buffet b = em.find(Buffet.class, 10);
+        em.remove(b);        
+        b = em.find(Buffet.class, 10);
         assertNull(b);
     }
 
@@ -126,51 +121,35 @@ public class TesteCerimonia
     }
     
     @Test
-    public void t06_buscarPessoas() throws Exception
+    public void t06_buscarNoivosDeUmaCerimonia() throws Exception
     {
         TypedQuery<Pessoa> query;
-        query = em.createQuery("SELECT p FROM Pessoa p WHERE p.cerimonia.id = ?1 ORDER BY p.nome", Pessoa.class);
+        query = em.createQuery("SELECT p FROM Pessoa p WHERE p.cerimonia.id = ?1 AND p.disc_pessoa like ?2", Pessoa.class);
         query.setParameter(1, 1); //o id da cerimonia eh int entao n pode mandar string
-        List<Pessoa> noivos = query.getResultList();
-        
-        assertEquals(9, noivos.size());
-        
-        List<String> nomes = new ArrayList<>();
-        nomes.add("Rayana");
-        nomes.add("Paulo");
-        
-        for (Pessoa noivo : noivos) { 
-            nomes.contains(noivo.getNome());
-        }        
+        query.setParameter(2, "N");
+        List<Pessoa> noivos = query.getResultList();        
+        assertEquals(2, noivos.size());        
     }
-    
-    
-    
-    /** TENTEI FAZER, MAS NÃO FUNCIONOU - NATÁLIA AMÂNCIO
-    @Test
-    public void t07_testeAtualizarTelefone() throws Exception {
-    
-        Query query = em.createQuery("UPDATE Telefone AS t SET t.txt_numero = ?1 WHERE t.id = ?2 ");
-        String NovoNumeroTelefone = "998877665";
-        query.setParameter(1, NovoNumeroTelefone );
-        query.setParameter(2, 6);
-        query.executeUpdate();
-        Telefone t = em.find(Telefone.class, 6);
-        assertEquals(t.getNumero() , NovoNumeroTelefone);
-    }
-    */
   
-//    @Test CATEGORIA N EXISTE MAIS - MAS SERVE COMO EXEMPLO PARA VER COMO BUSCAR COISA DE UMA ENUM
-//    public void t07_buscarCategoriaDePresentePorNome() throws Exception
-//    {
-//        TypedQuery<Presente> query = em.createQuery(
-//                "SELECT p FROM Presente p WHERE p.categoria = :categoria ORDER BY p.id",
-//                Presente.class); //nao usei o like pq ele so compara string, como ta comparando uma enum, o teste estava falhando       
-//        query.setParameter("categoria", PresenteCategoria.camaMesaBanho); //n pode mandar como string, tem que mandar como um tipo da categoria
-//        List<Presente> presentes = query.getResultList();
-//
-//        for (Presente presente : presentes) {
-//            assertTrue(presente.getCategoria().toString().startsWith("cama"));
-//        }
-//    }
+    @Test
+    public void t07_testeAtualizarTelefone() throws Exception 
+    {           
+        String NovoNumeroTelefone = "998877665";               
+        Telefone t = em.find(Telefone.class, 6);
+        t.setNumero(NovoNumeroTelefone);        
+        em.merge(t);        
+        assertEquals(t.getNumero() , NovoNumeroTelefone);
+    }    
+  
+    @Test
+    public void t08_buscarTelefonesDoTipoCelular() throws Exception
+    {
+        TypedQuery<Telefone> query = em.createQuery("SELECT t FROM Telefone t WHERE t.categoria = :categoria",
+                Telefone.class); //like compara string, nesse caso eh uma enum,logo usa o =    
+        query.setParameter("categoria", TelefoneCategoria.celular); //n pode mandar como string, manda como enum
+        List<Telefone> telefones = query.getResultList();
+
+        for (Telefone telefone : telefones) 
+            assertEquals("celular", telefone.getCategoria().toString());        
+    }   
 }

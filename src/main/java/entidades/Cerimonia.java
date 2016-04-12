@@ -42,27 +42,15 @@ public class Cerimonia implements Serializable
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Presente> presentes;
 
-    //uma cerimonia to many usuarios, pois o casal pode editar a cerimonia
+    //uma cerimonia to many pessoas (noivos, convidados, produtorDeMidia)
     @OneToMany(mappedBy = "cerimonia", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Noivo> usuarios;
-
-    //uma cerimonia to many convidados
-    @OneToMany(mappedBy = "cerimonia", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Convidado> convidados;
-
-    //uma cerimonia tem uma equipe de midia (varios produtores de midia - fotografos, filmagens)
-    @OneToMany(mappedBy = "cerimonia", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProdutorDeMidia> equipeDeMidia;    
+    private List<Pessoa> pessoas;
     
     public Cerimonia()
     {
         presentes = new ArrayList<>();
-        usuarios = new ArrayList<>();
-        convidados = new ArrayList<>();
-        equipeDeMidia = new ArrayList<>();
+        pessoas = new ArrayList<>();
     }
 
     public Date getData()
@@ -121,53 +109,19 @@ public class Cerimonia implements Serializable
         }
     }
 
-    public List<Noivo> getUsuarios()
+    public List<Pessoa> getPessoas()
     {
-        return usuarios;
+        return pessoas;
     }
 
-    public void setUsuarios(List<Noivo> usuariosNovos)
+    public void setPessoas(List<Pessoa> pessoasNovas)
     {
-        for (Noivo noivo : usuariosNovos)
+        for (Pessoa pessoa : pessoasNovas)
         {
-            if(!usuarios.contains(noivo))
+            if(!pessoas.contains(pessoa))
             {
-                usuarios.add(noivo);
+                pessoas.add(pessoa);
             }
         }
-    }
-
-    public List<Convidado> getConvidados()
-    {
-        return convidados;
-    }
-
-    public void setConvidados(List<Convidado> convidadosNovos)
-    {
-        //Marcos andre mandou fazer assim: percorre a lista nova
-        //se a lista antiga nao contem tal usuario da lista nova: adicione-o na lista antiga
-        for (Convidado convidado : convidadosNovos)
-        {
-            if(!convidados.contains(convidado))
-            {
-                convidados.add(convidado);
-            }
-        }
-    }
-    
-    public void setEquipeDeMidia(List<ProdutorDeMidia> novaEquipe)
-    {
-        for (ProdutorDeMidia produtor : novaEquipe)
-        {
-            if(!equipeDeMidia.contains(produtor))
-            {
-                equipeDeMidia.add(produtor);
-            }
-        }
-    }
-    
-    public List<ProdutorDeMidia> getEquipeDeMidia()
-    {
-        return equipeDeMidia;
     }
 }

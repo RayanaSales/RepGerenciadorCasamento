@@ -24,7 +24,7 @@ public class DbUnitUtil
         try
         {
             conn = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/casamento", "postgres", "root");
+                    "jdbc:postgresql://localhost:5432/casamento", "postgres", "postgres");
             db_conn = new DatabaseConnection(conn);
             
              DatabaseConfig dbConfig = db_conn.getConfig();

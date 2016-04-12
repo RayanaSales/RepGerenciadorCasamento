@@ -29,17 +29,17 @@ public class Telefone implements Serializable
     @Column(name = "txt_numero")
     private String numero;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_convidado", referencedColumnName = "id")
-    private Convidado convidado;  
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "id_convidado", referencedColumnName = "id")
+//    private Convidado convidado;  
+//    
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "id_noivo", referencedColumnName = "id")
+//    private Noivo noivo;  
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_noivo", referencedColumnName = "id")
-    private Noivo noivo;  
-    
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_produtorDeMidia", referencedColumnName = "id")
-    private ProdutorDeMidia produtorDeMidia;  
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
+    private Pessoa pessoa;  
 
     public Telefone()
     {
@@ -50,30 +50,6 @@ public class Telefone implements Serializable
         this.categoria = categoria;
         this.ddd = ddd;
         this.numero = numero;
-    }
-
-    public Telefone(Convidado convidado, TelefoneCategoria categoria, String ddd, String numero)
-    {       
-        this.categoria = categoria;
-        this.ddd = ddd;
-        this.numero = numero;
-        this.convidado = convidado;
-    }
-    
-    public Telefone(ProdutorDeMidia p, TelefoneCategoria categoria, String ddd, String numero)
-    {       
-        this.categoria = categoria;
-        this.ddd = ddd;
-        this.numero = numero;
-        this.produtorDeMidia = p;
-    }
-    
-    public Telefone(Noivo noivo, TelefoneCategoria categoria, String ddd, String numero)
-    {       
-        this.categoria = categoria;
-        this.ddd = ddd;
-        this.numero = numero;
-        this.noivo = noivo;
     }
     
     public int getId()
@@ -114,51 +90,16 @@ public class Telefone implements Serializable
     public void setNumero(String numero)
     {
         this.numero = numero;
-    }    
+    }        
 
-    public Convidado getConvidado()
+    public Pessoa getPessoa()
     {
-        return convidado;
+        return pessoa;
     }
 
-    public void setConvidado(Convidado convidado)
+    public void setPessoa(Pessoa pessoa)
     {
-        this.convidado = convidado;
+        this.pessoa = pessoa;
     }
-
-    public ProdutorDeMidia getProdutorMidia()
-    {
-        return getProdutorDeMidia();
-    }
-
-    public void setProdutorMidia(ProdutorDeMidia produtorMidia)
-    {
-        this.setProdutorDeMidia(produtorMidia);
-    }
-
-    public Noivo getNoivo() {
-        return noivo;
-    }
-    
-    public void setNoivo(Noivo noivo) {
-        this.noivo = noivo;
-    }
-
-    /**
-     * @return the produtorDeMidia
-     */
-    public ProdutorDeMidia getProdutorDeMidia() {
-        return produtorDeMidia;
-    }
-
-    /**
-     * @param produtorDeMidia the produtorDeMidia to set
-     */
-    public void setProdutorDeMidia(ProdutorDeMidia produtorDeMidia) {
-        this.produtorDeMidia = produtorDeMidia;
-    }
-
-    
-    
     
 }

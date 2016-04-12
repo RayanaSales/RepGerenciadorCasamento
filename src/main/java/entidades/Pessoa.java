@@ -25,7 +25,9 @@ public class Pessoa implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;    
+    int id;  
+    
+    private String disc_pessoa; //para o jpql poder acessar, sem ele aq jpql n acessa o disc_pessoa
         
     @Column(name = "txt_nome")
     private String nome;
@@ -33,13 +35,13 @@ public class Pessoa implements Serializable
     @Column(name = "txt_email")
     private String email;
 
-    @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
-    private Cerimonia cerimonia;
+    private Cerimonia cerimonia;    
 
     public Pessoa()
     {
@@ -99,6 +101,16 @@ public class Pessoa implements Serializable
     public void setCerimonia(Cerimonia cerimonia)
     {
         this.cerimonia = cerimonia;
+    }
+
+    public String getDisc_pessoa()
+    {
+        return disc_pessoa;
+    }
+
+    public void setDisc_pessoa(String disc_pessoa)
+    {
+        this.disc_pessoa = disc_pessoa;
     }
     
     
