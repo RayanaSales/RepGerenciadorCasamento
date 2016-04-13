@@ -2,7 +2,9 @@ package testes;
 
 import entidades.Buffet;
 import entidades.Cerimonia;
+import entidades.ComesBebes;
 import entidades.Localizacao;
+import entidades.Loja;
 import entidades.Pessoa;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
@@ -151,5 +153,42 @@ public class TesteCerimonia
 
         for (Telefone telefone : telefones) 
             assertEquals("celular", telefone.getCategoria().toString());        
-    }   
+    } 
+    
+    @Test
+    public void t09_buscarLoja() throws Exception
+    {
+        Loja c = em.find(Loja.class, 1);
+        assertEquals(1, c.getId());
+    }
+    
+    @Test 
+    public void t10_qntComesBebesNoBuffet() throws Exception
+    {
+        TypedQuery<ComesBebes> query;
+        query = em.createQuery("SELECT c FROM ComesBebes c WHERE c.buffet.id = ?1", ComesBebes.class);
+        query.setParameter(1, 1);
+        List<ComesBebes> comesBebes = query.getResultList();        
+        assertEquals(5, comesBebes.size()); 
+        
+    }
+    
+    @Test
+    public void t11_roupasDistintas() throws Exception
+    {
+        TypedQuery<String> query = 
+                em.createQuery("SELECT DISTINCT(r.roupa) FROM RoupaDosNoivos r ORDER BY r.roupa", String.class);
+        List<String> roupas = query.getResultList();
+        assertEquals(10, roupas.size());
+    }
+    
+//    @Test
+//    public void t12_qntConvidadosCerimonia() throws Exception
+//    {
+//        TypedQuery<Integer> query = 
+//                em.createQuery("SELECT sum(c.numero_qntSenhas) FROM Convidado c INNER JOIN Pessoa p ON p.cerimonia.id = ?1 and c.pessoa.id = p.id", Integer.class);
+//        query.setParameter(1, 2);
+//        Integer resultado = query.getSingleResult();
+//        assertEquals(new Integer(12), resultado);
+//    }
 }
