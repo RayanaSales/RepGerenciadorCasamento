@@ -201,4 +201,13 @@ public class TesteCerimonia
         
         assertEquals(12, somaTotal);
     }
+    
+    @Test
+    public void t13_lojasEmRecife() throws Exception
+    {
+        Query query = em.createNativeQuery("SELECT l FROM Loja l INNER JOIN Localizacao local ON l.id_localizacao = local.id AND local.txt_cidade LIKE ?1");
+        query.setParameter(1, "recife%");
+        List<Loja> lojaEmRecife = query.getResultList();
+        assertEquals(2, lojaEmRecife.size());
+    }
 }
