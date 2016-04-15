@@ -106,6 +106,7 @@ create table comesBebes
 create table roupaDosNoivos
 (
     id serial primary key,
-    roupa varchar(100) NOT NULL,
+    txt_roupa varchar(50) NOT NULL,
+    numero_valor real NOT NULL,
     id_noivo int references noivo(id)
 );

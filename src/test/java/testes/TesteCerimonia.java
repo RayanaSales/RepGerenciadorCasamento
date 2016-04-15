@@ -169,26 +169,36 @@ public class TesteCerimonia
         query = em.createQuery("SELECT c FROM ComesBebes c WHERE c.buffet.id = ?1", ComesBebes.class);
         query.setParameter(1, 1);
         List<ComesBebes> comesBebes = query.getResultList();        
-        assertEquals(5, comesBebes.size()); 
-        
-    }
-    
-    @Test
-    public void t11_roupasDistintas() throws Exception
-    {
-        TypedQuery<String> query = 
-                em.createQuery("SELECT DISTINCT(r.roupa) FROM RoupaDosNoivos r ORDER BY r.roupa", String.class);
-        List<String> roupas = query.getResultList();
-        assertEquals(10, roupas.size());
+        assertEquals(5, comesBebes.size());         
     }
     
 //    @Test
-//    public void t12_qntConvidadosCerimonia() throws Exception
+//    public void t11_valorTotalDasRoupasDosNoivos() throws Exception
 //    {
-//        TypedQuery<Integer> query = 
-//                em.createQuery("SELECT sum(c.numero_qntSenhas) FROM Convidado c INNER JOIN Pessoa p ON p.cerimonia.id = ?1 and c.pessoa.id = p.id", Integer.class);
+//        TypedQuery<Long> query = 
+//                em.createQuery("SELECT r.valor FROM RoupaDosNoivos r WHERE r.noivo.pessoa.cerimonia.id = ?1", Long.class);        
 //        query.setParameter(1, 2);
-//        Integer resultado = query.getSingleResult();
-//        assertEquals(new Integer(12), resultado);
+//        
+//        List<Long> valores = query.getResultList();        
+//        Long somaTotal = new Long(0);        
+//        for(Long s : valores)             
+//            somaTotal += s;
+//        
+//        assertEquals(new Long(12), somaTotal);
 //    }
+    
+    @Test
+    public void t12_qntConvidadosCerimonia() throws Exception
+    {
+        TypedQuery<Integer> query = 
+                em.createQuery("SELECT c.qntSenhas FROM Convidado c WHERE c.pessoa.cerimonia.id = ?1", Integer.class);
+        query.setParameter(1, 2);
+        
+        List<Integer> senhas = query.getResultList();        
+        int somaTotal = 0;        
+        for(Integer s : senhas)             
+            somaTotal += s;
+        
+        assertEquals(12, somaTotal);
+    }
 }

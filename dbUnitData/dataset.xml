@@ -29,15 +29,15 @@
     
     <pessoa id="1" disc_pessoa="N" txt_nome="Rayana" txt_email="rayana@gmail.com" id_cerimonia="1"/>
     <noivo id="1" txt_senha="123456" id_pessoa="1"/>
-    <roupaDosNoivos id="1" roupa="vestidoRendado" id_noivo="1"/>
-    <roupaDosNoivos id="2" roupa="salto" id_noivo="1"/>
-    <roupaDosNoivos id="3" roupa="grinalda" id_noivo="1"/>
+    <roupaDosNoivos id="1" txt_roupa="vestidoRendado" numero_valor="3000" id_noivo="1"/>
+    <roupaDosNoivos id="2" txt_roupa="salto" numero_valor="800" id_noivo="1"/>
+    <roupaDosNoivos id="3" txt_roupa="grinalda" numero_valor="100" id_noivo="1"/>
     
     <pessoa id="2" disc_pessoa="N" txt_nome="Paulo" txt_email="paulo@gmail.com" id_cerimonia="1"/>
     <noivo id="2" txt_senha="654321" id_pessoa="2"/>
-    <roupaDosNoivos id="4" roupa="Smoking" id_noivo="2"/>
-    <roupaDosNoivos id="5" roupa="gravata" id_noivo="2"/>
-    <roupaDosNoivos id="6" roupa="sapato" id_noivo="2"/>
+    <roupaDosNoivos id="4" txt_roupa="Smoking" numero_valor="3000" id_noivo="2"/>
+    <roupaDosNoivos id="5" txt_roupa="gravata" numero_valor="150" id_noivo="2"/>
+    <roupaDosNoivos id="6" txt_roupa="sapato" numero_valor="200" id_noivo="2"/>
     
     <pessoa id="3" disc_pessoa="C" txt_nome="Natália" txt_email="natalia@gmail.com" id_cerimonia="1"/>
     <convidado id="1" categoria="amigo" numero_qntsenhas="4" id_pessoa="3"/>
@@ -84,16 +84,16 @@
     <pessoa id="10" disc_pessoa="N" txt_nome="Thamires" txt_email="thamires@hotmail.com" id_cerimonia="2"/>
     <noivo id="3" txt_senha="09877" id_pessoa="10"/>
     <telefone id="10" categoria="celular" txt_ddd="81" txt_numero="993562341" id_pessoa="10"/>
-    <roupaDosNoivos id="7" roupa="vestidoTomaraQueCaiaComRendas" id_noivo="3"/>
-    <roupaDosNoivos id="8" roupa="salto" id_noivo="3"/>
-    <roupaDosNoivos id="9" roupa="veuLongo" id_noivo="3"/>
+    <roupaDosNoivos id="7" txt_roupa="vestido costas nua" numero_valor="2500" id_noivo="3"/>
+    <roupaDosNoivos id="8" txt_roupa="salto" numero_valor="200" id_noivo="3"/>
+    <roupaDosNoivos id="9" txt_roupa="veu longo" numero_valor="300" id_noivo="3"/>
     
     <pessoa id="11" disc_pessoa="N" txt_nome="Henrique" txt_email="henrique@yahoo.com" id_cerimonia="2"/>
     <noivo id="4" txt_senha="23456ghi" id_pessoa="11"/>
     <telefone id="11" categoria="celular" txt_ddd="81" txt_numero="9988846448" id_pessoa="11"/>
-    <roupaDosNoivos id="10" roupa="terno" id_noivo="4"/>
-    <roupaDosNoivos id="11" roupa="sapato" id_noivo="4"/>
-    <roupaDosNoivos id="12" roupa="gravataBorboleta" id_noivo="4"/>
+    <roupaDosNoivos id="10" txt_roupa="smooking" numero_valor="2300" id_noivo="4"/>
+    <roupaDosNoivos id="11" txt_roupa="sapato" numero_valor="200" id_noivo="4"/>
+    <roupaDosNoivos id="12" txt_roupa="gravata borboleta" numero_valor="300" id_noivo="4"/>
     
     <pessoa id="12" disc_pessoa="C" txt_nome="Mirela" txt_email="mirela@gmail.com" id_cerimonia="2"/>
     <convidado id="4" categoria="familia" numero_qntsenhas="5" id_pessoa="12"/>

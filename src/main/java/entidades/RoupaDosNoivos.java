@@ -20,20 +20,24 @@ public class RoupaDosNoivos implements Serializable {
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_noivo", referencedColumnName = "id")
-    Noivo noivo;
+    private Noivo noivo;
     
-    @Column
-    String roupa;
+    @Column(name = "txt_roupa")
+    private String roupa;
+    
+    @Column(name = "numero_valor")
+    private double valor;
     
     public RoupaDosNoivos()
     {
     
     }
     
-    public RoupaDosNoivos( Noivo noivo, String roupa )
+    public RoupaDosNoivos( Noivo noivo, String roupa, double valor)
     {
         this.noivo = noivo;
         this.roupa = roupa;
+        this.valor = valor;
     }
 
     public int getId() {
@@ -51,6 +55,8 @@ public class RoupaDosNoivos implements Serializable {
     public void setNoivo(Noivo noivo) {
         this.noivo = noivo;
     }
+    
+    
 
     public String getRoupa()
     {
@@ -61,4 +67,16 @@ public class RoupaDosNoivos implements Serializable {
     {
         this.roupa = roupa;
     }  
+
+    public double getValor()
+    {
+        return valor;
+    }
+
+    public void setValor(double valor)
+    {
+        this.valor = valor;
+    }
+    
+    
 }
