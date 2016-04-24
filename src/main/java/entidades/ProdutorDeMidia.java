@@ -2,9 +2,7 @@ package entidades;
 
 import enumeracoes.ProdutorDeMidiaCategoria;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -20,6 +18,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @DiscriminatorValue(value = "P")
@@ -30,14 +31,20 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @NotNull
+    @Pattern(regexp = "[0-9.,]+", message = "{entidades.ProdutorDeMidia.preco}") 
     @Column(name = "numero_preco")
     private double preco;
         
+    @NotNull
+    @Future
     @Column(name = "dt_dataEHoraChegada")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEHoraChegada; //mudar para date   
 
+    @NotNull
     @Column(name = "txt_linkParaRedeSocial")
+    @Pattern(regexp = "[A-Za-z0-9\\._-]+", message = "{entidades.ProdutorDeMidia.linkParaRedeSocial}")
     private String linkParaRedeSocial;
     
     @Enumerated(EnumType.STRING)

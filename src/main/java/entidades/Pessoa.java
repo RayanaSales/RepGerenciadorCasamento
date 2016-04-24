@@ -17,6 +17,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -29,9 +32,14 @@ public class Pessoa implements Serializable
     
     private String disc_pessoa; //para o jpql poder acessar, sem ele aq jpql n acessa o disc_pessoa
         
+    @NotNull
+    @Size(max = 30)
+    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Pessoa.nome}")
     @Column(name = "txt_nome")
     private String nome;
 
+    @NotNull 
+    @Pattern(regexp = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+", message = "{entidades.Pessoa.email}")
     @Column(name = "txt_email")
     private String email;
 

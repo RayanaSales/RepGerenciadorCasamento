@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Buffet implements Serializable
@@ -19,6 +21,8 @@ public class Buffet implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
+    @Pattern(regexp = "[0-9.,]+", message = "{entidades.Buffet.valorTotalGasto}")   
     @Column(name = "numero_valorTotal")
     private double valorTotalGasto;
 

@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class ComesBebes implements Serializable
@@ -37,9 +39,12 @@ public class ComesBebes implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @NotNull
     @Column(name = "numero_qtd")
     private int qtd;
     
+    @NotNull
+    @Pattern(regexp = "[0-9\\.,]+", message = "{entidades.ComesBebes.valor}") 
     @Column(name = "numero_valor")
     private double valor;
     

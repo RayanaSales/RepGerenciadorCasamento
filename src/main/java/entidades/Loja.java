@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Loja implements Serializable
@@ -19,6 +21,8 @@ public class Loja implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @NotNull
+    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Loja.nome}")
     @Column(name = "txt_nome")
     private String nome;
     

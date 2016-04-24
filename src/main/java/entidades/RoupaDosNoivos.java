@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class RoupaDosNoivos implements Serializable {
@@ -22,9 +24,13 @@ public class RoupaDosNoivos implements Serializable {
     @JoinColumn(name = "id_noivo", referencedColumnName = "id")
     private Noivo noivo;
     
+    @NotNull
+    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.RoupaDosNoivos.roupa}")
     @Column(name = "txt_roupa")
     private String roupa;
     
+    @NotNull
+    @Pattern(regexp = "[0-9.,]+", message = "{entidades.RoupaDosNoivos.valor}") 
     @Column(name = "numero_valor")
     private double valor;
     

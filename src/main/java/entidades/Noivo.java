@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @DiscriminatorValue(value = "N")
@@ -25,6 +27,8 @@ public class Noivo extends Pessoa implements Serializable //botar superclasse pe
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
      
+    @NotNull
+    @Pattern(regexp = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+", message = "{entidades.Buffet.valorTotalGasto}")
     @Column(name = "txt_senha")
     private String senha;      
 

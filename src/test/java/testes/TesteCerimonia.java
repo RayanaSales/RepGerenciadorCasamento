@@ -148,7 +148,10 @@ public class TesteCerimonia
     {
         TypedQuery<Telefone> query = em.createQuery("SELECT t FROM Telefone t WHERE t.categoria = :categoria",
                 Telefone.class); //like compara string, nesse caso eh uma enum,logo usa o =    
-        query.setParameter("categoria", TelefoneCategoria.celular); //n pode mandar como string, manda como enum
+       
+        //query.setParameter("categoria", TelefoneCategoria.celular); //n pode mandar como string, manda como enum
+        query.setParameter("categoria", "celular"); //pq n to usando string no momento
+        
         List<Telefone> telefones = query.getResultList();
 
         for (Telefone telefone : telefones) 

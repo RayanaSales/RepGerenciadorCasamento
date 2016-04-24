@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Telefone implements Serializable
@@ -20,22 +23,25 @@ public class Telefone implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Enumerated(EnumType.STRING)
-    TelefoneCategoria categoria;
+    //@Enumerated(EnumType.STRING)
+   // TelefoneCategoria categoria;
+    @NotNull
+    @validadores.ValidaTelefoneCategoria
+    @Size(min = 7, max = 11)
+    @Column
+    String categoria;
     
+    @NotNull  
+    @Size(min = 2, max = 3)
+    @Pattern(regexp = "[0-9]+", message = "{entidades.Telefone.ddd}")
     @Column(name = "txt_ddd")
     private String ddd;
         
+    @NotNull
+    @Size(min = 8, max = 9)
+    @Pattern(regexp = "[0-9]+", message = "{entidades.Telefone.numero}")
     @Column(name = "txt_numero")
     private String numero;
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "id_convidado", referencedColumnName = "id")
-//    private Convidado convidado;  
-//    
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "id_noivo", referencedColumnName = "id")
-//    private Noivo noivo;  
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
@@ -45,7 +51,7 @@ public class Telefone implements Serializable
     {
     }
     
-    public Telefone(TelefoneCategoria categoria, String ddd, String numero) //usado para loja
+    public Telefone(String categoria, String ddd, String numero) //usado para loja
     {       
         this.categoria = categoria;
         this.ddd = ddd;
@@ -62,12 +68,12 @@ public class Telefone implements Serializable
         this.id = id;
     }
 
-    public TelefoneCategoria getCategoria()
+    public String getCategoria()
     {
         return categoria;
     }
 
-    public void setCategoria(TelefoneCategoria categoria)
+    public void setCategoria(String categoria)
     {
         this.categoria = categoria;
     }

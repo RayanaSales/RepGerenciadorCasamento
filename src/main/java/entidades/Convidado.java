@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @DiscriminatorValue(value = "C")
@@ -27,7 +29,9 @@ public class Convidado extends Pessoa implements Serializable
     
     @Enumerated(EnumType.STRING)
     ConvidadoCategoria categoria;
-           
+      
+    @NotNull
+    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.qntSenhas}")
     @Column(name = "numero_qntsenhas")
     int qntSenhas;
     

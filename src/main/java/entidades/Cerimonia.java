@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cerimonia implements Serializable
@@ -24,6 +26,8 @@ public class Cerimonia implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
+    @Future
     @Column(name = "dt_dataHora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora; 

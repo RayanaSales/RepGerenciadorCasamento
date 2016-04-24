@@ -9,30 +9,43 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Localizacao implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
+    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.logradouro}")
     @Column(name = "txt_logradouro")
     private String logradouro;
 
+    @NotNull
+    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.bairro}")
     @Column(name = "txt_bairro")
     private String bairro;
 
+    @NotNull
+    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.cidade}")
     @Column(name = "txt_cidade")
     private String cidade;
     
+    @NotNull
+    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.complemento}")
     @Column(name = "txt_complemento")
     private String complemento;
 
+    @NotNull
+    @Pattern(regexp = "[0-9.]", message = "{entidades.Convidado.cep}")
     @Column(name = "txt_cep")
     private String cep;
 
+    @NotNull
+    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
     @Column(name = "numero_numero")
     private int numero;
     
