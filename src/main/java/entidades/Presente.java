@@ -40,6 +40,7 @@ public class Presente implements Serializable
     @Column(name = "txt_ondeEncontrar")
     private String ondeEncontrar;
 
+     @NotNull
     //uma cerimonia contem uma lista de presentes
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -22,7 +23,7 @@ public class Buffet implements Serializable
     private int id;
 
     @NotNull
-    @Pattern(regexp = "[0-9.,]+", message = "{entidades.Buffet.valorTotalGasto}")   
+    //adicionar validador
     @Column(name = "numero_valorTotal")
     private double valorTotalGasto;
 

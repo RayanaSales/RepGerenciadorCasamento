@@ -238,6 +238,9 @@ public class TesteCerimonia
         Validator validator = validatorFactory.getValidator();
         Set<ConstraintViolation<Telefone>> constraintViolations = validator.validate(telefone);
         assertEquals(1, constraintViolations.size());
+        ConstraintViolation<Telefone> violation = constraintViolations.iterator().next();
+        assertEquals("Categoria telefone inválido.", violation.getMessage());
+        
         
     }
 }

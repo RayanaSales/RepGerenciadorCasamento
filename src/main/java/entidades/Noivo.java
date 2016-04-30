@@ -22,11 +22,7 @@ import javax.validation.constraints.Pattern;
 @DiscriminatorValue(value = "N")
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class Noivo extends Pessoa implements Serializable //botar superclasse pessoa
-{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-     
+{     
     @NotNull
     @Pattern(regexp = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+", message = "{entidades.Buffet.valorTotalGasto}")
     @Column(name = "txt_senha")

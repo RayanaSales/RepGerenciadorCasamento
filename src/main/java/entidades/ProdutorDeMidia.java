@@ -26,13 +26,8 @@ import javax.validation.constraints.Pattern;
 @DiscriminatorValue(value = "P")
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class ProdutorDeMidia extends Pessoa implements Serializable
-{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
+{    
     @NotNull
-    @Pattern(regexp = "[0-9.,]+", message = "{entidades.ProdutorDeMidia.preco}") 
     @Column(name = "numero_preco")
     private double preco;
         

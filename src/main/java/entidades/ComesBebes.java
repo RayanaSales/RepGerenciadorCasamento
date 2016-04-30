@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -21,11 +22,13 @@ import javax.validation.constraints.Pattern;
 public class ComesBebes implements Serializable
 {
     @Column(name = "txt_produto")
+    //validar com padrão/pattern
     private String produto;
     
     @Enumerated(EnumType.STRING)
     ComesBebesCategoria categoria;
     
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;
@@ -44,7 +47,6 @@ public class ComesBebes implements Serializable
     private int qtd;
     
     @NotNull
-    @Pattern(regexp = "[0-9\\.,]+", message = "{entidades.ComesBebes.valor}") 
     @Column(name = "numero_valor")
     private double valor;
     

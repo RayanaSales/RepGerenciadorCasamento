@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -39,14 +40,15 @@ public class Pessoa implements Serializable
     private String nome;
 
     @NotNull 
-    @Pattern(regexp = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+", message = "{entidades.Pessoa.email}")
+    @Email
     @Column(name = "txt_email")
     private String email;
 
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones;
-
+    
+    @NotNull 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     private Cerimonia cerimonia;    

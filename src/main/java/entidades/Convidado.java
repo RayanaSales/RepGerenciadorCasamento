@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -31,10 +32,11 @@ public class Convidado extends Pessoa implements Serializable
     ConvidadoCategoria categoria;
       
     @NotNull
-    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.qntSenhas}")
+    @Min(value = 10)
     @Column(name = "numero_qntsenhas")
     int qntSenhas;
     
+    @NotNull
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Pessoa pessoa;

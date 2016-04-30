@@ -27,7 +27,7 @@ public class Telefone implements Serializable
     String categoria;
     
     @NotNull  
-    @Size(min = 2, max = 3)
+    @Size(min = 2, max = 2)
     @Pattern(regexp = "[0-9]+", message = "{entidades.Telefone.ddd}")
     @Column(name = "txt_ddd")
     private String ddd;
