@@ -1,11 +1,8 @@
 package entidades;
 
-import enumeracoes.TelefoneCategoria;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +20,6 @@ public class Telefone implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    //@Enumerated(EnumType.STRING)
-   // TelefoneCategoria categoria;
     @NotNull
     @validadores.ValidaTelefoneCategoria
     @Size(min = 7, max = 11)

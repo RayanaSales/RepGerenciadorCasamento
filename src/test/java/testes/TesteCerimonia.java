@@ -7,7 +7,6 @@ import entidades.Localizacao;
 import entidades.Loja;
 import entidades.Pessoa;
 import entidades.Telefone;
-import enumeracoes.TelefoneCategoria;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

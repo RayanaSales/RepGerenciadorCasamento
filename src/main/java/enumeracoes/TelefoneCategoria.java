@@ -1,6 +1,6 @@
 package enumeracoes;
 
-public enum TelefoneCategoria
-{
-    celular, empresarial, residencial;
-}
+//public enum TelefoneCategoria
+//{
+//    celular, empresarial, residencial;
+//}

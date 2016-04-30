@@ -1,30 +1,27 @@
 package validadores;
 
-import enumeracoes.TelefoneCategoria;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class ValidadorTelefoneCategoria implements ConstraintValidator<ValidaTelefoneCategoria, String> 
+public class ValidadorTelefoneCategoria implements ConstraintValidator<ValidaTelefoneCategoria, String>
 {
-    
-    
+
+    private List<String> categorias;
+
     @Override
-    public void initialize(ValidaTelefoneCategoria validaTelefoneCategoria) {
-              
+    public void initialize(ValidaTelefoneCategoria validaEstado)
+    {
+        this.categorias = new ArrayList<>();
+        this.categorias.add("celular");
+        this.categorias.add("empresarial");
+        this.categorias.add("residencial");
     }
 
     @Override
-    public boolean isValid(String valor, ConstraintValidatorContext context) {
-        
-        boolean verificador = false;
-        
-        for(TelefoneCategoria categoria : TelefoneCategoria.values()){
-            if(valor.equals(categoria.name()))
-                verificador = true;
-        }
-        
-        return verificador;
-    }  
+    public boolean isValid(String valor, ConstraintValidatorContext context)
+    {
+        return valor == null ? false : categorias.contains(valor);
+    }
 }
