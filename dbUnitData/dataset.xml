@@ -134,7 +134,14 @@
     <telefone id="20" categoria="celular" txt_ddd="81" txt_numero="997654324" id_pessoa="16"/>    
     <telefone id="21" categoria="celular" txt_ddd="81" txt_numero="993421577" id_pessoa="17"/>     
     <telefone id="22" categoria="empresarial" txt_ddd="81" txt_numero="35643278" id_pessoa="18"/> 
-    
+      
+    <!-- PARA O TESTE PESSOA: -->
+    <cerimonia id="3" dt_dataHora="2016-12-15 20:00:00" id_localizacao="9" id_buffet="3"/>
+    <pessoa id="19" disc_pessoa="N" txt_nome="Marlene" txt_email="marlene@gmail.com" id_cerimonia="3"/>
+    <telefone id="23" categoria="empresarial" txt_ddd="81" txt_numero="32453245" id_pessoa="19"/>    
+    <telefone id="24" categoria="celular" txt_ddd="81" txt_numero="993250212" id_pessoa="19"/>     
+    <telefone id="25" categoria="residencial" txt_ddd="81" txt_numero="32417065" id_pessoa="19"/> 
+    <noivo id="5" txt_senha="23456ghi" id_pessoa="19"/>
 </dataset>
 
 

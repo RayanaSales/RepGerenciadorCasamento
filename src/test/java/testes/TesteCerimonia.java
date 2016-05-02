@@ -7,20 +7,16 @@ import entidades.Localizacao;
 import entidades.Loja;
 import entidades.Pessoa;
 import entidades.Telefone;
+import enumeracoes.TelefoneCategoria;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -102,7 +98,7 @@ public class TesteCerimonia
     {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM Cerimonia c WHERE c.id IS NOT NULL", Long.class);
         Long resultado = query.getSingleResult();
-        assertEquals(new Long(2), resultado);
+        assertEquals(new Long(3), resultado);
     }
 
     @Test
@@ -153,8 +149,8 @@ public class TesteCerimonia
         TypedQuery<Telefone> query = em.createQuery("SELECT t FROM Telefone t WHERE t.categoria = :categoria",
                 Telefone.class); //like compara string, nesse caso eh uma enum,logo usa o =    
        
-        //query.setParameter("categoria", TelefoneCategoria.celular); //n pode mandar como string, manda como enum
-        query.setParameter("categoria", "celular"); //pq n to usando string no momento
+        query.setParameter("categoria", TelefoneCategoria.celular); //n pode mandar como string, manda como enum
+        //query.setParameter("categoria", "celular"); //pq n to usando string no momento
         
         List<Telefone> telefones = query.getResultList();
 
@@ -216,31 +212,30 @@ public class TesteCerimonia
         query.setParameter(1, "recife%");
         List<Loja> lojaEmRecife = query.getResultList();
         assertEquals(2, lojaEmRecife.size());
-    }
-    
-    
-    @Test
-    public void t14_criarTelefoneCategoriaValida() throws Exception
-    {
-        Telefone telefone = new Telefone("residencial", "81", "89764567");
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        Validator validator = validatorFactory.getValidator();
-        Set<ConstraintViolation<Telefone>> constraintViolations = validator.validate(telefone);
-        assertEquals(0, constraintViolations.size());
-        
-    }
-    
-    @Test
-    public void t15_criarTelefoneCategoriaInvalida() throws Exception
-    {
-        Telefone telefone = new Telefone("residencia", "81", "89764567");
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        Validator validator = validatorFactory.getValidator();
-        Set<ConstraintViolation<Telefone>> constraintViolations = validator.validate(telefone);
-        assertEquals(1, constraintViolations.size());
-        ConstraintViolation<Telefone> violation = constraintViolations.iterator().next();
-        assertEquals("Categoria telefone inválido.", violation.getMessage());
-        
-        
-    }
+    }    
+   
+//    @Test Eddie
+//    public void t14_criarTelefoneCategoriaValida() throws Exception
+//    {
+//        Telefone telefone = new Telefone("residencial", "81", "89764567");
+//        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+//        Validator validator = validatorFactory.getValidator();
+//        Set<ConstraintViolation<Telefone>> constraintViolations = validator.validate(telefone);
+//        assertEquals(0, constraintViolations.size());
+//        
+//    }
+//    
+//    @Test Eddie
+//    public void t15_criarTelefoneCategoriaInvalida() throws Exception
+//    {
+//        Telefone telefone = new Telefone("residencia", "81", "89764567");
+//        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+//        Validator validator = validatorFactory.getValidator();
+//        Set<ConstraintViolation<Telefone>> constraintViolations = validator.validate(telefone);
+//        
+//        assertEquals(1, constraintViolations.size());   
+//        //Pegando a msg - marcos andre
+//        ConstraintViolation<Telefone> violation = constraintViolations.iterator().next();
+//        assertEquals("Categoria telefone inválido.", violation.getMessage());
+//    }
 }

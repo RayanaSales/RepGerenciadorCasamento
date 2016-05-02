@@ -1,8 +1,11 @@
 package entidades;
 
+import enumeracoes.TelefoneCategoria;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -21,20 +23,19 @@ public class Telefone implements Serializable
     private int id;
     
     @NotNull
-    @validadores.ValidaTelefoneCategoria
-    @Size(min = 7, max = 11)
+    @Enumerated(EnumType.STRING)
     @Column
-    String categoria;
+    TelefoneCategoria categoria;
     
     @NotNull  
     @Size(min = 2, max = 2)
-    @Pattern(regexp = "[0-9]+", message = "{entidades.Telefone.ddd}")
+    @validadores.ValidaDDD
     @Column(name = "txt_ddd")
     private String ddd;
         
     @NotNull
     @Size(min = 8, max = 9)
-    @Pattern(regexp = "[0-9]+", message = "{entidades.Telefone.numero}")
+    @validadores.ValidaNumeroTelefone
     @Column(name = "txt_numero")
     private String numero;
     
@@ -46,7 +47,7 @@ public class Telefone implements Serializable
     {
     }
     
-    public Telefone(String categoria, String ddd, String numero) //usado para loja
+    public Telefone(TelefoneCategoria categoria, String ddd, String numero) //usado para loja
     {       
         this.categoria = categoria;
         this.ddd = ddd;
@@ -63,12 +64,12 @@ public class Telefone implements Serializable
         this.id = id;
     }
 
-    public String getCategoria()
+    public TelefoneCategoria getCategoria()
     {
         return categoria;
     }
 
-    public void setCategoria(String categoria)
+    public void setCategoria(TelefoneCategoria categoria)
     {
         this.categoria = categoria;
     }

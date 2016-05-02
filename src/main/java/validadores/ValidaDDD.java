@@ -10,11 +10,11 @@ import javax.validation.Payload;
 
 @Target( {ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidadorTelefoneCategoria.class)
+@Constraint(validatedBy = ValidadorDDD.class)
 @Documented
-public @interface ValidaTelefoneCategoria
+public @interface ValidaDDD
 {
-    String message() default "{entidades.Telefone.categoria}";
+    String message() default "{entidades.Telefone.ddd}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

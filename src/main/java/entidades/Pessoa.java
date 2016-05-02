@@ -29,17 +29,18 @@ public class Pessoa implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;  
+    protected int id;  
     
     private String disc_pessoa; //para o jpql poder acessar, sem ele aq jpql n acessa o disc_pessoa
         
     @NotNull
-    @Size(max = 30)
+    @Size(min = 2, max = 30)
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Pessoa.nome}")
     @Column(name = "txt_nome")
     private String nome;
 
     @NotNull 
+    @Size(min = 5, max = 50)
     @Email
     @Column(name = "txt_email")
     private String email;
@@ -48,7 +49,7 @@ public class Pessoa implements Serializable
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones;
     
-    @NotNull 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     private Cerimonia cerimonia;    
@@ -65,6 +66,11 @@ public class Pessoa implements Serializable
         this.cerimonia = cerimonia;
         telefones = new ArrayList<>();
     }
+
+    public int getId()
+    {
+        return id;
+    }
    
     public List<Telefone> getTelefones() {
         return telefones;
@@ -73,16 +79,39 @@ public class Pessoa implements Serializable
     //PADRAO EXPERT
     public void setTelefones(List<Telefone> telefonesNovos)
     {
+        if (telefones != null)
+        {
+           telefones = new ArrayList<>(); 
+        }
         
         for (Telefone telefone : telefonesNovos)
         {
-            if(!telefones.contains(telefone))
+            if(!existente(telefone))
             {
-                telefones.add(telefone);
+                //System.out.println("Telefone nao existia, entao vou add");
+                telefones.add(telefone);               
             }
-        }
+        }       
     }
-
+    
+    public boolean existente(Object c)
+    {
+        //System.out.println("MEU CONTAINS (existente) SENDO EXECUTADO");
+        
+        Telefone t = (Telefone) c;
+        boolean contem = false;
+        
+        for (int i = 0; i<telefones.size() ; i++)
+        {
+            if(telefones.get(i).getId() == t.getId())
+            {
+                contem = true;            
+                break;
+            }
+        }        
+        return contem;
+    }
+    
     public String getNome()
     {
         return nome;
