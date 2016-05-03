@@ -27,7 +27,7 @@ public class TesteTelefone
 
     private static EntityManagerFactory emf;
     private EntityManager em;
-    private EntityTransaction et;
+   // private EntityTransaction et;
 
     public TesteTelefone()
     {
@@ -37,6 +37,7 @@ public class TesteTelefone
     public static void setUpClass()
     {
         emf = Persistence.createEntityManagerFactory("casamento");
+        DbUnitUtil.inserirDados(); 
     }
 
     @AfterClass

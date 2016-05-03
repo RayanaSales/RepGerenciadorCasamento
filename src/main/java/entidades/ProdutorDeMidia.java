@@ -10,9 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -26,8 +23,9 @@ import javax.validation.constraints.Pattern;
 @DiscriminatorValue(value = "P")
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class ProdutorDeMidia extends Pessoa implements Serializable
-{    
+{     
     @NotNull
+    @validadores.ValidaPreco
     @Column(name = "numero_preco")
     private double preco;
         
@@ -35,16 +33,16 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     @Future
     @Column(name = "dt_dataEHoraChegada")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataEHoraChegada; //mudar para date   
+    private Date dataEHoraChegada;   
 
-    @NotNull
-    @Column(name = "txt_linkParaRedeSocial")
-    @Pattern(regexp = "[A-Za-z0-9\\._-]+", message = "{entidades.ProdutorDeMidia.linkParaRedeSocial}")
+    @validadores.ValidaURL
+    @Column(name = "txt_linkParaRedeSocial")   
     private String linkParaRedeSocial;
     
     @Enumerated(EnumType.STRING)
     ProdutorDeMidiaCategoria categoria;    
  
+    @NotNull
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Pessoa pessoa;
@@ -71,16 +69,6 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     public void setPessoa(Pessoa pessoa)
     {
         this.pessoa = pessoa;
-    }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public double getPreco()

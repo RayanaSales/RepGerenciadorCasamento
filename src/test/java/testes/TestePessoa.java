@@ -35,6 +35,7 @@ public class TestePessoa
     public static void setUpClass()
     {
         emf = Persistence.createEntityManagerFactory("casamento");
+        DbUnitUtil.inserirDados(); 
     }
     
     @AfterClass
