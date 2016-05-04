@@ -30,8 +30,6 @@ public class Pessoa implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;  
-    
-    private String disc_pessoa; //para o jpql poder acessar, sem ele aq jpql n acessa o disc_pessoa
         
     @NotNull
     @Size(min = 2, max = 30)
@@ -141,16 +139,4 @@ public class Pessoa implements Serializable
     {
         this.cerimonia = cerimonia;
     }
-
-    public String getDisc_pessoa()
-    {
-        return disc_pessoa;
-    }
-
-    public void setDisc_pessoa(String disc_pessoa)
-    {
-        this.disc_pessoa = disc_pessoa;
-    }
-    
-    
 }

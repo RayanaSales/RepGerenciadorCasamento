@@ -95,21 +95,21 @@ public class TestePessoa
         assertEquals(3, telefones.size());  
     }
     
-    @Test
-    public void testaTipoPessoaValida()
-    {
-        Pessoa p = em.find(Pessoa.class, 19);         
-        String tipoEsperado = "N";        
-        assertEquals(tipoEsperado, p.getDisc_pessoa());
-    }
-    
-    @Test
-    public void testaTipoPessoaInvalida()
-    {
-        Pessoa p = em.find(Pessoa.class, 19);         
-        String tipoNaoEsperado = "F";
-        assertNotEquals(tipoNaoEsperado, p.getDisc_pessoa());
-    }
+//    @Test
+//    public void testaTipoPessoaValida()
+//    {
+//        Pessoa p = em.find(Pessoa.class, 19);         
+//        String tipoEsperado = "N";        
+//        assertEquals(tipoEsperado, p.getDisc_pessoa());
+//    }
+//    
+//    @Test
+//    public void testaTipoPessoaInvalida()
+//    {
+//        Pessoa p = em.find(Pessoa.class, 19);         
+//        String tipoNaoEsperado = "F";
+//        assertNotEquals(tipoNaoEsperado, p.getDisc_pessoa());
+//    }
     
     @Test
     public void testaCerimoniaPessoa()

@@ -108,16 +108,16 @@ public class TesteCerimonia
 //        assertEquals(dataEsperada, c.getData());
 //    }
     
-    @Test
-    public void t06_buscarNoivosDeUmaCerimonia() throws Exception
-    {
-        TypedQuery<Pessoa> query;
-        query = em.createQuery("SELECT p FROM Pessoa p WHERE p.cerimonia.id = ?1 AND p.disc_pessoa like ?2", Pessoa.class);
-        query.setParameter(1, 1); //o id da cerimonia eh int entao n pode mandar string
-        query.setParameter(2, "N");
-        List<Pessoa> noivos = query.getResultList();        
-        assertEquals(2, noivos.size());        
-    }
+//    @Test
+//    public void t06_buscarNoivosDeUmaCerimonia() throws Exception
+//    {
+//        TypedQuery<Pessoa> query;
+//        query = em.createQuery("SELECT p FROM Pessoa p WHERE p.cerimonia.id = ?1 AND p.disc_pessoa like ?2", Pessoa.class);
+//        query.setParameter(1, 1); //o id da cerimonia eh int entao n pode mandar string
+//        query.setParameter(2, "N");
+//        List<Pessoa> noivos = query.getResultList();        
+//        assertEquals(2, noivos.size());        
+//    }
   
     @Test
     public void t07_testeAtualizarTelefone() throws Exception 

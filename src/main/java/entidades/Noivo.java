@@ -31,20 +31,15 @@ public class Noivo extends Pessoa implements Serializable //botar superclasse pe
     @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
     cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RoupaDosNoivos> roupaDosNoivos;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    private Pessoa pessoa;
     
     public Noivo()
     {
         roupaDosNoivos = new ArrayList<>();
     }
 
-    public Noivo(String senha, Pessoa p)
+    public Noivo(String senha)
     {
         this.senha = senha;
-        this.pessoa = p;
         roupaDosNoivos = new ArrayList<>();        
     }
 
@@ -81,15 +76,5 @@ public class Noivo extends Pessoa implements Serializable //botar superclasse pe
     public void setSenha(String senha)
     {
         this.senha = senha;
-    }
-
-    public Pessoa getPessoa()
-    {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa)
-    {
-        this.pessoa = pessoa;
     }
 }

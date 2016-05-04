@@ -36,12 +36,11 @@ create table pessoa
 );
 
 create table produtorDeMidia
-(
-	id serial primary key,        
+(	  
 	dt_dataEHoraChegada timestamp NOT NULL,
 	numero_preco real NOT NULL,	
         categoria varchar(30) NOT NULL,
-	txt_linkParaRedeSocial varchar(100),
+	txt_linkParaRedeSocial varchar(100),  
 
         id_pessoa int references pessoa(id)        
 );

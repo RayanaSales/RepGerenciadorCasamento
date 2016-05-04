@@ -41,34 +41,19 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     
     @Enumerated(EnumType.STRING)
     ProdutorDeMidiaCategoria categoria;    
- 
-    @NotNull
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    private Pessoa pessoa;
     
     public ProdutorDeMidia()
     {
         
     }
 
-    public ProdutorDeMidia(ProdutorDeMidiaCategoria categoria, Pessoa p, double preco, Date horaChegada, String linkParaRedeSocial)
+    public ProdutorDeMidia(ProdutorDeMidiaCategoria categoria,double preco, Date horaChegada, String linkParaRedeSocial)
     {       
         this.categoria = categoria;
-        this.pessoa = p;
+        
         this.preco = preco;
         this.dataEHoraChegada = horaChegada;       
         this.linkParaRedeSocial = linkParaRedeSocial;     
-    }
-
-    public Pessoa getPessoa()
-    {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa)
-    {
-        this.pessoa = pessoa;
     }
 
     public double getPreco()
