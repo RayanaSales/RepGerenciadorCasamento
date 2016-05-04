@@ -78,7 +78,7 @@ public class TesteProdutorDeMidia
 //            ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 //            Validator validator = validatorFactory.getValidator();
 //            Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
-//
+//            System.out.println(constraintViolations.iterator().next().getMessage());
 //            assertEquals(0, constraintViolations.size());           
 //    }
     
@@ -106,7 +106,7 @@ public class TesteProdutorDeMidia
     @Test
     public void horaChegadaDiferenteQuehoraCerimonia()
     {
-        ProdutorDeMidia pm = em.find(ProdutorDeMidia.class, 6);
+        ProdutorDeMidia pm = em.find(ProdutorDeMidia.class, 4);
              
         Date horaCerimonia = pm.getCerimonia().getData();
         Date horaChegadaProdutor = pm.getDataEHoraChegada();

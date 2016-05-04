@@ -24,10 +24,7 @@ import javax.validation.constraints.Pattern;
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class Convidado extends Pessoa implements Serializable
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id; 
-    
+       
     @Enumerated(EnumType.STRING)
     ConvidadoCategoria categoria;
       
@@ -35,21 +32,15 @@ public class Convidado extends Pessoa implements Serializable
     @Min(value = 10)
     @Column(name = "numero_qntsenhas")
     int qntSenhas;
-    
-    @NotNull
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    private Pessoa pessoa;
-    
+        
     public Convidado()
     {
       
     }
 
-    public Convidado(ConvidadoCategoria cc, Pessoa p, int quantidadeSenhas)
+    public Convidado(ConvidadoCategoria cc, int quantidadeSenhas)
     {        
         categoria = cc;
-        this.pessoa = p;
         this.qntSenhas = quantidadeSenhas;        
     }
 
@@ -61,16 +52,6 @@ public class Convidado extends Pessoa implements Serializable
     public void setQntSenhas(int qntSenhas)
     {
         this.qntSenhas = qntSenhas;
-    }
-
-    public Pessoa getPessoa()
-    {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa)
-    {
-        this.pessoa = pessoa;
     }
 
     public ConvidadoCategoria getCategoria()

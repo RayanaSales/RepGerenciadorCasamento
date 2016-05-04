@@ -28,39 +28,23 @@
     <presente id="3" txt_nome="Cortina" txt_descricao="cor: bege"  txt_ondeEncontrar="Jurandir pires" id_cerimonia="1"/>    
     
     <pessoa id="1" disc_pessoa="N" txt_nome="Rayana" txt_email="rayana@gmail.com" id_cerimonia="1"/>
-    <noivo id="1" txt_senha="123456" id_pessoa="1"/>
-    <roupaDosNoivos id="1" txt_roupa="vestidoRendado" numero_valor="3000" id_noivo="1"/>
-    <roupaDosNoivos id="2" txt_roupa="salto" numero_valor="800" id_noivo="1"/>
-    <roupaDosNoivos id="3" txt_roupa="grinalda" numero_valor="100" id_noivo="1"/>
+    <noivo txt_senha="123456" id_pessoa="1"/>
+    <roupaDosNoivos id="1" txt_roupa="vestidoRendado" numero_valor="3000" id_pessoa="1"/>
+    <roupaDosNoivos id="2" txt_roupa="salto" numero_valor="800" id_pessoa="1"/>
+    <roupaDosNoivos id="3" txt_roupa="grinalda" numero_valor="100" id_pessoa="1"/>
     
     <pessoa id="2" disc_pessoa="N" txt_nome="Paulo" txt_email="paulo@gmail.com" id_cerimonia="1"/>
-    <noivo id="2" txt_senha="654321" id_pessoa="2"/>
-    <roupaDosNoivos id="4" txt_roupa="Smoking" numero_valor="3000" id_noivo="2"/>
-    <roupaDosNoivos id="5" txt_roupa="gravata" numero_valor="150" id_noivo="2"/>
-    <roupaDosNoivos id="6" txt_roupa="sapato" numero_valor="200" id_noivo="2"/>
+    <noivo txt_senha="654321" id_pessoa="2"/>
+    <roupaDosNoivos id="4" txt_roupa="Smoking" numero_valor="3000" id_pessoa="2"/>
+    <roupaDosNoivos id="5" txt_roupa="gravata" numero_valor="150" id_pessoa="2"/>
+    <roupaDosNoivos id="6" txt_roupa="sapato" numero_valor="200" id_pessoa="2"/>
     
-    <pessoa id="3" disc_pessoa="C" txt_nome="Natália" txt_email="natalia@gmail.com" id_cerimonia="1"/>
-    <convidado id="1" categoria="amigo" numero_qntsenhas="4" id_pessoa="3"/>
-    <pessoa id="4" disc_pessoa="C" txt_nome="Cleron" txt_email="cleron@gmail.com" id_cerimonia="1"/>
-    <convidado id="2" categoria="amigo" numero_qntsenhas="4" id_pessoa="4"/>
-    <pessoa id="5" disc_pessoa="C" txt_nome="Thalita" txt_email="thalita@gmail.com" id_cerimonia="1"/>
-    <convidado id="3" categoria="familia" numero_qntsenhas="4" id_pessoa="5"/>
+    <pessoa id="3" disc_pessoa="C" txt_nome="Abadie" txt_email="abadie@gmail.com" id_cerimonia="1"/>
+    <convidado categoria="familia" numero_qntsenhas="10" id_pessoa="3"/>
     
-    <telefone id="1" categoria="celular" txt_ddd="81" txt_numero="997766965" id_pessoa="1"/>
-    <telefone id="2" categoria="residencial" txt_ddd="81" txt_numero="32674365" id_pessoa="2"/>
-    <telefone id="3" categoria="residencial" txt_ddd="81" txt_numero="32421608" id_pessoa="3"/> 
-    
-    <telefone id="4" categoria="empresarial" txt_ddd="81" txt_numero="32417065"/>   <!-- Telefone da loja --> 
-    <loja id="1" txt_nome="Santa lola" id_localizacao="2" id_telefone="4" id_presente="1"/>
-    
-    <telefone id="5" categoria="empresarial" txt_ddd="81" txt_numero="37895432"/>   <!-- Telefone da loja (buffet) --> 
-    <loja id="2" txt_nome="Delicatessen" id_localizacao="3" id_telefone="5"/> <!-- loja do buffet -->
-    <comesBebes id="1" txt_produto="brigadeiro suiço" numero_qtd="700" numero_valor="1000" categoria="doce" id_buffet="1" id_loja="2"/> 
-    <comesBebes id="2" txt_produto="brigadeiro argentino" numero_qtd="1000" numero_valor="1300" categoria="doce" id_buffet="1" id_loja="2"/>
-    <comesBebes id="3" txt_produto="alfajor" numero_qtd="800" numero_valor="700" categoria="doce" id_buffet="1" id_loja="2"/>
-    <comesBebes id="4" txt_produto="empanado de camarão" numero_qtd="10" numero_valor="200" categoria="salgado" id_buffet="1" id_loja="2"/>
-    <comesBebes id="5" txt_produto="champagne" numero_qtd="50" numero_valor="500" categoria="bebida" id_buffet="1" id_loja="2"/>
-   
+    <pessoa id="4" disc_pessoa="P" txt_nome="Spodinario" txt_email="letranafoto@hotmail.com" id_cerimonia="1"/>    
+    <produtorDeMidia id_pessoa="4" dt_dataEHoraChegada="2017-09-28 20:00:00" numero_preco="1.000" categoria="fotografo" txt_linkParaRedeSocial="www.facebook.com.br"/>    
+    <telefone id="1" categoria="celular" txt_ddd="81" txt_numero="998564321" id_pessoa="4"/>
     
     
     
@@ -69,102 +53,6 @@
     
     
     
-    
-    <!-- PRODUTORRRRRRRRRRRR DE MIDIA CORRETOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO (os outros vao ter que seguir esse padrão)-->
-    <pessoa id="6" disc_pessoa="P" txt_nome="Spodinario" txt_email="letranafoto@hotmail.com" id_cerimonia="1"/>    
-    <produtorDeMidia id_pessoa="6" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="1.000" categoria="fotografo" 
-                     txt_linkParaRedeSocial="www.facebook.com.br"/>    
-    <telefone id="6" categoria="celular" txt_ddd="81" txt_numero="998564321" id_pessoa="6"/>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!--
-    <pessoa id="7" disc_pessoa="P" txt_nome="Americo" txt_email="americospondinario@hotmail.com" id_cerimonia="1"/>    
-    <produtorDeMidia id="2" id_pessoa="7" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="1.500" categoria="fotografo" txt_linkParaRedeSocial="facebook.com.br/americospond"/>
-    <pessoa id="8" disc_pessoa="P" txt_nome="Amanda" txt_email="amandaBittencourt@hotmail.com" id_cerimonia="1"/>
-    <produtorDeMidia id="3" id_pessoa="8" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="1.900" categoria="fotografo" txt_linkParaRedeSocial="youtube.com.br/amandaBittencourt"/>
-    <pessoa id="9" disc_pessoa="P" txt_nome="Companhia" txt_email="ciaDoVideo@hotmail.com" id_cerimonia="1"/>
-    <produtorDeMidia id="4" id_pessoa="9" dt_dataEHoraChegada="2001-09-28 20:00:00" numero_preco="2.000" categoria="filmografia" txt_linkParaRedeSocial="youtube.com.br/ciaDoVideo"/>  
-    
-    
-    <telefone id="7" categoria="celular" txt_ddd="81" txt_numero="997654324" id_pessoa="7"/>    
-    <telefone id="8" categoria="celular" txt_ddd="81" txt_numero="993421577" id_pessoa="8"/>     
-    <telefone id="9" categoria="empresarial" txt_ddd="81" txt_numero="35643278" id_pessoa="9"/>  -->
-        
-    <!-- Cerimonia 2 -->	
-    <cerimonia id="2" dt_dataHora="2016-12-15 20:00:00" id_localizacao="4" id_buffet="2"/>
-    <presente id="4" txt_nome="Tapete" txt_descricao="Cor: vinho"  txt_ondeEncontrar="Americanas" id_cerimonia="2"/>
-    <presente id="5" txt_nome="Jogo sabonetes" txt_descricao="natura"  txt_ondeEncontrar="Revista" id_cerimonia="2"/>
-    <presente id="6" txt_nome="Roupa de cama" txt_descricao="com edredon"  txt_ondeEncontrar="Hiper bompreço" id_cerimonia="2"/>    
-     
-    <pessoa id="10" disc_pessoa="N" txt_nome="Thamires" txt_email="thamires@hotmail.com" id_cerimonia="2"/>
-    <noivo id="3" txt_senha="09877" id_pessoa="10"/>
-    <telefone id="10" categoria="celular" txt_ddd="81" txt_numero="993562341" id_pessoa="10"/> 
-    <roupaDosNoivos id="7" txt_roupa="vestido costas nua" numero_valor="2500" id_noivo="3"/>
-    <roupaDosNoivos id="8" txt_roupa="salto" numero_valor="200" id_noivo="3"/>
-    <roupaDosNoivos id="9" txt_roupa="veu longo" numero_valor="300" id_noivo="3"/>
-    
-    <pessoa id="11" disc_pessoa="N" txt_nome="Henrique" txt_email="henrique@yahoo.com" id_cerimonia="2"/>
-    <noivo id="4" txt_senha="23456ghi" id_pessoa="11"/>
-    <telefone id="11" categoria="celular" txt_ddd="81" txt_numero="9988846448" id_pessoa="11"/>
-    <roupaDosNoivos id="10" txt_roupa="smooking" numero_valor="2300" id_noivo="4"/>
-    <roupaDosNoivos id="11" txt_roupa="sapato" numero_valor="200" id_noivo="4"/>
-    <roupaDosNoivos id="12" txt_roupa="gravata borboleta" numero_valor="300" id_noivo="4"/>
-    
-    <pessoa id="12" disc_pessoa="C" txt_nome="Mirela" txt_email="mirela@gmail.com" id_cerimonia="2"/>
-    <convidado id="4" categoria="familia" numero_qntsenhas="5" id_pessoa="12"/>
-    <pessoa id="13" disc_pessoa="C" txt_nome="Gilson" txt_email="gilsinho@gmail.com" id_cerimonia="2"/>
-    <convidado id="5" categoria="amigo" numero_qntsenhas="3" id_pessoa="13"/>
-    <pessoa id="14" disc_pessoa="C" txt_nome="Marcelo" txt_email="marcelo@hotmail.com" id_cerimonia="2"/>
-    <convidado id="6" categoria="amigo" numero_qntsenhas="4" id_pessoa="14"/>
-    <telefone id="12" categoria="celular" txt_ddd="81" txt_numero="99453278" id_pessoa="12"/>
-    <telefone id="13" categoria="celular" txt_ddd="81" txt_numero="998343221" id_pessoa="13"/>
-    <telefone id="14" categoria="celular" txt_ddd="81" txt_numero="9987453214" id_pessoa="14"/> 
-
-    <telefone id="15" categoria="empresarial" txt_ddd="81" txt_numero="32456743"/>   <!-- Telefone da loja do presente 4--> 
-    <loja id="3" txt_nome="Americanas" id_localizacao="5" id_telefone="15" id_presente="4"/>
-    
-    <telefone id="16" categoria="empresarial" txt_ddd="81" txt_numero="32784356"/>   <!-- Telefone da loja do presente 5--> 
-    <loja id="4" txt_nome="Casas decoracao" id_localizacao="6" id_telefone="16" id_presente="5"/>
-    
-    <telefone id="17" categoria="empresarial" txt_ddd="81" txt_numero="34562137"/>   <!-- Telefone da loja do presente 6--> 
-    <loja id="5" txt_nome="Jurandir pires" id_localizacao="7" id_telefone="17" id_presente="6"/>
-    
-    <telefone id="18" categoria="empresarial" txt_ddd="81" txt_numero="34216753"/>   <!-- Telefone da loja (buffet) --> 
-    <loja id="6" txt_nome="Casa refeições" id_localizacao="8" id_telefone="18"/> <!-- loja do buffet -->
-    <comesBebes id="6" txt_produto="empanado siri" numero_qtd="200" numero_valor="1000" categoria="salgado" id_buffet="2" id_loja="6"/> 
-    <comesBebes id="7" txt_produto="trufa morango" numero_qtd="100" numero_valor="1300" categoria="doce" id_buffet="2" id_loja="6"/>
-    <comesBebes id="8" txt_produto="suco laranja" numero_qtd="500" numero_valor="700" categoria="bebida" id_buffet="2" id_loja="6"/>
-    <comesBebes id="9" txt_produto="guarana antartica" numero_qtd="200" numero_valor="200" categoria="bebida" id_buffet="2" id_loja="6"/>
-    <comesBebes id="10" txt_produto="coca cola" numero_qtd="150" numero_valor="500" categoria="bebida" id_buffet="2" id_loja="6"/>
-   
-  <!--  <pessoa id="15" disc_pessoa="P" txt_nome="Maju" txt_email="jutrindande@hotmail.com" id_cerimonia="2"/>
-    <produtorDeMidia id="5" id_pessoa="15" dt_dataEHoraChegada="2016-12-15 17:00:00" numero_preco="1.500" categoria="fotografo" txt_linkParaRedeSocial="youtube.com.br/jutrindade"/>
-    <pessoa id="16" disc_pessoa="P" txt_nome="Amelia" txt_email="amelia@hotmail.com" id_cerimonia="2"/>
-    <produtorDeMidia id="6" id_pessoa="16" dt_dataEHoraChegada="2016-12-15 17:00:00" numero_preco="2.000" categoria="fotografo" txt_linkParaRedeSocial="facebook.com.br/amelia"/>
-    <pessoa id="17" disc_pessoa="P" txt_nome="Marina" txt_email="marina@hotmail.com" id_cerimonia="2"/>
-    <produtorDeMidia id="7" id_pessoa="17" dt_dataEHoraChegada="2016-12-15 17:00:00" numero_preco="1.300" categoria="fotografo" txt_linkParaRedeSocial="youtube.com.br/marinamarimar"/>
-    <pessoa id="18" disc_pessoa="P" txt_nome="Video total" txt_email="videoTotal@hotmail.com" id_cerimonia="2"/>
-    <produtorDeMidia id="8" id_pessoa="18" dt_dataEHoraChegada="2016-12-15 17:00:00" numero_preco="2.500" categoria="filmografia" txt_linkParaRedeSocial="youtube.com.br/videoTotal"/>  
-    <telefone id="19" categoria="celular" txt_ddd="81" txt_numero="998564321" id_pessoa="15"/> 
-    <telefone id="20" categoria="celular" txt_ddd="81" txt_numero="997654324" id_pessoa="16"/>    
-    <telefone id="21" categoria="celular" txt_ddd="81" txt_numero="993421577" id_pessoa="17"/>     
-    <telefone id="22" categoria="empresarial" txt_ddd="81" txt_numero="35643278" id_pessoa="18"/> -->
-      
-    <!-- PARA O TESTE PESSOA: -->
-    <cerimonia id="3" dt_dataHora="2016-12-15 20:00:00" id_localizacao="9" id_buffet="3"/>
-    <pessoa id="19" disc_pessoa="N" txt_nome="Marlene" txt_email="marlene@gmail.com" id_cerimonia="3"/>
-    <telefone id="23" categoria="empresarial" txt_ddd="81" txt_numero="32453245" id_pessoa="19"/>    
-    <telefone id="24" categoria="celular" txt_ddd="81" txt_numero="993250212" id_pessoa="19"/>     
-    <telefone id="25" categoria="residencial" txt_ddd="81" txt_numero="32417065" id_pessoa="19"/> 
-    <noivo id="5" txt_senha="23456ghi" id_pessoa="19"/>
 </dataset>
 
 

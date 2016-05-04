@@ -21,7 +21,7 @@ public class RoupaDosNoivos implements Serializable {
     private int id;
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_noivo", referencedColumnName = "id")
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Noivo noivo;
     
     @NotNull

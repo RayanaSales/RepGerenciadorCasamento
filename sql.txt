@@ -56,7 +56,7 @@ create table presente
 
 create table noivo
 (
-	id serial primary key,	
+		
 	txt_senha varchar(100) NOT NULL,
         
         id_pessoa int references pessoa(id)
@@ -64,7 +64,7 @@ create table noivo
 
 create table convidado
 (
-	id serial primary key,     	
+	    	
         categoria varchar(30) NOT NULL,
         numero_qntsenhas int NOT NULL ,
 
@@ -107,5 +107,5 @@ create table roupaDosNoivos
     id serial primary key,
     txt_roupa varchar(50) NOT NULL,
     numero_valor real NOT NULL,
-    id_noivo int references noivo(id)
+    id_pessoa int references pessoa(id)
 );

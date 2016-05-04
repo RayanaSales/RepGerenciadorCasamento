@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Loja implements Serializable
@@ -22,14 +23,17 @@ public class Loja implements Serializable
     private int id;
     
     @NotNull
+    @Size(min = 3)
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Loja.nome}")
     @Column(name = "txt_nome")
     private String nome;
     
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_telefone", referencedColumnName = "id")
     private Telefone telefone;
     
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_localizacao", referencedColumnName = "id")
     private Localizacao localizacao;
