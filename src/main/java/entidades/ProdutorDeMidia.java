@@ -3,21 +3,16 @@ package entidades;
 import enumeracoes.ProdutorDeMidiaCategoria;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @DiscriminatorValue(value = "P")
@@ -39,6 +34,7 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     @Column(name = "txt_linkParaRedeSocial")   
     private String linkParaRedeSocial;
     
+    @NotNull
     @Enumerated(EnumType.STRING)
     ProdutorDeMidiaCategoria categoria;    
     

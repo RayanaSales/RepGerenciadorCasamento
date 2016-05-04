@@ -5,70 +5,21 @@ import entidades.Loja;
 import entidades.Telefone;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-
-public class TesteLoja
+/**
+ *
+ * @author natalia
+ */
+public class TesteLoja extends Teste
 {
-    private static EntityManagerFactory emf;
-    private EntityManager em;
-    private EntityTransaction et;
-    
-    public TesteLoja()
-    {
-    }
-    
-      @BeforeClass
-    public static void setUpClass()
-    {
-        emf = Persistence.createEntityManagerFactory("casamento");
-        DbUnitUtil.inserirDados();
-    }
-
-    @AfterClass
-    public static void tearDownClass()
-    {
-        emf.close();
-    }
-
-    @Before
-    public void setUp()
-    {
-        em = emf.createEntityManager();
-//        et = em.getTransaction();
-//        et.begin();
-    }
-
-    @After
-    public void tearDown()
-    {
-//        try
-//        {
-//            et.commit();
-//        } catch (Exception ex)
-//        {
-//            et.rollback();
-//        } finally
-//        {
-        em.close();
-        //}
-    }    
-    
- 
     @Test
     public void testarTelefoneDaLoja(){
         
@@ -107,11 +58,13 @@ public class TesteLoja
     @Test
     public void testaNomeDaLoja()
     {
-        Loja l = new Loja("aaaaa", null, null);
+        Telefone fone = em.find(Telefone.class, 7);
+        Localizacao local = em.find(Localizacao.class, 4);
+        Loja loja = new Loja("aaaaa", fone, local);
         
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
-        Set<ConstraintViolation<Loja>> constraintViolations = validator.validate(l);
+        Set<ConstraintViolation<Loja>> constraintViolations = validator.validate(loja);
         
         ConstraintViolation<Loja> violation = constraintViolations.iterator().next();
         assertEquals("Deve possuir uma única letra maiúscula, seguida por letras minúsculas.", violation.getMessage());

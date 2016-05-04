@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
     <localizacao id="1" txt_logradouro="Rua Serinhaen" txt_complemento="B" txt_bairro="Jardim Atlantico" txt_cep="53140010" txt_cidade="olinda" estado="PE" numero_numero="157" />
-    <localizacao id="2" txt_logradouro="Rua Carlos de Lima Cavlcanti" txt_complemento="C" txt_bairro="Rio Doce" txt_cep="54156089" txt_cidade="olinda" estado="PE" numero_numero="1897" />
+    <localizacao id="2" txt_logradouro="Rua Carlos de Lima Cavlcanti" txt_complemento="C" txt_bairro="Rio Doce" txt_cep="54156089" txt_cidade="Recife" estado="PE" numero_numero="1897" />
     <localizacao id="3" txt_logradouro="Rua Richuelo" txt_complemento="B" txt_bairro="Jardim Atlantico" txt_cep="53144010" txt_cidade="olinda" estado="PE" numero_numero="100" />
     <localizacao id="4" txt_logradouro="Avenida Arthur Lopes" txt_complemento="D" txt_bairro="Casa forte" txt_cep="54156879" txt_cidade="recife" estado="PE" numero_numero="56" />
     <localizacao id="5" txt_logradouro="Avenida Maria jaborondi" txt_complemento="E" txt_bairro="Limoeiro" txt_cep="52346578" txt_cidade="recife" estado="PE" numero_numero="24" />
@@ -40,7 +40,7 @@
     <roupaDosNoivos id="6" txt_roupa="sapato" numero_valor="200" id_pessoa="2"/>
     
     <pessoa id="3" disc_pessoa="C" txt_nome="Abadie" txt_email="abadie@gmail.com" id_cerimonia="1"/>
-    <convidado categoria="familia" numero_qntsenhas="10" id_pessoa="3"/>
+    <convidado categoria="familia" numero_quantidadeSenhas="10" id_pessoa="3"/>
     
     <pessoa id="4" disc_pessoa="P" txt_nome="Spodinario" txt_email="letranafoto@hotmail.com" id_cerimonia="1"/>    
     <produtorDeMidia id_pessoa="4" dt_dataEHoraChegada="2017-09-28 20:00:00" numero_preco="1.000" categoria="fotografo" txt_linkParaRedeSocial="www.facebook.com.br"/>    
@@ -49,6 +49,7 @@
     <telefone id="2" categoria="empresarial" txt_ddd="81" txt_numero="31111111"/>   
     <loja id="1" txt_nome="Santa lola" id_localizacao="2" id_telefone="2" id_presente="1"/>
     
+    <!-- CERIMONIA 2 -->
     <!-- PARA O TESTE PESSOA: -->
     <cerimonia id="2" dt_dataHora="2016-12-15 20:00:00" id_localizacao="3" id_buffet="2"/>
     <pessoa id="5" disc_pessoa="N" txt_nome="Marlene" txt_email="marlene@gmail.com" id_cerimonia="2"/>
@@ -56,6 +57,21 @@
     <telefone id="4" categoria="celular" txt_ddd="81" txt_numero="993250212" id_pessoa="5"/>     
     <telefone id="5" categoria="residencial" txt_ddd="81" txt_numero="32417065" id_pessoa="5"/> 
     <noivo txt_senha="23456ghi" id_pessoa="5"/>
+    
+    <!-- PARA O TESTE TELEFONE: -->
+    <pessoa id="6" disc_pessoa="C" txt_nome="Lucia" txt_email="lucia@gmail.com" id_cerimonia="2"/>
+    <telefone id="6" categoria="residencial" txt_ddd="81" txt_numero="32417065" id_pessoa="6"/> 
+    
+    <!-- Adicionando mais convidados na cerimonia 1 -->
+    <pessoa id="7" disc_pessoa="C" txt_nome="Renata" txt_email="renata@gmail.com" id_cerimonia="1"/>
+    <convidado categoria="familia" numero_quantidadeSenhas="8" id_pessoa="7"/>
+    <pessoa id="8" disc_pessoa="C" txt_nome="Vinicius" txt_email="viny@gmail.com" id_cerimonia="1"/>
+    <convidado categoria="amigo" numero_quantidadeSenhas="5" id_pessoa="8"/>
+    <pessoa id="9" disc_pessoa="C" txt_nome="Mari" txt_email="mari@hotmail.com" id_cerimonia="1"/>
+    <convidado categoria="amigo" numero_quantidadeSenhas="5" id_pessoa="9"/>
+    
+    <!-- Adicionando telefone para teste Loja -->
+    <telefone id="7" categoria="empresarial" txt_ddd="81" txt_numero="36237642"/> 
 </dataset>
 
 

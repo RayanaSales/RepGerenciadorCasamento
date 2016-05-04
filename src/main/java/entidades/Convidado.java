@@ -29,9 +29,9 @@ public class Convidado extends Pessoa implements Serializable
     ConvidadoCategoria categoria;
       
     @NotNull
-    @Min(value = 10)
-    @Column(name = "numero_qntsenhas")
-    int qntSenhas;
+    @Min(value = 1)
+    @Column(name = "numero_quantidadeSenhas")
+    int quantidadeSenhas;
         
     public Convidado()
     {
@@ -41,17 +41,17 @@ public class Convidado extends Pessoa implements Serializable
     public Convidado(ConvidadoCategoria cc, int quantidadeSenhas)
     {        
         categoria = cc;
-        this.qntSenhas = quantidadeSenhas;        
+        this.quantidadeSenhas = quantidadeSenhas;        
     }
 
-    public int getQntSenhas()
+    public int getQuantidadeSenhas()
     {
-        return qntSenhas;
+        return quantidadeSenhas;
     }
 
-    public void setQntSenhas(int qntSenhas)
+    public void setQuantidadeSenhas(int quantidadeSenhas)
     {
-        this.qntSenhas = qntSenhas;
+        this.quantidadeSenhas = quantidadeSenhas;
     }
 
     public ConvidadoCategoria getCategoria()

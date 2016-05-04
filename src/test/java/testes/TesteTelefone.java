@@ -2,19 +2,13 @@ package testes;
 
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
+import java.util.List;
 import java.util.Set;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -22,42 +16,8 @@ import static org.junit.Assert.*;
  *
  * @author rayana
  */
-public class TesteTelefone
+public class TesteTelefone extends Teste
 {
-
-    private static EntityManagerFactory emf;
-    private EntityManager em;
-   // private EntityTransaction et;
-
-    public TesteTelefone()
-    {
-    }
-
-    @BeforeClass
-    public static void setUpClass()
-    {
-        emf = Persistence.createEntityManagerFactory("casamento");
-        DbUnitUtil.inserirDados(); 
-    }
-
-    @AfterClass
-    public static void tearDownClass()
-    {
-        emf.close();
-    }
-
-    @Before
-    public void setUp()
-    {
-        em = emf.createEntityManager();
-    }
-
-    @After
-    public void tearDown()
-    {
-        em.close();
-    }
-
     @Test
     public void testaDDDValido()
     {
@@ -123,4 +83,26 @@ public class TesteTelefone
         Telefone t = em.find(Telefone.class, 2);
         assertNotEquals("residencia", t.getCategoria());        
     }
+    
+     @Test
+    public void testeAtualizarTelefone() throws Exception 
+    {           
+        String NovoNumeroTelefone = "34267844";               
+        Telefone t = em.find(Telefone.class, 6);
+        t.setNumero(NovoNumeroTelefone);        
+        em.merge(t);        
+        assertEquals(t.getNumero() , NovoNumeroTelefone);
+    }    
+  
+    @Test
+    public void buscarTelefonesDoTipoCelular() throws Exception
+    {
+        TypedQuery<Telefone> query = em.createQuery("SELECT t FROM Telefone t WHERE t.categoria = :categoria",
+                Telefone.class); //like compara string, nesse caso eh uma enum,logo usa o =          
+        query.setParameter("categoria", TelefoneCategoria.celular); //n pode mandar como string, manda como enum        
+        List<Telefone> telefones = query.getResultList();
+
+        for (Telefone telefone : telefones) 
+            assertEquals("celular", telefone.getCategoria().toString());        
+    } 
 }

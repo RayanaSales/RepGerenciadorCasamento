@@ -33,6 +33,7 @@ public class Cerimonia implements Serializable
     private Date dataHora; 
 
     //Relacionamentos:
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_localizacao", referencedColumnName = "id")
     private Localizacao localizacao;

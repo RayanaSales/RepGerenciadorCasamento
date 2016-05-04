@@ -3,7 +3,6 @@ package validadores;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-
 public class ValidadorURL implements ConstraintValidator<ValidaURL, String>
 {
     @Override
@@ -17,7 +16,7 @@ public class ValidadorURL implements ConstraintValidator<ValidaURL, String>
         boolean valido = false;
         
         //achar funcao que use o pattern/ validar com .br tb
-        if(link.startsWith("www.") && (link.endsWith(".com") || link.endsWith(".com.br")))
+        if(link.startsWith("www.") && (link.endsWith(".com") || link.endsWith(".com.br") || link.endsWith(".net")))
         {
             valido = true;            
         }

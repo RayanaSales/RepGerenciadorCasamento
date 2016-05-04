@@ -27,7 +27,6 @@ import org.hibernate.validator.constraints.Email;
 @DiscriminatorColumn(name = "disc_pessoa", discriminatorType = DiscriminatorType.STRING, length = 1)
 public class Pessoa implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
@@ -79,7 +78,7 @@ public class Pessoa implements Serializable
     //PADRAO EXPERT
     public void setTelefones(List<Telefone> telefonesNovos)
     {
-        if (telefones != null)
+        if (telefones == null)
         {
             telefones = new ArrayList<>();
         }
@@ -92,17 +91,9 @@ public class Pessoa implements Serializable
             }
         }
     }
-    
-//    @Override
-//    public boolean Contains(Object o) //de listas
-//    {
-//        return false;
-//    }
 
     public boolean existente(Object c)
     {
-        System.out.println("MEU CONTAINS (existente) SENDO EXECUTADO");
-
         Telefone t = (Telefone) c;
         boolean contem = false;
 
@@ -147,20 +138,21 @@ public class Pessoa implements Serializable
         this.cerimonia = cerimonia;
     }
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (o != null)
-        {
-            if(o instanceof Pessoa)
-            {
-                Pessoa outra = (Pessoa) o;
-                if(this.nome.equals(outra.nome))
-                { //testa tds as outras propriedades.
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    @Override
+//    public boolean equals(Object o)
+//    {System.out.println("meu equals");
+//        if (o != null)
+//        {
+//            if(o instanceof Pessoa)
+//            {
+//                Pessoa outra = (Pessoa) o;
+//                if(this.nome.equals(outra.nome) && this.email.equals(outra.email) && this.telefones.equals(outra.getTelefones())
+//                        && this.cerimonia.equals(outra.cerimonia))
+//                { //testa tds as outras propriedades.
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 }

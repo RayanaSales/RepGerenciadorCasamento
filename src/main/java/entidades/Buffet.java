@@ -11,13 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Entity
 public class Buffet implements Serializable
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -86,5 +85,39 @@ public class Buffet implements Serializable
     public List<ComesBebes> getComesBebes()
     {
         return comesBebes;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Buffet)
+            {
+                Buffet outra = (Buffet) o;
+
+                if (this.valorTotalGasto == outra.valorTotalGasto) //confere atributos
+                {  
+                    int tamanhoLista = outra.getComesBebes().size();
+                    int loops = 0;
+                    
+                    for (ComesBebes cb1 : this.comesBebes)//confere itens da lista
+                    {
+                        for (ComesBebes cb2 : outra.comesBebes)
+                        {
+                            if(cb1.getProduto().equals(cb2.getProduto()) && cb1.getCategoria().equals(cb2.getCategoria())
+                                    && cb1.getBuffet().equals(cb2.getBuffet()) && cb1.getLoja().equals(cb2.getLoja())
+                                    && cb1.getQtd() == cb2.getQtd() && cb1.getValor()== cb2.getValor())
+                            {
+                                loops++;
+                            }
+                        }
+                    }
+                    if (loops == tamanhoLista)
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 }

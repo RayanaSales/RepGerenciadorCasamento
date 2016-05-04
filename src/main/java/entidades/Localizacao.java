@@ -15,6 +15,7 @@ import javax.validation.constraints.Pattern;
 @Entity
 public class Localizacao implements Serializable
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -33,7 +34,7 @@ public class Localizacao implements Serializable
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.cidade}")
     @Column(name = "txt_cidade")
     private String cidade;
-    
+
     @NotNull
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.complemento}")
     @Column(name = "txt_complemento")
@@ -48,7 +49,7 @@ public class Localizacao implements Serializable
     @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
     @Column(name = "numero_numero")
     private int numero;
-    
+
     @Enumerated(EnumType.STRING)
     EstadosDoBrasil estado;
 
@@ -155,5 +156,25 @@ public class Localizacao implements Serializable
     public void setEstado(EstadosDoBrasil estado)
     {
         this.estado = estado;
-    }    
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Localizacao)
+            {
+                Localizacao outra = (Localizacao) o;
+
+                if (this.logradouro.equals(outra.logradouro) && this.bairro.equals(outra.bairro) && this.cidade.equals(outra.cidade)
+                        && this.complemento.equals(outra.complemento) && this.cep.equals(outra.cep) && this.numero == outra.numero
+                        && this.estado.equals(outra.estado))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
