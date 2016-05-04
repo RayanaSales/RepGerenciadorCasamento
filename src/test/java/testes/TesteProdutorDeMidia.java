@@ -69,42 +69,44 @@ public class TesteProdutorDeMidia
         //}
     }
 
-//    @Test
-//    public void testaPrecoValido()
-//    {//espera 0, mas vem 2
-//        
-//            ProdutorDeMidia pm = em.find(ProdutorDeMidia.class, 6);
-//            
-//            ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-//            Validator validator = validatorFactory.getValidator();
-//            Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
-//            System.out.println(constraintViolations.iterator().next().getMessage());
-//            assertEquals(0, constraintViolations.size());           
-//    }
-    
-//    @Test
-//    public void testaPrecoInvalido()
-//    { //espera um, mas vem 3
-//        
-//        Date dataCerimonia = Calendar.getInstance().getTime();
-//        Cerimonia c = new Cerimonia();
-//        c.setData(dataCerimonia);        
-//        ProdutorDeMidia pm = new ProdutorDeMidia(ProdutorDeMidiaCategoria.fotografo, 0.0, dataCerimonia, "lalaalal");
-//        pm.setNome("Luna");
-//        pm.setEmail("lunabandeira@gmail.com");
-//        pm.setCerimonia(c);
-//        
-//        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-//        Validator validator = validatorFactory.getValidator();
-//        Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
-//
-//        assertEquals(1, constraintViolations.size());
-//        ConstraintViolation<ProdutorDeMidia> violation = constraintViolations.iterator().next();
-//        assertEquals("Deve ser maior que 0. Pode conter ponto.", violation.getMessage());
-//    }
-    
     @Test
-    public void horaChegadaDiferenteQuehoraCerimonia()
+    public void testaPrecoValido()
+    {
+        ProdutorDeMidia pm = em.find(ProdutorDeMidia.class, 4);
+
+        if (pm != null)
+        {
+            ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+            Validator validator = validatorFactory.getValidator();
+            Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
+            
+            assertEquals(0, constraintViolations.size());
+
+        }
+    }
+
+    @Test
+    public void testaPrecoInvalido()
+    { //espera um, mas vem 3
+        
+        Cerimonia c = em.find(Cerimonia.class, 1);
+        ProdutorDeMidia pm = new ProdutorDeMidia(ProdutorDeMidiaCategoria.fotografo, 0.0, c.getData(), "www.lala.com");
+        pm.setNome("Luna");
+        pm.setEmail("lunabandeira@gmail.com");
+        pm.setCerimonia(c);
+        
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
+
+        assertEquals(1, constraintViolations.size()); //da erro em um
+        
+        ConstraintViolation<ProdutorDeMidia> violation = constraintViolations.iterator().next();
+        assertEquals("Deve ser maior que 0. Pode conter ponto.", violation.getMessage());
+    }
+    
+   @Test
+    public void horaChegadaDiferenteQuehoraCerimonia() 
     {
         ProdutorDeMidia pm = em.find(ProdutorDeMidia.class, 4);
              
@@ -112,22 +114,21 @@ public class TesteProdutorDeMidia
         Date horaChegadaProdutor = pm.getDataEHoraChegada();
         Assert.assertNotEquals(horaCerimonia, horaChegadaProdutor);
     }
+    @Test
+    public void urlValida()
+    { //espera 0, mas vem 2
+        
+        Cerimonia c = em.find(Cerimonia.class, 1);
+             
+        ProdutorDeMidia pm = new ProdutorDeMidia(ProdutorDeMidiaCategoria.filmografia, 7.000, c.getData(), "www.lunalunatica.com.br");
+        pm.setNome("Luna");
+        pm.setEmail("lunabandeira@gmail.com");
+        pm.setCerimonia(c);
+        
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
 
-//    @Test
-//    public void urlValida()
-//    { //espera 0, mas vem 2
-//        Date dataCerimonia = Calendar.getInstance().getTime();
-//        Cerimonia c = new Cerimonia();
-//        c.setData(dataCerimonia);        
-//        ProdutorDeMidia pm = new ProdutorDeMidia(ProdutorDeMidiaCategoria.filmografia, 7.000, dataCerimonia, "www.lunalunatica.com.br");
-//        pm.setNome("Luna");
-//        pm.setEmail("lunabandeira@gmail.com");
-//        pm.setCerimonia(c);
-//        
-//        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-//        Validator validator = validatorFactory.getValidator();
-//        Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
-//
-//        assertEquals(0, constraintViolations.size());    
-//    }
+        assertEquals(0, constraintViolations.size());    
+    }
 }

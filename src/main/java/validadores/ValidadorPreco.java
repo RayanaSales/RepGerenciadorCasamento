@@ -16,7 +16,7 @@ public class ValidadorPreco implements ConstraintValidator<ValidaPreco, Double>
     {
         boolean valido = false;
         
-        if(valor > 0.0)
+        if(valor > 0)
             valido = true;
         
         return valido;

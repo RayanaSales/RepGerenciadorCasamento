@@ -24,20 +24,21 @@ import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "disc_pessoa", discriminatorType = DiscriminatorType.STRING , length = 1)
+@DiscriminatorColumn(name = "disc_pessoa", discriminatorType = DiscriminatorType.STRING, length = 1)
 public class Pessoa implements Serializable
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;  
-        
+    protected int id;
+
     @NotNull
     @Size(min = 2, max = 30)
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Pessoa.nome}")
     @Column(name = "txt_nome")
     private String nome;
 
-    @NotNull 
+    @NotNull
     @Size(min = 5, max = 50)
     @Email
     @Column(name = "txt_email")
@@ -46,11 +47,11 @@ public class Pessoa implements Serializable
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones;
-    
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
-    private Cerimonia cerimonia;    
+    private Cerimonia cerimonia;
 
     public Pessoa()
     {
@@ -69,8 +70,9 @@ public class Pessoa implements Serializable
     {
         return id;
     }
-   
-    public List<Telefone> getTelefones() {
+
+    public List<Telefone> getTelefones()
+    {
         return telefones;
     }
 
@@ -79,37 +81,42 @@ public class Pessoa implements Serializable
     {
         if (telefones != null)
         {
-           telefones = new ArrayList<>(); 
+            telefones = new ArrayList<>();
         }
-        
+
         for (Telefone telefone : telefonesNovos)
         {
-            if(!existente(telefone))
+            if (!existente(telefone))
             {
-                //System.out.println("Telefone nao existia, entao vou add");
-                telefones.add(telefone);               
+                telefones.add(telefone);
             }
-        }       
+        }
     }
     
+//    @Override
+//    public boolean Contains(Object o) //de listas
+//    {
+//        return false;
+//    }
+
     public boolean existente(Object c)
     {
-        //System.out.println("MEU CONTAINS (existente) SENDO EXECUTADO");
-        
+        System.out.println("MEU CONTAINS (existente) SENDO EXECUTADO");
+
         Telefone t = (Telefone) c;
         boolean contem = false;
-        
-        for (int i = 0; i<telefones.size() ; i++)
+
+        for (int i = 0; i < telefones.size(); i++)
         {
-            if(telefones.get(i).getId() == t.getId())
+            if (telefones.get(i).getId() == t.getId())
             {
-                contem = true;            
+                contem = true;
                 break;
             }
-        }        
+        }
         return contem;
     }
-    
+
     public String getNome()
     {
         return nome;
@@ -138,5 +145,22 @@ public class Pessoa implements Serializable
     public void setCerimonia(Cerimonia cerimonia)
     {
         this.cerimonia = cerimonia;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if(o instanceof Pessoa)
+            {
+                Pessoa outra = (Pessoa) o;
+                if(this.nome.equals(outra.nome))
+                { //testa tds as outras propriedades.
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

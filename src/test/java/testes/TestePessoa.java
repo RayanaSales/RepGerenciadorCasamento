@@ -57,32 +57,26 @@ public class TestePessoa
     }
     
     @Test
-    public void testarMetodoContainsOveride_Telefone() //bug - assertNotEquals devia ser true
-    {    
-        //busca pessoa 19 - guarda referencia da pessoa antes da alteracao
-        Pessoa pessoaAntiga = em.find(Pessoa.class, 19);
+    public void testarMetodoContainsOveride_Telefone()
+    {            
+        Pessoa pessoaAntiga = em.find(Pessoa.class, 5); //guarda referencia           
+        Pessoa pessoaNova = em.find(Pessoa.class, 5); //a ser alterado
         
-        //busca pessoa 19 - pessoa a ser alterada
-        Pessoa pessoaNova = em.find(Pessoa.class, 19);
-        
-        //busca telefones da pessoa 19
+        //busca telefones da pessoa 5
         TypedQuery<Telefone> query2;
         query2 = em.createQuery("SELECT c FROM Telefone c WHERE c.pessoa.id = ?1", Telefone.class);
-        query2.setParameter(1, 19);
+        query2.setParameter(1, 5);
         List<Telefone> telefones = query2.getResultList(); 
         
         //CRIA NOVO TELEFONE, ADD em p2 
         Telefone t = new Telefone(TelefoneCategoria.celular, "81", "988846448");
-        t.setId(26);
+        t.setId(6);
         telefones.add(t);
         pessoaNova.setTelefones(telefones);
         
-        System.out.println("qtd tel na pessoa nova: " + pessoaNova.getTelefones().size());
-        em.merge(pessoaNova); //coloca no banco as alteracoes
-                
-        //verifica se p1 != p2
-        //assertNotEquals(pessoaAntiga, pessoaNova);
-        assertEquals(pessoaAntiga, pessoaNova);
+        System.out.println("fones pessoaAntiga: " + pessoaAntiga.getTelefones().size() + "fones pessoaNova: "+ pessoaNova.getTelefones().size());
+        
+        assertNotEquals(pessoaAntiga, pessoaNova); //o equals compara referencia, se eu quiser q ele olhe pros campos, preciso sobrescrever o equals, la em pessoa
     }
     
     @Test
@@ -90,33 +84,17 @@ public class TestePessoa
     { 
         TypedQuery<Telefone> query;
         query = em.createQuery("SELECT c FROM Telefone c WHERE c.pessoa.id = ?1", Telefone.class);
-        query.setParameter(1, 19);
+        query.setParameter(1, 5);
         List<Telefone> telefones = query.getResultList();        
         assertEquals(3, telefones.size());  
     }
     
-//    @Test
-//    public void testaTipoPessoaValida()
-//    {
-//        Pessoa p = em.find(Pessoa.class, 19);         
-//        String tipoEsperado = "N";        
-//        assertEquals(tipoEsperado, p.getDisc_pessoa());
-//    }
-//    
-//    @Test
-//    public void testaTipoPessoaInvalida()
-//    {
-//        Pessoa p = em.find(Pessoa.class, 19);         
-//        String tipoNaoEsperado = "F";
-//        assertNotEquals(tipoNaoEsperado, p.getDisc_pessoa());
-//    }
-    
     @Test
     public void testaCerimoniaPessoa()
     {
-        Pessoa p = em.find(Pessoa.class, 19);        
+        Pessoa p = em.find(Pessoa.class, 5);        
         int idCerimonia = p.getCerimonia().getId();
-        assertEquals(3, idCerimonia);        
+        assertEquals(2, idCerimonia);        
     }
     
 }

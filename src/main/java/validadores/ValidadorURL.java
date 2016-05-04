@@ -16,7 +16,8 @@ public class ValidadorURL implements ConstraintValidator<ValidaURL, String>
     {
         boolean valido = false;
         
-        if(link.startsWith("www.") && link.matches("a-zA-Z0-9_-/") && (link.endsWith(".com") || link.endsWith(".com.br")))
+        //achar funcao que use o pattern/ validar com .br tb
+        if(link.startsWith("www.") && (link.endsWith(".com") || link.endsWith(".com.br")))
         {
             valido = true;            
         }

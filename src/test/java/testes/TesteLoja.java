@@ -32,39 +32,52 @@ public class TesteLoja
     {
     }
     
-    @BeforeClass
+      @BeforeClass
     public static void setUpClass()
     {
         emf = Persistence.createEntityManagerFactory("casamento");
+        DbUnitUtil.inserirDados();
     }
-    
+
     @AfterClass
     public static void tearDownClass()
     {
         emf.close();
     }
-    
+
     @Before
     public void setUp()
     {
         em = emf.createEntityManager();
+//        et = em.getTransaction();
+//        et.begin();
     }
-    
+
     @After
     public void tearDown()
     {
+//        try
+//        {
+//            et.commit();
+//        } catch (Exception ex)
+//        {
+//            et.rollback();
+//        } finally
+//        {
         em.close();
-    }
+        //}
+    }    
+    
  
     @Test
     public void testarTelefoneDaLoja(){
         
         TypedQuery<Telefone> query;
-        query = em.createQuery("SELECT t FROM Telefone t Where t.id = 15 ", Telefone.class);
+        query = em.createQuery("SELECT t FROM Telefone t Where t.id = 2 ", Telefone.class);
         Telefone telefoneEsperado = query.getSingleResult();
        
         query = em.createQuery("SELECT l.telefone FROM Loja l Where l.id = ?1 ", Telefone.class);
-        query.setParameter(1, 3);
+        query.setParameter(1, 1);
         Telefone telefoneAtual = query.getSingleResult();
         assertEquals(telefoneEsperado, telefoneAtual);
     }
@@ -87,7 +100,7 @@ public class TesteLoja
         TypedQuery<Loja> query;
         query = em.createQuery("SELECT l FROM Loja l", Loja.class);
         List<Loja> lojas = query.getResultList();
-        assertEquals(6, lojas.size());
+        assertEquals(1, lojas.size());
     
     }
     

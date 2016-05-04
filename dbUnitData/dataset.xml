@@ -22,7 +22,7 @@
     <buffet id="10" numero_valorTotal ="6430" />
 	
     <!-- Cerimonia 1 -->	
-    <cerimonia id="1" dt_dataHora="2001-09-28 22:00:00" id_localizacao="1" id_buffet="1"/>
+    <cerimonia id="1" dt_dataHora="2020-09-28 22:00:00" id_localizacao="1" id_buffet="1"/>
     <presente id="1" txt_nome="Microondas" txt_descricao="Potência x"  txt_ondeEncontrar="Hiper" id_cerimonia="1"/>
     <presente id="2" txt_nome="Jogo de talheres" txt_descricao="Prateado"  txt_ondeEncontrar="Casa de cor" id_cerimonia="1"/>
     <presente id="3" txt_nome="Cortina" txt_descricao="cor: bege"  txt_ondeEncontrar="Jurandir pires" id_cerimonia="1"/>    
@@ -45,14 +45,17 @@
     <pessoa id="4" disc_pessoa="P" txt_nome="Spodinario" txt_email="letranafoto@hotmail.com" id_cerimonia="1"/>    
     <produtorDeMidia id_pessoa="4" dt_dataEHoraChegada="2017-09-28 20:00:00" numero_preco="1.000" categoria="fotografo" txt_linkParaRedeSocial="www.facebook.com.br"/>    
     <telefone id="1" categoria="celular" txt_ddd="81" txt_numero="998564321" id_pessoa="4"/>
+   
+    <telefone id="2" categoria="empresarial" txt_ddd="81" txt_numero="31111111"/>   
+    <loja id="1" txt_nome="Santa lola" id_localizacao="2" id_telefone="2" id_presente="1"/>
     
-    
-    
-    
-    
-    
-    
-    
+    <!-- PARA O TESTE PESSOA: -->
+    <cerimonia id="2" dt_dataHora="2016-12-15 20:00:00" id_localizacao="3" id_buffet="2"/>
+    <pessoa id="5" disc_pessoa="N" txt_nome="Marlene" txt_email="marlene@gmail.com" id_cerimonia="2"/>
+    <telefone id="3" categoria="empresarial" txt_ddd="81" txt_numero="32453245" id_pessoa="5"/>    
+    <telefone id="4" categoria="celular" txt_ddd="81" txt_numero="993250212" id_pessoa="5"/>     
+    <telefone id="5" categoria="residencial" txt_ddd="81" txt_numero="32417065" id_pessoa="5"/> 
+    <noivo txt_senha="23456ghi" id_pessoa="5"/>
 </dataset>
 
 

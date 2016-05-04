@@ -57,6 +57,7 @@ public class TestePresente
     {
         Presente p = new Presente(null, "Faqueiro", "Contém 100 peças", "Lojas Americanas");
         
-        
+        // testar se a cerimonia é válida.
+        //
     }    
 }
