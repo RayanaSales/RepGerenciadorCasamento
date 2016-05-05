@@ -1,10 +1,11 @@
 package testes;
 
 import entidades.Cerimonia;
-import entidades.Loja;
 import entidades.Noivo;
 import entidades.Pessoa;
+import java.text.SimpleDateFormat;
 import java.util.Set;
+import javax.persistence.Query;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -39,14 +40,31 @@ public class TesteNoivo extends Teste
         assertEquals("A senha deve possuir de 6 até 16 caracteres.", violation.getMessage());
     }
     
-//     @Test 
-    public void t01_atualizarNoivo()
+    @Test
+    public void quantidadeRoupas()
     {
-        Noivo p = em.find(Noivo.class, 5);
-        p.setNome("Laaa");
+        Noivo n = em.find(Noivo.class, 1);
+        assertEquals(3, n.getRoupaDosNoivos().size());
+    }
+    
+     @Test 
+    public void t01_atualizarNoivo()
+    {       
+      /*  Noivo p = em.find(Noivo.class, 10);
+        p.setSenha("9876dcba");
         em.merge(p);
-        p = em.find(Noivo.class, 5);
-        assertEquals("Laaa", p.getNome());
+        p = em.find(Noivo.class, 10);
+        assertEquals("9876dcba", p.getSenha()); */
+        
+        int id = 10;
+        String senhaEsperada = "9876dcba";
+        
+        Query query = em.createQuery("UPDATE Noivo AS n SET n.senha = ?1 WHERE n.id = ?2");
+        query.setParameter(1, senhaEsperada);
+        query.setParameter(2, id);
+        query.executeUpdate();        
+        Noivo n = em.find(Noivo.class, id);               
+        assertEquals(senhaEsperada, n.getSenha());
     }
         
     @Test

@@ -75,11 +75,40 @@
     
     <!-- Nova loja para delecao-->
     <telefone id="8" categoria="empresarial" txt_ddd="81" txt_numero="35555555"/>   
-    <loja id="2" txt_nome="Lojao" id_localizacao="8" id_telefone="8"/>
+    <loja id="2" txt_nome="Lojao" id_localizacao="8" id_telefone="8"/>    
+            
+    <!-- CRIANDO CERIMONIA 3 -->
+    <cerimonia id="3" dt_dataHora="2019-10-7 14:00:00" id_localizacao="4" id_buffet="3"/>    
     
+    <!-- PESSOA PARA DELECAO-->
+    <pessoa id="11" disc_pessoa="P" txt_nome="Daniel" txt_email="dani@hotmail.com" id_cerimonia="3"/>
+    <produtorDeMidia id_pessoa="11" dt_dataEHoraChegada="2019-10-7 12:00:00" numero_preco="1.000" categoria="fotografo" txt_linkParaRedeSocial="www.facebook.com.br"/>    
+    
+    <!-- PESSOA PARA ALTERACAO-->
+    <pessoa id="12" disc_pessoa="P" txt_nome="Antonio" txt_email="tony@hotmail.com" id_cerimonia="3"/>
+    <produtorDeMidia id_pessoa="12" dt_dataEHoraChegada="2019-10-7 12:00:00" numero_preco="1.000" categoria="fotografo" txt_linkParaRedeSocial="www.facebook.com.br"/>    
+     
+    <!-- telefone para delecao-->
+    <telefone id="9" categoria="residencial" txt_ddd="81" txt_numero="37777777"/> 
+    
+    <!-- CRIANDO CERIMONIA 4 - para delecao -->
+    <cerimonia id="4" dt_dataHora="2019-10-7 14:00:00" id_localizacao="5" id_buffet="4"/>    
+    <pessoa id="13" disc_pessoa="N" txt_nome="Benedite" txt_email="be@hotmail.com" id_cerimonia="4"/>
+    <noivo txt_senha="123lala" id_pessoa="13"/>
+    <pessoa id="14" disc_pessoa="N" txt_nome="Bento" txt_email="bento@hotmail.com" id_cerimonia="4"/>
+    <noivo txt_senha="123lala" id_pessoa="14"/>
+    
+    <!-- produtor de midia para alteracao -->
+    <pessoa id="15" disc_pessoa="P" txt_nome="Spotty" txt_email="spotty@hotmail.com" id_cerimonia="4"/>
+    <produtorDeMidia id_pessoa="15" dt_dataEHoraChegada="2019-10-7 12:00:00" numero_preco="5.000" categoria="fotografo" txt_linkParaRedeSocial="www.facebook.com.br"/>    
+   
+    <!-- produtor de midia para delecao -->
+    <pessoa id="16" disc_pessoa="P" txt_nome="Aria" txt_email="aria@hotmail.com" id_cerimonia="4"/>
+    <produtorDeMidia id_pessoa="16" dt_dataEHoraChegada="2019-10-7 12:00:00" numero_preco="4.000" categoria="fotografo" txt_linkParaRedeSocial="www.facebook.com.br"/>    
+       
     <!-- Novo noivo para delecao e alteracao -->
-    <pessoa id="10" disc_pessoa="N" txt_nome="Marcio" txt_email="marcio@hotmail.com" id_cerimonia="2"/>
-    <noivo txt_senha="123lala" id_pessoa="10"/>
+    <pessoa id="10" disc_pessoa="N" txt_nome="Marcio" txt_email="marcio@hotmail.com" id_cerimonia="3"/>
+    <noivo txt_senha="123lalala" id_pessoa="10"/>
 </dataset>
 
 

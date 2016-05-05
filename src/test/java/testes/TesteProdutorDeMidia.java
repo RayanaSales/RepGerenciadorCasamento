@@ -1,6 +1,8 @@
 package testes;
 
 import entidades.Cerimonia;
+import entidades.Loja;
+import entidades.Pessoa;
 import entidades.ProdutorDeMidia;
 import enumeracoes.ProdutorDeMidiaCategoria;
 import java.util.Date;
@@ -11,6 +13,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 /**
@@ -96,5 +99,36 @@ public class TesteProdutorDeMidia extends Teste
         Set<ConstraintViolation<ProdutorDeMidia>> constraintViolations = validator.validate(pm);
 
         assertEquals(1, constraintViolations.size());    
+    }
+    
+     @Test 
+    public void atualizarProdutor()
+    {
+    /*    Pessoa p = em.find(Pessoa.class, 15);
+        p.setNome("Linder");
+        em.merge(p);
+        p = em.find(Pessoa.class, 15);
+        assertEquals("Linder", p.getNome()); 
+        
+        ProdutorDeMidia p = em.find(ProdutorDeMidia.class, 15);
+        p.setEmail("spotty@yahoo.com");
+        em.merge(p);
+        p = em.find(ProdutorDeMidia.class, 15);
+        assertEquals("spotty@yahoo.com", p.getEmail());*/
+        
+        ProdutorDeMidia p = em.find(ProdutorDeMidia.class, 15);
+        p.setLinkParaRedeSocial("www.facebook.com");
+        em.merge(p);
+        p = em.find(ProdutorDeMidia.class, 15);
+        assertEquals("www.facebook.com", p.getLinkParaRedeSocial());
+    }
+        
+    @Test
+    public void deletarProdutor()
+    {        
+        ProdutorDeMidia b = em.find(ProdutorDeMidia.class, 16);
+        em.remove(b);        
+        b = em.find(ProdutorDeMidia.class, 16);
+        assertNull(b);        
     }
 }

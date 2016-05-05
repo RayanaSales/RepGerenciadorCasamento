@@ -55,10 +55,8 @@ create table presente
 );
 
 create table noivo
-(
-		
-	txt_senha varchar(100) NOT NULL,
-        
+(		
+	txt_senha varchar(100) NOT NULL,        
         id_pessoa int references pessoa(id)
 );
 

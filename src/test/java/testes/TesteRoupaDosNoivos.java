@@ -6,6 +6,7 @@ import entidades.Pessoa;
 import entidades.Presente;
 import entidades.RoupaDosNoivos;
 import java.util.Set;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -14,6 +15,8 @@ import javax.validation.ValidatorFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  *
@@ -74,24 +77,26 @@ public class TesteRoupaDosNoivos extends Teste {
         return r;
     }
            
-//     @Test 
+     @Test 
     public void testarAtualizarRoupa()
     {
-        RoupaDosNoivos r = em.find(RoupaDosNoivos.class, 1);
-        r.setRoupa("Vestido");
-        em.merge(r);
-        r = em.find(RoupaDosNoivos.class, 1);
-        assertEquals("Vestido", r.getRoupa());
+        int id = 2;
+        String roupaEsperada = "Salto vinho";
+        
+        Query query = em.createQuery("UPDATE RoupaDosNoivos AS n SET n.roupa = ?1 WHERE n.id = ?2");
+        query.setParameter(1, roupaEsperada);
+        query.setParameter(2, id);
+        query.executeUpdate();        
+        RoupaDosNoivos n = em.find(RoupaDosNoivos.class, id);               
+        assertEquals(roupaEsperada, n.getRoupa());
     }
         
     @Test
     public void testarDeletarRoupa()
-    {
-        
+    {        
         Presente b = em.find(Presente.class, 2);
         em.remove(b);        
         b = em.find(Presente.class, 2);
-        assertNull(b);
-        
+        assertNull(b);        
     }
 }

@@ -1,12 +1,14 @@
 package testes;
 
+import entidades.Noivo;
 import entidades.Pessoa;
 import entidades.Telefone;
 import java.util.List;
 import javax.persistence.TypedQuery;
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  *
@@ -66,5 +68,25 @@ public class TestePessoa extends Teste
         Pessoa p = em.find(Pessoa.class, 5);
         int idCerimonia = p.getCerimonia().getId();
         assertNotEquals(3, idCerimonia);
+    }
+         
+     @Test 
+    public void atualizarPessoa()
+    {
+        Pessoa p = em.find(Pessoa.class, 11);
+        p.setNome("Luana");
+        em.merge(p);
+        p = em.find(Pessoa.class, 11);
+        assertEquals("Luana", p.getNome());
+    }
+        
+    @Test
+    public void deletarPessoa()
+    {        
+        Pessoa b = em.find(Pessoa.class, 12);
+        em.remove(b);        
+        b = em.find(Pessoa.class, 12);
+        assertNull(b);
+        
     }
 }

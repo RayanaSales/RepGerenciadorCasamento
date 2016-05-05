@@ -1,5 +1,6 @@
 package testes;
 
+import entidades.Pessoa;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
 import java.util.List;
@@ -84,7 +85,7 @@ public class TesteTelefone extends Teste
         assertNotEquals("residencia", t.getCategoria());        
     }
     
-     @Test
+    @Test
     public void testeAtualizarTelefone() throws Exception 
     {           
         String NovoNumeroTelefone = "34267844";               
@@ -92,7 +93,16 @@ public class TesteTelefone extends Teste
         t.setNumero(NovoNumeroTelefone);        
         em.merge(t);        
         assertEquals(t.getNumero() , NovoNumeroTelefone);
-    }    
+    }  
+    
+    @Test
+    public void testeDeletarTelefone() throws Exception 
+    { 
+        Telefone t = em.find(Telefone.class, 9);
+        em.remove(t);        
+        t = em.find(Telefone.class, 9);
+        assertNull(t);
+    }
   
     @Test
     public void buscarTelefonesDoTipoCelular() throws Exception

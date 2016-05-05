@@ -8,6 +8,7 @@ import entidades.Noivo;
 import entidades.Pessoa;
 import enumeracoes.EstadosDoBrasil;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +29,7 @@ public class TesteCerimonia2 extends Teste
     {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM Cerimonia c WHERE c.id IS NOT NULL", Long.class);
         Long resultado = query.getSingleResult();
-        assertEquals(new Long(2), resultado);
+        assertEquals(new Long(3), resultado);
     }
 
     @Test
@@ -139,5 +140,29 @@ public class TesteCerimonia2 extends Teste
         }
         
         assertEquals(2, noivos.size());
+    }
+    
+     @Test 
+    public void atualizarCerimonia() throws ParseException
+    {
+        //atualiza hora, era 2020-09-28 22:00:00, fica 2020-09-28 20:00:00
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = (Date) formatter.parse("2020/09/28 20:00:00");
+        
+        Cerimonia p = em.find(Cerimonia.class, 1);
+        p.setData(date);
+        em.merge(p);
+        p = em.find(Cerimonia.class, 1);
+        assertEquals(date, p.getData());
+    }
+        
+    @Test
+    public void deletarCerimonia()
+    {        
+        Cerimonia b = em.find(Cerimonia.class, 4);
+        em.remove(b);        
+        b = em.find(Cerimonia.class, 4);
+        assertNull(b);
+        
     }
 }

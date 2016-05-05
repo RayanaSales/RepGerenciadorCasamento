@@ -2,11 +2,9 @@ package testes;
 
 import entidades.Localizacao;
 import entidades.Loja;
-import entidades.Presente;
 import entidades.Telefone;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
