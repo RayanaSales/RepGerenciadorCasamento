@@ -40,7 +40,7 @@ public class TesteCerimonia extends Teste
         assertEquals(1, c.getId());
     }   
 
-    //@Test
+  //  @Test
     public void t04_deletarBuffet() throws Exception
     {
         Buffet b = em.find(Buffet.class, 10);

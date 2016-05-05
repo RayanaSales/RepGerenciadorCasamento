@@ -48,7 +48,7 @@ public class Presente implements Serializable
 
     //Um presente pode ser encontrado em uma lista de lojas
     @OneToMany(mappedBy = "presente", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
+            cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Loja> lojas;
 
     public Presente()

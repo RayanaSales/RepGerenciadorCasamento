@@ -25,7 +25,7 @@ public class RoupaDosNoivos implements Serializable {
     private Noivo noivo;
     
     @NotNull
-    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.RoupaDosNoivos.roupa}")
+    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.RoupaDosNoivos.roupa}")
     @Column(name = "txt_roupa")
     private String roupa;
     

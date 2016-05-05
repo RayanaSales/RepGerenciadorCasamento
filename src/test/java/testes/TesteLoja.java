@@ -2,6 +2,7 @@ package testes;
 
 import entidades.Localizacao;
 import entidades.Loja;
+import entidades.Presente;
 import entidades.Telefone;
 import java.util.List;
 import java.util.Set;
@@ -12,12 +13,16 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  *
  * @author natalia
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TesteLoja extends Teste
 {
     @Test
@@ -46,12 +51,12 @@ public class TesteLoja extends Teste
     }
   
     @Test
-    public void testaQuantidadeDeLojas(){
+    public void t01_QuantidadeDeLojas(){
     
         TypedQuery<Loja> query;
         query = em.createQuery("SELECT l FROM Loja l", Loja.class);
         List<Loja> lojas = query.getResultList();
-        assertEquals(1, lojas.size());
+        assertEquals(2, lojas.size());
     
     }
     
@@ -70,4 +75,25 @@ public class TesteLoja extends Teste
         assertEquals("Deve possuir uma única letra maiúscula, seguida por letras minúsculas.", violation.getMessage());
     
     }
+    
+     @Test 
+    public void testarAtualizarLoja()
+    {
+        Loja p = em.find(Loja.class, 1);
+        p.setNome("Amend");
+        em.merge(p);
+        p = em.find(Loja.class, 1);
+        assertEquals("Amend", p.getNome());
+    }
+        
+    @Test
+    public void t02_deletarLoja()
+    {        
+        Loja b = em.find(Loja.class, 2);
+        em.remove(b);        
+        b = em.find(Loja.class, 2);
+        assertNull(b);
+        
+    }
+    
 }

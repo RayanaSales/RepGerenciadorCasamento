@@ -23,21 +23,21 @@
 	
     <!-- Cerimonia 1 -->	
     <cerimonia id="1" dt_dataHora="2020-09-28 22:00:00" id_localizacao="1" id_buffet="1"/>
-    <presente id="1" txt_nome="Microondas" txt_descricao="Potência x"  txt_ondeEncontrar="Hiper" id_cerimonia="1"/>
+    <presente id="1" txt_nome="Microondas" txt_descricao="Potencia"  txt_ondeEncontrar="Hiper" id_cerimonia="1"/>
     <presente id="2" txt_nome="Jogo de talheres" txt_descricao="Prateado"  txt_ondeEncontrar="Casa de cor" id_cerimonia="1"/>
-    <presente id="3" txt_nome="Cortina" txt_descricao="cor: bege"  txt_ondeEncontrar="Jurandir pires" id_cerimonia="1"/>    
+    <presente id="3" txt_nome="Cortina" txt_descricao="cor bege"  txt_ondeEncontrar="Jurandir pires" id_cerimonia="1"/>    
     
     <pessoa id="1" disc_pessoa="N" txt_nome="Rayana" txt_email="rayana@gmail.com" id_cerimonia="1"/>
     <noivo txt_senha="123456" id_pessoa="1"/>
-    <roupaDosNoivos id="1" txt_roupa="vestidoRendado" numero_valor="3000" id_pessoa="1"/>
-    <roupaDosNoivos id="2" txt_roupa="salto" numero_valor="800" id_pessoa="1"/>
-    <roupaDosNoivos id="3" txt_roupa="grinalda" numero_valor="100" id_pessoa="1"/>
+    <roupaDosNoivos id="1" txt_roupa="Vestido rendado" numero_valor="3000" id_pessoa="1"/>
+    <roupaDosNoivos id="2" txt_roupa="Salto" numero_valor="800" id_pessoa="1"/>
+    <roupaDosNoivos id="3" txt_roupa="Grinalda" numero_valor="100" id_pessoa="1"/>
     
     <pessoa id="2" disc_pessoa="N" txt_nome="Paulo" txt_email="paulo@gmail.com" id_cerimonia="1"/>
     <noivo txt_senha="654321" id_pessoa="2"/>
     <roupaDosNoivos id="4" txt_roupa="Smoking" numero_valor="3000" id_pessoa="2"/>
-    <roupaDosNoivos id="5" txt_roupa="gravata" numero_valor="150" id_pessoa="2"/>
-    <roupaDosNoivos id="6" txt_roupa="sapato" numero_valor="200" id_pessoa="2"/>
+    <roupaDosNoivos id="5" txt_roupa="Gravata" numero_valor="150" id_pessoa="2"/>
+    <roupaDosNoivos id="6" txt_roupa="Sapato" numero_valor="200" id_pessoa="2"/>
     
     <pessoa id="3" disc_pessoa="C" txt_nome="Abadie" txt_email="abadie@gmail.com" id_cerimonia="1"/>
     <convidado categoria="familia" numero_quantidadeSenhas="10" id_pessoa="3"/>
@@ -72,6 +72,14 @@
     
     <!-- Adicionando telefone para teste Loja -->
     <telefone id="7" categoria="empresarial" txt_ddd="81" txt_numero="36237642"/> 
+    
+    <!-- Nova loja para delecao-->
+    <telefone id="8" categoria="empresarial" txt_ddd="81" txt_numero="35555555"/>   
+    <loja id="2" txt_nome="Lojao" id_localizacao="8" id_telefone="8"/>
+    
+    <!-- Novo noivo para delecao e alteracao -->
+    <pessoa id="10" disc_pessoa="N" txt_nome="Marcio" txt_email="marcio@hotmail.com" id_cerimonia="2"/>
+    <noivo txt_senha="123lala" id_pessoa="10"/>
 </dataset>
 
 

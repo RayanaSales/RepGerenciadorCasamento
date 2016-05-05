@@ -39,7 +39,7 @@ public class Loja implements Serializable
     private Localizacao localizacao;
     
     //um presente contem uma lista de lojas
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_presente", referencedColumnName = "id")
     private Presente presente;
 
