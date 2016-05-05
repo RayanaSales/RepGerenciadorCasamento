@@ -11,36 +11,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Localizacao implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
+    @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.logradouro}")
     @Column(name = "txt_logradouro")
     private String logradouro;
 
     @NotNull
+    @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.bairro}")
     @Column(name = "txt_bairro")
     private String bairro;
 
     @NotNull
+    @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.cidade}")
     @Column(name = "txt_cidade")
     private String cidade;
 
     @NotNull
+    @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.complemento}")
     @Column(name = "txt_complemento")
     private String complemento;
 
     @NotNull
+    @Size(min = 3, max = 40)
     @Pattern(regexp = "[0-9.]", message = "{entidades.Convidado.cep}")
     @Column(name = "txt_cep")
     private String cep;
@@ -50,6 +55,7 @@ public class Localizacao implements Serializable
     @Column(name = "numero_numero")
     private int numero;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     EstadosDoBrasil estado;
 

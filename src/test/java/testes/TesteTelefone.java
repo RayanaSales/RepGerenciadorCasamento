@@ -1,6 +1,5 @@
 package testes;
 
-import entidades.Pessoa;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
 import java.util.List;

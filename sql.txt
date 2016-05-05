@@ -93,9 +93,10 @@ create table comesBebes
 (
         id serial  primary key,
         txt_produto varchar(100) NOT NULL,
-        numero_qtd int NOT NULL,
+        numero_quantidade int NOT NULL,
         numero_valor real NOT NULL,
         categoria varchar(10) NOT NULL,
+
         id_buffet int references buffet(id),
         id_loja int references loja(id)
 );

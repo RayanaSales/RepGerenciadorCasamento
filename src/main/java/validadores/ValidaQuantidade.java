@@ -10,11 +10,11 @@ import javax.validation.Payload;
 
 @Target( {ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidadorPreco.class)
+@Constraint(validatedBy = ValidadorQuantidade.class)
 @Documented
-public @interface ValidaPreco
+public @interface ValidaQuantidade
 {
-    String message() default "{entidades.ProdutorDeMidia.preco}";
+    String message() default "{entidades.Convidado.quantidadeSenhas}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -93,8 +93,8 @@ public class TesteCerimonia2 extends Teste
     @Test
     public void buffetDaCerimoniaValido() throws Exception
     {        
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        Buffet b = new Buffet(3000);
+        Cerimonia c = em.find(Cerimonia.class, 2);
+        Buffet b = new Buffet(3500);
                 
         //EM BUFFET,SOBRESCREVI,O EQUALS,PARA COMPARAR OBJETOS POR ATRIBUTOS, E NAO POR REFERENCIAS(COMO O EQUALS NORMAL FAZ)
         assertEquals(b, c.getBuffet());

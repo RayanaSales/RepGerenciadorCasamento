@@ -2,34 +2,26 @@ package entidades;
 
 import enumeracoes.ConvidadoCategoria;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @DiscriminatorValue(value = "C")
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class Convidado extends Pessoa implements Serializable
 {
-       
+    @NotNull
     @Enumerated(EnumType.STRING)
     ConvidadoCategoria categoria;
       
     @NotNull
-    @Min(value = 1)
+    @validadores.ValidaQuantidade   
     @Column(name = "numero_quantidadeSenhas")
     int quantidadeSenhas;
         

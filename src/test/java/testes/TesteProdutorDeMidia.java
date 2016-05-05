@@ -1,8 +1,6 @@
 package testes;
 
 import entidades.Cerimonia;
-import entidades.Loja;
-import entidades.Pessoa;
 import entidades.ProdutorDeMidia;
 import enumeracoes.ProdutorDeMidiaCategoria;
 import java.util.Date;

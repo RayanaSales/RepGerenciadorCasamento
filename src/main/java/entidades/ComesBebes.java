@@ -15,14 +15,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ComesBebes implements Serializable
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    
+    @NotNull
     @Column(name = "txt_produto")
-    //validar com padrão/pattern
+    @Size(min = 3, max = 40)
+    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.ComesBebes.produto}")
     private String produto;
     
+    @NotNull
     @Enumerated(EnumType.STRING)
     ComesBebesCategoria categoria;
     
@@ -31,20 +40,19 @@ public class ComesBebes implements Serializable
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;
     
+    @NotNull
     //quero pedir o brigadeiro da minha vizinha, os doces finos de tal lugar, mas eu gosto da coxinha da padaria. Pede tudo de cada lugar
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_loja", referencedColumnName = "id")
     private Loja loja;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+            
+    @NotNull
+    @validadores.ValidaQuantidade
+    @Column(name = "numero_quantidade")
+    private int quantidade;
     
     @NotNull
-    @Column(name = "numero_qtd")
-    private int qtd;
-    
-    @NotNull
+    @validadores.ValidaPreco
     @Column(name = "numero_valor")
     private double valor;
     
@@ -53,9 +61,9 @@ public class ComesBebes implements Serializable
         
     }
     
-    public ComesBebes(Buffet buffet, String produto, Loja loja, ComesBebesCategoria categoria, int qtd, double valor){
+    public ComesBebes(Buffet buffet, String produto, Loja loja, ComesBebesCategoria categoria, int quantidade, double valor){
         
-        this.qtd = qtd;
+        this.quantidade = quantidade;
         this.produto = produto;
         this.valor = valor;
         this.loja = loja;
@@ -71,12 +79,12 @@ public class ComesBebes implements Serializable
         this.id = id;
     }
 
-    public int getQtd() {
-        return qtd;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setQtd(int qtd) {
-        this.qtd = qtd;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public ComesBebesCategoria getCategoria() {

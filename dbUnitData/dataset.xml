@@ -10,6 +10,10 @@
     <localizacao id="8" txt_logradouro="Rua Oswaldo barbosa" txt_complemento="D" txt_bairro="Jardim Atlantico" txt_cep="53142674" txt_cidade="olinda" estado="PE" numero_numero="87" />
     <localizacao id="9" txt_logradouro="Rua José Almeida" txt_complemento="A" txt_bairro="Rio Doce" txt_cep="53140653" txt_cidade="olinda" estado="PE" numero_numero="12" />
     <localizacao id="10" txt_logradouro="Avenida Agamenon magalhães" txt_complemento="C" txt_bairro="Jardim Atlantico" txt_cep="53146010" txt_cidade="olinda" estado="PE" numero_numero="344" />
+   
+    <!-- Local para delecao -->
+    <localizacao id="11" txt_logradouro="Rua rose e silva" txt_complemento="A" txt_bairro="Janga" txt_cep="52040090" txt_cidade="recife" estado="PE" numero_numero="123" />
+   
     <buffet id="1" numero_valorTotal ="3000" />
     <buffet id="2" numero_valorTotal ="3500" />
     <buffet id="3" numero_valorTotal ="5200" />
@@ -109,6 +113,22 @@
     <!-- Novo noivo para delecao e alteracao -->
     <pessoa id="10" disc_pessoa="N" txt_nome="Marcio" txt_email="marcio@hotmail.com" id_cerimonia="3"/>
     <noivo txt_senha="123lalala" id_pessoa="10"/>
+    
+    <!-- Criando comes e bebes-->
+    <telefone id="10" categoria="empresarial" txt_ddd="81" txt_numero="36666666"/>   
+    <loja id="3" txt_nome="Amandita" id_localizacao="9" id_telefone="10"/>      
+    <comesBebes id="1" txt_produto="empanado siri" numero_quantidade="200" numero_valor="1000" categoria="salgado" id_buffet="1" id_loja="3"/> 
+    <comesBebes id="2" txt_produto="trufa morango" numero_quantidade="100" numero_valor="1300" categoria="doce" id_buffet="1" id_loja="3"/>
+    <comesBebes id="3" txt_produto="suco laranja" numero_quantidade="500" numero_valor="700" categoria="bebida" id_buffet="1" id_loja="3"/>
+    <comesBebes id="4" txt_produto="guarana antartica" numero_quantidade="200" numero_valor="200" categoria="bebida" id_buffet="1" id_loja="3"/>
+    <comesBebes id="5" txt_produto="coca cola" numero_quantidade="150" numero_valor="500" categoria="bebida" id_buffet="1" id_loja="3"/>
+    <comesBebes id="6" txt_produto="brigadeiro suico" numero_quantidade="700" numero_valor="1000" categoria="doce" id_buffet="1" id_loja="3"/> 
+    <comesBebes id="7" txt_produto="brigadeiro argentino" numero_quantidade="1000" numero_valor="1300" categoria="doce" id_buffet="1" id_loja="3"/>
+    <comesBebes id="8" txt_produto="alfajor" numero_quantidade="800" numero_valor="700" categoria="doce" id_buffet="1" id_loja="3"/>
+    <comesBebes id="9" txt_produto="empanado de camarao" numero_quantidade="10" numero_valor="200" categoria="salgado" id_buffet="1" id_loja="3"/>
+    <comesBebes id="10" txt_produto="champagne" numero_quantidade="50" numero_valor="500" categoria="bebida" id_buffet="1" id_loja="3"/>
+   
+    
 </dataset>
 
 

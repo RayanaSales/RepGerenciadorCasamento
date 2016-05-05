@@ -2,8 +2,6 @@ package testes;
 
 import entidades.Cerimonia;
 import entidades.Noivo;
-import entidades.Pessoa;
-import java.text.SimpleDateFormat;
 import java.util.Set;
 import javax.persistence.Query;
 import javax.validation.ConstraintViolation;

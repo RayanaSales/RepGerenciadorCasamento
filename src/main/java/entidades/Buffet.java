@@ -16,28 +16,28 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Buffet implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
-    //adicionar validador
+    @validadores.ValidaPreco
     @Column(name = "numero_valorTotal")
     private double valorTotalGasto;
 
+    @NotNull
     @OneToMany(mappedBy = "buffet", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ComesBebes> comesBebes;
 
-    public double calcularValorTotal()
-    {
-        for (ComesBebes produto : comesBebes)
-        {
-            valorTotalGasto += produto.getQtd() * produto.getValor();
-        }
-        return valorTotalGasto;
-    }
+//    public double calcularValorTotal()
+//    {
+//        for (ComesBebes produto : comesBebes)
+//        {
+//            valorTotalGasto += produto.getQtd() * produto.getValor();
+//        }
+//        return valorTotalGasto;
+//    }
 
     public Buffet()
     {
@@ -89,7 +89,7 @@ public class Buffet implements Serializable
 
     @Override
     public boolean equals(Object o)
-    {
+    {System.out.println("equals buffet");
         if (o != null)
         {
             if (o instanceof Buffet)
@@ -107,17 +107,21 @@ public class Buffet implements Serializable
                         {
                             if(cb1.getProduto().equals(cb2.getProduto()) && cb1.getCategoria().equals(cb2.getCategoria())
                                     && cb1.getBuffet().equals(cb2.getBuffet()) && cb1.getLoja().equals(cb2.getLoja())
-                                    && cb1.getQtd() == cb2.getQtd() && cb1.getValor()== cb2.getValor())
+                                    && cb1.getQuantidade() == cb2.getQuantidade() && cb1.getValor()== cb2.getValor())
                             {
                                 loops++;
                             }
                         }
                     }
                     if (loops == tamanhoLista)
+                    {
+                        System.out.println("terminou");
                         return true;
+                    }
                 }
             }
         }
+        System.out.println("terminou");
         return false;
     }
 }
