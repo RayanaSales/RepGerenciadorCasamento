@@ -24,11 +24,7 @@ public class TesteNoivo extends Teste
      @Test
     public void testarTamanhoDaSenhaInvalido()
     {
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        Noivo noivo = new Noivo("senha");
-        noivo.setNome("Nati");
-        noivo.setEmail("nati@gmail.com");
-        noivo.setCerimonia(c);
+        Noivo noivo = this.montarNoivo();
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -48,12 +44,6 @@ public class TesteNoivo extends Teste
      @Test 
     public void t01_atualizarNoivo()
     {       
-      /*  Noivo p = em.find(Noivo.class, 10);
-        p.setSenha("9876dcba");
-        em.merge(p);
-        p = em.find(Noivo.class, 10);
-        assertEquals("9876dcba", p.getSenha()); */
-        
         int id = 10;
         String senhaEsperada = "9876dcba";
         
@@ -73,6 +63,17 @@ public class TesteNoivo extends Teste
         b = em.find(Noivo.class, 10);
         assertNull(b);
         
+    }
+    
+    private Noivo montarNoivo()
+    {
+        Cerimonia c = em.find(Cerimonia.class, 1);
+        Noivo noivo = new Noivo("senha");
+        noivo.setNome("Nati");
+        noivo.setEmail("nati@gmail.com");
+        noivo.setCerimonia(c);
+        
+        return noivo;
     }
 
 }

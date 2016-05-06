@@ -119,7 +119,7 @@ public class TesteComesBebes extends Teste
         assertEquals("Deve ser maior que 0. Pode conter ponto, ou virgula.", violation.getMessage());
     }
 
-    public ComesBebes montarComesBebes()
+    private ComesBebes montarComesBebes()
     {
         Buffet b = em.find(Buffet.class, 5);
         Loja loja = em.find(Loja.class, 1);

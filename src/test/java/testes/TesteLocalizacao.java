@@ -139,7 +139,7 @@ public class TesteLocalizacao extends Teste
         assertNotEquals(50, l.getNumero());
     }
 
-    public Localizacao montarLocalizacao()
+    private Localizacao montarLocalizacao()
     {
         Localizacao l = new Localizacao(EstadosDoBrasil.ES, "Recife", "Encruzilhada", "rua lagoa azul", "b", "52040090", 50);
         return l;

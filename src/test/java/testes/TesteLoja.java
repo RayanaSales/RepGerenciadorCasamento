@@ -61,9 +61,7 @@ public class TesteLoja extends Teste
     @Test
     public void testaNomeDaLoja()
     {
-        Telefone fone = em.find(Telefone.class, 7);
-        Localizacao local = em.find(Localizacao.class, 4);
-        Loja loja = new Loja("aaaaa", fone, local);
+        Loja loja = this.montarLoja();
         
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -92,6 +90,14 @@ public class TesteLoja extends Teste
         b = em.find(Loja.class, 2);
         assertNull(b);
         
+    }
+    
+    private Loja montarLoja()
+    {
+        Telefone fone = em.find(Telefone.class, 7);
+        Localizacao local = em.find(Localizacao.class, 4);
+        Loja loja = new Loja("aaaaa", fone, local);
+        return loja;
     }
     
 }

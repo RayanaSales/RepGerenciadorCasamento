@@ -79,7 +79,7 @@ public class TesteConvidado extends Teste
         assertNotEquals(ConvidadoCategoria.familia, c.getCategoria());
     }
     
-    public Convidado montarConvidado()
+    private Convidado montarConvidado()
     {
         Convidado c = new Convidado(ConvidadoCategoria.amigo, 5);
         c.setId(10);

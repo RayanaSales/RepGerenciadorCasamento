@@ -58,6 +58,12 @@ public class Cerimonia implements Serializable
         pessoas = new ArrayList<>();
     }
 
+    public Cerimonia(Date dataHora, Localizacao localizacao)
+    {       
+        this.dataHora = dataHora;
+        this.localizacao = localizacao;        
+    }    
+
     public Date getData()
     {
         return dataHora;
@@ -105,6 +111,9 @@ public class Cerimonia implements Serializable
 
     public void setPresentes(List<Presente> presentesNovos)
     {
+        if(presentes == null )
+            presentes = new ArrayList<>();
+        
         for (Presente presente : presentesNovos)
         {
             if(!presentes.contains(presente))
@@ -121,6 +130,9 @@ public class Cerimonia implements Serializable
 
     public void setPessoas(List<Pessoa> pessoasNovas)
     {
+        if (pessoas == null)
+            pessoas = new ArrayList<>();
+        
         for (Pessoa pessoa : pessoasNovas)
         {
             if(!pessoas.contains(pessoa))

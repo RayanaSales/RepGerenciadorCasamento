@@ -21,7 +21,7 @@ public class TesteTelefone extends Teste
     @Test
     public void testaDDDValido()
     {
-        Telefone telefone = new Telefone(TelefoneCategoria.celular, "81", "989764567");
+        Telefone telefone = this.montarTelefone();
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -33,7 +33,8 @@ public class TesteTelefone extends Teste
     @Test
     public void testaDDDInvalido()
     {
-        Telefone telefone = new Telefone(TelefoneCategoria.celular, "00", "989764567");
+        Telefone telefone = this.montarTelefone();
+        telefone.setDdd("00");
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -47,7 +48,7 @@ public class TesteTelefone extends Teste
     @Test
     public void testaNumeroValido()
     {
-        Telefone telefone = new Telefone(TelefoneCategoria.residencial, "81", "32417065");
+        Telefone telefone = this.montarTelefone();
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -59,7 +60,8 @@ public class TesteTelefone extends Teste
     @Test
     public void testaNumeroInvalido()
     {
-        Telefone telefone = new Telefone(TelefoneCategoria.celular, "81", "22224444");
+        Telefone telefone = this.montarTelefone();
+        telefone.setNumero("22223333");
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -73,22 +75,23 @@ public class TesteTelefone extends Teste
     @Test
     public void testaCategoriaValida()
     {
-        Telefone t = em.find(Telefone.class, 1);
+        Telefone t = this.montarTelefone();
         assertEquals(TelefoneCategoria.celular, t.getCategoria());
     }
     
     @Test
     public void testaCategoriaInvalida()
     {
-        Telefone t = em.find(Telefone.class, 2);
-        assertNotEquals("residencia", t.getCategoria());        
+        Telefone t = this.montarTelefone();
+        assertNotEquals(TelefoneCategoria.empresarial, t.getCategoria());        
     }
     
     @Test
     public void testeAtualizarTelefone() throws Exception 
     {           
-        String NovoNumeroTelefone = "34267844";               
-        Telefone t = em.find(Telefone.class, 6);
+        String NovoNumeroTelefone = "34267844"; 
+        
+        Telefone t = this.montarTelefone();
         t.setNumero(NovoNumeroTelefone);        
         em.merge(t);        
         assertEquals(t.getNumero() , NovoNumeroTelefone);
@@ -114,4 +117,12 @@ public class TesteTelefone extends Teste
         for (Telefone telefone : telefones) 
             assertEquals("celular", telefone.getCategoria().toString());        
     } 
+    
+    
+    private Telefone montarTelefone()
+    {
+        Telefone t = new Telefone(TelefoneCategoria.celular, "81", "993250212");
+        t.setId(1);
+        return t;
+    }
 }

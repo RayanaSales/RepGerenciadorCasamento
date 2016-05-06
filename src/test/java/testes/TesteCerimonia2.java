@@ -6,6 +6,8 @@ import entidades.Convidado;
 import entidades.Localizacao;
 import entidades.Noivo;
 import entidades.Pessoa;
+import entidades.Presente;
+import enumeracoes.ConvidadoCategoria;
 import enumeracoes.EstadosDoBrasil;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -52,117 +54,169 @@ public class TesteCerimonia2 extends Teste
     public void dataValida() throws Exception
     {
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = (Date) formatter.parse("2016/12/15 20:00:00");
+        Date date = (Date) formatter.parse("2018/05/28 17:00:00");
 
-        Cerimonia c = em.find(Cerimonia.class, 2);
-        
+        Cerimonia c = this.montarCerimonia();
+
         assertEquals(date, c.getData());
     }
-    
+
     @Test
     public void dataInvalida() throws Exception
     {
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = (Date) formatter.parse("2013/10/15 21:00:00");
 
-        Cerimonia c = em.find(Cerimonia.class, 2);
-        
+        Cerimonia c = this.montarCerimonia();
+
         assertNotEquals(date, c.getData());
     }
-    
+
     @Test
     public void localizacaoDaCerimoniaValida() throws Exception
-    {        
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        Localizacao local = new Localizacao(EstadosDoBrasil.PE, "olinda", "Jardim Atlantico", "Rua Serinhaen", "B", "53140010", 157);
-        
+    {
+        Cerimonia c = this.montarCerimonia();
+        Localizacao l = new Localizacao(EstadosDoBrasil.ES, "Recife", "Encruzilhada", "rua lagoa azul", "b", "52040090", 50);
+
         //EM LOCALIZACAO,SOBRESCREVI,O EQUALS,PARA COMPARAR OBJETOS POR ATRIBUTOS, E NAO POR REFERENCIAS(COMO O EQUALS NORMAL FAZ)
-        assertEquals(local, c.getLocalizacao());
+        assertEquals(l, c.getLocalizacao());
     }
-    
+
     @Test
     public void localizacaoDaCerimoniaInvalida() throws Exception
-    {        
-        Cerimonia c = em.find(Cerimonia.class, 1);
+    {
+        Cerimonia c = this.montarCerimonia();
         Localizacao local = new Localizacao(EstadosDoBrasil.DF, "olinda", "Jardim Atlantico", "Rua Serinhaen", "B", "53140010", 157);
-        
+
         //EM LOCALIZACAO,SOBRESCREVI,O EQUALS,PARA COMPARAR OBJETOS POR ATRIBUTOS, E NAO POR REFERENCIAS(COMO O EQUALS NORMAL FAZ)
         assertNotEquals(local, c.getLocalizacao());
     }
-    
+
     @Test
     public void buffetDaCerimoniaValido() throws Exception
-    {        
-        Cerimonia c = em.find(Cerimonia.class, 2);
-        Buffet b = new Buffet(3500);
-                
+    {
+        Cerimonia c = this.montarCerimonia();
+
         //EM BUFFET,SOBRESCREVI,O EQUALS,PARA COMPARAR OBJETOS POR ATRIBUTOS, E NAO POR REFERENCIAS(COMO O EQUALS NORMAL FAZ)
-        assertEquals(b, c.getBuffet());
+        assertEquals(5000, c.getBuffet().getValorTotalGasto(), 0.0001);
     }
-    
+
     @Test
     public void quantidadePresentes() throws Exception
     {
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        
+        Cerimonia c = this.montarCerimonia();
+
         assertEquals(3, c.getPresentes().size());
     }
-    
+
     @Test
     public void quantidadePessoasQueRecebemSenhas() throws Exception
     {  //confere convidados (eles recebem as senhas)
-        
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        
+        Cerimonia c = this.montarCerimonia();
+
         List<Pessoa> pessoas = new ArrayList<>();
-        
-        for(Pessoa p : c.getPessoas())
+        for (Pessoa p : c.getPessoas())
         {
-            if(p instanceof Convidado)
+            if (p instanceof Convidado)
+            {
                 pessoas.add(p);
+            }
         }
-        
-        assertEquals(4, pessoas.size());
+
+        assertEquals(1, pessoas.size());
     }
-    
+
     @Test
     public void quantidadeNoivos() throws Exception
-    { // por cerimonia, so pode haver 2 noivos
-        
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        
+    { // por que cerimonia, so pode haver 2 noivos
+        Cerimonia c = this.montarCerimonia();
+
         List<Pessoa> noivos = new ArrayList<>();
-        
-        for(Pessoa p : c.getPessoas())
+
+        for (Pessoa p : c.getPessoas())
         {
-            if(p instanceof Noivo)
+            if (p instanceof Noivo)
+            {
                 noivos.add(p);
+            }
         }
-        
         assertEquals(2, noivos.size());
     }
-    
-     @Test 
+
+    @Test
     public void atualizarCerimonia() throws ParseException
     {
         //atualiza hora, era 2020-09-28 22:00:00, fica 2020-09-28 20:00:00
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = (Date) formatter.parse("2020/09/28 20:00:00");
-        
+
         Cerimonia p = em.find(Cerimonia.class, 1);
         p.setData(date);
         em.merge(p);
         p = em.find(Cerimonia.class, 1);
         assertEquals(date, p.getData());
     }
-        
+
     @Test
     public void deletarCerimonia()
-    {        
+    {
         Cerimonia b = em.find(Cerimonia.class, 4);
-        em.remove(b);        
+        em.remove(b);
         b = em.find(Cerimonia.class, 4);
         assertNull(b);
-        
+
+    }
+
+    private Cerimonia montarCerimonia() throws ParseException
+    {
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = (Date) formatter.parse("2018/05/28 17:00:00");
+        Localizacao l = new Localizacao(EstadosDoBrasil.ES, "Recife", "Encruzilhada", "rua lagoa azul", "b", "52040090", 50);
+
+        Cerimonia c = new Cerimonia(date, l);
+
+        Noivo noivo = new Noivo("senha");
+        noivo.setNome("Nati");
+        noivo.setEmail("nati@gmail.com");
+        noivo.setId(1);
+        noivo.setCerimonia(c);
+
+        Noivo noivo2 = new Noivo("senha2");
+        noivo2.setNome("Clerron");
+        noivo2.setEmail("clerron@gmail.com");
+        noivo.setId(2);
+        noivo2.setCerimonia(c);
+
+        Convidado convidado = new Convidado(ConvidadoCategoria.amigo, 5);
+        convidado.setId(10);
+        convidado.setNome("Larissa");
+        convidado.setEmail("larissa@gmail.com");
+        noivo.setId(3);
+        convidado.setCerimonia(c);
+
+        List<Pessoa> pessoas = new ArrayList<>();
+        pessoas.add(noivo);
+        pessoas.add(noivo2);
+        pessoas.add(convidado);      
+        c.setPessoas(pessoas);
+
+        Presente p1 = new Presente(c, "Celular", "moto g", "Hiper");
+        p1.setId(1);
+        Presente p2 = new Presente(c, "Cortina", "bege", "Casa de cor");
+        p2.setId(2);
+        Presente p3 = new Presente(c, "Jogo talheres", "tramontina", "Le biscuit");
+        p3.setId(3);
+
+        List<Presente> presentes = new ArrayList<>();
+        presentes.add(p1);
+        presentes.add(p2);
+        presentes.add(p3);
+        c.setPresentes(presentes);
+
+        Buffet b = new Buffet(5000);
+        b.setId(1);
+        c.setBuffet(b);
+
+        return c;
     }
 }

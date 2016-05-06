@@ -83,7 +83,7 @@ public class TesteBuffet extends Teste
     }
     
     
-    public Buffet montarBuffet()
+    private Buffet montarBuffet()
     {
         Buffet b = new Buffet(5000);
         

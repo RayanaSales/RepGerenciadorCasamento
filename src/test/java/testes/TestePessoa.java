@@ -1,8 +1,10 @@
 package testes;
 
-import entidades.Noivo;
+import entidades.Cerimonia;
 import entidades.Pessoa;
 import entidades.Telefone;
+import enumeracoes.TelefoneCategoria;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import static org.junit.Assert.assertEquals;
@@ -19,55 +21,56 @@ public class TestePessoa extends Teste
     @Test
     public void testarPessoaConhecida()
     {
-        Pessoa p = em.find(Pessoa.class, 5);        
-        assertEquals("Marlene", p.getNome());
+        Pessoa p = this.montarPessoa();
+        assertEquals("Lucia", p.getNome());
     }
     
     @Test
     public void testarPessoaDesconhecida()
     {
-        Pessoa p = em.find(Pessoa.class, 5);        
+        Pessoa p = this.montarPessoa();
         assertNotEquals("Julia", p.getNome());
     }
     
     @Test
     public void testarEmailConhecido()
     {
-        Pessoa p = em.find(Pessoa.class, 4);        
-        assertEquals("letranafoto@hotmail.com", p.getEmail());
+        Pessoa p = this.montarPessoa();
+        assertEquals("lucia@hotmail.com", p.getEmail());
     }
     
     @Test
     public void testarEmailDesconhecido()
     {
-        Pessoa p = em.find(Pessoa.class, 4);        
-        assertNotEquals("letranafotoooo@hotmail.com", p.getEmail());
+        Pessoa p = this.montarPessoa();
+        assertNotEquals("letranafoto@hotmail.com", p.getEmail());
     }
 
     @Test
     public void testarQuantidadeTelefones()
     {
-        TypedQuery<Telefone> query;
-        query = em.createQuery("SELECT c FROM Telefone c WHERE c.pessoa.id = ?1", Telefone.class);
-        query.setParameter(1, 5);
-        List<Telefone> telefones = query.getResultList();
-        assertEquals(3, telefones.size());
+//        TypedQuery<Telefone> query;
+//        query = em.createQuery("SELECT c FROM Telefone c WHERE c.pessoa.id = ?1", Telefone.class);
+//        query.setParameter(1, 5);
+//        List<Telefone> telefones = query.getResultList();
+        
+        Pessoa p = this.montarPessoa();        
+        assertEquals(2, p.getTelefones().size());
     }
 
     @Test
     public void testaCerimoniaValida()
     {
-        Pessoa p = em.find(Pessoa.class, 5);
-        int idCerimonia = p.getCerimonia().getId();
-        assertEquals(2, idCerimonia);
+        Pessoa p = this.montarPessoa();
+        
+        assertEquals(1, p.getCerimonia().getId());
     }
 
     @Test
     public void testaCerimoniaInvalida()
     {
-        Pessoa p = em.find(Pessoa.class, 5);
-        int idCerimonia = p.getCerimonia().getId();
-        assertNotEquals(3, idCerimonia);
+        Pessoa p = this.montarPessoa();
+        assertNotEquals(3, p.getCerimonia().getId());
     }
          
      @Test 
@@ -86,7 +89,29 @@ public class TestePessoa extends Teste
         Pessoa b = em.find(Pessoa.class, 12);
         em.remove(b);        
         b = em.find(Pessoa.class, 12);
-        assertNull(b);
+        assertNull(b);        
+    }
+    
+    private Pessoa montarPessoa()
+    {
+        Cerimonia c = em.find(Cerimonia.class, 1);
+        c.setId(1);
+        Pessoa p = new Pessoa("Lucia", "lucia@hotmail.com", c);
+        p.setId(1);
         
+        Telefone t = new Telefone(TelefoneCategoria.celular, "81", "993250212");
+        t.setId(1);
+        t.setPessoa(p);
+        Telefone t1 = new Telefone(TelefoneCategoria.celular, "81", "988846448");
+        t1.setId(2);
+        t1.setPessoa(p);
+        
+        List<Telefone> telefones = new ArrayList<>();
+        telefones.add(t);
+        telefones.add(t1);
+        
+        p.setTelefones(telefones);
+        
+        return p;
     }
 }
