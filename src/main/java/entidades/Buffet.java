@@ -90,7 +90,6 @@ public class Buffet implements Serializable
     @Override
     public boolean equals(Object o)
     {
-        System.out.println("equals buffet");
         if (o != null)
         {
             if (o instanceof Buffet)
@@ -116,13 +115,11 @@ public class Buffet implements Serializable
                     }
                     if (loops == tamanhoLista)
                     {
-                        System.out.println("terminou");
                         return true;
                     }
                 }
             }
         }
-        System.out.println("terminou");
         return false;
     }
 
