@@ -113,5 +113,28 @@ public class Loja implements Serializable
         this.presente = presente;
     }
     
-    
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Loja)
+            {
+                Loja outra = (Loja) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 17 * hash + this.id;
+        return hash;
+    }    
 }

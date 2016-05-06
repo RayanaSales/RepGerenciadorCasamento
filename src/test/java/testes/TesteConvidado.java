@@ -62,7 +62,7 @@ public class TesteConvidado extends Teste
 
         assertEquals(1, constraintViolations.size());
         ConstraintViolation<Convidado> violation = constraintViolations.iterator().next();
-        assertEquals("A quantidade de senhas tem que ser maior que zero.", violation.getMessage());
+        assertEquals("A quantidade tem que ser maior que zero.", violation.getMessage());
     }
     
     @Test

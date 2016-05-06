@@ -1,12 +1,9 @@
 package testes;
 
-import entidades.Buffet;
 import entidades.Cerimonia;
-import entidades.Noivo;
 import entidades.Presente;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

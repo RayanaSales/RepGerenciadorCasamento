@@ -24,90 +24,101 @@ public class ComesBebes implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @NotNull
     @Column(name = "txt_produto")
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.ComesBebes.produto}")
     private String produto;
-    
+
     @NotNull
     @Enumerated(EnumType.STRING)
     ComesBebesCategoria categoria;
-    
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;
-    
+
     @NotNull
     //quero pedir o brigadeiro da minha vizinha, os doces finos de tal lugar, mas eu gosto da coxinha da padaria. Pede tudo de cada lugar
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_loja", referencedColumnName = "id")
     private Loja loja;
-            
+
     @NotNull
     @validadores.ValidaQuantidade
     @Column(name = "numero_quantidade")
     private int quantidade;
-    
+
     @NotNull
     @validadores.ValidaPreco
     @Column(name = "numero_valor")
     private double valor;
-    
+
     public ComesBebes()
     {
-        
+
     }
-    
-    public ComesBebes(Buffet buffet, String produto, Loja loja, ComesBebesCategoria categoria, int quantidade, double valor){
-        
+
+    public ComesBebes(Buffet buffet, String produto, Loja loja, ComesBebesCategoria categoria, int quantidade, double valor)
+    {
+
         this.quantidade = quantidade;
         this.produto = produto;
         this.valor = valor;
         this.loja = loja;
         this.buffet = buffet;
-        this.categoria = categoria;      
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public ComesBebesCategoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(ComesBebesCategoria categoria) {
         this.categoria = categoria;
     }
 
-    public Buffet getBuffet() {
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public int getQuantidade()
+    {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade)
+    {
+        this.quantidade = quantidade;
+    }
+
+    public ComesBebesCategoria getCategoria()
+    {
+        return categoria;
+    }
+
+    public void setCategoria(ComesBebesCategoria categoria)
+    {
+        this.categoria = categoria;
+    }
+
+    public Buffet getBuffet()
+    {
         return buffet;
     }
 
-    public void setBuffet(Buffet buffet) {
+    public void setBuffet(Buffet buffet)
+    {
         this.buffet = buffet;
     }
 
-    public Loja getLoja() {
+    public Loja getLoja()
+    {
         return loja;
     }
 
-    public void setLoja(Loja loja) {
+    public void setLoja(Loja loja)
+    {
         this.loja = loja;
     }
 
@@ -130,6 +141,29 @@ public class ComesBebes implements Serializable
     {
         this.produto = produto;
     }
-    
-  
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof ComesBebes)
+            {
+                ComesBebes outra = (ComesBebes) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 53 * hash + this.id;
+        return hash;
+    }    
 }

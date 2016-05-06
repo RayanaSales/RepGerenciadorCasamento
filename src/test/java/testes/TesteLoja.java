@@ -54,7 +54,7 @@ public class TesteLoja extends Teste
         TypedQuery<Loja> query;
         query = em.createQuery("SELECT l FROM Loja l", Loja.class);
         List<Loja> lojas = query.getResultList();
-        assertEquals(3, lojas.size());
+        assertEquals(4, lojas.size());
     
     }
     

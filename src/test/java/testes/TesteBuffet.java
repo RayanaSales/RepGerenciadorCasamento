@@ -10,11 +10,12 @@ import enumeracoes.EstadosDoBrasil;
 import enumeracoes.TelefoneCategoria;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -59,7 +60,7 @@ public class TesteBuffet extends Teste
 //        }
 //    }
 
-    //@Test
+//    @Test
 //    public void testaPrecoInvalido()
 //    {        
 //        Buffet b = this.montarBuffet();

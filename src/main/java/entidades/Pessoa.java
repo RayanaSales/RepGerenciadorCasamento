@@ -138,21 +138,28 @@ public class Pessoa implements Serializable
         this.cerimonia = cerimonia;
     }
 
-//    @Override
-//    public boolean equals(Object o)
-//    {System.out.println("meu equals");
-//        if (o != null)
-//        {
-//            if(o instanceof Pessoa)
-//            {
-//                Pessoa outra = (Pessoa) o;
-//                if(this.nome.equals(outra.nome) && this.email.equals(outra.email) && this.telefones.equals(outra.getTelefones())
-//                        && this.cerimonia.equals(outra.cerimonia))
-//                { //testa tds as outras propriedades.
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
+     @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Pessoa)
+            {
+                Pessoa outra = (Pessoa) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 53 * hash + this.id;
+        return hash;
+    } 
 }

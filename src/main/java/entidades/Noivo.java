@@ -54,17 +54,7 @@ public class Noivo extends Pessoa implements Serializable //botar superclasse pe
             }
         }
     }
-    
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    
+        
     public String getSenha()
     {
         return senha;
@@ -75,40 +65,26 @@ public class Noivo extends Pessoa implements Serializable //botar superclasse pe
         this.senha = senha;
     }
     
-//    @Override
-//    public boolean equals(Object o)
-//    { System.out.println("EQUALS DO NOIVO SENDO EXECUTADO");
-//        if (o != null)
-//        {
-//            if (o instanceof Noivo)
-//            {
-//                Noivo outra = (Noivo) o;
-//
-//                if (this.senha.equals(outra.senha)) //confere atributos
-//                {  
-//                    int tamanhoLista = outra.getRoupaDosNoivos().size();
-//                    int loops = 0;
-//                    
-//                    for (RoupaDosNoivos cb1 : this.roupaDosNoivos)//confere itens da lista
-//                    {
-//                        for (RoupaDosNoivos cb2 : outra.roupaDosNoivos)
-//                        {
-//                            if(cb1.getNoivo().equals(cb2.getNoivo()) && cb1.getRoupa().equals(cb2.getRoupa())
-//                                    && cb1.getValor()== cb2.getValor())
-//                            {
-//                                loops++;
-//                            }
-//                        }
-//                    }
-//                    if (loops == tamanhoLista)
-//                    {
-//                        System.out.println("iguais");
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
-//        System.out.println("diferentes");
-//        return false;
-//    }
+     @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Noivo)
+            {
+                Noivo outra = (Noivo) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+     @Override
+    public int hashCode()
+    {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

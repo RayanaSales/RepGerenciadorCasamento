@@ -128,6 +128,10 @@
     <comesBebes id="9" txt_produto="empanado de camarao" numero_quantidade="10" numero_valor="200" categoria="salgado" id_buffet="1" id_loja="3"/>
     <comesBebes id="10" txt_produto="champagne" numero_quantidade="50" numero_valor="500" categoria="bebida" id_buffet="1" id_loja="3"/>
    
+    <!-- PARA alteracao e DELECAO -->
+    <telefone id="11" categoria="empresarial" txt_ddd="81" txt_numero="36666655"/>   
+    <loja id="4" txt_nome="Maria" id_localizacao="7" id_telefone="11"/>      
+    <comesBebes id="11" txt_produto="empanado frango" numero_quantidade="200" numero_valor="1000" categoria="salgado" id_buffet="3" id_loja="4"/> 
     
 </dataset>
 

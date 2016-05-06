@@ -91,4 +91,27 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     {
         this.categoria = categoria;
     }
+    
+      @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof ProdutorDeMidia)
+            {
+                ProdutorDeMidia outra = (ProdutorDeMidia) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

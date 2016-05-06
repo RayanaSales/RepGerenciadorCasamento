@@ -84,5 +84,28 @@ public class RoupaDosNoivos implements Serializable {
         this.valor = valor;
     }
     
-    
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof RoupaDosNoivos)
+            {
+                RoupaDosNoivos outra = (RoupaDosNoivos) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 23 * hash + this.id;
+        return hash;
+    }
 }

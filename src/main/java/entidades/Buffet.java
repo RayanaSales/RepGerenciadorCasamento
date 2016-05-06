@@ -38,7 +38,6 @@ public class Buffet implements Serializable
 //        }
 //        return valorTotalGasto;
 //    }
-
     public Buffet()
     {
         comesBebes = new ArrayList<>();
@@ -89,7 +88,8 @@ public class Buffet implements Serializable
 
     @Override
     public boolean equals(Object o)
-    {System.out.println("equals buffet");
+    {
+        System.out.println("equals buffet");
         if (o != null)
         {
             if (o instanceof Buffet)
@@ -97,17 +97,17 @@ public class Buffet implements Serializable
                 Buffet outra = (Buffet) o;
 
                 if (this.valorTotalGasto == outra.valorTotalGasto) //confere atributos
-                {  
+                {
                     int tamanhoLista = outra.getComesBebes().size();
                     int loops = 0;
-                    
+
                     for (ComesBebes cb1 : this.comesBebes)//confere itens da lista
                     {
                         for (ComesBebes cb2 : outra.comesBebes)
                         {
-                            if(cb1.getProduto().equals(cb2.getProduto()) && cb1.getCategoria().equals(cb2.getCategoria())
+                            if (cb1.getProduto().equals(cb2.getProduto()) && cb1.getCategoria().equals(cb2.getCategoria())
                                     && cb1.getBuffet().equals(cb2.getBuffet()) && cb1.getLoja().equals(cb2.getLoja())
-                                    && cb1.getQuantidade() == cb2.getQuantidade() && cb1.getValor()== cb2.getValor())
+                                    && cb1.getQuantidade() == cb2.getQuantidade() && cb1.getValor() == cb2.getValor())
                             {
                                 loops++;
                             }
@@ -124,4 +124,12 @@ public class Buffet implements Serializable
         System.out.println("terminou");
         return false;
     }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        return hash;
+    }   
 }

@@ -132,4 +132,29 @@ public class Presente implements Serializable
     {
         return lojas;
     }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Presente)
+            {
+                Presente outra = (Presente) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        return hash;
+    }
 }

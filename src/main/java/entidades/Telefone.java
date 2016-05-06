@@ -104,4 +104,28 @@ public class Telefone implements Serializable
         this.pessoa = pessoa;
     }
     
+     @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Telefone)
+            {
+                Telefone outra = (Telefone) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 71 * hash + this.id;
+        return hash;
+    } 
 }

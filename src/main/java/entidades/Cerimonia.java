@@ -129,4 +129,29 @@ public class Cerimonia implements Serializable
             }
         }
     }
+    
+     @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Cerimonia)
+            {
+                Cerimonia outra = (Cerimonia) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 67 * hash + this.id;
+        return hash;
+    }    
 }

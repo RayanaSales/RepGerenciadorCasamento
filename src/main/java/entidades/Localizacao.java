@@ -183,4 +183,12 @@ public class Localizacao implements Serializable
         }
         return false;
     }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 53 * hash + this.id;
+        return hash;
+    }    
 }

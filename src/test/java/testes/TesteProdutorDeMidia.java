@@ -52,7 +52,7 @@ public class TesteProdutorDeMidia extends Teste
         assertEquals(1, constraintViolations.size()); 
         
         ConstraintViolation<ProdutorDeMidia> violation = constraintViolations.iterator().next();
-        assertEquals("Deve ser maior que 0. Pode conter ponto.", violation.getMessage());
+        assertEquals("Deve ser maior que 0. Pode conter ponto, ou virgula.", violation.getMessage());
     }
     
    @Test

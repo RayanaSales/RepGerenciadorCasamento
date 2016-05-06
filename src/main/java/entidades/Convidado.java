@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -56,13 +55,31 @@ public class Convidado extends Pessoa implements Serializable
         this.categoria = categoria;
     }
 
-    public int getId()
-    {
-        return id;
-    }
-
     public void setId(int id)
     {
         this.id = id;
+    }
+    
+     @Override
+    public boolean equals(Object o)
+    {
+        if (o != null)
+        {
+            if (o instanceof Convidado)
+            {
+                Convidado outra = (Convidado) o;
+                if (this.id == outra.id)
+                { 
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
     }
 }
