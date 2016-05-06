@@ -44,37 +44,37 @@ public class TesteBuffet extends Teste
         assertNull(b);
     }
     
-//    @Test
-//    public void testaPrecoValido()
-//    {
-//        Buffet b = this.montarBuffet();
-//
-//        if (b != null)
-//        {
-//            ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-//            Validator validator = validatorFactory.getValidator();
-//            Set<ConstraintViolation<Buffet>> constraintViolations = validator.validate(b);
-//            
-//            assertEquals(0, constraintViolations.size());
-//
-//        }
-//    }
+    @Test
+    public void testaPrecoValido()
+    {
+        Buffet b = this.montarBuffet();
 
-//    @Test
-//    public void testaPrecoInvalido()
-//    {        
-//        Buffet b = this.montarBuffet();
-//        b.setValorTotalGasto(0);
-//        
-//        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-//        Validator validator = validatorFactory.getValidator();
-//        Set<ConstraintViolation<Buffet>> constraintViolations = validator.validate(b);
-//
-//        assertEquals(1, constraintViolations.size()); 
-//        
-//        ConstraintViolation<Buffet> violation = constraintViolations.iterator().next();
-//        assertEquals("Deve ser maior que 0. Pode conter ponto.", violation.getMessage());
-//    }
+        if (b != null)
+        {
+            ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+            Validator validator = validatorFactory.getValidator();
+            Set<ConstraintViolation<Buffet>> constraintViolations = validator.validate(b);
+            
+            assertEquals(0, constraintViolations.size());
+
+        }
+    }
+
+    @Test
+    public void testaPrecoInvalido()
+    {        
+        Buffet b = this.montarBuffet();
+        b.setValorTotalGasto(0);
+        
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<Buffet>> constraintViolations = validator.validate(b);
+
+        assertEquals(1, constraintViolations.size()); 
+        
+        ConstraintViolation<Buffet> violation = constraintViolations.iterator().next();
+        assertEquals("Deve ser maior que 0. Pode conter ponto, ou virgula.", violation.getMessage());
+    }
     
     public void quantidadeComesBebes()
     {

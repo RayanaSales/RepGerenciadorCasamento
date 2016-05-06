@@ -38,6 +38,7 @@ public class Buffet implements Serializable
 //        }
 //        return valorTotalGasto;
 //    }
+    
     public Buffet()
     {
         comesBebes = new ArrayList<>();
@@ -106,7 +107,7 @@ public class Buffet implements Serializable
                         for (ComesBebes cb2 : outra.comesBebes)
                         {
                             if (cb1.getProduto().equals(cb2.getProduto()) && cb1.getCategoria().equals(cb2.getCategoria())
-                                    && cb1.getBuffet().equals(cb2.getBuffet()) && cb1.getLoja().equals(cb2.getLoja())
+                                    && cb1.getBuffet().getId() == cb2.getBuffet().getId() && cb1.getLoja().equals(cb2.getLoja())
                                     && cb1.getQuantidade() == cb2.getQuantidade() && cb1.getValor() == cb2.getValor())
                             {
                                 loops++;
