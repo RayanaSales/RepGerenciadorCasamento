@@ -125,7 +125,7 @@ public class TesteLocalizacao extends Teste
     }
     
     @Test
-    public void testarUmeroValido()
+    public void testarNumeroValido()
     {
         Localizacao l = this.montarLocalizacao();
         assertEquals(50, l.getNumero());

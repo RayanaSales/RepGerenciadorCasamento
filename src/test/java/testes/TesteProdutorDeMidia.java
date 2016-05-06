@@ -1,7 +1,9 @@
 package testes;
 
 import entidades.Cerimonia;
+import entidades.Localizacao;
 import entidades.ProdutorDeMidia;
+import enumeracoes.EstadosDoBrasil;
 import enumeracoes.ProdutorDeMidiaCategoria;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,6 +20,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  *
@@ -25,7 +36,6 @@ import org.junit.Test;
  */
 public class TesteProdutorDeMidia extends Teste
 {
-
     @Test
     public void testaPrecoValido()
     {
@@ -64,6 +74,7 @@ public class TesteProdutorDeMidia extends Teste
 
         Date horaCerimonia = pm.getCerimonia().getData();
         Date horaChegadaProdutor = pm.getDataEHoraChegada();
+        
         assertNotEquals(horaCerimonia, horaChegadaProdutor);
     }
 
@@ -83,7 +94,7 @@ public class TesteProdutorDeMidia extends Teste
     public void urlInvalida()
     {
         ProdutorDeMidia pm = this.montarProdutor();
-        pm.setLinkParaRedeSocial("www.meuSite");
+        pm.setLinkParaRedeSocial("www.meusite");
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -111,34 +122,37 @@ public class TesteProdutorDeMidia extends Teste
         assertNull(b);
     }
 
+    
     private ProdutorDeMidia montarProdutor()
     {
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = null;
+        Date dataCerimonia = null;
         try
         {
-            date = (Date) formatter.parse("2020-09-27 22:00:00");
+            dataCerimonia = (Date) formatter.parse("2020/09/27 22:00:00");
         } catch (ParseException ex)
         {
             Logger.getLogger(TesteProdutorDeMidia.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Cerimonia c = em.find(Cerimonia.class, 1);
-        c.setData(date);
-
-        ProdutorDeMidia pm = new ProdutorDeMidia(ProdutorDeMidiaCategoria.filmografia, 7.000, c.getData(), "www.lunalunatica.com.br");
+        
+        Localizacao localizacao = new Localizacao(EstadosDoBrasil.ES, "Recife", "Encruzilhada", "rua lagoa azul", "b", "52040090", 50);   
+        Cerimonia c = new Cerimonia(dataCerimonia, localizacao);
+        c.setId(1);
+        
+        ProdutorDeMidia pm = new ProdutorDeMidia(ProdutorDeMidiaCategoria.filmografia, 7000, c.getData(), "www.lunalunatica.com.br");
         pm.setNome("Luna");
         pm.setEmail("lunabandeira@gmail.com");
 
         DateFormat formatter2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date2 = null;
+        Date dataProdutor = null;
         try
         {
-            date2 = (Date) formatter2.parse("2020-09-27 19:00:00");
+            dataProdutor = (Date) formatter2.parse("2020/09/27 19:00:00");
         } catch (ParseException ex)
         {
             Logger.getLogger(TesteProdutorDeMidia.class.getName()).log(Level.SEVERE, null, ex);
         }
-        pm.setDataEHoraChegada(date2);
+        pm.setDataEHoraChegada(dataProdutor);
 
         pm.setCerimonia(c);
         pm.setId(1);

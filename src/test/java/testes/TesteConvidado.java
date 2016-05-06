@@ -39,7 +39,7 @@ public class TesteConvidado extends Teste
     }
     
     @Test
-    public void senhasValidas()
+    public void senhaValida()
     {
         Convidado c = this.montarConvidado();
 
@@ -51,7 +51,7 @@ public class TesteConvidado extends Teste
     }
 
     @Test
-    public void senhasInvalidas()
+    public void senhaInvalida()
     {
         Convidado c = this.montarConvidado();
         c.setQuantidadeSenhas(-2);
