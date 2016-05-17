@@ -1,0 +1,85 @@
+.header-area a {
+    color: #888;
+}
+
+.header-area {
+    background: none repeat scroll 0 0 #FEF0FF;
+    
+}
+.user-menu ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.user-menu li {
+    display: inline-block;
+}
+.user-menu li a {
+    display: block;
+    font-size: 13px;
+    margin-right: 5px;
+    padding: 10px;
+}
+.user-menu li a i.fa {
+    margin-right: 5px;
+}
+.mainmenu-area {background: none repeat scroll 0 0 #D6C8FF;
+                
+font-family: "Roboto Condensed",sans-serif;
+text-transform: uppercase;
+width: 100%;
+z-index: 999;}
+
+.mainmenu-area ul.navbar-nav li a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 20px;
+}
+.mainmenu-area ul.navbar-nav li:hover a, .mainmenu-area ul.navbar-nav li.active a {background: #C79ECF}
+
+.product-big-title-area {background: url(img/crossword.png) repeat scroll 0 0 #1ABC9C
+}
+
+#inputDescricao{
+  max-width:100%;
+   width:100%;
+ 
+   height:200px;
+   max-height:200px;
+}
+
+body{
+ background-image: url("../img/imgCasal1.jpg");
+  background-repeat: no-repeat;
+   background-size: 100%;
+}
+     
+.caixaCadastro label{
+    color: white;
+}
+.formularioCadastro
+{
+    width:50%;
+    height: 53%;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    position:absolute;                
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    margin: auto;
+}
+
+.caixaCadastro
+{               
+    width:90%;
+    height: 90%;
+    position: relative;              
+    top: 10px;
+    margin: auto;
+}    
+
+.caixaCadastro button
+{
+    margin-left: 40%;
+}

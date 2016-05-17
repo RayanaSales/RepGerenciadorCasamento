@@ -31,6 +31,8 @@ public class TesteBuffet extends Teste
         Buffet p = em.find(Buffet.class, 10);
         p.setValorTotalGasto(3.500);
         em.merge(p);
+        em.flush();
+        em.clear();
         p = em.find(Buffet.class, 10);
         assertEquals(3.500, p.getValorTotalGasto(), 0.001);
     }

@@ -7,6 +7,7 @@ import entidades.Localizacao;
 import entidades.Noivo;
 import entidades.Pessoa;
 import entidades.Presente;
+import entidades.ProdutorDeMidia;
 import enumeracoes.ConvidadoCategoria;
 import enumeracoes.EstadosDoBrasil;
 import java.text.DateFormat;
@@ -15,7 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.TypedQuery;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -29,7 +35,7 @@ public class TesteCerimonia extends Teste
     @Test
     public void quantidadeCerimonias() throws Exception
     {
-        TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM Cerimonia c WHERE c.id IS NOT NULL", Long.class);
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(c) FROM Cerimonia c", Long.class);
         Long resultado = query.getSingleResult();
         assertEquals(new Long(3), resultado);
     }
@@ -68,8 +74,15 @@ public class TesteCerimonia extends Teste
         Date date = (Date) formatter.parse("2013/10/15 21:00:00");
 
         Cerimonia c = this.montarCerimonia();
+        c.setData(date);
 
-        assertNotEquals(date, c.getData());
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<Cerimonia>> constraintViolations = validator.validate(c);
+
+        assertEquals(1, constraintViolations.size());
+        //  assertNotEquals(date, c.getData());
+
     }
 
     @Test
@@ -153,6 +166,8 @@ public class TesteCerimonia extends Teste
         Cerimonia p = em.find(Cerimonia.class, 1);
         p.setData(date);
         em.merge(p);
+        em.flush();
+        em.clear();
         p = em.find(Cerimonia.class, 1);
         assertEquals(date, p.getData());
     }
@@ -197,7 +212,7 @@ public class TesteCerimonia extends Teste
         List<Pessoa> pessoas = new ArrayList<>();
         pessoas.add(noivo);
         pessoas.add(noivo2);
-        pessoas.add(convidado);      
+        pessoas.add(convidado);
         c.setPessoas(pessoas);
 
         Presente p1 = new Presente(c, "Celular", "moto g", "Hiper");

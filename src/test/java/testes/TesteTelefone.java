@@ -49,6 +49,7 @@ public class TesteTelefone extends Teste
     public void testaNumeroValido()
     {
         Telefone telefone = this.montarTelefone();
+        telefone.setNumero("9AAAAAAAA");
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
