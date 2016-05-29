@@ -95,6 +95,8 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
       @Override
     public boolean equals(Object o)
     {
+        super.equals(o);
+        
         if (o != null)
         {
             if (o instanceof ProdutorDeMidia)

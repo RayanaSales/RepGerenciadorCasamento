@@ -151,7 +151,7 @@ public class Pessoa implements Serializable
             if (o instanceof Pessoa)
             {
                 Pessoa outra = (Pessoa) o;
-                if (this.id == outra.id)
+                if (this.id == outra.id && this.nome.equals(outra.nome))
                 { 
                     return true;
                 }
