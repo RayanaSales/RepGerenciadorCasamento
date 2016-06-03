@@ -21,8 +21,7 @@ public class Telefone implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @NotNull
+        
     @Enumerated(EnumType.STRING)
     @Column
     TelefoneCategoria categoria;

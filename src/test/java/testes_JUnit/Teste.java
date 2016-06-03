@@ -8,11 +8,9 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import testes_JUnit.DbUnitUtil;
 
 public class Teste
 {
-
     protected static EntityManagerFactory emf;
     protected EntityManager em;
     private EntityTransaction et;
