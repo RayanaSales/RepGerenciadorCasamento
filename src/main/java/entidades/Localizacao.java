@@ -20,42 +20,38 @@ public class Localizacao implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.logradouro}")
     @Column(name = "txt_logradouro")
     private String logradouro;
 
-    @NotNull
+    
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.bairro}")
     @Column(name = "txt_bairro")
     private String bairro;
 
-    @NotNull
+    
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.cidade}")
     @Column(name = "txt_cidade")
     private String cidade;
-
-    @NotNull
-    @Size(min = 3, max = 40)
+   
+    @Size(min = 3, max = 10)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.complemento}")
     @Column(name = "txt_complemento")
     private String complemento;
 
-    @NotNull
-    @Size(min = 3, max = 40)
+    
+    @Size(min = 8, max = 8)
     @Pattern(regexp = "[0-9.]", message = "{entidades.Convidado.cep}")
     @Column(name = "txt_cep")
     private String cep;
+//    
+//    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
+//    @Column(name = "numero_numero")
+//    private int numero;
 
-    @NotNull
-    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
-    @Column(name = "numero_numero")
-    private int numero;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     EstadosDoBrasil estado;
 
@@ -63,7 +59,7 @@ public class Localizacao implements Serializable
     {
     }
 
-    public Localizacao(EstadosDoBrasil estado, String cidade, String bairro, String logradouro, String complemento, String cep, int numero)
+    public Localizacao(EstadosDoBrasil estado, String cidade, String bairro, String logradouro, String complemento, String cep)
     {
         this.estado = estado;
         this.logradouro = logradouro;
@@ -71,7 +67,7 @@ public class Localizacao implements Serializable
         this.cidade = cidade;
         this.complemento = complemento;
         this.cep = cep;
-        this.numero = numero;
+//        this.numero = numero;
     }
 
     public int getId()
@@ -114,15 +110,15 @@ public class Localizacao implements Serializable
         this.cep = cep;
     }
 
-    public int getNumero()
-    {
-        return numero;
-    }
-
-    public void setNumero(int numero)
-    {
-        this.numero = numero;
-    }
+//    public int getNumero()
+//    {
+//        return numero;
+//    }
+//
+//    public void setNumero(int numero)
+//    {
+//        this.numero = numero;
+//    }
 
     public String getLogradouro()
     {
@@ -174,7 +170,7 @@ public class Localizacao implements Serializable
                 Localizacao outra = (Localizacao) o;
 
                 if (this.logradouro.equals(outra.logradouro) && this.bairro.equals(outra.bairro) && this.cidade.equals(outra.cidade)
-                        && this.complemento.equals(outra.complemento) && this.cep.equals(outra.cep) && this.numero == outra.numero
+                        && this.complemento.equals(outra.complemento) && this.cep.equals(outra.cep) //&& this.numero == outra.numero
                         && this.estado.equals(outra.estado))
                 {
                     return true;

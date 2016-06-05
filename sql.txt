@@ -3,11 +3,11 @@ create table localizacao
 	id serial primary key,
 	txt_logradouro varchar(100),
         txt_complemento varchar(100),
-	txt_bairro varchar(100) NOT NULL,
-	txt_cep varchar(100) NOT NULL,
-        txt_cidade varchar(100) NOT NULL,
-        estado varchar(5) NOT NULL,
-	numero_numero int NOT NULL
+	txt_bairro varchar(100),
+	txt_cep varchar(100),
+        txt_cidade varchar(100),
+        estado varchar(5),
+	numero_numero int
 );
 
 create table buffet

@@ -32,8 +32,7 @@ public class Cerimonia implements Serializable
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora; 
 
-    //Relacionamentos:
-    @NotNull
+    //Relacionamentos:    
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_localizacao", referencedColumnName = "id")
     private Localizacao localizacao;
