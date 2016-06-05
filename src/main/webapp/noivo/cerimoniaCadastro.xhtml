@@ -3,6 +3,7 @@
 <ui:decorate xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 
              template="../publico/template.xhtml">
@@ -15,10 +16,14 @@
             <h:panelGrid columns="3" cellpadding="5">
 
                 <p:outputLabel for="datetime" value="Datetime:" />
-                <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.data}" pattern="MM/dd/yyyy HH:mm:ss" />
+                <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
                 <p:message for="datetime" id="messageDatetime" severity="error"/>
 
-            </h:panelGrid>                
+            </h:panelGrid>   
+
+            <p:messages autoUpdate="true" showDetail="true">
+
+            </p:messages>
 
             <p:toolbarGroup>
                 <p:commandButton action="#{cerimoniaBean.salvar()}" value="Salvar" ajax="true" update="@form" 
@@ -33,11 +38,20 @@
                     <p:commandButton id="editar" value="Editar" action="#{cerimoniaBean.editar(cerimonia)}" update="@form"></p:commandButton>
 
                 </p:column>
-                <p:column headerText="Data" sortBy="#{cerimonia.data}">
-                    <h:outputText value="#{cerimonia.data}"></h:outputText>
-                </p:column>                                  
-            </p:dataTable>
+                <p:column headerText="Data" sortBy="#{cerimonia.dataHora}">
+                    <h:outputText value="#{cerimonia.dataHora}"></h:outputText>
+                </p:column> 
 
+                
+
+              <!--   <p:dataTable value="#{cerimoniaBean.getPessoas}" var="pessoa">
+                 
+                    <p:column headerText="Pessoa" sortBy="#{pessoa.nome}">
+                        <h:outputText value="#{pessoa.nome}"></h:outputText>
+                    </p:column>  
+                </p:dataTable>
+                -->
+            </p:dataTable>
         </p:fieldset>
     </h:form>
 

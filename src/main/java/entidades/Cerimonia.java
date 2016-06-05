@@ -57,20 +57,20 @@ public class Cerimonia implements Serializable
         pessoas = new ArrayList<>();
     }
 
-    public Cerimonia(Date dataHora, Localizacao localizacao)
+    public Cerimonia(Date dataHora)
     {       
         this.dataHora = dataHora;
-        this.localizacao = localizacao;        
+      //  this.localizacao = localizacao;        
     }    
 
-    public Date getData()
+    public Date getDataHora()
     {
         return dataHora;
     }
 
-    public void setData(Date data)
+    public void setDataHora(Date dataHora)
     {
-        this.dataHora = data;
+        this.dataHora = dataHora;
     }
 
     public int getId()
