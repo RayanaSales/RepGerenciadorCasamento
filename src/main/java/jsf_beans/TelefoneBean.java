@@ -42,10 +42,9 @@ public class TelefoneBean implements Serializable
         telefone = new Telefone(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(Telefone t)
+    public void editar()
     {
-        listar(); //atualize a minha lista
-
+        listar(); //atualize a minha lista      
         telefoneServico.atualizar(telefone);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
     }
@@ -72,7 +71,6 @@ public class TelefoneBean implements Serializable
     public List<Telefone> getTelefones()
     {
         listar(); //atualize a minha lista
-
         return telefones;
     }
 

@@ -13,8 +13,10 @@ import javax.ejb.TransactionManagementType;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TelefoneServico extends Servico
 {
+
     public void salvar(Telefone telefone)
     {
+        em.flush();
         em.persist(telefone);
     }
 
@@ -27,11 +29,13 @@ public class TelefoneServico extends Servico
     {
         Telefone t = (Telefone) em.find(Telefone.class, telefone.getId()); //se n tiver isso, o jpa acha que n deatachou        
         em.remove(t);
+        em.flush();
     }
 
     public void atualizar(Telefone telefone)
     {
-        em.merge(telefone);
+        telefone = em.find(Telefone.class, telefone.getId());
+        em.merge(telefone);       
     }
 
     public boolean existente(Telefone telefone)

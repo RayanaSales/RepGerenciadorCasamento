@@ -5,6 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class ValidadorURL implements ConstraintValidator<ValidaURL, String>
 {
+
     @Override
     public void initialize(ValidaURL a)
     {
@@ -14,13 +15,16 @@ public class ValidadorURL implements ConstraintValidator<ValidaURL, String>
     public boolean isValid(String link, ConstraintValidatorContext cvc)
     {
         boolean valido = false;
-        
-        //achar funcao que use o pattern/ validar com .br tb
-        if(link.startsWith("www.") && (link.endsWith(".com") || link.endsWith(".com.br") || link.endsWith(".net")))
+
+        if (link != null) //pq o cara n quis botar o site dele
         {
-            valido = true;            
+            if (link.startsWith("www.") && (link.endsWith(".com") || link.endsWith(".com.br") || link.endsWith(".net")))
+            {
+                valido = true;
+            }
         }
+        else valido = true;
         
         return valido;
-    }    
+    }
 }

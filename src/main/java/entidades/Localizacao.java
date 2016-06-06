@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -41,16 +40,15 @@ public class Localizacao implements Serializable
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.complemento}")
     @Column(name = "txt_complemento")
     private String complemento;
-
     
     @Size(min = 8, max = 8)
     @Pattern(regexp = "[0-9.]", message = "{entidades.Convidado.cep}")
     @Column(name = "txt_cep")
     private String cep;
-//    
-//    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
-//    @Column(name = "numero_numero")
-//    private int numero;
+    
+    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
+    @Column(name = "numero_numero")
+    private int numero;
 
     @Enumerated(EnumType.STRING)
     EstadosDoBrasil estado;
@@ -59,7 +57,7 @@ public class Localizacao implements Serializable
     {
     }
 
-    public Localizacao(EstadosDoBrasil estado, String cidade, String bairro, String logradouro, String complemento, String cep)
+    public Localizacao(EstadosDoBrasil estado, String cidade, String bairro, String logradouro, String complemento, String cep, int numero)
     {
         this.estado = estado;
         this.logradouro = logradouro;
@@ -67,7 +65,7 @@ public class Localizacao implements Serializable
         this.cidade = cidade;
         this.complemento = complemento;
         this.cep = cep;
-//        this.numero = numero;
+        this.numero = numero;
     }
 
     public int getId()
@@ -110,15 +108,15 @@ public class Localizacao implements Serializable
         this.cep = cep;
     }
 
-//    public int getNumero()
-//    {
-//        return numero;
-//    }
-//
-//    public void setNumero(int numero)
-//    {
-//        this.numero = numero;
-//    }
+    public int getNumero()
+    {
+        return numero;
+    }
+
+    public void setNumero(int numero)
+    {
+        this.numero = numero;
+    }
 
     public String getLogradouro()
     {

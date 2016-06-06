@@ -3,6 +3,7 @@ package entidades;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,19 +26,9 @@ public class Buffet implements Serializable
     @Column(name = "numero_valorTotal")
     private double valorTotalGasto;
 
-    @NotNull
     @OneToMany(mappedBy = "buffet", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ComesBebes> comesBebes;
-
-//    public double calcularValorTotal()
-//    {
-//        for (ComesBebes produto : comesBebes)
-//        {
-//            valorTotalGasto += produto.getQtd() * produto.getValor();
-//        }
-//        return valorTotalGasto;
-//    }
     
     public Buffet()
     {
@@ -96,7 +87,7 @@ public class Buffet implements Serializable
             {
                 Buffet outra = (Buffet) o;
 
-                if (this.valorTotalGasto == outra.valorTotalGasto) //confere atributos
+                if (Objects.equals(this.valorTotalGasto, outra.valorTotalGasto)) //confere atributos
                 {
                     int tamanhoLista = outra.getComesBebes().size();
                     int loops = 0;

@@ -37,7 +37,7 @@ public class Pessoa implements Serializable
     @Column(name = "txt_nome")
     private String nome;
 
-    @NotNull
+    
     @Size(min = 5, max = 50)
     @Email
     @Column(name = "txt_email")
@@ -47,7 +47,7 @@ public class Pessoa implements Serializable
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones;
 
-    @NotNull
+    
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     private Cerimonia cerimonia;

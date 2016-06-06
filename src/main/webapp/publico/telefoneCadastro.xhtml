@@ -23,12 +23,12 @@
                 <p:message for="phone" id="messageFone" severity="error"/>
 
                 <p:outputLabel for="categoria" value="Categoria:" />
-              
+
                 <p:selectOneMenu id="categoria" value="#{telefoneBean.telefone.categoria}">
                     <f:selectItems value="#{telefoneBean.categorias}"   />
                 </p:selectOneMenu>
-                
-                
+
+
             </h:panelGrid>                
 
             <p:toolbarGroup>
@@ -37,11 +37,16 @@
                 <p:commandButton value="Listar" action="#{telefoneBean.listar()}" update="@form"></p:commandButton>
             </p:toolbarGroup>
 
+        </p:fieldset>
+
+        <br/>
+        <p:fieldset legend="Telefones cadastrados">
+
             <p:dataTable value="#{telefoneBean.telefones}" var="telefone">
-                <p:column>
+                <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" action="#{telefoneBean.remover(telefone)}" update="@form"></p:commandButton>
 
-                    <p:commandButton id="editar" value="Editar" action="#{telefoneBean.editar(telefone)}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{telefoneBean.editar()}" update="@form"></p:commandButton>
 
                 </p:column>
                 <p:column headerText="ddd" sortBy="#{telefone.ddd}">
@@ -54,8 +59,8 @@
                     <h:outputText value="#{telefone.categoria}"></h:outputText>
                 </p:column>                    
             </p:dataTable>
-
         </p:fieldset>
+
     </h:form>
 
 </ui:decorate>

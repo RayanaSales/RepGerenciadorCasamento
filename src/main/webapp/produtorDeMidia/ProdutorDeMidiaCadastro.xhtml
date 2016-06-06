@@ -7,33 +7,33 @@
 
              template="../publico/template.xhtml">
 
-    <h:form id="noivo">
-        <p:fieldset legend="Noivo">
+    <h:form id="produtor">
+        <p:fieldset legend="Produtor de mídia">
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
-                <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
+                <p:inputText id="nome" value="#{produtorDeMidiaBean.produtor.nome}"/>
                 <p:message for="nome" id="messageDatetime" severity="error"/>
             </h:panelGrid>   
 
             <p:toolbarGroup>
-                <p:commandButton action="#{noivoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
+                <p:commandButton action="#{produtorDeMidiaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
-                <p:commandButton value="Listar" action="#{noivoBean.listar()}" update="@form" ajax="false"/>
+                <p:commandButton value="Listar" action="#{produtorDeMidiaBean.listar()}" update="@form" ajax="false"/>
             </p:toolbarGroup>
         </p:fieldset>
 
         <br/>
-        <p:fieldset legend="Noivos cadastrados">
-            <p:dataTable value="#{noivoBean.noivos}" var="noivo">
+        <p:fieldset legend="Produtores cadastrados">
+            <p:dataTable value="#{produtorDeMidiaBean.produtores}" var="produtor">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{noivoBean.remover(noivo)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" value="Deletar" action="#{produtorDeMidiaBean.remover(produtor)}" update="@form"></p:commandButton>
 
-                    <p:commandButton id="editar" value="Editar" action="#{noivoBean.editar(noivo)}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{produtorDeMidiaBean.editar(produtor)}" update="@form"></p:commandButton>
 
                 </p:column>
-                <p:column headerText="Nome" sortBy="#{noivo.nome}">
-                    <h:outputText value="#{noivo.nome}"></h:outputText>
+                <p:column headerText="Nome" sortBy="#{produtor.nome}">
+                    <h:outputText value="#{produtor.nome}"></h:outputText>
                 </p:column> 
             </p:dataTable>
         </p:fieldset>

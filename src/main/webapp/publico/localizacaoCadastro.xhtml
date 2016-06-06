@@ -1,53 +1,42 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:h="http://xmlns.jcp.org/jsf/html" 
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h:form id="localizacao">
-            <p:growl id="localizacaoGrowl" showDetail="true" life="4000" severity="info, warn"/>
-            <p:panel header="Growl"> 
-                <h:panelGrid columns="3" cellpadding="5">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml">
 
-                    <p:outputLabel for="logradouro" value="Logradouro:" />
-                    <p:inputText id="logradouro" value="#{localizacaoBean.localizacao.logradouro}"/>
-                    <p:message for="logradouro" id="messageLogradouro" severity="error"/>
+    <h:form id="localizacao">
+        <p:fieldset legend="Localizacao">
+            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="logradouro" value="Logradouro:" />
+                <p:inputText id="logradouro" value="#{localizacaoBean.localizacao.logradouro}"/>
+                <p:message for="logradouro" id="messageLogradouro" severity="error"/>                    
+            </h:panelGrid>                
 
-              <!--    <p:outputLabel for="bairro" value="Bairro:" />
-                    <p:inputMask id="bairro" value="#{localizacaoBean.localizacao.bairro}" maxlength="40" mask=""/>
-                    <p:message for="bairro" id="messageBairro" severity="error"/>
 
-                    <p:outputLabel for="cidade" value="Cidade:" />
-                    <p:inputMask id="cidade" value="#{localizacaoBean.localizacao.cidade}" maxlength="40" mask=""/>
-                    <p:message for="cidade" id="messageCidade" severity="error"/>
-
-                    <p:outputLabel for="complemento" value="Complemento:" />
-                    <p:inputMask id="complemento" value="#{localizacaoBean.localizacao.complemento}" maxlength="40" mask=""/>
-                    <p:message for="complemento" id="messageComplemento" severity="error"/>
-
-                    <p:outputLabel for="cep" value="Cep:" />
-                    <p:inputMask id="cep" value="#{localizacaoBean.localizacao.cep}" maxlength="8" mask="99.999-999"/>
-                    <p:message for="cep" id="messageCep" severity="error"/>
-
-                    <p:outputLabel for="numero" value="Número:" />
-                    <p:inputMask id="numero" value="#{localizacaoBean.localizacao.numero}" mask="999"/>
-                    <p:message for="numero" id="messageNumero" severity="error"/>
-
-                    <p:outputLabel for="estado" value="Estado:" />
-                    <p:selectOneMenu id="estado" value="#{localizacaoBean.localizacao.estado}">
-                        <f:selectItems value="#{localizacaoBean.estados}"   />
-                    </p:selectOneMenu>
-                    <p:message for="estado" id="messageEstado" severity="error"/> -->
-
-                </h:panelGrid>
-
-                <p:commandButton action="#{localizacaoBean.salvar()}" value="Salvar" ajax="true" update="@form" 
+            <p:toolbarGroup>
+                <p:commandButton action="#{localizacaoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar localização" icon="ui-icon-check" validateClient="true"/>
-            </p:panel>
-        </h:form>
-    </h:body>
-</html>
+                <p:commandButton value="Listar" action="#{localizacaoBean.listar()}" update="@form"></p:commandButton>
+            </p:toolbarGroup>
 
+        </p:fieldset>
+
+        <br/>
+        <p:fieldset legend="Locais cadastrados">
+            <p:dataTable value="#{localizacaoBean.locais}" var="local">
+                <p:column headerText="Opções">
+                    <p:commandButton id="deletar" value="Deletar" action="#{localizacaoBean.remover(local)}" update="@form"></p:commandButton>
+
+                    <p:commandButton id="editar" value="Editar" action="#{localizacaoBean.editar()}" update="@form"></p:commandButton>
+
+                </p:column>
+                <p:column headerText="Nome" sortBy="#{local.logradouro}">
+                    <h:outputText value="#{local.logradouro}"></h:outputText>
+                </p:column> 
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>

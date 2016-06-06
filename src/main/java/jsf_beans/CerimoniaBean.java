@@ -1,15 +1,19 @@
 package jsf_beans;
 
 import entidades.Cerimonia;
-import entidades.Pessoa;
-import enumeracoes.TelefoneCategoria;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import servico.CerimoniaServico;
 
 @ManagedBean
@@ -21,31 +25,38 @@ public class CerimoniaBean implements Serializable
 
     public List<Cerimonia> cerimonias;
     public Cerimonia cerimonia;
-    
+
     public CerimoniaBean()
-    {
+    {        
+        cerimonia = new Cerimonia();
     }
-        
+
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
     {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-        
+
     public void salvar()
     {
-        listar(); //atualize a minha lista
-
-        if (!cerimonias.contains(cerimonia))
+        if (validaObjeto(cerimonia) == true)
         {
-            cerimoniaServico.salvar(cerimonia);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+            listar(); //atualize a minha lista
+            if (!cerimonias.contains(cerimonia))
+            {
+                cerimoniaServico.salvar(cerimonia);
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+            } else
+            {
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia já existe!");
+            }
+            cerimonia = new Cerimonia(); //renove a instancia, para o proximo elemento
+            
         } else
         {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone já existe!");
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
         }
-        
-        cerimonia = new Cerimonia(); //renove a instancia, para o proximo elemento
+
     }
 
     public void editar(Cerimonia t)
@@ -55,9 +66,8 @@ public class CerimoniaBean implements Serializable
         cerimoniaServico.atualizar(t);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
     }
-    
-    
-   public void remover(Cerimonia cer)
+
+    public void remover(Cerimonia cer)
     {
         listar(); //atualize a minha lista
 
@@ -69,9 +79,9 @@ public class CerimoniaBean implements Serializable
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia não existe!");
         }
-    } 
-    
-   public void listar()
+    }
+
+    public void listar()
     {        
         cerimonias = cerimoniaServico.listar();
     }
@@ -101,5 +111,31 @@ public class CerimoniaBean implements Serializable
     public void setTelefoneServico(CerimoniaServico cerimoniaServico)
     {
         this.cerimoniaServico = cerimoniaServico;
+    }
+
+    public boolean validaObjeto(Cerimonia c)
+    {
+        boolean valido = false;
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Cerimonia>> constraintViolations = validator.validate(c);
+        if (constraintViolations.size() > 0)
+        {
+            Iterator<ConstraintViolation<Cerimonia>> iterator = constraintViolations.iterator();
+            while (iterator.hasNext())
+            {
+                ConstraintViolation<Cerimonia> cv = iterator.next();
+                System.out.println(cv.getMessage());
+                System.out.println(cv.getPropertyPath());
+            }
+        }
+
+        if (constraintViolations.isEmpty())
+        {
+            valido = true;
+        }
+
+        return valido;
     }
 }
