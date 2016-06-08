@@ -89,7 +89,7 @@ public class Buffet implements Serializable
 
                 if (Objects.equals(this.valorTotalGasto, outra.valorTotalGasto)) //confere atributos
                 {
-                    int tamanhoLista = outra.getComesBebes().size();
+                   /* int tamanhoLista = outra.getComesBebes().size();
                     int loops = 0;
 
                     for (ComesBebes cb1 : this.comesBebes)//confere itens da lista
@@ -107,7 +107,9 @@ public class Buffet implements Serializable
                     if (loops == tamanhoLista)
                     {
                         return true;
-                    }
+                    } */
+                   
+                   return true; //qd descomentar o de cima, tira essa linha
                 }
             }
         }

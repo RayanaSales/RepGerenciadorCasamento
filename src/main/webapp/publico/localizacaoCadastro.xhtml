@@ -4,7 +4,8 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:p="http://primefaces.org/ui"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             template="template.xhtml">
+             template="/publico/template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:form id="localizacao">
         <p:fieldset legend="Localizacao">
@@ -13,8 +14,43 @@
                 <p:outputLabel for="logradouro" value="Logradouro:" />
                 <p:inputText id="logradouro" value="#{localizacaoBean.localizacao.logradouro}"/>
                 <p:message for="logradouro" id="messageLogradouro" severity="error"/>                    
-            </h:panelGrid>                
+            </h:panelGrid>
 
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="bairro" value="Bairro:" />
+                <p:inputText id="bairro" value="#{localizacaoBean.localizacao.bairro}"/>
+                <p:message for="bairro" id="messageBairro" severity="error"/>                    
+            </h:panelGrid>
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="cidade" value="Cidade:" />
+                <p:inputText id="cidade" value="#{localizacaoBean.localizacao.cidade}"/>
+                <p:message for="cidade" id="messageCidade" severity="error"/>                    
+            </h:panelGrid>
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="complemento" value="Complemento:" />
+                <p:inputText id="complemento" value="#{localizacaoBean.localizacao.complemento}"/>
+                <p:message for="complemento" id="messageComplemento" severity="error"/>                    
+            </h:panelGrid>
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="cep" value="Cep:" />
+                <p:inputText id="cep" value="#{localizacaoBean.localizacao.cep}"/>
+                <p:message for="cep" id="messageCep" severity="error"/>                    
+            </h:panelGrid>
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="numero" value="Número:" />
+                <p:inputMask id="numero" value="#{localizacaoBean.localizacao.numero}" mask="999" />
+                <p:message for="numero" id="messageNumero" severity="error"/>                    
+            </h:panelGrid>
+
+            <h:panelGrid>
+                <p:selectOneMenu id="categoria" value="#{localizacaoBean.localizacao.estado}">
+                    <f:selectItems value="#{localizacaoBean.estados}"   />
+                </p:selectOneMenu>
+            </h:panelGrid>
 
             <p:toolbarGroup>
                 <p:commandButton action="#{localizacaoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
@@ -29,13 +65,27 @@
             <p:dataTable value="#{localizacaoBean.locais}" var="local">
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" action="#{localizacaoBean.remover(local)}" update="@form"></p:commandButton>
-
-                    <p:commandButton id="editar" value="Editar" action="#{localizacaoBean.editar()}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{localizacaoBean.editar(local.id)}" update="@form"></p:commandButton>
 
                 </p:column>
-                <p:column headerText="Nome" sortBy="#{local.logradouro}">
+                <p:column headerText="Logradouro" >
                     <h:outputText value="#{local.logradouro}"></h:outputText>
                 </p:column> 
+                <p:column headerText="Bairro" >
+                    <h:outputText value="#{local.bairro}"></h:outputText>
+                </p:column>
+                <p:column headerText="Cidade">
+                    <h:outputText value="#{local.cidade}"></h:outputText>
+                </p:column>
+                <p:column headerText="Complemento" >
+                    <h:outputText value="#{local.complemento}"></h:outputText>
+                </p:column>       
+                <p:column headerText="CEP" >
+                    <h:outputText value="#{local.cep}"></h:outputText>
+                </p:column>
+                 <p:column headerText="Número" >
+                    <h:outputText value="#{local.numero}"></h:outputText>
+                </p:column>
             </p:dataTable>
         </p:fieldset>
     </h:form>

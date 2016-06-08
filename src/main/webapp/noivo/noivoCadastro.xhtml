@@ -29,7 +29,7 @@
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" action="#{noivoBean.remover(noivo)}" update="@form"></p:commandButton>
 
-                    <p:commandButton id="editar" value="Editar" action="#{noivoBean.editar(noivo)}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{noivoBean.editar(noivo.id)}" update="@form"></p:commandButton>
 
                 </p:column>
                 <p:column headerText="Nome" sortBy="#{noivo.nome}">

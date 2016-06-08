@@ -16,18 +16,19 @@ public class ProdutorDeMidiaServico extends Servico
 {
     public void salvar(ProdutorDeMidia produtor)
     {
+        em.flush();
         em.persist(produtor);
         em.flush();
     }
 
     public List<ProdutorDeMidia> listar()
-    {     
+    {
         TypedQuery<ProdutorDeMidia> query = em.createQuery("SELECT c FROM ProdutorDeMidia c", ProdutorDeMidia.class);
         List<ProdutorDeMidia> produtores = query.getResultList();
-        
+
         return produtores;
     }
-    
+
     public void remover(ProdutorDeMidia produtor)
     {
         ProdutorDeMidia c = (ProdutorDeMidia) em.find(ProdutorDeMidia.class, produtor.getId()); //se n tiver isso, o jpa acha que n deatachou        
@@ -37,8 +38,8 @@ public class ProdutorDeMidiaServico extends Servico
 
     public void atualizar(ProdutorDeMidia produtor)
     {
-        em.merge(produtor);
         em.flush();
+        em.merge(produtor);
     }
 
     public boolean existente(ProdutorDeMidia produtor)

@@ -33,7 +33,6 @@ public class NoivoBean implements Serializable
     public void salvar()
     {
         listar(); //atualize a minha lista
-
         if (!noivos.contains(noivo))
         {
             noivoServico.salvar(noivo);
@@ -41,17 +40,17 @@ public class NoivoBean implements Serializable
         } else
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Noivo já existe!");
-        }
-        
+        }        
         noivo = new Noivo(); //renove a instancia, para o proximo elemento
     }    
     
-    public void editar(Noivo t)
+    public void editar(int id)
     {
         listar(); //atualize a minha lista
-
+        noivo.setId(id);
         noivoServico.atualizar(noivo);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        noivo = new Noivo();
     }
 
     public void remover(Noivo noivo)

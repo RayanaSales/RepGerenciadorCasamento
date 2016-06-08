@@ -42,11 +42,12 @@ public class Localizacao implements Serializable
     private String complemento;
     
     @Size(min = 8, max = 8)
-    @Pattern(regexp = "[0-9.]", message = "{entidades.Convidado.cep}")
+    @Pattern(regexp = "[0-9]+", message = "{entidades.Localizacao.cep}")
     @Column(name = "txt_cep")
     private String cep;
     
-    @Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
+    // PROBLEMA AO USAR O PATTERN COM INTEIROS.
+    //@Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
     @Column(name = "numero_numero")
     private int numero;
 

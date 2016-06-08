@@ -35,6 +35,7 @@ public class NoivoServico extends Servico
 
     public void atualizar(Noivo noivo)
     {
+        em.flush();
         em.merge(noivo);        
     }
     

@@ -17,6 +17,7 @@ public class BuffetServico extends Servico
     {
         em.flush();
         em.persist(buffet);
+        em.flush();
     }
 
     public List<Buffet> listar()
@@ -27,13 +28,12 @@ public class BuffetServico extends Servico
     public void remover(Buffet buffet)
     {
         Buffet t = (Buffet) em.find(Buffet.class, buffet.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(t);
-        em.flush();
+        em.remove(t);        
     }
 
     public void atualizar(Buffet buffet)
     {
-        buffet = em.find(Buffet.class, buffet.getId());
+        em.flush();
         em.merge(buffet);       
     }
 

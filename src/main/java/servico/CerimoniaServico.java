@@ -37,8 +37,8 @@ public class CerimoniaServico extends Servico
 
     public void atualizar(Cerimonia cerimonia)
     {
-        em.merge(cerimonia);
         em.flush();
+        em.merge(cerimonia);
     }
 
     public boolean existente(Cerimonia cerimonia)

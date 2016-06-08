@@ -15,7 +15,6 @@ import servico.ProdutorDeMidiaServico;
 @SessionScoped
 public class ProdutorDeMidiaBean implements Serializable
 {
-
     @EJB
     public ProdutorDeMidiaServico produtorServico;
 
@@ -52,12 +51,14 @@ public class ProdutorDeMidiaBean implements Serializable
         produtor = new ProdutorDeMidia(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(ProdutorDeMidia t)
+    public void editar(int id)
     {
         listar(); //atualize a minha lista
-
-        produtorServico.atualizar(t);
-        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        
+        produtor.setId(id);
+        produtorServico.atualizar(produtor);
+        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");        
+        produtor = new ProdutorDeMidia();
     }
 
     public void remover(ProdutorDeMidia cer)

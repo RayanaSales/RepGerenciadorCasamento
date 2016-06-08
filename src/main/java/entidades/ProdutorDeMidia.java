@@ -17,35 +17,35 @@ import javax.validation.constraints.Future;
 @DiscriminatorValue(value = "P")
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class ProdutorDeMidia extends Pessoa implements Serializable
-{     
-    @validadores.ValidaPreco
+{
+   // @validadores.ValidaPreco
     @Column(name = "numero_preco")
     private double preco;
-        
+
     @Future
     @Column(name = "dt_dataEHoraChegada")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataEHoraChegada;   
+    private Date dataEHoraChegada;
 
-    @validadores.ValidaURL
-    @Column(name = "txt_linkParaRedeSocial")   
+  //  @validadores.ValidaURL
+    @Column(name = "txt_linkParaRedeSocial")
     private String linkParaRedeSocial;
-    
+
     @Enumerated(EnumType.STRING)
-    ProdutorDeMidiaCategoria categoria;    
-    
+    ProdutorDeMidiaCategoria categoria;
+
     public ProdutorDeMidia()
     {
-        
+
     }
 
-    public ProdutorDeMidia(ProdutorDeMidiaCategoria categoria,double preco, Date horaChegada, String linkParaRedeSocial)
-    {       
+    public ProdutorDeMidia(ProdutorDeMidiaCategoria categoria, double preco, Date horaChegada, String linkParaRedeSocial)
+    {
         this.categoria = categoria;
-        
+
         this.preco = preco;
-        this.dataEHoraChegada = horaChegada;       
-        this.linkParaRedeSocial = linkParaRedeSocial;     
+        this.dataEHoraChegada = horaChegada;
+        this.linkParaRedeSocial = linkParaRedeSocial;
     }
 
     public double getPreco()
@@ -87,19 +87,19 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     {
         this.categoria = categoria;
     }
-    
-      @Override
+
+    @Override
     public boolean equals(Object o)
     {
         super.equals(o);
-        
+
         if (o != null)
         {
             if (o instanceof ProdutorDeMidia)
             {
                 ProdutorDeMidia outra = (ProdutorDeMidia) o;
                 if (this.id == outra.id)
-                { 
+                {
                     return true;
                 }
             }

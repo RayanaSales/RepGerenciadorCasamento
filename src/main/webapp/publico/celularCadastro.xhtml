@@ -45,7 +45,7 @@
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" action="#{telefoneBean.remover(telefone)}" update="@form"></p:commandButton>
 
-                    <p:commandButton id="editar" value="Editar" action="#{telefoneBean.editar()}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{telefoneBean.editar(telefone.id)}" update="@form"></p:commandButton>
 
                 </p:column>
                 <p:column headerText="ddd" sortBy="#{telefone.ddd}">

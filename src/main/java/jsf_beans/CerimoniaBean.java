@@ -59,12 +59,13 @@ public class CerimoniaBean implements Serializable
 
     }
 
-    public void editar(Cerimonia t)
+    public void editar(int id)
     {
         listar(); //atualize a minha lista
-
-        cerimoniaServico.atualizar(t);
+        cerimonia.setId(id);
+        cerimoniaServico.atualizar(cerimonia);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        cerimonia = new Cerimonia();
     }
 
     public void remover(Cerimonia cer)

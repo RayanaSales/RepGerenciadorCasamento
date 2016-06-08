@@ -42,11 +42,14 @@ public class TelefoneBean implements Serializable
         telefone = new Telefone(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar()
+    public void editar(int id)
     {
         listar(); //atualize a minha lista      
-        telefoneServico.atualizar(telefone);
+        
+        telefone.setId(id);
+        telefoneServico.atualizar(telefone);       
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        telefone = new Telefone();
     }
 
     public void remover(Telefone tel)

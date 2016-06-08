@@ -13,7 +13,7 @@
             <h:panelGrid columns="3" cellpadding="5">
                 
                 <p:outputLabel for="valor" value="Valor:" />
-                <p:inputMask id="valor" value="#{buffetBean.buffet.valorTotalGasto}" mask="99"/>
+                <p:inputMask id="valor" value="#{buffetBean.buffet.valorTotalGasto}" mask="999"/>
                 <p:message for="valor" id="messageDatetime" severity="error"/>
                 
             </h:panelGrid>   
@@ -31,7 +31,7 @@
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
 
-                    <p:commandButton id="editar" value="Editar" action="#{buffetBean.editar()}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{buffetBean.editar(buffet.id)}" update="@form"></p:commandButton>
 
                 </p:column>
                 <p:column headerText="Valor" sortBy="#{buffet.valorTotalGasto}">

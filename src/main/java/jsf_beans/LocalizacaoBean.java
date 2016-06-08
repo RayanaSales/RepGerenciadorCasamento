@@ -1,7 +1,7 @@
 package jsf_beans;
 
 import entidades.Localizacao;
-import entidades.Telefone;
+import enumeracoes.EstadosDoBrasil;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +35,6 @@ public class LocalizacaoBean implements Serializable
     public void listar()
     {
         locais = localizacaoServico.listar();
-        System.out.println("QUANTIDADE LOCAIS NO BEAN: " + locais.size());
     }
 
     public List<Localizacao> getLocais()
@@ -67,11 +66,13 @@ public class LocalizacaoBean implements Serializable
 //        }
     }
 
-    public void editar()
+    public void editar(int id)
     {
         listar(); //atualize a minha lista
+        localizacao.setId(id);
         localizacaoServico.atualizar(localizacao);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        localizacao = new Localizacao();
     }
 
     public void remover(Localizacao tel)
@@ -102,6 +103,11 @@ public class LocalizacaoBean implements Serializable
     public LocalizacaoServico getLocalizacaoServico()
     {
         return localizacaoServico;
+    }
+    
+    public EstadosDoBrasil[] getEstados()
+    {
+        return EstadosDoBrasil.values();
     }
 
     public void setLocalizacao(Localizacao localizacao)

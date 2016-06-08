@@ -33,7 +33,7 @@
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" action="#{cerimoniaBean.remover(cerimonia)}" update="@form"></p:commandButton>
 
-                    <p:commandButton id="editar" value="Editar" action="#{cerimoniaBean.editar(cerimonia)}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{cerimoniaBean.editar(cerimonia.id)}" update="@form"></p:commandButton>
 
                 </p:column>
                 <p:column headerText="Data" sortBy="#{cerimonia.dataHora}">

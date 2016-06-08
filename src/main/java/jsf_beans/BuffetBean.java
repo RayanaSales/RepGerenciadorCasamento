@@ -42,11 +42,13 @@ public class BuffetBean implements Serializable
         buffet = new Buffet(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar()
+    public void editar(int id)
     {
-        listar(); //atualize a minha lista      
+        listar(); //atualize a minha lista   
+        buffet.setId(id);
         buffetServico.atualizar(buffet);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        buffet = new Buffet();
     }
 
     public void remover(Buffet tel)

@@ -35,22 +35,22 @@ public class Pessoa implements Serializable
     @Size(min = 2, max = 30)
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Pessoa.nome}")
     @Column(name = "txt_nome")
-    private String nome;
+    protected String nome;
 
     
     @Size(min = 5, max = 50)
     @Email
     @Column(name = "txt_email")
-    private String email;
+    protected String email;
 
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Telefone> telefones;
+    protected List<Telefone> telefones;
 
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
-    private Cerimonia cerimonia;
+    protected Cerimonia cerimonia;
 
     public Pessoa()
     {
@@ -145,19 +145,37 @@ public class Pessoa implements Serializable
 
      @Override
     public boolean equals(Object o)
-    {
+    {   
+        boolean valido = false;
+        
         if (o != null)
-        {
-            if (o instanceof Pessoa)
+        {            
+            if (o instanceof ProdutorDeMidia)       
             {
-                Pessoa outra = (Pessoa) o;
+                ProdutorDeMidia outra = (ProdutorDeMidia) o;      
                 if (this.id == outra.id && this.nome.equals(outra.nome))
                 { 
-                    return true;
-                }
+                    valido = true;
+                }                
+            }            
+            else if(o instanceof Noivo)
+            {
+                Noivo outra = (Noivo) o;
+                if (this.id == outra.id && this.nome.equals(outra.nome))
+                { 
+                    valido = true;
+                }   
             }
-        }
-        return false;
+            else if(o instanceof Convidado)
+            {
+                Convidado outra = (Convidado) o;
+                if (this.id == outra.id && this.nome.equals(outra.nome))
+                { 
+                    valido = true;
+                }   
+            }
+        }        
+        return valido;
     }
 
     @Override

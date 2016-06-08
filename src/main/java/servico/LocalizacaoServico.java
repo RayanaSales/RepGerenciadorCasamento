@@ -7,7 +7,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
-import javax.persistence.TypedQuery;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -37,7 +36,7 @@ public class LocalizacaoServico extends Servico
     public void atualizar(Localizacao telefone)
     {
         em.merge(telefone);
-        em.flush();
+ //       em.flush();
     }
 
     public boolean existente(Localizacao telefone)
