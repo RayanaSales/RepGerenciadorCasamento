@@ -27,13 +27,11 @@ public class Loja implements Serializable
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Loja.nome}")
     @Column(name = "txt_nome")
     private String nome;
-    
-    @NotNull
+        
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_telefone", referencedColumnName = "id")
     private Telefone telefone;
-    
-    @NotNull
+       
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_localizacao", referencedColumnName = "id")
     private Localizacao localizacao;

@@ -1,7 +1,7 @@
 package jsf_beans;
 
-import entidades.Cerimonia;
 import entidades.ProdutorDeMidia;
+import enumeracoes.ProdutorDeMidiaCategoria;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -94,5 +94,10 @@ public class ProdutorDeMidiaBean implements Serializable
     public void setProdutor(ProdutorDeMidia produtor)
     {
         this.produtor = produtor;
+    }
+    
+    public ProdutorDeMidiaCategoria[] getCategorias()
+    {
+        return ProdutorDeMidiaCategoria.values();
     }
 }

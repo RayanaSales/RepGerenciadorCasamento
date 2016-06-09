@@ -36,7 +36,6 @@ public class Pessoa implements Serializable
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Pessoa.nome}")
     @Column(name = "txt_nome")
     protected String nome;
-
     
     @Size(min = 5, max = 50)
     @Email

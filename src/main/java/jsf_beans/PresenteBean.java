@@ -81,11 +81,6 @@ public class PresenteBean implements Serializable
         return presente;
     }
 
-    public PresenteServico getPresenteServico()
-    {
-        return presenteServico;
-    }
-
     public void setPresente(Presente presente)
     {
         this.presente = presente;

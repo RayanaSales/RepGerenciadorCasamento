@@ -34,13 +34,11 @@ public class Presente implements Serializable
     @Column(name = "txt_descricao")
     private String descricao;
 
-    //@NotNull
     @Size(max = 50)
     @Pattern(regexp = "[A-Za-z0-9.,]+", message = "{entidades.Presente.ondeEncontrar}")
     @Column(name = "txt_ondeEncontrar")
     private String ondeEncontrar;
 
-   //  @NotNull
     //uma cerimonia contem uma lista de presentes
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")

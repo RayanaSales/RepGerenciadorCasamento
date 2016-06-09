@@ -30,24 +30,8 @@ public class ComesBebes implements Serializable
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z]+", message = "{entidades.ComesBebes.produto}")
     private String produto;
-
+    
     @NotNull
-    @Enumerated(EnumType.STRING)
-    ComesBebesCategoria categoria;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_buffet", referencedColumnName = "id")
-    private Buffet buffet;
-
-    @NotNull
-    //quero pedir o brigadeiro da minha vizinha, os doces finos de tal lugar, mas eu gosto da coxinha da padaria. Pede tudo de cada lugar
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_loja", referencedColumnName = "id")
-    private Loja loja;
-
-    @NotNull
-    @validadores.ValidaQuantidade
     @Column(name = "numero_quantidade")
     private int quantidade;
 
@@ -55,6 +39,19 @@ public class ComesBebes implements Serializable
     @validadores.ValidaPreco
     @Column(name = "numero_valor")
     private double valor;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    ComesBebesCategoria categoria;
+  
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_buffet", referencedColumnName = "id")
+    private Buffet buffet;
+
+    //quero pedir o brigadeiro da minha vizinha, os doces finos de tal lugar, mas eu gosto da coxinha da padaria. Pede tudo de cada lugar
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "id_loja", referencedColumnName = "id")
+    private Loja loja;
 
     public ComesBebes()
     {

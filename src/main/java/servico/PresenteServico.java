@@ -1,7 +1,6 @@
 package servico;
 
 import entidades.Presente;
-import entidades.Telefone;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -14,7 +13,6 @@ import javax.ejb.TransactionManagementType;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class PresenteServico extends Servico
 {
-
     public void salvar(Presente presente)
     {
         em.flush();
@@ -38,8 +36,4 @@ public class PresenteServico extends Servico
         em.merge(presente);
     }
 
-    public boolean existente(Presente presente)
-    {
-        return listar().contains(presente);
-    }
 }

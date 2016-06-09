@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -18,8 +18,9 @@ import javax.validation.constraints.Size;
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class Noivo extends Pessoa implements Serializable //botar superclasse pessoa
 {     
+    @NotNull
     @Size(min = 6, max = 16, message = "{entidades.Noivo.senha}")
-    @Pattern(regexp = "[A-Za-z0-9\\._-]+@[A-Za-z]+\\.[A-Za-z]+", message = "{entidades.Noivo.senha}")
+   // @Pattern(regexp = "[A-Za-z0-9\\._-]", message = "{entidades.Noivo.senha}")
     @Column(name = "txt_senha")
     private String senha;      
 

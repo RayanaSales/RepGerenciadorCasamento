@@ -14,6 +14,10 @@
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
                 <p:message for="nome" id="messageDatetime" severity="error"/>
+                
+                <p:outputLabel for="senha" value="Senha:" />
+                <p:password id="senha" value="#{noivoBean.noivo.senha}" feedback="true"/>
+                <p:message for="senha" id="messageSenha" severity="error"/>
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -34,7 +38,10 @@
                 </p:column>
                 <p:column headerText="Nome" sortBy="#{noivo.nome}">
                     <h:outputText value="#{noivo.nome}"></h:outputText>
-                </p:column> 
+                </p:column>
+                <p:column headerText="Senha" sortBy="#{noivo.senha}">
+                    <h:outputText value="#{noivo.senha}"></h:outputText>
+                </p:column>
             </p:dataTable>
         </p:fieldset>
     </h:form>

@@ -12,22 +12,25 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue(value = "P")
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
 public class ProdutorDeMidia extends Pessoa implements Serializable
 {
-   // @validadores.ValidaPreco
+    @NotNull
+    @validadores.ValidaPreco
     @Column(name = "numero_preco")
     private double preco;
 
+    @NotNull
     @Future
     @Column(name = "dt_dataEHoraChegada")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEHoraChegada;
 
-  //  @validadores.ValidaURL
+    @validadores.ValidaURL
     @Column(name = "txt_linkParaRedeSocial")
     private String linkParaRedeSocial;
 

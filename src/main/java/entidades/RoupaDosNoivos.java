@@ -30,7 +30,7 @@ public class RoupaDosNoivos implements Serializable {
     private String roupa;
     
     @NotNull
-    @Pattern(regexp = "[0-9.,]+", message = "{entidades.RoupaDosNoivos.valor}") 
+    @validadores.ValidaPreco
     @Column(name = "numero_valor")
     private double valor;
     

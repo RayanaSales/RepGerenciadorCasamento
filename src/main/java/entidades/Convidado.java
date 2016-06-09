@@ -19,10 +19,9 @@ public class Convidado extends Pessoa implements Serializable
     @Enumerated(EnumType.STRING)
     ConvidadoCategoria categoria;
       
-    @NotNull
-    @validadores.ValidaQuantidade   
+    @NotNull    
     @Column(name = "numero_quantidadeSenhas")
-    int quantidadeSenhas;
+    Integer quantidadeSenhas;
         
     public Convidado()
     {
@@ -35,12 +34,12 @@ public class Convidado extends Pessoa implements Serializable
         this.quantidadeSenhas = quantidadeSenhas;        
     }
 
-    public int getQuantidadeSenhas()
+    public Integer getQuantidadeSenhas()
     {
         return quantidadeSenhas;
     }
 
-    public void setQuantidadeSenhas(int quantidadeSenhas)
+    public void setQuantidadeSenhas(Integer quantidadeSenhas)
     {
         this.quantidadeSenhas = quantidadeSenhas;
     }

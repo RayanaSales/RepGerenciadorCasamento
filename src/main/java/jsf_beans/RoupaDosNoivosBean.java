@@ -1,7 +1,6 @@
 package jsf_beans;
 
-import entidades.Telefone;
-import enumeracoes.TelefoneCategoria;
+import entidades.RoupaDosNoivos;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -9,56 +8,56 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import servico.TelefoneServico;
+import servico.RoupaDosNoivosServico;
 
 @ManagedBean
 @SessionScoped
-public class TelefoneBean implements Serializable
+public class RoupaDosNoivosBean implements Serializable
 {
     @EJB
-    private TelefoneServico telefoneServico;
+    private RoupaDosNoivosServico roupaServico;
 
-    public List<Telefone> telefones;
-    public Telefone telefone;
+    public List<RoupaDosNoivos> roupas;
+    public RoupaDosNoivos roupa;
 
-    public TelefoneBean()
+    public RoupaDosNoivosBean()
     {
-        telefone = new Telefone();
+        roupa = new RoupaDosNoivos();
     }
 
     public void salvar()
     {
         listar(); //atualize a minha lista
 
-        if (!telefones.contains(telefone))
+        if (!roupas.contains(roupa))
         {
-            telefoneServico.salvar(telefone);
+            roupaServico.salvar(roupa);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
         {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone já existe!");
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Roupa já existe!");
         }
         
-        telefone = new Telefone(); //renove a instancia, para o proximo elemento
+        roupa = new RoupaDosNoivos(); //renove a instancia, para o proximo elemento
     }
 
     public void editar(int id)
     {
         listar(); //atualize a minha lista      
         
-        telefone.setId(id);
-        telefoneServico.atualizar(telefone);       
+        roupa.setId(id);
+        roupaServico.atualizar(roupa);       
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
-        telefone = new Telefone();
+        roupa = new RoupaDosNoivos();
     }
 
-    public void remover(Telefone tel)
+    public void remover(RoupaDosNoivos roupa)
     {
         listar(); //atualize a minha lista
 
-        if (telefones.contains(tel))
+        if (roupas.contains(roupa))
         {
-            telefoneServico.remover(tel);
+            roupaServico.remover(roupa);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
         } else
         {
@@ -68,33 +67,33 @@ public class TelefoneBean implements Serializable
 
     public void listar()
     {        
-        telefones = telefoneServico.listar();
+        roupas = roupaServico.listar();
     }
 
-    public List<Telefone> getTelefones()
+    public List<RoupaDosNoivos> getRoupas()
     {
         listar(); //atualize a minha lista
-        return telefones;
+        return roupas;
     }
 
-    public Telefone getTelefone()
+    public RoupaDosNoivos getRoupa()
     {
-        return telefone;
+        return roupa;
     }
 
-    public void setTelefone(Telefone telefone)
+    public RoupaDosNoivosServico getRoupaDosNoivosServico()
     {
-        this.telefone = telefone;
+        return roupaServico;
     }
 
-    public void setTelefoneServico(TelefoneServico telefoneServico)
+    public void setRoupaDosNoivos(RoupaDosNoivos roupa)
     {
-        this.telefoneServico = telefoneServico;
+        this.roupa = roupa;
     }
 
-    public TelefoneCategoria[] getCategorias()
+    public void setRoupaDosNoivosServico(RoupaDosNoivosServico roupaServico)
     {
-        return TelefoneCategoria.values();
+        this.roupaServico = roupaServico;
     }
 
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)

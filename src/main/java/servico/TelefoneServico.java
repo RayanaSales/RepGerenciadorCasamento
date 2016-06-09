@@ -37,8 +37,4 @@ public class TelefoneServico extends Servico
         em.merge(telefone);
     }
 
-    public boolean existente(Telefone telefone)
-    {
-        return listar().contains(telefone);
-    }
 }
