@@ -44,4 +44,5 @@ public class NoivoServico extends Servico
         em.flush();
         return listar().contains(noivo);
     }
+    
 }

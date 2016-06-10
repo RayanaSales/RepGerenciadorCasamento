@@ -1,13 +1,16 @@
 package jsf_beans;
 
+import entidades.Loja;
 import entidades.Presente;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import servico.LojaServico;
 import servico.PresenteServico;
 
 @ManagedBean
@@ -17,6 +20,9 @@ public class PresenteBean implements Serializable
     @EJB
     private PresenteServico presenteServico;
 
+    @EJB
+    private LojaServico lojaServico;
+    
     public List<Presente> presentes;
     public Presente presente;
 
@@ -96,4 +102,25 @@ public class PresenteBean implements Serializable
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
+    public List<Loja> listarTodasLojas(){
+        return lojaServico.listar();
+    
+    }
+    
+    public List<Loja> listarLojasPresente(int id){
+        
+        int idPresenteGeral;
+        List<Loja> lojasGeral = listarTodasLojas();
+        List<Loja> lojasPresentes = new ArrayList<>();
+        
+        for (int i = 0; i < lojasGeral.size(); i++) {
+            idPresenteGeral = lojasGeral.get(i).getPresente().getId();
+            
+            if(idPresenteGeral == id)
+                lojasPresentes.add(lojasGeral.get(i));
+        }
+        return lojasPresentes;
+    }
+    
 }

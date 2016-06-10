@@ -5,7 +5,8 @@
              xmlns:p="http://primefaces.org/ui"
              xmlns:f="http://xmlns.jcp.org/jsf/core"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             template="template.xhtml">
+             template="template.xhtml"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:form id="telefone">
         <p:fieldset legend="Telefone">
@@ -18,11 +19,21 @@
                 <p:inputText id="nome" value="#{presenteBean.presente.nome}"/>
                 <p:message for="nome" id="messageNome" severity="error"/>
 
-                <p:outputLabel for="descri" value="Descrição" />
+                <p:outputLabel for="descri" value="Descrição:" />
                 <p:inputText id="descri" value="#{presenteBean.presente.descricao}"/>
                 <p:message for="descri" id="messageDesc" severity="error"/>
-                
+
+                <p:outputLabel for="ondeEncontrar" value="Onde encontrar:" />
+                <p:inputText id="ondeEncontrar" value="#{presenteBean.presente.ondeEncontrar}"/>
+                <p:message for="ondeEncontrar" id="messageOndeEncontrar" severity="error"/>
+
+                <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                <p:selectOneMenu id="cerimonia" value="#{presenteBean.presente.cerimonia}">
+                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                </p:selectOneMenu>
+
             </h:panelGrid>                
+
 
             <p:toolbarGroup>
                 <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="true" update="@form" 
@@ -47,7 +58,15 @@
                 </p:column>
                 <p:column headerText="Descrição" sortBy="#{presente.descricao}">
                     <h:outputText value="#{presente.descricao}"></h:outputText>
-                </p:column>                                    
+                </p:column>
+                <p:column headerText="Onde encontrar" sortBy="#{presente.ondeEncontrar}">
+                    <h:outputText value="#{presente.ondeEncontrar}"></h:outputText>
+                </p:column>       
+                <p:column headerText="Lojas" >
+                    <c:forEach items="#{presente.lojas}" var="loja" >
+                        <p:outputLabel value="#{loja.nome}"/>
+                    </c:forEach>
+                </p:column>
             </p:dataTable>
         </p:fieldset>
 

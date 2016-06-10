@@ -14,39 +14,27 @@
                 <p:outputLabel for="logradouro" value="Logradouro:" />
                 <p:inputText id="logradouro" value="#{localizacaoBean.localizacao.logradouro}"/>
                 <p:message for="logradouro" id="messageLogradouro" severity="error"/>                    
-            </h:panelGrid>
-
-            <h:panelGrid columns="3" cellpadding="5">
+         
                 <p:outputLabel for="bairro" value="Bairro:" />
                 <p:inputText id="bairro" value="#{localizacaoBean.localizacao.bairro}"/>
                 <p:message for="bairro" id="messageBairro" severity="error"/>                    
-            </h:panelGrid>
-
-            <h:panelGrid columns="3" cellpadding="5">
+          
                 <p:outputLabel for="cidade" value="Cidade:" />
                 <p:inputText id="cidade" value="#{localizacaoBean.localizacao.cidade}"/>
                 <p:message for="cidade" id="messageCidade" severity="error"/>                    
-            </h:panelGrid>
-
-            <h:panelGrid columns="3" cellpadding="5">
+          
                 <p:outputLabel for="complemento" value="Complemento:" />
                 <p:inputText id="complemento" value="#{localizacaoBean.localizacao.complemento}"/>
                 <p:message for="complemento" id="messageComplemento" severity="error"/>                    
-            </h:panelGrid>
-
-            <h:panelGrid columns="3" cellpadding="5">
+          
                 <p:outputLabel for="cep" value="Cep:" />
                 <p:inputText id="cep" value="#{localizacaoBean.localizacao.cep}"/>
                 <p:message for="cep" id="messageCep" severity="error"/>                    
-            </h:panelGrid>
-
-            <h:panelGrid columns="3" cellpadding="5">
+          
                 <p:outputLabel for="numero" value="Número:" />
                 <p:inputMask id="numero" value="#{localizacaoBean.localizacao.numero}" mask="999" />
                 <p:message for="numero" id="messageNumero" severity="error"/>                    
-            </h:panelGrid>
-
-            <h:panelGrid>
+          
                 <p:selectOneMenu id="categoria" value="#{localizacaoBean.localizacao.estado}">
                     <f:selectItems value="#{localizacaoBean.estados}"   />
                 </p:selectOneMenu>

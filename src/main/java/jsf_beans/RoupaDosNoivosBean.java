@@ -1,5 +1,6 @@
 package jsf_beans;
 
+import entidades.Noivo;
 import entidades.RoupaDosNoivos;
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import servico.NoivoServico;
 import servico.RoupaDosNoivosServico;
 
 @ManagedBean
@@ -17,6 +19,9 @@ public class RoupaDosNoivosBean implements Serializable
     @EJB
     private RoupaDosNoivosServico roupaServico;
 
+    @EJB
+    private NoivoServico noivoServico;
+    
     public List<RoupaDosNoivos> roupas;
     public RoupaDosNoivos roupa;
 
@@ -100,5 +105,9 @@ public class RoupaDosNoivosBean implements Serializable
     {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public List<Noivo> listarNoivos(){
+        return noivoServico.listar();
     }
 }

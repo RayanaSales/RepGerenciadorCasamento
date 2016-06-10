@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import servico.LojaServico;
-import servico.NoivoServico;
 
 @ManagedBean
 @SessionScoped
@@ -30,6 +29,7 @@ public class LojaBean implements Serializable
     public void listar()
     {        
         lojas = noivoServico.listar();
+        
     }
     
     public void salvar()
@@ -37,12 +37,16 @@ public class LojaBean implements Serializable
         listar(); //atualize a minha lista
         if (!lojas.contains(loja))
         {
+            System.out.println("Telefone : " + loja.getTelefone());
+            System.out.println("Localizacao : " + loja.getLocalizacao());
+            System.out.println("Presente : " + loja.getPresente() );
             noivoServico.salvar(loja);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja já existe!");
         }        
+        adicionarMessagem(FacesMessage.SEVERITY_INFO, "ESTOU NO SALVAR!");
         loja = new Loja(); //renove a instancia, para o proximo elemento
     }    
     
