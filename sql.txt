@@ -108,4 +108,3 @@ create table roupaDosNoivos
     numero_valor real NOT NULL,
     id_pessoa int references pessoa(id)
 );
-

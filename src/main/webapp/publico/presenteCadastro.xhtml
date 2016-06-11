@@ -8,7 +8,7 @@
              template="template.xhtml"
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <h:form id="presente">
+    <h:form id="telefone">
         <p:fieldset legend="Presente">
 
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
@@ -26,22 +26,13 @@
                 <p:outputLabel for="ondeEncontrar" value="Onde encontrar:" />
                 <p:inputText id="ondeEncontrar" value="#{presenteBean.presente.ondeEncontrar}"/>
                 <p:message for="ondeEncontrar" id="messageOndeEncontrar" severity="error"/>
-                
-                <!-- tentando salvar o presente, setando as referencias dos objetos aqui-->
-                
-                <!-- DUVIDAAAA, como pegar as lojas cadastradas, e mostrar em checkbox? Para setar os checados, na lista de lojas, em presente... -->
-                <p:outputLabel for="lojas" value="Lojas onde encontrar:" />
-                <p:selectManyCheckbox id="lojas" value="#{lojaBean.lojas}" layout="grid" columns="3">
-                    <f:selectItems value="#{presenteBean.presente.lojas}" />
-                </p:selectManyCheckbox>
-                
+
                 <p:outputLabel for="cerimonia" value="Cerimônia :"/>
-                <p:selectOneMenu id="cerimonia" value="#{presenteBean.presente.cerimonia}">
+                <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{presenteBean.presente.cerimonia}">
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
-                </p:selectOneMenu>                
+                </p:selectOneMenu>
+
             </h:panelGrid>                
-
-
             <p:toolbarGroup>
                 <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="true" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
@@ -51,11 +42,13 @@
         </p:fieldset>
 
         <br/>
-        <p:fieldset legend="Presentes cadastrados">
+           </h:form>
+    <h:form>
+         <p:fieldset legend="Presentes cadastrados">
 
             <p:dataTable value="#{presenteBean.presentes}" var="presente">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{presenteBean.remover(presente)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" immediate="true" value="Deletar" action="#{presenteBean.remover(presente)}" update="@form"></p:commandButton>
 
                     <p:commandButton id="editar" value="Editar" action="#{presenteBean.editar(presente.id)}" update="@form"></p:commandButton>
 
@@ -69,18 +62,14 @@
                 <p:column headerText="Onde encontrar" sortBy="#{presente.ondeEncontrar}">
                     <h:outputText value="#{presente.ondeEncontrar}"></h:outputText>
                 </p:column>       
-                <p:column headerText="Lojas" >                    
-                   <!--  <c:forEach items="#{presente.lojas}" var="loja" >
-                        <p:outputLabel value="#{loja.nome}"/>
-                    </c:forEach > -->
+                <p:column headerText="Lojas" >
                     <p:selectOneMenu id="lojas" value="#{presente.lojas}">
                         <f:selectItems value="#{presente.lojas}" var="loja" itemValue="#{loja}" itemLabel="#{loja.nome}"  />
-                    </p:selectOneMenu>
-                </p:column>
-                <p:column headerText="Cerimonia" >
-                    <h:outputText value="#{presente.cerimonia.dataHora}"></h:outputText>
+                    </p:selectOneMenu> 
                 </p:column>
             </p:dataTable>
         </p:fieldset>
+
+
     </h:form>
 </ui:decorate>

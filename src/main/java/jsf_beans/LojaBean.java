@@ -1,6 +1,7 @@
 package jsf_beans;
 
 import entidades.Loja;
+import entidades.Noivo;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -92,12 +93,13 @@ public class LojaBean implements Serializable
     {
         this.loja = loja;
     }
-       
+    
+    
+    
+    
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
     {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
-    
 }

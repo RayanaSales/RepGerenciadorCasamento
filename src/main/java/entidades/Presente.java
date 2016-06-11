@@ -63,7 +63,7 @@ public class Presente implements Serializable
         lojas = new ArrayList<>();
     }
 
-    public int getId()
+    public Integer getId()
     {
         return id;
     }

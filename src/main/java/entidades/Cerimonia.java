@@ -20,7 +20,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Cerimonia implements Serializable
+public class Cerimonia implements Serializable 
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +73,7 @@ public class Cerimonia implements Serializable
         this.dataHora = dataHora;
     }
 
-    public int getId()
+    public Integer getId()
     {
         return id;
     }

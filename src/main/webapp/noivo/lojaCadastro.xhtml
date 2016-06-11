@@ -44,14 +44,23 @@
         <p:fieldset legend="Lojas cadastradas">
             <p:dataTable value="#{lojaBean.lojas}" var="loja">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{lojaBean.remover(loja)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{lojaBean.remover(loja)}" update="@form"></p:commandButton>
 
                     <p:commandButton id="editar" value="Editar" action="#{lojaBean.editar(loja.id)}" update="@form"></p:commandButton>
 
                 </p:column>
                 <p:column headerText="Nome" sortBy="#{loja.nome}">
                     <h:outputText value="#{loja.nome}"></h:outputText>
-                </p:column>               
+                </p:column> 
+                <p:column headerText="Local">
+                    <h:outputLabel value="#{loja.localizacao}" />
+                </p:column>
+                <p:column headerText="Telefone">
+                    <h:outputLabel value="#{loja.telefone.ddd}" />
+                </p:column>
+                <p:column headerText="Presente">
+                    <h:outputLabel value="#{loja.presente.nome}" />
+                </p:column>
             </p:dataTable>
         </p:fieldset>
     </h:form>
