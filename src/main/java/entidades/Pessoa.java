@@ -17,6 +17,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -25,10 +26,11 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "disc_pessoa", discriminatorType = DiscriminatorType.STRING, length = 1)
+@SequenceGenerator(name = "PESSOA_SEQUENCE", sequenceName = "PESSOA_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Pessoa implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQUENCE")
     protected int id;
 
     @NotNull
@@ -36,7 +38,7 @@ public class Pessoa implements Serializable
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Pessoa.nome}")
     @Column(name = "txt_nome")
     protected String nome;
-    
+
     @Size(min = 5, max = 50)
     @Email
     @Column(name = "txt_email")
@@ -46,7 +48,6 @@ public class Pessoa implements Serializable
             cascade = CascadeType.ALL, orphanRemoval = true)
     protected List<Telefone> telefones;
 
-    
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     protected Cerimonia cerimonia;
@@ -73,7 +74,7 @@ public class Pessoa implements Serializable
     {
         this.id = id;
     }
-    
+
     public List<Telefone> getTelefones()
     {
         return telefones;
@@ -142,38 +143,36 @@ public class Pessoa implements Serializable
         this.cerimonia = cerimonia;
     }
 
-     @Override
+    @Override
     public boolean equals(Object o)
-    {   
+    {
         boolean valido = false;
-        
+
         if (o != null)
-        {            
-            if (o instanceof ProdutorDeMidia)       
+        {
+            if (o instanceof ProdutorDeMidia)
             {
-                ProdutorDeMidia outra = (ProdutorDeMidia) o;      
+                ProdutorDeMidia outra = (ProdutorDeMidia) o;
                 if (this.id == outra.id && this.nome.equals(outra.nome))
-                { 
+                {
                     valido = true;
-                }                
-            }            
-            else if(o instanceof Noivo)
+                }
+            } else if (o instanceof Noivo)
             {
                 Noivo outra = (Noivo) o;
                 if (this.id == outra.id && this.nome.equals(outra.nome))
-                { 
+                {
                     valido = true;
-                }   
-            }
-            else if(o instanceof Convidado)
+                }
+            } else if (o instanceof Convidado)
             {
                 Convidado outra = (Convidado) o;
                 if (this.id == outra.id && this.nome.equals(outra.nome))
-                { 
+                {
                     valido = true;
-                }   
+                }
             }
-        }        
+        }
         return valido;
     }
 
@@ -183,5 +182,5 @@ public class Pessoa implements Serializable
         int hash = 7;
         hash = 53 * hash + this.id;
         return hash;
-    } 
+    }
 }

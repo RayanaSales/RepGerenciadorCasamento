@@ -17,18 +17,26 @@ import servico.PresenteServico;
 @SessionScoped
 public class PresenteBean implements Serializable
 {
+
     @EJB
     private PresenteServico presenteServico;
 
     @EJB
     private LojaServico lojaServico;
-    
+
     public List<Presente> presentes;
     public Presente presente;
+
+    public Loja[] arrayLojas;
 
     public PresenteBean()
     {
         presente = new Presente();
+    }
+    
+    public void setar()
+    {
+        
     }
 
     public void salvar()
@@ -43,16 +51,23 @@ public class PresenteBean implements Serializable
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente já existe!");
         }
-        
+
         presente = new Presente(); //renove a instancia, para o proximo elemento
     }
 
     public void editar(int id)
     {
-        listar(); //atualize a minha lista      
+        System.out.println("EDITAR PRESENTE");
+        Presente antigo = presenteServico.buscar(id);
+                
+        antigo.setId(presente.getId());
+        antigo.setNome(presente.getNome());
+        antigo.setDescricao(presente.getDescricao());
+        antigo.setOndeEncontrar(presente.getOndeEncontrar());
+        antigo.setCerimonia(presente.getCerimonia());
+        antigo.setLojas(presente.getLojas());
         
-        presente.setId(id);
-        presenteServico.atualizar(presente);       
+        presenteServico.atualizar(antigo);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
         presente = new Presente();
     }
@@ -72,7 +87,7 @@ public class PresenteBean implements Serializable
     }
 
     public void listar()
-    {        
+    {
         presentes = presenteServico.listar();
     }
 
@@ -102,25 +117,42 @@ public class PresenteBean implements Serializable
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
-    public List<Loja> listarTodasLojas(){
+
+    public List<Loja> listarLojas()
+    {
         return lojaServico.listar();
-    
     }
-    
-    public List<Loja> listarLojasPresente(int id){
-        
+
+    public Loja[] getArrayLojas()
+    {
+        List<Loja> listaLojas = lojaServico.listar();
+        arrayLojas = new Loja[listaLojas.size()];
+
+        for (int i = 0; i < listaLojas.size(); i++)
+        {
+            arrayLojas[i] = listaLojas.get(i);
+        }
+
+        return arrayLojas;
+    }
+
+    public List<Loja> listarLojasPresente(int id)
+    {
+
         int idPresenteGeral;
-        List<Loja> lojasGeral = listarTodasLojas();
+        List<Loja> lojasGeral = listarLojas();
         List<Loja> lojasPresentes = new ArrayList<>();
-        
-        for (int i = 0; i < lojasGeral.size(); i++) {
+
+        for (int i = 0; i < lojasGeral.size(); i++)
+        {
             idPresenteGeral = lojasGeral.get(i).getPresente().getId();
-            
-            if(idPresenteGeral == id)
+
+            if (idPresenteGeral == id)
+            {
                 lojasPresentes.add(lojasGeral.get(i));
+            }
         }
         return lojasPresentes;
     }
-    
+
 }

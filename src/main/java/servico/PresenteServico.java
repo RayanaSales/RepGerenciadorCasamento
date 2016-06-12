@@ -35,5 +35,9 @@ public class PresenteServico extends Servico
         em.flush();
         em.merge(presente);
     }
-
+    
+    public Presente buscar(int id)
+    {
+        return (Presente) em.find(Presente.class, id);
+    }
 }

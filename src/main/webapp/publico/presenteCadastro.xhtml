@@ -8,7 +8,7 @@
              template="template.xhtml"
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <h:form id="telefone">
+    <h:form id="presente">
         <p:fieldset legend="Presente">
 
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
@@ -32,26 +32,32 @@
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
                 </p:selectOneMenu>
 
+             <!--   <p:selectCheckboxMenu id="lojas" value="#{presenteBean.arrayLojas}" label="Lojas"
+                                      filter="true" filterMatchMode="startsWith" 
+                                      required="true" converter="lojaConverter">
+                    <f:selectItems value="#{presenteBean.presente.lojas}" var="loja" itemLabel="#{loja.nome}" itemValue="#{loja}"/>
+                </p:selectCheckboxMenu> -->
+
+
             </h:panelGrid>                
             <p:toolbarGroup>
                 <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="true" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
-                <p:commandButton value="Listar" action="#{presenteBean.listar()}" update="@form"></p:commandButton>
+
+                <p:commandButton value="Listar" action="#{presenteBean.listar()}" immediate="true" update="@form"></p:commandButton>
+                <h:commandButton action="editarPresente?faces-redirect=true" immediate="true" value="Editar" />
+
             </p:toolbarGroup>
 
         </p:fieldset>
 
         <br/>
-           </h:form>
-    <h:form>
-         <p:fieldset legend="Presentes cadastrados">
-
+    </h:form>
+    <h:form> 
+        <p:fieldset legend="Presentes cadastrados">
             <p:dataTable value="#{presenteBean.presentes}" var="presente">
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" immediate="true" value="Deletar" action="#{presenteBean.remover(presente)}" update="@form"></p:commandButton>
-
-                    <p:commandButton id="editar" value="Editar" action="#{presenteBean.editar(presente.id)}" update="@form"></p:commandButton>
-
                 </p:column>
                 <p:column headerText="Nome" sortBy="#{presente.nome}">
                     <h:outputText value="#{presente.nome}"></h:outputText>
@@ -61,7 +67,10 @@
                 </p:column>
                 <p:column headerText="Onde encontrar" sortBy="#{presente.ondeEncontrar}">
                     <h:outputText value="#{presente.ondeEncontrar}"></h:outputText>
-                </p:column>       
+                </p:column>   
+                <p:column headerText="Cerimonia" >
+                    <h:outputText value="#{presente.cerimonia.dataHora}"></h:outputText>
+                </p:column>
                 <p:column headerText="Lojas" >
                     <p:selectOneMenu id="lojas" value="#{presente.lojas}">
                         <f:selectItems value="#{presente.lojas}" var="loja" itemValue="#{loja}" itemLabel="#{loja.nome}"  />
@@ -69,7 +78,5 @@
                 </p:column>
             </p:dataTable>
         </p:fieldset>
-
-
     </h:form>
 </ui:decorate>

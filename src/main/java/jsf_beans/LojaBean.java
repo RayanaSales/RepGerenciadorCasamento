@@ -16,7 +16,7 @@ import servico.LojaServico;
 public class LojaBean implements Serializable
 {
     @EJB
-    private LojaServico noivoServico;
+    private LojaServico lojaServico;
 
     public List<Loja> lojas;
     public Loja loja;
@@ -28,7 +28,7 @@ public class LojaBean implements Serializable
     
     public void listar()
     {        
-        lojas = noivoServico.listar();
+        lojas = lojaServico.listar();
         
     }
     
@@ -40,7 +40,7 @@ public class LojaBean implements Serializable
             System.out.println("Telefone : " + loja.getTelefone());
             System.out.println("Localizacao : " + loja.getLocalizacao());
             System.out.println("Presente : " + loja.getPresente() );
-            noivoServico.salvar(loja);
+            lojaServico.salvar(loja);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
         {
@@ -54,7 +54,7 @@ public class LojaBean implements Serializable
     {
         listar(); //atualize a minha lista
         loja.setId(id);
-        noivoServico.atualizar(loja);
+        lojaServico.atualizar(loja);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
         loja = new Loja();
     }
@@ -65,7 +65,7 @@ public class LojaBean implements Serializable
 
         if (lojas.contains(loja))
         {
-            noivoServico.remover(loja);
+            lojaServico.remover(loja);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
         } else
         {
@@ -93,8 +93,6 @@ public class LojaBean implements Serializable
     {
         this.loja = loja;
     }
-    
-    
     
     
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)

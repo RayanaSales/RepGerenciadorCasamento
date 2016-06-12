@@ -11,15 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@SequenceGenerator(name = "LOJA_SEQUENCE", sequenceName = "LOJA_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Loja implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOJA_SEQUENCE")
     private int id;
     
     @NotNull
@@ -61,7 +63,7 @@ public class Loja implements Serializable
         this.localizacao = localizacao;
     }
         
-    public int getId()
+    public Integer getId()
     {
         return id;
     }

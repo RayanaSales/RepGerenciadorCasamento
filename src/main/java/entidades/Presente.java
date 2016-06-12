@@ -13,15 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@SequenceGenerator(name = "PRESENTE_SEQUENCE", sequenceName = "PRESENTE_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Presente implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRESENTE_SEQUENCE")
     private int id;
 
     @NotNull
