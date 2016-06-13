@@ -14,16 +14,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@SequenceGenerator(name = "CERIMONIA_SEQUENCE", sequenceName = "CERIMONIA_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Cerimonia implements Serializable 
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CERIMONIA_SEQUENCE")
     private int id;
 
     @NotNull

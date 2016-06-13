@@ -52,7 +52,7 @@
         <p:fieldset legend="Locais cadastrados">
             <p:dataTable value="#{localizacaoBean.locais}" var="local">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{localizacaoBean.remover(local)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" immediate="true" value="Deletar" action="#{localizacaoBean.remover(local)}" update="@form"></p:commandButton>
                     <p:commandButton id="editar" value="Editar" action="#{localizacaoBean.editar(local.id)}" update="@form"></p:commandButton>
 
                 </p:column>

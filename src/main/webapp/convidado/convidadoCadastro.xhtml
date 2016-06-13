@@ -15,19 +15,25 @@
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{convidadoBean.convidado.nome}"/>
                 <p:message for="nome" id="messageDatetime" severity="error"/>
-                
+
                 <p:outputLabel for="email" value="Email:" />
                 <p:inputText id="email" value="#{convidadoBean.convidado.email}"/>
                 <p:message for="email" id="messageEmail" severity="error"/>
-                
+
                 <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
                 <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="99"/>
                 <p:message for="quantidadeSenhas" id="messageSenhas" severity="error"/>
-                
+
+                <p:outputLabel for="categoria" value="Categoria: " />
                 <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}">
                     <f:selectItems value="#{convidadoBean.categorias}"   />
                 </p:selectOneMenu>
-                
+
+                <br/><br/>
+                <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
+                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                </p:selectOneMenu>
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -58,6 +64,9 @@
                 <p:column headerText="Quantidade de senhas" sortBy="#{convidado.quantidadeSenhas}">
                     <h:outputText value="#{convidado.quantidadeSenhas}"></h:outputText>
                 </p:column> 
+                <p:column headerText="Cerimonia" >
+                    <h:outputText value="#{convidado.cerimonia.dataHora}"></h:outputText>
+                </p:column>
             </p:dataTable>
         </p:fieldset>
     </h:form>

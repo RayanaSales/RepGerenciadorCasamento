@@ -1,7 +1,10 @@
 package jsf_beans;
 
+import entidades.Cerimonia;
 import entidades.Noivo;
+import entidades.Pessoa;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -35,6 +38,14 @@ public class NoivoBean implements Serializable
         listar(); //atualize a minha lista
         if (!noivos.contains(noivo))
         {
+            //setar o noivo, na lista de novasPessoas em cerimonia.
+            Cerimonia cerimonia = noivo.getCerimonia();
+            List<Pessoa> novasPessoas = new ArrayList<>();
+            novasPessoas.add(noivo);
+            cerimonia.setPessoas(novasPessoas);
+            noivo.setCerimonia(cerimonia);            
+            
+            
             noivoServico.salvar(noivo);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else

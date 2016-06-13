@@ -29,6 +29,7 @@ import org.hibernate.validator.constraints.Email;
 @SequenceGenerator(name = "PESSOA_SEQUENCE", sequenceName = "PESSOA_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Pessoa implements Serializable
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQUENCE")
     protected int id;
@@ -65,7 +66,7 @@ public class Pessoa implements Serializable
         telefones = new ArrayList<>();
     }
 
-    public int getId()
+    public Integer getId()
     {
         return id;
     }
@@ -104,7 +105,7 @@ public class Pessoa implements Serializable
 
         for (int i = 0; i < telefones.size(); i++)
         {
-            if (telefones.get(i).getId() == t.getId())
+            if (telefones.get(i).getId().equals(t.getId()))
             {
                 contem = true;
                 break;

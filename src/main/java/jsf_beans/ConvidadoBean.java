@@ -1,10 +1,11 @@
 package jsf_beans;
 
+import entidades.Cerimonia;
 import entidades.Convidado;
-import entidades.Localizacao;
+import entidades.Pessoa;
 import enumeracoes.ConvidadoCategoria;
-import enumeracoes.EstadosDoBrasil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -18,12 +19,12 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import servico.ConvidadoServico;
-import servico.LocalizacaoServico;
 
 @ManagedBean
 @SessionScoped
 public class ConvidadoBean implements Serializable
 {
+
     @EJB
     private ConvidadoServico convidadoServico;
 
@@ -32,7 +33,7 @@ public class ConvidadoBean implements Serializable
 
     public ConvidadoBean()
     {
-        convidado = new Convidado();        
+        convidado = new Convidado();
     }
 
     public void listar()
@@ -50,18 +51,25 @@ public class ConvidadoBean implements Serializable
     {
 //        if (validaObjeto(convidado) == true)
 //        {
-            listar(); //atualize a minha lista
+        listar(); //atualize a minha lista
 
-            if (!convidados.contains(convidado))
-            {
-                convidadoServico.salvar(convidado);
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-            } else
-            {
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Convidado já existe!");
-            }
+        if (!convidados.contains(convidado))
+        {
+            //setar o produtor, na lista de novasPessoas em cerimonia.
+            Cerimonia cerimonia = convidado.getCerimonia();
+            List<Pessoa> novasPessoas = new ArrayList<>();
+            novasPessoas.add(convidado);
+            cerimonia.setPessoas(novasPessoas);
+            convidado.setCerimonia(cerimonia);
 
-            convidado = new Convidado(); //renove a instancia, para o proximo elemento
+            convidadoServico.salvar(convidado);
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+        } else
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Convidado já existe!");
+        }
+
+        convidado = new Convidado(); //renove a instancia, para o proximo elemento
 
 //        } else
 //        {
@@ -107,7 +115,7 @@ public class ConvidadoBean implements Serializable
     {
         return convidadoServico;
     }
-    
+
     public ConvidadoCategoria[] getCategorias()
     {
         return ConvidadoCategoria.values();
@@ -145,8 +153,10 @@ public class ConvidadoBean implements Serializable
         {
             valido = true;
             System.out.println("LOCAL VALIDO");
+        } else
+        {
+            System.out.println("LOCAL INVALIDOOOOOOOOOOOOOOOOOO");
         }
-        else System.out.println("LOCAL INVALIDOOOOOOOOOOOOOOOOOO");
 
         return valido;
     }

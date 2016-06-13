@@ -17,7 +17,6 @@ import servico.PresenteServico;
 @SessionScoped
 public class PresenteBean implements Serializable
 {
-
     @EJB
     private PresenteServico presenteServico;
 

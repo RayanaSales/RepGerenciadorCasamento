@@ -9,14 +9,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@SequenceGenerator(name = "LOCALIZACAO_SEQUENCE", sequenceName = "LOCALIZACAO_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Localizacao implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOCALIZACAO_SEQUENCE")
     private int id;
 
     @Size(min = 3, max = 40)
@@ -69,7 +71,7 @@ public class Localizacao implements Serializable
         this.numero = numero;
     }
 
-    public int getId()
+    public Integer getId()
     {
         return id;
     }

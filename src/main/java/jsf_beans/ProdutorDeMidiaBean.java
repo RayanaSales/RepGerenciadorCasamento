@@ -1,8 +1,11 @@
 package jsf_beans;
 
+import entidades.Cerimonia;
+import entidades.Pessoa;
 import entidades.ProdutorDeMidia;
 import enumeracoes.ProdutorDeMidiaCategoria;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -42,6 +45,15 @@ public class ProdutorDeMidiaBean implements Serializable
         listar(); //atualize a minha lista
         if (!produtores.contains(produtor))
         {
+            //setar o produtor, na lista de novasPessoas em cerimonia.
+            Cerimonia cerimonia = produtor.getCerimonia();
+            List<Pessoa> novasPessoas = new ArrayList<>();
+            novasPessoas.add(produtor);
+            cerimonia.setPessoas(novasPessoas);
+            produtor.setCerimonia(cerimonia);
+            
+            
+            
             produtorServico.salvar(produtor);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else

@@ -41,7 +41,7 @@ public class Buffet implements Serializable
         comesBebes = new ArrayList<>();
     }
 
-    public int getId()
+    public Integer getId()
     {
         return id;
     }

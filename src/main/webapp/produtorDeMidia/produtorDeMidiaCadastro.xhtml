@@ -37,6 +37,12 @@
                 <p:selectOneMenu id="categoria" value="#{produtorDeMidiaBean.produtor.categoria}">
                     <f:selectItems value="#{produtorDeMidiaBean.categorias}"   />
                 </p:selectOneMenu>
+                
+                <br/>
+                 <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{produtorDeMidiaBean.produtor.cerimonia}">
+                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                </p:selectOneMenu>
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -50,7 +56,7 @@
         <p:fieldset legend="Produtores cadastrados">
             <p:dataTable value="#{produtorDeMidiaBean.produtores}" var="produtor">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{produtorDeMidiaBean.remover(produtor)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" value="Deletar" action="#{produtorDeMidiaBean.remover(produtor)}" immediate="true" update="@form"></p:commandButton>
 
                     <p:commandButton id="editar" value="Editar" action="#{produtorDeMidiaBean.editar(produtor.id)}" update="@form"></p:commandButton>
 
@@ -73,6 +79,9 @@
                 <p:column headerText="Categoria" sortBy="#{produtor.categoria}">
                     <h:outputText value="#{produtor.categoria}"></h:outputText>
                 </p:column> 
+                 <p:column headerText="Cerimonia" >
+                     <h:outputText value="#{produtor.cerimonia.dataHora}"></h:outputText>
+                </p:column>
             </p:dataTable>
         </p:fieldset>
     </h:form>

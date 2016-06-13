@@ -12,48 +12,50 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@SequenceGenerator(name = "TELEFONE_SEQUENCE", sequenceName = "TELEFONE_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Telefone implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TELEFONE_SEQUENCE")
     private int id;
-        
+
     @Enumerated(EnumType.STRING)
     @Column
     TelefoneCategoria categoria;
-    
-    @NotNull  
+
+    @NotNull
     @Size(min = 2, max = 2)
     @validadores.ValidaDDD
     @Column(name = "txt_ddd")
     private String ddd;
-        
+
     @NotNull
     @Size(min = 8, max = 9)
     @validadores.ValidaNumeroTelefone
     @Column(name = "txt_numero")
     private String numero;
-    
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
-    private Pessoa pessoa;  
+    private Pessoa pessoa;
 
     public Telefone()
     {
     }
-    
+
     public Telefone(TelefoneCategoria categoria, String ddd, String numero) //usado para loja
-    {       
+    {
         this.categoria = categoria;
         this.ddd = ddd;
         this.numero = numero;
     }
-    
-    public int getId()
+
+    public Integer getId()
     {
         return id;
     }
@@ -91,7 +93,7 @@ public class Telefone implements Serializable
     public void setNumero(String numero)
     {
         this.numero = numero;
-    }        
+    }
 
     public Pessoa getPessoa()
     {
@@ -102,8 +104,8 @@ public class Telefone implements Serializable
     {
         this.pessoa = pessoa;
     }
-    
-     @Override
+
+    @Override
     public boolean equals(Object o)
     {
         if (o != null)
@@ -112,7 +114,7 @@ public class Telefone implements Serializable
             {
                 Telefone outra = (Telefone) o;
                 if (this.id == outra.id)
-                { 
+                {
                     return true;
                 }
             }
@@ -126,5 +128,5 @@ public class Telefone implements Serializable
         int hash = 5;
         hash = 71 * hash + this.id;
         return hash;
-    } 
+    }
 }
