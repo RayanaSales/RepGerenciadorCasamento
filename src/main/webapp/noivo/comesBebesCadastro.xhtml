@@ -27,12 +27,23 @@
                 <p:message for="valorUnid" id="messageValorUnid" severity="error"/>
                 
                 <p:outputLabel for="categoria" value="Categoria:" />
-
                 <p:selectOneMenu id="categoria" value="#{comesBebesBean.cb.categoria}">
                     <f:selectItems value="#{comesBebesBean.categorias}"   />
                 </p:selectOneMenu>
 
-
+                <br/>
+                <p:outputLabel for="buffet" value="Buffet:" />
+                <p:selectOneMenu id="buffet" converter="buffetConverter" value="#{comesBebesBean.cb.buffet}">
+                    <f:selectItems value="#{buffetBean.buffets}" var="buffet" itemValue="#{buffet}" itemLabel="#{buffet.valorTotalGasto}"  />
+                </p:selectOneMenu>
+                
+                <!--
+                <br/>
+                <p:outputLabel for="loja" value="Loja:" />
+                <p:selectOneMenu id="loja" converter="lojaConverter" value="#{comesBebesBean.cb.loja}">
+                    <f:selectItems value="#{lojaBean.lojas}" var="loja" itemValue="#{loja}" itemLabel="#{loja.nome}"  />
+                </p:selectOneMenu> -->
+                
             </h:panelGrid>                
 
             <p:toolbarGroup>
@@ -44,11 +55,12 @@
         </p:fieldset>
 
         <br/>
+        
         <p:fieldset legend="Comidas e bebidas cadastrados">
 
             <p:dataTable value="#{comesBebesBean.cbs}" var="cb">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{comesBebesBean.remover(cb)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{comesBebesBean.remover(cb)}" update="@form"></p:commandButton>
 
                     <p:commandButton id="editar" value="Editar" action="#{comesBebesBean.editar(cb.id)}" update="@form"></p:commandButton>
 
@@ -64,7 +76,15 @@
                 </p:column>   
                 <p:column headerText="Categoria" sortBy="#{cb.categoria}">
                     <h:outputText value="#{cb.categoria}"></h:outputText>
-                </p:column> 
+                </p:column>
+                <p:column headerText="Buffet" sortBy="#{cb.buffet}">
+                    <h:outputText value="#{cb.buffet.valorTotalGasto}"></h:outputText>
+                </p:column>
+                <!--
+                <p:column headerText="Loja" sortBy="#{cb.loja}">
+                    <h:outputText value="#{cb.loja.nome}"></h:outputText>
+                </p:column>
+                -->
             </p:dataTable>
         </p:fieldset>
 

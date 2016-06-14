@@ -12,13 +12,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@SequenceGenerator(name = "BUFFET_SEQUENCE", sequenceName = "BUFFET_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Buffet implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUFFET_SEQUENCE")
     private int id;
 
     @NotNull

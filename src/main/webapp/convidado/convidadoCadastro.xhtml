@@ -47,7 +47,7 @@
         <p:fieldset legend="Noivos cadastrados">
             <p:dataTable value="#{convidadoBean.convidados}" var="convidado">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{convidadoBean.remover(convidado)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{convidadoBean.remover(convidado)}" update="@form"></p:commandButton>
 
                     <p:commandButton id="editar" value="Editar" action="#{convidadoBean.editar(convidado.id)}" update="@form"></p:commandButton>
 

@@ -4,18 +4,19 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:p="http://primefaces.org/ui"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-             
-             template="../publico/template.xhtml">
+
+             template="../publico/template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:form id="buffet">
         <p:fieldset legend="Buffet">
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
-                
+
                 <p:outputLabel for="valor" value="Valor:" />
                 <p:inputMask id="valor" value="#{buffetBean.buffet.valorTotalGasto}" mask="999"/>
                 <p:message for="valor" id="messageDatetime" severity="error"/>
-                
+
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -24,12 +25,12 @@
                 <p:commandButton value="Listar" action="#{buffetBean.listar()}" update="@form" ajax="false"/>
             </p:toolbarGroup>
         </p:fieldset>
-
+   
         <br/>
         <p:fieldset legend="Buffets cadastrados">
             <p:dataTable value="#{buffetBean.buffets}" var="buffet">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
 
                     <p:commandButton id="editar" value="Editar" action="#{buffetBean.editar(buffet.id)}" update="@form"></p:commandButton>
 
@@ -37,6 +38,11 @@
                 <p:column headerText="Valor" sortBy="#{buffet.valorTotalGasto}">
                     <h:outputText value="#{buffet.valorTotalGasto}"></h:outputText>
                 </p:column> 
+                <p:column headerText="Comes e Bebes" >
+                    <p:selectOneMenu id="comesBebes" value="#{buffet.comesBebes}">
+                        <f:selectItems value="#{buffet.comesBebes}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />
+                    </p:selectOneMenu> 
+                </p:column>
             </p:dataTable>
         </p:fieldset>
     </h:form>
