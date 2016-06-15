@@ -1,7 +1,6 @@
 package jsf_beans;
 
 import entidades.Loja;
-import entidades.Noivo;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -36,10 +35,7 @@ public class LojaBean implements Serializable
     {
         listar(); //atualize a minha lista
         if (!lojas.contains(loja))
-        {
-            System.out.println("Telefone : " + loja.getTelefone());
-            System.out.println("Localizacao : " + loja.getLocalizacao());
-            System.out.println("Presente : " + loja.getPresente() );
+        {            
             lojaServico.salvar(loja);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else

@@ -16,57 +16,55 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @SequenceGenerator(name = "ROUPADOSNOIVOS_SEQUENCE", sequenceName = "ROUPADOSNOIVOS_SEQUENCE", allocationSize = 1, initialValue = 1)
-public class RoupaDosNoivos implements Serializable
-{
+public class RoupaDosNoivos implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROUPADOSNOIVOS_SEQUENCE")
     private int id;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Noivo noivo;
-
+    
     @NotNull
     @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.RoupaDosNoivos.roupa}")
     @Column(name = "txt_roupa")
     private String roupa;
-
+    
     @NotNull
     @validadores.ValidaPreco
     @Column(name = "numero_valor")
     private double valor;
-
+    
     public RoupaDosNoivos()
     {
-
+    
     }
-
-    public RoupaDosNoivos(Noivo noivo, String roupa, double valor)
+    
+    public RoupaDosNoivos( Noivo noivo, String roupa, double valor)
     {
         this.noivo = noivo;
         this.roupa = roupa;
         this.valor = valor;
     }
 
-    public Integer getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Noivo getNoivo()
-    {
+    public Noivo getNoivo() {
         return noivo;
     }
 
-    public void setNoivo(Noivo noivo)
-    {
+    public void setNoivo(Noivo noivo) {
         this.noivo = noivo;
     }
+    
+    
 
     public String getRoupa()
     {
@@ -76,7 +74,7 @@ public class RoupaDosNoivos implements Serializable
     public void setRoupa(String roupa)
     {
         this.roupa = roupa;
-    }
+    }  
 
     public double getValor()
     {
@@ -87,7 +85,7 @@ public class RoupaDosNoivos implements Serializable
     {
         this.valor = valor;
     }
-
+    
     @Override
     public boolean equals(Object o)
     {
@@ -97,7 +95,7 @@ public class RoupaDosNoivos implements Serializable
             {
                 RoupaDosNoivos outra = (RoupaDosNoivos) o;
                 if (this.id == outra.id)
-                {
+                { 
                     return true;
                 }
             }

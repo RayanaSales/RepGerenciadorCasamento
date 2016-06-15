@@ -42,7 +42,8 @@ public class NoivoBean implements Serializable
             Cerimonia cerimonia = noivo.getCerimonia();
             List<Pessoa> novasPessoas = new ArrayList<>();
             novasPessoas.add(noivo);
-            cerimonia.setPessoas(novasPessoas);
+            if(cerimonia != null)
+              cerimonia.setPessoas(novasPessoas);
             noivo.setCerimonia(cerimonia);            
             
             

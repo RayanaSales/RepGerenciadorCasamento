@@ -16,21 +16,17 @@
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{lojaBean.loja.nome}"/>  
                 
-                
-            <!--     <p:outputLabel for="local" value="Local :"/>
-                <p:selectOneMenu id="local" value="#{lojaBean.loja.localizacao}">
-                    <f:selectItems value="#{localizacaoBean.locais}" var="local" itemValue="#{local}" itemLabel="Rua #{local.rua} nº #{local.numero} - #{local.cidade}"  />
+                 <p:outputLabel for="local" value="Localização :"/>
+                 <p:selectOneMenu id="local" converter="localConverter" value="#{lojaBean.loja.localizacao}">
+                    <f:selectItems value="#{localizacaoBean.locais}" var="local" itemValue="#{local}" itemLabel="#{local.logradouro}"  />
                 </p:selectOneMenu>
-
-                <p:outputLabel for="telefone" value="Telefone :"/>
-                <p:selectOneMenu id="telefone" value="#{lojaBean.loja.telefone}">
+                 
+                 <p:outputLabel for="telefone" value="Telefone :"/>
+                 <p:selectOneMenu id="telefone" converter="telefoneConverter" value="#{lojaBean.loja.telefone}">
                     <f:selectItems value="#{telefoneBean.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="(#{telefone.ddd})#{telefone.numero}"  />
                 </p:selectOneMenu>
-
-                <p:outputLabel for="presente" value="Presente :"/>
-                <p:selectOneMenu id="presente" value="#{lojaBean.loja.presente}">
-                    <f:selectItems value="#{presenteBean.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />
-                </p:selectOneMenu> -->
+                
+         
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -53,14 +49,11 @@
                     <h:outputText value="#{loja.nome}"></h:outputText>
                 </p:column> 
                 <p:column headerText="Local">
-                    <h:outputLabel value="#{loja.localizacao.estado}" />
+                    <h:outputLabel value="#{loja.localizacao.logradouro}" />
                 </p:column>
                 <p:column headerText="Telefone">
-                    <h:outputLabel value="#{loja.telefone.ddd}" />
-                </p:column>
-                <p:column headerText="Presente">
-                    <h:outputLabel value="#{loja.presente.nome}" />
-                </p:column>
+                    <h:outputLabel value="#{loja.telefone.numero}" />
+                </p:column>               
             </p:dataTable>
         </p:fieldset>
     </h:form>

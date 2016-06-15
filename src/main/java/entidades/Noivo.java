@@ -10,12 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @DiscriminatorValue(value = "N")
 @PrimaryKeyJoinColumn(name = "id_pessoa", referencedColumnName = "id")
+@SequenceGenerator(name = "PESSOA_SEQUENCE", sequenceName = "PESSOA_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Noivo extends Pessoa implements Serializable //botar superclasse pessoa
 {     
     @NotNull

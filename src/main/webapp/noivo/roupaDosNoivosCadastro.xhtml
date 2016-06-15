@@ -21,7 +21,7 @@
                 <p:message for="valor" id="messageDatetime" severity="error"/>
 
                 <p:outputLabel for="noivos" value="Noivo:" />
-                <p:selectOneMenu id="noivos" value="#{roupaDosNoivosBean.roupa.noivo}">
+                <p:selectOneMenu id="noivos" converter="noivoConverter" value="#{roupaDosNoivosBean.roupa.noivo}">
                     <f:selectItems value="#{noivoBean.noivos}" var="noivo" itemValue="#{noivo}" itemLabel="#{noivo.nome}" />
                 </p:selectOneMenu>
             </h:panelGrid>   
