@@ -39,7 +39,8 @@
                 <p:commandButton action="#{telefoneBean.salvar()}" value="Salvar" ajax="true" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" action="#{telefoneBean.listar()}" update="@form"></p:commandButton>
-            </p:toolbarGroup>
+               <h:commandButton action="editarTelefone?faces-redirect=true" immediate="true" value="Editar" />
+           </p:toolbarGroup>
 
         </p:fieldset>
 

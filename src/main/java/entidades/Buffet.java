@@ -17,8 +17,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @SequenceGenerator(name = "BUFFET_SEQUENCE", sequenceName = "BUFFET_SEQUENCE", allocationSize = 1, initialValue = 1)
-public class Buffet implements Serializable
-{
+public class Buffet implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUFFET_SEQUENCE")
     private int id;
@@ -31,67 +31,57 @@ public class Buffet implements Serializable
     @OneToMany(mappedBy = "buffet", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ComesBebes> comesBebes;
-    
-    public Buffet()
-    {
+
+    public Buffet() {
         comesBebes = new ArrayList<>();
     }
 
-    public Buffet(double valorTotalGasto)
-    {
+    public Buffet(double valorTotalGasto) {
         this.valorTotalGasto = valorTotalGasto;
         comesBebes = new ArrayList<>();
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public double getValorTotalGasto()
-    {
+    public double getValorTotalGasto() {
         return valorTotalGasto;
     }
 
-    public void setValorTotalGasto(double valorTotalGasto)
-    {
+    public void setValorTotalGasto(double valorTotalGasto) {
         this.valorTotalGasto = valorTotalGasto;
     }
 
-    public void setComesBebes(List<ComesBebes> ComesBebesNovos)
-    {
+    public void setComesBebes(List<ComesBebes> ComesBebesNovos) {
 
-        for (ComesBebes comesBebe : ComesBebesNovos)
-        {
-            if (!comesBebes.contains(comesBebe))
-            {
-                comesBebes.add(comesBebe);
+        if (ComesBebesNovos != null) {
+            for (ComesBebes comesBebe : ComesBebesNovos) {
+                if (!comesBebes.contains(comesBebe)) {
+                    comesBebes.add(comesBebe);
+                }
             }
         }
+
     }
 
-    public List<ComesBebes> getComesBebes()
-    {
+    public List<ComesBebes> getComesBebes() {
         return comesBebes;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (o != null)
-        {
-            if (o instanceof Buffet)
-            {
+    public boolean equals(Object o) {
+        if (o != null) {
+            if (o instanceof Buffet) {
                 Buffet outra = (Buffet) o;
 
                 if (Objects.equals(this.valorTotalGasto, outra.valorTotalGasto)) //confere atributos
                 {
-                   /* int tamanhoLista = outra.getComesBebes().size();
+                    /* int tamanhoLista = outra.getComesBebes().size();
                     int loops = 0;
 
                     for (ComesBebes cb1 : this.comesBebes)//confere itens da lista
@@ -110,8 +100,8 @@ public class Buffet implements Serializable
                     {
                         return true;
                     } */
-                   
-                   return true; //qd descomentar o de cima, tira essa linha
+
+                    return true; //qd descomentar o de cima, tira essa linha
                 }
             }
         }
@@ -119,10 +109,9 @@ public class Buffet implements Serializable
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 7;
         hash = 29 * hash + this.id;
         return hash;
-    }   
+    }
 }
