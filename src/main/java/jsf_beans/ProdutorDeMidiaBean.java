@@ -49,7 +49,9 @@ public class ProdutorDeMidiaBean implements Serializable
             Cerimonia cerimonia = produtor.getCerimonia();
             List<Pessoa> novasPessoas = new ArrayList<>();
             novasPessoas.add(produtor);
-            cerimonia.setPessoas(novasPessoas);
+            
+            if(cerimonia != null)
+                cerimonia.setPessoas(novasPessoas);
             produtor.setCerimonia(cerimonia);
             
             

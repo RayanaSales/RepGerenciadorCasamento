@@ -46,11 +46,7 @@
             </h:panelGrid>   
 
             <p:toolbarGroup>
-                <p:commandButton action="#{produtorDeMidiaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
-                                 title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" action="#{produtorDeMidiaBean.listar()}" update="@form" ajax="false"/>
-                <h:commandButton action="editarProdutorDeMidia?faces-redirect=true" immediate="true" value="Editar" />
-
             </p:toolbarGroup>
         </p:fieldset>
 
@@ -58,7 +54,7 @@
         <p:fieldset legend="Produtores cadastrados">
             <p:dataTable value="#{produtorDeMidiaBean.produtores}" var="produtor">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" action="#{produtorDeMidiaBean.remover(produtor)}" immediate="true" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{produtorDeMidiaBean.editar(produtor.id)}" update="@form"></p:commandButton>
                 </p:column>
                 <p:column headerText="Nome" sortBy="#{produtor.nome}">
                     <h:outputText value="#{produtor.nome}"></h:outputText>

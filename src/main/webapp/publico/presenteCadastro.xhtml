@@ -43,17 +43,14 @@
             <p:toolbarGroup>
                 <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="true" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
-
                 <p:commandButton value="Listar" action="#{presenteBean.listar()}" immediate="true" update="@form"></p:commandButton>
                 <h:commandButton action="editarPresente?faces-redirect=true" immediate="true" value="Editar" />
-
             </p:toolbarGroup>
 
         </p:fieldset>
 
         <br/>
-    </h:form>
-    <h:form> 
+    
         <p:fieldset legend="Presentes cadastrados">
             <p:dataTable value="#{presenteBean.presentes}" var="presente">
                 <p:column headerText="Opções">

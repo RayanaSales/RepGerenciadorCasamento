@@ -18,6 +18,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import org.primefaces.event.CellEditEvent;
 import servico.ConvidadoServico;
 
 @ManagedBean
@@ -34,6 +35,22 @@ public class ConvidadoBean implements Serializable
     public ConvidadoBean()
     {
         convidado = new Convidado();
+    }
+
+    public void onCellEdit(CellEditEvent event)
+    {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+        
+        Object campo = event.getColumn();
+        
+        System.out.println("NOVOS VALORES: " + newValue.toString());
+
+        if (newValue != null && !newValue.equals(oldValue))
+        {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public void listar()
@@ -59,7 +76,11 @@ public class ConvidadoBean implements Serializable
             Cerimonia cerimonia = convidado.getCerimonia();
             List<Pessoa> novasPessoas = new ArrayList<>();
             novasPessoas.add(convidado);
-            cerimonia.setPessoas(novasPessoas);
+
+            if (cerimonia != null)
+            {
+                cerimonia.setPessoas(novasPessoas);
+            }
             convidado.setCerimonia(cerimonia);
 
             convidadoServico.salvar(convidado);

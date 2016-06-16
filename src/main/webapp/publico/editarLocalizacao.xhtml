@@ -41,11 +41,7 @@
             </h:panelGrid>
 
             <p:toolbarGroup>
-                <p:commandButton action="#{localizacaoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
-                                 title="Salvar localização" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" action="#{localizacaoBean.listar()}" update="@form"></p:commandButton>
-                <h:commandButton action="editarLocalizacao?faces-redirect=true" immediate="true" value="Editar" />
-
             </p:toolbarGroup>
 
         </p:fieldset>
@@ -54,7 +50,7 @@
         <p:fieldset legend="Locais cadastrados">
             <p:dataTable value="#{localizacaoBean.locais}" var="local">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" immediate="true" value="Deletar" action="#{localizacaoBean.remover(local)}" update="@form"></p:commandButton>
+                    <p:commandButton id="editar" value="Editar" action="#{localizacaoBean.editar(local.id)}" update="@form"></p:commandButton>
                 </p:column>
                 <p:column headerText="Logradouro" >
                     <h:outputText value="#{local.logradouro}"></h:outputText>

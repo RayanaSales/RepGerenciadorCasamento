@@ -8,6 +8,8 @@
              template="../publico/template.xhtml"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+   
+
     <h:form id="convidado">
         <p:fieldset legend="Convidado">
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
@@ -37,11 +39,7 @@
             </h:panelGrid>   
 
             <p:toolbarGroup>
-                <p:commandButton action="#{convidadoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
-                                 title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" action="#{convidadoBean.listar()}" update="@form" ajax="false"/>
-                 <h:commandButton action="editarConvidado?faces-redirect=true" immediate="true" value="Editar" />
-        
             </p:toolbarGroup>
         </p:fieldset>
 
@@ -49,7 +47,9 @@
         <p:fieldset legend="Noivos cadastrados">
             <p:dataTable value="#{convidadoBean.convidados}" var="convidado">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{convidadoBean.remover(convidado)}" update="@form"></p:commandButton>
+
+                    <p:commandButton id="editar" value="Editar" action="#{convidadoBean.editar(convidado.id)}" update="@form"></p:commandButton>
+
                 </p:column>                
                 <p:column headerText="Nome" sortBy="#{convidado.nome}">
                     <h:outputText value="#{convidado.nome}"></h:outputText>
@@ -68,5 +68,5 @@
                 </p:column>
             </p:dataTable>
         </p:fieldset>
-    </h:form>
+    </h:form> 
 </ui:decorate>
