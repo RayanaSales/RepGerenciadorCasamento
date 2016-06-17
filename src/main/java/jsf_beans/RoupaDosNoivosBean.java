@@ -36,6 +36,15 @@ public class RoupaDosNoivosBean implements Serializable
 
         if (!roupas.contains(roupa))
         {
+            //seta em noivo , a lista de roupas
+            roupas.add(roupa);
+            Noivo n = roupa.getNoivo();
+            if(n != null)
+            {
+                n.setRoupaDosNoivos(roupas);
+                roupa.setNoivo(n);
+            }
+            
             roupaServico.salvar(roupa);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else

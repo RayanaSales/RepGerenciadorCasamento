@@ -45,9 +45,6 @@
             <p:dataTable value="#{cerimoniaBean.cerimonias}" var="cerimonia">
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{cerimoniaBean.remover(cerimonia)}" update="@form"></p:commandButton>
-
-                    <p:commandButton id="editar" value="Editar" action="#{cerimoniaBean.editar(cerimonia.id)}" update="@form"></p:commandButton>
-
                 </p:column>
                 <p:column headerText="Data" sortBy="#{cerimonia.dataHora}">
                     <h:outputText value="#{cerimonia.dataHora}"></h:outputText>
@@ -65,8 +62,8 @@
                         <f:selectItems value="#{cerimonia.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
                     </p:selectOneMenu> 
                 </p:column>
-                
-                
+
+
                 <p:column headerText="Presentes" >
                     <p:selectOneMenu id="presentes" value="#{cerimonia.presentes}">
                         <f:selectItems value="#{cerimonia.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />

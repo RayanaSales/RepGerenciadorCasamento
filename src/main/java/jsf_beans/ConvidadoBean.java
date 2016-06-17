@@ -37,21 +37,6 @@ public class ConvidadoBean implements Serializable
         convidado = new Convidado();
     }
 
-//    public void onCellEdit(CellEditEvent event)
-//    {
-//        Object oldValue = event.getOldValue();
-//        Object newValue = event.getNewValue();
-//
-//        Object campo = event.getColumn();
-//
-//        System.out.println("NOVOS VALORES: " + newValue.toString());
-//
-//        if (newValue != null && !newValue.equals(oldValue))
-//        {
-//            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-//            FacesContext.getCurrentInstance().addMessage(null, msg);
-//        }
-//    }
     public void onRowEdit(RowEditEvent event)
     {
         System.out.println("jsf_beans.ConvidadoBean.onRowEdit()");
@@ -73,8 +58,6 @@ public class ConvidadoBean implements Serializable
 
     public void salvar()
     {
-//        if (validaObjeto(convidado) == true)
-//        {
         listar(); //atualize a minha lista
 
         if (!convidados.contains(convidado))
@@ -98,11 +81,6 @@ public class ConvidadoBean implements Serializable
         }
 
         convidado = new Convidado(); //renove a instancia, para o proximo elemento
-
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
-//        }
     }
 
     public void editar(int id)
@@ -118,13 +96,19 @@ public class ConvidadoBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-        if (convidados.contains(convidado))
+        if (convidado.getTelefones().isEmpty()) //se ela nao tem telefones
         {
-            convidadoServico.remover(convidado);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+            if (convidados.contains(convidado))
+            {
+                convidadoServico.remover(convidado);
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+            } else
+            {
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Convidado não existe!");
+            }
         } else
         {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Convidado não existe!");
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Esse convidado não pode ser excluido. Ele possui celulares.");
         }
     }
 

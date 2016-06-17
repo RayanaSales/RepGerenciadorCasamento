@@ -22,8 +22,9 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @SequenceGenerator(name = "CERIMONIA_SEQUENCE", sequenceName = "CERIMONIA_SEQUENCE", allocationSize = 1, initialValue = 1)
-public class Cerimonia implements Serializable 
+public class Cerimonia implements Serializable
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CERIMONIA_SEQUENCE")
     private int id;
@@ -32,10 +33,10 @@ public class Cerimonia implements Serializable
     @Future
     @Column(name = "dt_dataHora")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataHora; 
+    private Date dataHora;
 
     //Relacionamentos:    
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "id_localizacao", referencedColumnName = "id")
     private Localizacao localizacao;
 
@@ -45,14 +46,14 @@ public class Cerimonia implements Serializable
 
     //lista de presentes que o casal cria
     @OneToMany(mappedBy = "cerimonia", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
+            cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Presente> presentes;
 
     //uma cerimonia to many pessoas (noivos, convidados, produtorDeMidia)
     @OneToMany(mappedBy = "cerimonia", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
+            cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Pessoa> pessoas;
-    
+
     public Cerimonia()
     {
         presentes = new ArrayList<>();
@@ -60,10 +61,10 @@ public class Cerimonia implements Serializable
     }
 
     public Cerimonia(Date dataHora)
-    {       
+    {
         this.dataHora = dataHora;
-      //  this.localizacao = localizacao;        
-    }    
+        //  this.localizacao = localizacao;        
+    }
 
     public Date getDataHora()
     {
@@ -112,12 +113,18 @@ public class Cerimonia implements Serializable
 
     public void setPresentes(List<Presente> presentesNovos)
     {
-        if(presentes == null )
+        if (presentes == null)
+        {
             presentes = new ArrayList<>();
-        
+        }
+        if (presentesNovos == null)
+        {
+            presentesNovos = new ArrayList<>();
+        }
+
         for (Presente presente : presentesNovos)
         {
-            if(!presentes.contains(presente))
+            if (!presentes.contains(presente))
             {
                 presentes.add(presente);
             }
@@ -132,18 +139,25 @@ public class Cerimonia implements Serializable
     public void setPessoas(List<Pessoa> pessoasNovas)
     {
         if (pessoas == null)
+        {
             pessoas = new ArrayList<>();
+        }
         
+        if (pessoasNovas == null)
+        {
+            pessoasNovas = new ArrayList<>();
+        }
+
         for (Pessoa pessoa : pessoasNovas)
         {
-            if(!pessoas.contains(pessoa))
+            if (!pessoas.contains(pessoa))
             {
                 pessoas.add(pessoa);
             }
         }
     }
-    
-     @Override
+
+    @Override
     public boolean equals(Object o)
     {
         if (o != null)
@@ -152,7 +166,7 @@ public class Cerimonia implements Serializable
             {
                 Cerimonia outra = (Cerimonia) o;
                 if (this.id == outra.id)
-                { 
+                {
                     return true;
                 }
             }
@@ -166,5 +180,5 @@ public class Cerimonia implements Serializable
         int hash = 7;
         hash = 67 * hash + this.id;
         return hash;
-    }    
+    }
 }

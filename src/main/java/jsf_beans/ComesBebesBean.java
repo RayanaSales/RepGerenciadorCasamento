@@ -1,9 +1,11 @@
 package jsf_beans;
 
+import entidades.Buffet;
 import entidades.ComesBebes;
 import enumeracoes.ComesBebesCategoria;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,6 +17,7 @@ import servico.ComesBebesServico;
 @SessionScoped
 public class ComesBebesBean implements Serializable
 {
+
     @EJB
     private ComesBebesServico comesBebesServico;
 
@@ -32,6 +35,15 @@ public class ComesBebesBean implements Serializable
 
         if (!cbs.contains(cb))
         {
+            //sete no buffet, a lista de come e bebes
+            cbs.add(cb);
+            Buffet b = cb.getBuffet();
+            if (b != null)
+            {
+                b.setComesBebes(cbs);
+                cb.setBuffet(b);
+            }
+
             comesBebesServico.salvar(cb);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
@@ -71,6 +83,7 @@ public class ComesBebesBean implements Serializable
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    @PostConstruct
     public void listar()
     {
         cbs = comesBebesServico.listar();
@@ -96,7 +109,7 @@ public class ComesBebesBean implements Serializable
     {
         this.cb = cb;
     }
-    
+
     public ComesBebesCategoria[] getCategorias()
     {
         return ComesBebesCategoria.values();

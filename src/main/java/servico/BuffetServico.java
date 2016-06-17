@@ -22,6 +22,7 @@ public class BuffetServico extends Servico
 
     public List<Buffet> listar()
     {
+        em.flush();
         return em.createQuery("select t from Buffet AS t", Buffet.class).getResultList();
     }
     
@@ -36,9 +37,10 @@ public class BuffetServico extends Servico
         em.flush();
         em.merge(buffet);       
     }
-
-    public boolean existente(Buffet buffet)
+    
+    public Buffet buscar(int id)
     {
-        return listar().contains(buffet);
+        return (Buffet) em.find(Buffet.class, id);
     }
+
 }

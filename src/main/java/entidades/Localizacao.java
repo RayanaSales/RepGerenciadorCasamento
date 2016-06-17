@@ -1,5 +1,6 @@
 package entidades;
 
+import javax.validation.constraints.NotNull;
 import enumeracoes.EstadosDoBrasil;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -21,28 +22,31 @@ public class Localizacao implements Serializable
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOCALIZACAO_SEQUENCE")
     private int id;
 
+    @NotNull
     @Size(min = 3, max = 40)
-    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.logradouro}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.logradouro}")
     @Column(name = "txt_logradouro")
     private String logradouro;
-
     
+    @NotNull
     @Size(min = 3, max = 40)
-    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.bairro}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.bairro}")
     @Column(name = "txt_bairro")
     private String bairro;
-
     
+    @NotNull
     @Size(min = 3, max = 40)
-    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.cidade}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.cidade}")
     @Column(name = "txt_cidade")
     private String cidade;
    
+    @NotNull
     @Size(min = 3, max = 10)
-    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.Localizacao.complemento}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.complemento}")
     @Column(name = "txt_complemento")
     private String complemento;
     
+    @NotNull
     @Size(min = 8, max = 8)
     @Pattern(regexp = "[0-9]+", message = "{entidades.Localizacao.cep}")
     @Column(name = "txt_cep")

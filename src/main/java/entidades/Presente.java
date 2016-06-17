@@ -22,22 +22,24 @@ import javax.validation.constraints.Size;
 @SequenceGenerator(name = "PRESENTE_SEQUENCE", sequenceName = "PRESENTE_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Presente implements Serializable
 {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRESENTE_SEQUENCE")
     private int id;
 
     @NotNull
-    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Presente.nome}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Presente.nome}")
     @Column(name = "txt_nome")
     private String nome;
-    
+
+    @NotNull
     @Size(max = 50)
-    @Pattern(regexp = "[A-Za-z0-9.,]+", message = "{entidades.Presente.descricao}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Presente.descricao}")
     @Column(name = "txt_descricao")
     private String descricao;
 
     @Size(max = 50)
-    @Pattern(regexp = "[A-Za-z0-9.,]+", message = "{entidades.Presente.ondeEncontrar}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Presente.ondeEncontrar}")
     @Column(name = "txt_ondeEncontrar")
     private String ondeEncontrar;
 
@@ -56,12 +58,12 @@ public class Presente implements Serializable
     }
 
     public Presente(Cerimonia c, String nome, String descricao, String ondeEncontrar)
-    {       
+    {
         this.cerimonia = c;
         this.nome = nome;
         this.descricao = descricao;
         this.ondeEncontrar = ondeEncontrar;
-        
+
         lojas = new ArrayList<>();
     }
 
@@ -84,7 +86,7 @@ public class Presente implements Serializable
     {
         this.nome = nome;
     }
-   
+
     public String getDescricao()
     {
         return descricao;
@@ -118,12 +120,15 @@ public class Presente implements Serializable
     //PADRAO EXPERT
     public void setLojas(List<Loja> novaslojasOndeEncontrar)
     {
-
-        for (Loja loja : novaslojasOndeEncontrar)
+        if (novaslojasOndeEncontrar != null)
         {
-            if (!lojas.contains(loja))
+
+            for (Loja loja : novaslojasOndeEncontrar)
             {
-                lojas.add(loja);
+                if (!lojas.contains(loja))
+                {
+                    lojas.add(loja);
+                }
             }
         }
     }
@@ -132,7 +137,7 @@ public class Presente implements Serializable
     {
         return lojas;
     }
-    
+
     @Override
     public boolean equals(Object o)
     {
@@ -142,7 +147,7 @@ public class Presente implements Serializable
             {
                 Presente outra = (Presente) o;
                 if (this.id == outra.id)
-                { 
+                {
                     return true;
                 }
             }

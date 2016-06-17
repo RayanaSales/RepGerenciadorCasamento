@@ -20,11 +20,11 @@
                 <p:message for="produto" id="messageProduto" severity="error"/>
                 
                 <p:outputLabel for="quantidade" value="Quantidade: " />
-                <p:inputMask id="quantidade" value="#{comesBebesBean.cb.quantidade}" mask="999"/>
+                <p:inputMask id="quantidade" value="#{comesBebesBean.cb.quantidade}" mask="99?999"/>
                 <p:message for="quantidade" id="messageQuantidade" severity="error"/>
                
                 <p:outputLabel for="valorUnid" value="Valor (unidade):" />
-                <p:inputMask id="valorUnid" value="#{comesBebesBean.cb.valor}" mask="9"/>
+                <p:inputMask id="valorUnid" value="#{comesBebesBean.cb.valor}" mask="9?9"/>
                 <p:message for="valorUnid" id="messageValorUnid" severity="error"/>
                 
                 <p:outputLabel for="categoria" value="Categoria:" />

@@ -23,7 +23,7 @@ entidades.Presente.nome = Deve possuir apenas letras, no maximo 1 maiuscula. Min
 entidades.Presente.descricao = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
 entidades.Presente.ondeEncontrar = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
 
-entidades.ProdutorDeMidia.preco = Deve ser maior que 0.
+entidades.ProdutorDeMidia.preco = Deve ser maior que 0. Pode conter ponto, ou virgula.
 entidades.ProdutorDeMidia.linkParaRedeSocial = Sintax: www. + texto + .com + (.br opcional).
 
 entidades.RoupaDosNoivos.valor = Deve ser maior que 0. Pode conter ponto.

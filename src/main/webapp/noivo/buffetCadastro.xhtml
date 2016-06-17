@@ -14,15 +14,15 @@
             <h:panelGrid columns="3" cellpadding="5">
 
                 <p:outputLabel for="valor" value="Valor:" />
-                <p:inputMask id="valor" value="#{buffetBean.buffet.valorTotalGasto}" mask="999"/>
+                <p:inputMask id="valor" value="#{buffetBean.buffet.valorTotalGasto}" mask="999?999"/>
                 <p:message for="valor" id="messageDatetime" severity="error"/>
 
             </h:panelGrid>   
 
             <p:toolbarGroup>
                 <p:commandButton action="#{buffetBean.salvar()}" value="Salvar" ajax="false" update="@form" 
-                                 title="Salvar" icon="ui-icon-check" validateClient="false"/>
-                <p:commandButton value="Listar" action="#{buffetBean.listar()}" update="@form" ajax="false"/>
+                                 title="Salvar" icon="ui-icon-check" validateClient="true"/>
+                <p:commandButton value="Listar" immediate="true" action="#{buffetBean.listar()}" update="@form" ajax="false"/>
                 <h:commandButton action="editarBuffet?faces-redirect=true" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
@@ -31,14 +31,14 @@
         <p:fieldset legend="Buffets cadastrados">
             <p:dataTable value="#{buffetBean.buffets}" var="buffet">
                 <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
+                    <p:commandButton id="deletar" value="Deletar" ajax="false" immediate="true" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
                 </p:column>
                 <p:column headerText="Valor" sortBy="#{buffet.valorTotalGasto}">
                     <h:outputText value="#{buffet.valorTotalGasto}"></h:outputText>
                 </p:column> 
                 <p:column headerText="Comes e Bebes" >
-                    <p:selectOneMenu id="comesBebes" value="#{buffet.comesBebes}">
-                        <f:selectItems value="#{buffet.comesBebes}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />
+                    <p:selectOneMenu id="comesBebes" value="#{buffetBean.buffet.comesBebes}">
+                        <f:selectItems value="#{buffetBean.buscarComesEBebes(buffet.id)}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />
                     </p:selectOneMenu> 
                 </p:column>
             </p:dataTable>

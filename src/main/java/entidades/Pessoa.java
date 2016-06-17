@@ -35,12 +35,12 @@ public class Pessoa implements Serializable
     protected int id;
 
     @NotNull
-    @Size(min = 2, max = 30)
-    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Pessoa.nome}")
+    @Size(min = 3, max = 40)
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Pessoa.nome}")
     @Column(name = "txt_nome")
     protected String nome;
-
-    @Size(min = 5, max = 50)
+    
+    @Size(min = 5, max = 40)
     @Email
     @Column(name = "txt_email")
     protected String email;
@@ -87,6 +87,11 @@ public class Pessoa implements Serializable
         if (telefones == null)
         {
             telefones = new ArrayList<>();
+        }
+        
+        if (telefonesNovos == null)
+        {
+            telefonesNovos = new ArrayList<>();
         }
 
         for (Telefone telefone : telefonesNovos)

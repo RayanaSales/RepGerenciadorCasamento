@@ -17,9 +17,12 @@ public class ValidadorPreco implements ConstraintValidator<ValidaPreco, Double>
     {
         boolean valido = false;
 
-        if (valor > 0.0) //o cara pode ter escolhido n botar o preço ainda
+        if (valor != null)
         {
-            valido = true;
+            if (valor > 0.0) //o cara pode ter escolhido n botar o preço ainda
+            {
+                valido = true;
+            }
         }
 
         return valido;

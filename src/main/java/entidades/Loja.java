@@ -26,7 +26,7 @@ public class Loja implements Serializable
     
     @NotNull
     @Size(min = 3)
-    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.Loja.nome}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Loja.nome}")
     @Column(name = "txt_nome")
     private String nome;
         

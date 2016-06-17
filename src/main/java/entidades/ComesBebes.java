@@ -30,7 +30,7 @@ public class ComesBebes implements Serializable
     @NotNull
     @Column(name = "txt_produto")
     @Size(min = 3, max = 40)
-    @Pattern(regexp = "[A-Za-z]+", message = "{entidades.ComesBebes.produto}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.ComesBebes.produto}")
     private String produto;
     
     @NotNull
@@ -46,6 +46,7 @@ public class ComesBebes implements Serializable
     @Enumerated(EnumType.STRING)
     ComesBebesCategoria categoria;
   
+    
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;

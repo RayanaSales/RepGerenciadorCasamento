@@ -1,5 +1,6 @@
 package jsf_beans;
 
+import entidades.Pessoa;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import servico.TelefoneServico;
 @SessionScoped
 public class TelefoneBean implements Serializable
 {
+
     @EJB
     private TelefoneServico telefoneServico;
 
@@ -32,22 +34,34 @@ public class TelefoneBean implements Serializable
 
         if (!telefones.contains(telefone))
         {
+            telefones.add(telefone);
+            
+            //seta a pessoa no telefone
+            if (telefone.getCategoria() == TelefoneCategoria.celular || telefone.getCategoria() == TelefoneCategoria.residencial) //eh uma pessoa?
+            {
+                Pessoa pessoa = telefone.getPessoa();
+                if (pessoa != null)
+                {
+                    pessoa.setTelefones(telefones);
+                    telefone.setPessoa(pessoa);
+                }
+            }             
             telefoneServico.salvar(telefone);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone já existe!");
         }
-        
+
         telefone = new Telefone(); //renove a instancia, para o proximo elemento
     }
 
     public void editar(int id)
     {
         listar(); //atualize a minha lista      
-        
+
         telefone.setId(id);
-        telefoneServico.atualizar(telefone);       
+        telefoneServico.atualizar(telefone);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
         telefone = new Telefone();
     }
@@ -67,7 +81,7 @@ public class TelefoneBean implements Serializable
     }
 
     public void listar()
-    {        
+    {
         telefones = telefoneServico.listar();
     }
 

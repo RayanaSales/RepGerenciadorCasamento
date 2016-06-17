@@ -1,5 +1,6 @@
 package jsf_beans;
 
+import entidades.Cerimonia;
 import entidades.Presente;
 import java.io.Serializable;
 import java.util.List;
@@ -37,6 +38,15 @@ public class PresenteBean implements Serializable
 
         if (!presentes.contains(presente))
         {
+            //seta os presentes la na cerimonia
+            presentes.add(presente);
+            Cerimonia c = presente.getCerimonia();
+            if (c != null)
+            {
+                c.setPresentes(presentes);
+                presente.setCerimonia(c);
+            }
+
             presenteServico.salvar(presente);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
@@ -60,13 +70,19 @@ public class PresenteBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-        if (presentes.contains(presente))
+        if (presente.getLojas().isEmpty()) //se nao tiver lojas
         {
-            presenteServico.remover(presente);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+            if (presentes.contains(presente))
+            {
+                presenteServico.remover(presente);
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+            } else
+            {
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente não existe!");
+            }
         } else
         {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente não existe!");
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente não pode ser excluido. Possui lojas.");
         }
     }
 

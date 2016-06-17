@@ -21,8 +21,7 @@ import javax.validation.constraints.Size;
 public class Noivo extends Pessoa implements Serializable //botar superclasse pessoa
 {     
     @NotNull
-    @Size(min = 6, max = 16, message = "{entidades.Noivo.senha}")
-   // @Pattern(regexp = "[A-Za-z0-9\\._-]", message = "{entidades.Noivo.senha}")
+    @Size(min = 6, max = 16, message = "{entidades.Noivo.senha}")   
     @Column(name = "txt_senha")
     private String senha;      
 
@@ -47,6 +46,11 @@ public class Noivo extends Pessoa implements Serializable //botar superclasse pe
 
     public void setRoupaDosNoivos(List<RoupaDosNoivos> roupaDosNoivosNovas) {
     
+        if(roupaDosNoivos == null)
+            roupaDosNoivos = new ArrayList<>();
+        if(roupaDosNoivosNovas == null)
+            roupaDosNoivosNovas = new ArrayList<>();
+        
         for ( RoupaDosNoivos roupa : roupaDosNoivosNovas ) {
             
             if(!roupaDosNoivos.contains(roupa))

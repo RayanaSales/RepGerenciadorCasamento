@@ -1,7 +1,6 @@
 package jsf_beans;
 
 import entidades.Loja;
-import entidades.Presente;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -18,7 +17,7 @@ public class LojaBean implements Serializable
 {
     @EJB
     private LojaServico lojaServico;
-    
+
     @EJB
     private PresenteServico presenteServico;
 
@@ -29,32 +28,32 @@ public class LojaBean implements Serializable
     {
         loja = new Loja();
     }
-    
+
     public void listar()
-    {        
-        lojas = lojaServico.listar();        
+    {
+        lojas = lojaServico.listar();
     }
-    
+
     public void salvar()
     {
         listar(); //atualize a minha lista
-        
-      /* SE EU FIZER ASSIM, ELE SALVA CERTO. MAS ESSA MERDA VEM NUL, DO XHTML.        
+
+        /* SE EU FIZER ASSIM, ELE SALVA CERTO. MAS ESSA MERDA VEM NUL, DO XHTML.        
         Presente p = presenteServico.buscar(2);
         System.out.println("PRESENTE NO BANCO: " + p.getNome());
         loja.setPresente(p);  */
         
         if (!lojas.contains(loja))
-        {            
+        {
             lojaServico.salvar(loja);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja já existe!");
-        }                
+        }
         loja = new Loja(); //renove a instancia, para o proximo elemento
-    }    
-    
+    }
+
     public void editar(int id)
     {
         listar(); //atualize a minha lista
@@ -77,7 +76,7 @@ public class LojaBean implements Serializable
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja não existe!");
         }
     }
-  
+
     public List<Loja> getLojas()
     {
         listar(); //atualize a minha lista
@@ -98,8 +97,7 @@ public class LojaBean implements Serializable
     {
         this.loja = loja;
     }
-    
-    
+
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
     {
         FacesMessage message = new FacesMessage(severity, mensagem, "");

@@ -18,6 +18,7 @@ import servico.ProdutorDeMidiaServico;
 @SessionScoped
 public class ProdutorDeMidiaBean implements Serializable
 {
+
     @EJB
     public ProdutorDeMidiaServico produtorServico;
 
@@ -49,13 +50,13 @@ public class ProdutorDeMidiaBean implements Serializable
             Cerimonia cerimonia = produtor.getCerimonia();
             List<Pessoa> novasPessoas = new ArrayList<>();
             novasPessoas.add(produtor);
-            
-            if(cerimonia != null)
+
+            if (cerimonia != null)
+            {
                 cerimonia.setPessoas(novasPessoas);
+            }
             produtor.setCerimonia(cerimonia);
-            
-            
-            
+
             produtorServico.salvar(produtor);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
@@ -68,24 +69,31 @@ public class ProdutorDeMidiaBean implements Serializable
     public void editar(int id)
     {
         listar(); //atualize a minha lista
-        
+
         produtor.setId(id);
         produtorServico.atualizar(produtor);
-        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");        
+        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
         produtor = new ProdutorDeMidia();
     }
 
-    public void remover(ProdutorDeMidia cer)
+    public void remover(ProdutorDeMidia produtor)
     {
         listar(); //atualize a minha lista
 
-        if (produtores.contains(cer))
-        {
-            produtorServico.remover(cer);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+        if (produtor.getTelefones().isEmpty()) 
+        { //nao tem, pode excluir
+
+            if (produtores.contains(produtor))
+            {
+                produtorServico.remover(produtor);
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+            } else
+            {
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Produtor não existe!");
+            }
         } else
         {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Produtor não existe!");
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Esse produtor não pode ser excluido. Ele possui celulares.");
         }
     }
 
@@ -109,7 +117,7 @@ public class ProdutorDeMidiaBean implements Serializable
     {
         this.produtor = produtor;
     }
-    
+
     public ProdutorDeMidiaCategoria[] getCategorias()
     {
         return ProdutorDeMidiaCategoria.values();

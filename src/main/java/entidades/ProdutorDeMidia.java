@@ -30,10 +30,12 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEHoraChegada;
 
+    @NotNull
     @validadores.ValidaURL
     @Column(name = "txt_linkParaRedeSocial")
     private String linkParaRedeSocial;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     ProdutorDeMidiaCategoria categoria;
 

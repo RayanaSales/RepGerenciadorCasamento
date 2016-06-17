@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @SequenceGenerator(name = "ROUPADOSNOIVOS_SEQUENCE", sequenceName = "ROUPADOSNOIVOS_SEQUENCE", allocationSize = 1, initialValue = 1)
@@ -21,13 +22,14 @@ public class RoupaDosNoivos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROUPADOSNOIVOS_SEQUENCE")
     private int id;
-    
+        
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Noivo noivo;
     
     @NotNull
-    @Pattern(regexp = "\\p{Upper}{1}\\p{Lower}+", message = "{entidades.RoupaDosNoivos.roupa}")
+    @Size(min = 3, max = 40)
+    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.RoupaDosNoivos.roupa}")
     @Column(name = "txt_roupa")
     private String roupa;
     

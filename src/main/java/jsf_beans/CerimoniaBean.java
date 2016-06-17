@@ -20,6 +20,7 @@ import servico.CerimoniaServico;
 @SessionScoped
 public class CerimoniaBean implements Serializable
 {
+
     @EJB
     public CerimoniaServico cerimoniaServico;
 
@@ -27,7 +28,7 @@ public class CerimoniaBean implements Serializable
     public Cerimonia cerimonia;
 
     public CerimoniaBean()
-    {        
+    {
         cerimonia = new Cerimonia();
     }
 
@@ -51,7 +52,7 @@ public class CerimoniaBean implements Serializable
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia já existe!");
             }
             cerimonia = new Cerimonia(); //renove a instancia, para o proximo elemento
-            
+
         } else
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
@@ -68,22 +69,30 @@ public class CerimoniaBean implements Serializable
         cerimonia = new Cerimonia();
     }
 
-    public void remover(Cerimonia cer)
+    public void remover(Cerimonia cerimonia)
     {
         listar(); //atualize a minha lista
 
-        if (cerimonias.contains(cer))
+        if (cerimonia.getPessoas().isEmpty() && cerimonia.getPresentes().isEmpty()) //se não tiver nada nas listas
         {
-            cerimoniaServico.remover(cer);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia não existe!");
+            if (cerimonias.contains(cerimonia))
+            {
+                cerimoniaServico.remover(cerimonia);
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+            } else
+            {
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia não existe!");
+            }
         }
+        
+        if(!cerimonia.getPessoas().isEmpty())
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Essa cerimonia não pode ser excluida. Ela possui pessoas.");
+        if(!cerimonia.getPresentes().isEmpty())
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Essa cerimonia não pode ser excluida. Ela possui presentes.");
     }
 
     public void listar()
-    {        
+    {
         cerimonias = cerimoniaServico.listar();
     }
 
