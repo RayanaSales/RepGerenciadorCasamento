@@ -1,6 +1,7 @@
 package jsf_beans;
 
 import entidades.Loja;
+import entidades.Presente;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -9,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import servico.LojaServico;
+import servico.PresenteServico;
 
 @ManagedBean
 @SessionScoped
@@ -16,6 +18,9 @@ public class LojaBean implements Serializable
 {
     @EJB
     private LojaServico lojaServico;
+    
+    @EJB
+    private PresenteServico presenteServico;
 
     public List<Loja> lojas;
     public Loja loja;
@@ -27,13 +32,18 @@ public class LojaBean implements Serializable
     
     public void listar()
     {        
-        lojas = lojaServico.listar();
-        
+        lojas = lojaServico.listar();        
     }
     
     public void salvar()
     {
         listar(); //atualize a minha lista
+        
+      /* SE EU FIZER ASSIM, ELE SALVA CERTO. MAS ESSA MERDA VEM NUL, DO XHTML.        
+        Presente p = presenteServico.buscar(2);
+        System.out.println("PRESENTE NO BANCO: " + p.getNome());
+        loja.setPresente(p);  */
+        
         if (!lojas.contains(loja))
         {            
             lojaServico.salvar(loja);
@@ -41,8 +51,7 @@ public class LojaBean implements Serializable
         } else
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja já existe!");
-        }        
-        adicionarMessagem(FacesMessage.SEVERITY_INFO, "ESTOU NO SALVAR!");
+        }                
         loja = new Loja(); //renove a instancia, para o proximo elemento
     }    
     

@@ -15,26 +15,29 @@
             <h:panelGrid columns="2" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{lojaBean.loja.nome}"/>  
-                
-                 <p:outputLabel for="local" value="Localização :"/>
-                 <p:selectOneMenu id="local" converter="localConverter" value="#{lojaBean.loja.localizacao}">
+
+                <p:outputLabel for="local" value="Localização :"/>
+                <p:selectOneMenu id="local" converter="localConverter" value="#{lojaBean.loja.localizacao}">
                     <f:selectItems value="#{localizacaoBean.locais}" var="local" itemValue="#{local}" itemLabel="#{local.logradouro}"  />
                 </p:selectOneMenu>
-                 
-                 <p:outputLabel for="telefone" value="Telefone :"/>
-                 <p:selectOneMenu id="telefone" converter="telefoneConverter" value="#{lojaBean.loja.telefone}">
+
+                <p:outputLabel for="telefone" value="Telefone :"/>
+                <p:selectOneMenu id="telefone" converter="telefoneConverter" value="#{lojaBean.loja.telefone}">
                     <f:selectItems value="#{telefoneBean.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="(#{telefone.ddd})#{telefone.numero}"  />
                 </p:selectOneMenu>
                 
-         
+                <p:outputLabel for="presente" value="Presente :"/>
+                <p:selectOneMenu id="presente" converter="presenteConverter" value="#{lojaBean.loja.presente}">
+                    <f:selectItems value="#{presenteBean.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />
+                </p:selectOneMenu>
+              
             </h:panelGrid>   
 
             <p:toolbarGroup>
                 <p:commandButton action="#{lojaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" action="#{lojaBean.listar()}" update="@form" ajax="false"/>
-               <h:commandButton action="editarLoja?faces-redirect=true" immediate="true" value="Editar" />
-           
+                <h:commandButton action="editarLoja?faces-redirect=true" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
 
@@ -43,9 +46,6 @@
             <p:dataTable value="#{lojaBean.lojas}" var="loja">
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{lojaBean.remover(loja)}" update="@form"></p:commandButton>
-
-                    <p:commandButton id="editar" value="Editar" action="#{lojaBean.editar(loja.id)}" update="@form"></p:commandButton>
-
                 </p:column>
                 <p:column headerText="Nome" sortBy="#{loja.nome}">
                     <h:outputText value="#{loja.nome}"></h:outputText>
@@ -55,7 +55,10 @@
                 </p:column>
                 <p:column headerText="Telefone">
                     <h:outputLabel value="#{loja.telefone.numero}" />
-                </p:column>               
+                </p:column>  
+                <p:column headerText="Presente">
+                    <h:outputLabel value="#{loja.presente.nome}" />
+                </p:column>                
             </p:dataTable>
         </p:fieldset>
     </h:form>

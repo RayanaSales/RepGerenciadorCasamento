@@ -81,6 +81,13 @@
                 <p:column headerText="Cerimonia" >
                     <h:outputText value="#{produtor.cerimonia.dataHora}"></h:outputText>
                 </p:column>
+                
+                     
+                <p:column headerText="Telefones" >
+                    <p:selectOneMenu id="telefone" value="#{produtor.telefones}">
+                        <f:selectItems value="#{produtor.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
+                    </p:selectOneMenu> 
+                </p:column>
             </p:dataTable>
         </p:fieldset>
     </h:form>

@@ -31,17 +31,10 @@
                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{presenteBean.presente.cerimonia}">
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
                 </p:selectOneMenu>
-
-             <!--   <p:selectCheckboxMenu id="lojas" value="#{presenteBean.arrayLojas}" label="Lojas"
-                                      filter="true" filterMatchMode="startsWith" 
-                                      required="true" converter="lojaConverter">
-                    <f:selectItems value="#{presenteBean.presente.lojas}" var="loja" itemLabel="#{loja.nome}" itemValue="#{loja}"/>
-                </p:selectCheckboxMenu> -->
-
-
+         
             </h:panelGrid>                
             <p:toolbarGroup>
-                <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="true" update="@form" 
+                <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" action="#{presenteBean.listar()}" immediate="true" update="@form"></p:commandButton>
                 <h:commandButton action="editarPresente?faces-redirect=true" immediate="true" value="Editar" />
@@ -68,6 +61,9 @@
                 <p:column headerText="Cerimonia" >
                     <h:outputText value="#{presente.cerimonia.dataHora}"></h:outputText>
                 </p:column>
+
+
+
                 <p:column headerText="Lojas" >
                     <p:selectOneMenu id="lojas" value="#{presente.lojas}">
                         <f:selectItems value="#{presente.lojas}" var="loja" itemValue="#{loja}" itemLabel="#{loja.nome}"  />

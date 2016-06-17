@@ -20,17 +20,17 @@
                 <p:password id="senha" value="#{noivoBean.noivo.senha}" feedback="true"/>
                 <p:message for="senha" id="messageSenha" severity="error"/>
 
-
                 <p:outputLabel for="cerimonia" value="Cerimônia :"/>
                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{noivoBean.noivo.cerimonia}">
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
                 </p:selectOneMenu>
+                
             </h:panelGrid>   
 
             <p:toolbarGroup>
                 <p:commandButton action="#{noivoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
-                <p:commandButton value="Listar" action="#{noivoBean.listar()}" update="@form" ajax="false"/>
+                <p:commandButton value="Listar" immediate="true" action="#{noivoBean.listar()}" update="@form" ajax="false"/>
                 <h:commandButton action="editarNoivo?faces-redirect=true" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
@@ -50,7 +50,19 @@
                 <p:column headerText="Cerimonia" >
                     <h:outputText value="#{noivo.cerimonia.dataHora}"></h:outputText>
                 </p:column>
-            </p:dataTable>
+                    
+                <p:column headerText="Telefones" >
+                     <p:selectOneMenu id="telefone" value="#{noivo.telefones}">
+                         <f:selectItems value="#{noivo.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
+                    </p:selectOneMenu> 
+                </p:column>
+                
+                <p:column headerText="Roupas" >
+                    <p:selectOneMenu id="roupas" value="#{noivo.roupaDosNoivos}">
+                        <f:selectItems value="#{noivo.roupaDosNoivos}"  />
+                    </p:selectOneMenu> 
+                </p:column>                
+            </p:dataTable>            
         </p:fieldset>
     </h:form>
 </ui:decorate>

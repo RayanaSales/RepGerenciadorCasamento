@@ -3,6 +3,7 @@ package jsf_beans;
 import entidades.Cerimonia;
 import entidades.Noivo;
 import entidades.Pessoa;
+import entidades.RoupaDosNoivos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,38 @@ public class NoivoBean implements Serializable
 
     public List<Noivo> noivos;
     public Noivo noivo;
+        
+    public String[] roupasSelecionadas;
 
     public NoivoBean()
     {
         noivo = new Noivo();
     }
+    
+    
+    
+    
+    
+    
+    
+    public void setRoupasSelecionadas(String[] roupasSelecionadas) {
+        this.roupasSelecionadas = roupasSelecionadas;
+        
+    }
+
+    public String[] getRoupasSelecionadas()
+    {
+        
+        return roupasSelecionadas;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     public void listar()
     {        

@@ -28,19 +28,19 @@
                     <f:selectItems value="#{telefoneBean.categorias}"   />
                 </p:selectOneMenu>
 
-           <!--     <br/>
-                <p:outputLabel for="pessoa" value="Pessoa :"/>
-                <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{telefoneBean.telefone.pessoa}">
-                    <f:selectItems value="#{pessoaBean.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
-                </p:selectOneMenu>  -->
+                <!--     <br/>
+                     <p:outputLabel for="pessoa" value="Pessoa :"/>
+                     <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{telefoneBean.telefone.pessoa}">
+                         <f:selectItems value="#{pessoaBean.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
+                     </p:selectOneMenu>  -->
             </h:panelGrid>                
 
             <p:toolbarGroup>
                 <p:commandButton action="#{telefoneBean.salvar()}" value="Salvar" ajax="true" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" action="#{telefoneBean.listar()}" update="@form"></p:commandButton>
-               <h:commandButton action="editarTelefone?faces-redirect=true" immediate="true" value="Editar" />
-           </p:toolbarGroup>
+                <h:commandButton action="editarTelefone?faces-redirect=true" immediate="true" value="Editar" />
+            </p:toolbarGroup>
 
         </p:fieldset>
 
@@ -50,9 +50,6 @@
             <p:dataTable value="#{telefoneBean.telefones}" var="telefone">
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{telefoneBean.remover(telefone)}" update="@form"></p:commandButton>
-
-                    <p:commandButton id="editar" value="Editar" action="#{telefoneBean.editar(telefone.id)}" update="@form"></p:commandButton>
-
                 </p:column>
                 <p:column headerText="ddd" sortBy="#{telefone.ddd}">
                     <h:outputText value="#{telefone.ddd}"></h:outputText>
@@ -63,10 +60,7 @@
                 <p:column headerText="Categoria" sortBy="#{telefone.categoria}">
                     <h:outputText value="#{telefone.categoria}"></h:outputText>
                 </p:column>   
-
-          <!--      <p:column headerText="Pessoa" sortBy="#{telefone.pessoa.nome}">
-                    <h:outputText value="#{telefone.pessoa.nome}"></h:outputText>
-                </p:column>  -->
+                
             </p:dataTable>
         </p:fieldset>
 

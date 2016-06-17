@@ -8,65 +8,41 @@
              template="../publico/template.xhtml"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-   
+    <h:form id="form">
+     <!--    <p:growl id="msgs" showDetail="true"/> -->
 
-    <h:form id="convidado">
-        <p:fieldset legend="Convidado">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
-            <h:panelGrid columns="3" cellpadding="5">
-                <p:outputLabel for="nome" value="Nome:" />
-                <p:inputText id="nome" value="#{convidadoBean.convidado.nome}"/>
-                <p:message for="nome" id="messageDatetime" severity="error"/>
+        <p:dataTable id="editarConvidado" var="convidado" value="#{convidadoBean.convidados}" editable="true" style="margin-bottom:20px">
+            <f:facet name="header">
+                Row Editing
+            </f:facet>
 
-                <p:outputLabel for="email" value="Email:" />
-                <p:inputText id="email" value="#{convidadoBean.convidado.email}"/>
-                <p:message for="email" id="messageEmail" severity="error"/>
-
-                <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
-                <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="99"/>
-                <p:message for="quantidadeSenhas" id="messageSenhas" severity="error"/>
-
-                <p:outputLabel for="categoria" value="Categoria: " />
-                <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}">
-                    <f:selectItems value="#{convidadoBean.categorias}"   />
-                </p:selectOneMenu>
-
-                <br/><br/>
-                <p:outputLabel for="cerimonia" value="Cerimônia :"/>
-                <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
-                    <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
-                </p:selectOneMenu>
-            </h:panelGrid>   
-
-            <p:toolbarGroup>
-                <p:commandButton value="Listar" action="#{convidadoBean.listar()}" update="@form" ajax="false"/>
-            </p:toolbarGroup>
-        </p:fieldset>
-
-        <br/>
-        <p:fieldset legend="Noivos cadastrados">
-            <p:dataTable value="#{convidadoBean.convidados}" var="convidado">
-                <p:column headerText="Opções">
-
-                    <p:commandButton id="editar" value="Editar" action="#{convidadoBean.editar(convidado.id)}" update="@form"></p:commandButton>
-
-                </p:column>                
-                <p:column headerText="Nome" sortBy="#{convidado.nome}">
-                    <h:outputText value="#{convidado.nome}"></h:outputText>
-                </p:column> 
-                <p:column headerText="Email" sortBy="#{convidado.email}">
-                    <h:outputText value="#{convidado.email}"></h:outputText>
-                </p:column> 
-                <p:column headerText="Categoria" sortBy="#{convidado.categoria}">
-                    <h:outputText value="#{convidado.categoria}"></h:outputText>
-                </p:column> 
-                <p:column headerText="Quantidade de senhas" sortBy="#{convidado.quantidadeSenhas}">
-                    <h:outputText value="#{convidado.quantidadeSenhas}"></h:outputText>
-                </p:column> 
-                <p:column headerText="Cerimonia" >
-                    <h:outputText value="#{convidado.cerimonia.dataHora}"></h:outputText>
-                </p:column>
-            </p:dataTable>
-        </p:fieldset>
-    </h:form> 
+            <p:ajax event="rowEdit" listener="#{convidadoBean.teste}"/>
+           
+            <p:column headerText="Nome">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{convidado.nome}" /></f:facet>
+                    <f:facet name="input"><p:inputText id="nome" value="#{convidado.nome}" style="width:100%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+            <p:column headerText="Email">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{convidado.email}" /></f:facet>
+                    <f:facet name="input"><p:inputText id="email" value="#{convidado.email}" style="width:100%"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+<!--            <p:column headerText="Cerimonia">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{convidado.cerimonia.dataHora}" /></f:facet>
+                    <f:facet name="input">
+                        <h:selectOneMenu value="#{convidado.cerimonia.dataHora}" style="width:100%">
+                            <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cer" itemLabel="#{cer}" itemValue="#{cer}" />
+                        </h:selectOneMenu>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>-->
+            <p:column style="width:32px">
+                <p:rowEditor />
+            </p:column>
+        </p:dataTable>
+    </h:form>
 </ui:decorate>

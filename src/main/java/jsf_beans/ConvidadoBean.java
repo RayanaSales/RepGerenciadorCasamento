@@ -18,7 +18,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import servico.ConvidadoServico;
 
 @ManagedBean
@@ -37,20 +37,27 @@ public class ConvidadoBean implements Serializable
         convidado = new Convidado();
     }
 
-    public void onCellEdit(CellEditEvent event)
+//    public void onCellEdit(CellEditEvent event)
+//    {
+//        Object oldValue = event.getOldValue();
+//        Object newValue = event.getNewValue();
+//
+//        Object campo = event.getColumn();
+//
+//        System.out.println("NOVOS VALORES: " + newValue.toString());
+//
+//        if (newValue != null && !newValue.equals(oldValue))
+//        {
+//            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+//            FacesContext.getCurrentInstance().addMessage(null, msg);
+//        }
+//    }
+    public void onRowEdit(RowEditEvent event)
     {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-        
-        Object campo = event.getColumn();
-        
-        System.out.println("NOVOS VALORES: " + newValue.toString());
-
-        if (newValue != null && !newValue.equals(oldValue))
-        {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
+        System.out.println("jsf_beans.ConvidadoBean.onRowEdit()");
+        Convidado c = (Convidado) event.getObject();
+        editar(c.getId());
+        System.out.println("NOVO NOME CONVIDADO: " + c.getNome());
     }
 
     public void listar()
@@ -180,5 +187,12 @@ public class ConvidadoBean implements Serializable
         }
 
         return valido;
+    }
+
+    public void teste(RowEditEvent event)
+    {
+        System.out.println("aaaaaaaaaaaa");
+        Convidado c = (Convidado) event.getObject();
+        System.out.println("OBJETO: " + c.getNome());
     }
 }

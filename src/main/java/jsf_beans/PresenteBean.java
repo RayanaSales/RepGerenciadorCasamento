@@ -1,41 +1,34 @@
 package jsf_beans;
 
-import entidades.Loja;
 import entidades.Presente;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import servico.LojaServico;
 import servico.PresenteServico;
 
 @ManagedBean
 @SessionScoped
 public class PresenteBean implements Serializable
 {
+
     @EJB
     private PresenteServico presenteServico;
 
-    @EJB
-    private LojaServico lojaServico;
-
     public List<Presente> presentes;
     public Presente presente;
-
-    public Loja[] arrayLojas;
 
     public PresenteBean()
     {
         presente = new Presente();
     }
-    
+
     public void setar()
     {
-        
+
     }
 
     public void salvar()
@@ -56,17 +49,9 @@ public class PresenteBean implements Serializable
 
     public void editar(int id)
     {
-        System.out.println("EDITAR PRESENTE");
-        Presente antigo = presenteServico.buscar(id);
-                
-        antigo.setId(presente.getId());
-        antigo.setNome(presente.getNome());
-        antigo.setDescricao(presente.getDescricao());
-        antigo.setOndeEncontrar(presente.getOndeEncontrar());
-        antigo.setCerimonia(presente.getCerimonia());
-        antigo.setLojas(presente.getLojas());
-        
-        presenteServico.atualizar(antigo);
+        listar(); //atualize a minha lista
+        presente.setId(id);
+        presenteServico.atualizar(presente);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
         presente = new Presente();
     }
@@ -117,41 +102,26 @@ public class PresenteBean implements Serializable
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public List<Loja> listarLojas()
-    {
-        return lojaServico.listar();
-    }
-
-    public Loja[] getArrayLojas()
-    {
-        List<Loja> listaLojas = lojaServico.listar();
-        arrayLojas = new Loja[listaLojas.size()];
-
-        for (int i = 0; i < listaLojas.size(); i++)
-        {
-            arrayLojas[i] = listaLojas.get(i);
-        }
-
-        return arrayLojas;
-    }
-
-    public List<Loja> listarLojasPresente(int id)
-    {
-
-        int idPresenteGeral;
-        List<Loja> lojasGeral = listarLojas();
-        List<Loja> lojasPresentes = new ArrayList<>();
-
-        for (int i = 0; i < lojasGeral.size(); i++)
-        {
-            idPresenteGeral = lojasGeral.get(i).getPresente().getId();
-
-            if (idPresenteGeral == id)
-            {
-                lojasPresentes.add(lojasGeral.get(i));
-            }
-        }
-        return lojasPresentes;
-    }
-
+//    public List<Loja> listarLojas()
+//    {
+//        return lojaServico.listar();
+//    }
+//
+//    public List<Loja> listarLojasPresente(int id)
+//    {
+//        int idPresenteGeral;
+//        List<Loja> lojasGeral = listarLojas();
+//        List<Loja> lojasPresentes = new ArrayList<>();
+//
+//        for (int i = 0; i < lojasGeral.size(); i++)
+//        {
+//            idPresenteGeral = lojasGeral.get(i).getPresente().getId();
+//
+//            if (idPresenteGeral == id)
+//            {
+//                lojasPresentes.add(lojasGeral.get(i));
+//            }
+//        }
+//        return lojasPresentes;
+//    }
 }

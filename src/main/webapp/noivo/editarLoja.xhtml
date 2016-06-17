@@ -25,6 +25,11 @@
                 <p:selectOneMenu id="telefone" converter="telefoneConverter" value="#{lojaBean.loja.telefone}">
                     <f:selectItems value="#{telefoneBean.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="(#{telefone.ddd})#{telefone.numero}"  />
                 </p:selectOneMenu>
+                
+                 <p:outputLabel for="presente" value="Presente :"/>
+                <p:selectOneMenu id="presente" converter="presenteConverter" value="#{lojaBean.loja.presente}">
+                    <f:selectItems value="#{presenteBean.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />
+                </p:selectOneMenu>
             </h:panelGrid>   
 
 
@@ -47,7 +52,10 @@
                 </p:column>
                 <p:column headerText="Telefone">
                     <h:outputLabel value="#{loja.telefone.numero}" />
-                </p:column>               
+                </p:column> 
+                 <p:column headerText="Presente">
+                    <h:outputLabel value="#{loja.presente.nome}" />
+                </p:column> 
             </p:dataTable>
         </p:fieldset>
     </h:form>

@@ -32,13 +32,6 @@
                         <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
                     </p:selectOneMenu>
 
-             <!--   <p:selectCheckboxMenu id="lojas" value="#{presenteBean.arrayLojas}" label="Lojas"
-                                      filter="true" filterMatchMode="startsWith" 
-                                      required="true" converter="lojaConverter">
-                    <f:selectItems value="#{presenteBean.presente.lojas}" var="loja" itemLabel="#{loja.nome}" itemValue="#{loja}"/>
-                </p:selectCheckboxMenu> -->
-
-
                 </h:panelGrid>  
                 <p:toolbarGroup>
                     <p:commandButton value="Listar" action="#{presenteBean.listar()}" update="@form"></p:commandButton>
@@ -51,7 +44,7 @@
             <p:fieldset legend="Presentes cadastrados">
                 <p:dataTable value="#{presenteBean.presentes}" var="presente">
                     <p:column headerText="Opções">
-                        <p:commandButton id="editar" value="Editar" action="#{presenteBean.editar(presente.id)}" update="@form"></p:commandButton>
+                        <p:commandButton id="editar" immediate="true" value="Editar" action="#{presenteBean.editar(presente.id)}" update="@form"></p:commandButton>
                     </p:column>
                     <p:column headerText="Nome" sortBy="#{presente.nome}">
                         <h:outputText value="#{presente.nome}"></h:outputText>
@@ -75,4 +68,3 @@
         </h:form>
     </h:body>
 </ui:decorate>
-
