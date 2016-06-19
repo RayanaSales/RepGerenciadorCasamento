@@ -16,6 +16,9 @@
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{lojaBean.loja.nome}"/>  
 
+                <p:outputLabel for="cnpj" value="CNPJ: " />
+                <p:inputMask id="cnpj" value="#{lojaBean.loja.cnpj}" mask="99999999999999"/>
+
                 <p:outputLabel for="local" value="Localização :"/>
                 <p:selectOneMenu id="local" converter="localConverter" value="#{lojaBean.loja.localizacao}">
                     <f:selectItems value="#{localizacaoBean.locais}" var="local" itemValue="#{local}" itemLabel="#{local.logradouro}"  />
@@ -25,8 +28,8 @@
                 <p:selectOneMenu id="telefone" converter="telefoneConverter" value="#{lojaBean.loja.telefone}">
                     <f:selectItems value="#{telefoneBean.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="(#{telefone.ddd})#{telefone.numero}"  />
                 </p:selectOneMenu>
-                
-                 <p:outputLabel for="presente" value="Presente :"/>
+
+                <p:outputLabel for="presente" value="Presente :"/>
                 <p:selectOneMenu id="presente" converter="presenteConverter" value="#{lojaBean.loja.presente}">
                     <f:selectItems value="#{presenteBean.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />
                 </p:selectOneMenu>
@@ -53,8 +56,11 @@
                 <p:column headerText="Telefone">
                     <h:outputLabel value="#{loja.telefone.numero}" />
                 </p:column> 
-                 <p:column headerText="Presente">
+                <p:column headerText="Presente">
                     <h:outputLabel value="#{loja.presente.nome}" />
+                </p:column> 
+                <p:column headerText="CNPJ">
+                    <h:outputLabel value="#{loja.cnpj}" />
                 </p:column> 
             </p:dataTable>
         </p:fieldset>

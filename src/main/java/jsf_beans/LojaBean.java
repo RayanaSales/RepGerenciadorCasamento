@@ -43,14 +43,12 @@ public class LojaBean implements Serializable
         System.out.println("PRESENTE NO BANCO: " + p.getNome());
         loja.setPresente(p);  */
         
-        if (!lojas.contains(loja))
-        {
-            lojaServico.salvar(loja);
+        
+        boolean salvou =  lojaServico.salvar(loja);
+        if(salvou)
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
+        else
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja já existe!");
-        }
         loja = new Loja(); //renove a instancia, para o proximo elemento
     }
 
@@ -58,8 +56,12 @@ public class LojaBean implements Serializable
     {
         listar(); //atualize a minha lista
         loja.setId(id);
-        lojaServico.atualizar(loja);
-        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        boolean alterou = lojaServico.atualizar(loja);
+        if(alterou)
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        else
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja já existe!");
+        
         loja = new Loja();
     }
 

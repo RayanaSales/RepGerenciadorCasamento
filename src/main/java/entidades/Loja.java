@@ -43,6 +43,21 @@ public class Loja implements Serializable
     @JoinColumn(name = "id_presente", referencedColumnName = "id")
     private Presente presente;
 
+    @NotNull
+    @Size(min = 14, max = 14)
+    @validadores.ValidaCNPJ
+    @Pattern(regexp = "[0-9]+", message = "{entidades.Loja.cnpj}")
+    @Column(name = "txt_cnpj")
+    private String cnpj;
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+    
     public Loja()
     {
     }

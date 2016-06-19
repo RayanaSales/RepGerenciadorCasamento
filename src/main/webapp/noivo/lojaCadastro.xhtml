@@ -12,25 +12,29 @@
         <p:fieldset legend="Loja">
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
 
-            <h:panelGrid columns="2" cellpadding="5">
+            <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{lojaBean.loja.nome}"/>  
-
+                <br/>
+                <p:outputLabel for="cnpj" value="CNPJ: " />
+                <p:inputMask id="cnpj" value="#{lojaBean.loja.cnpj}" mask="99999999999999"/>
+                <p:message for="cnpj" id="messageCNPJ" severity="error"/>
+                
                 <p:outputLabel for="local" value="Localização :"/>
                 <p:selectOneMenu id="local" converter="localConverter" value="#{lojaBean.loja.localizacao}">
                     <f:selectItems value="#{localizacaoBean.locais}" var="local" itemValue="#{local}" itemLabel="#{local.logradouro}"  />
                 </p:selectOneMenu>
-
+                <br/>
                 <p:outputLabel for="telefone" value="Telefone :"/>
                 <p:selectOneMenu id="telefone" converter="telefoneConverter" value="#{lojaBean.loja.telefone}">
                     <f:selectItems value="#{telefoneBean.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="(#{telefone.ddd})#{telefone.numero}"  />
                 </p:selectOneMenu>
-                
+                <br/>
                 <p:outputLabel for="presente" value="Presente :"/>
                 <p:selectOneMenu id="presente" converter="presenteConverter" value="#{lojaBean.loja.presente}">
                     <f:selectItems value="#{presenteBean.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />
                 </p:selectOneMenu>
-              
+              <br/>
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -58,7 +62,10 @@
                 </p:column>  
                 <p:column headerText="Presente">
                     <h:outputLabel value="#{loja.presente.nome}" />
-                </p:column>                
+                </p:column> 
+                <p:column headerText="CNPJ">
+                    <h:outputLabel value="#{loja.cnpj}" />
+                </p:column>  
             </p:dataTable>
         </p:fieldset>
     </h:form>

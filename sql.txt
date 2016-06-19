@@ -83,6 +83,7 @@ create table loja
 (
 	id serial primary key,
 	txt_nome varchar(50) NOT NULL,
+        txt_cnpj varchar(14) NOT NULL,
 
 	id_localizacao int references localizacao(id),
 	id_telefone int references telefone(id),
