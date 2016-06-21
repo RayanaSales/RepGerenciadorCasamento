@@ -4,6 +4,7 @@ import entidades.Pessoa;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -21,21 +22,43 @@ public class TelefoneBean implements Serializable
     private TelefoneServico telefoneServico;
 
     public List<Telefone> telefones;
+
     public Telefone telefone;
 
     public TelefoneBean()
     {
         telefone = new Telefone();
     }
+    
+    public List<Telefone> buscarTelefonesCelulares()
+    {
+        return telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.celular);
+    }
+
+    public List<Telefone> buscarTelefonesFixos()
+    {
+        List<Telefone> fixos = new ArrayList<>();
+
+        fixos.addAll(telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.residencial));
+        fixos.addAll(telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.empresarial));
+                
+        return fixos;
+    }
 
     public void salvar()
     {
         listar(); //atualize a minha lista
 
+        //SE N TEM CATEGORIA, EH PQ EH UM CELULAR
+        if (telefone.getCategoria() == null)
+        {
+            telefone.setCategoria(TelefoneCategoria.celular);
+        }
+
         if (!telefones.contains(telefone))
         {
             telefones.add(telefone);
-            
+
             //seta a pessoa no telefone
             if (telefone.getCategoria() == TelefoneCategoria.celular || telefone.getCategoria() == TelefoneCategoria.residencial) //eh uma pessoa?
             {
@@ -45,7 +68,7 @@ public class TelefoneBean implements Serializable
                     pessoa.setTelefones(telefones);
                     telefone.setPessoa(pessoa);
                 }
-            }             
+            }
             telefoneServico.salvar(telefone);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         } else
@@ -108,7 +131,12 @@ public class TelefoneBean implements Serializable
 
     public TelefoneCategoria[] getCategorias()
     {
-        return TelefoneCategoria.values();
+        TelefoneCategoria[] categorias = new TelefoneCategoria[2];
+
+        categorias[0] = TelefoneCategoria.empresarial;
+        categorias[1] = TelefoneCategoria.residencial;
+
+        return categorias;
     }
 
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)

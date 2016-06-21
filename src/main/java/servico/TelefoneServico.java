@@ -1,6 +1,8 @@
 package servico;
 
 import entidades.Telefone;
+import enumeracoes.TelefoneCategoria;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -19,6 +21,21 @@ public class TelefoneServico extends Servico
         em.flush();
         em.persist(telefone);
     }
+    
+    public List<Telefone> listarTelefonesPorCategoria(TelefoneCategoria categoria)
+    {
+        List<Telefone> telefonesTotais = listar();
+        List<Telefone> telefonesEmpresariais = new ArrayList<>();
+
+        for (Telefone telefone : telefonesTotais)
+        {
+            if (telefone.getCategoria() == categoria)
+            {
+                telefonesEmpresariais.add(telefone);
+            }
+        }
+        return telefonesEmpresariais;
+    }
 
     public List<Telefone> listar()
     {
@@ -32,7 +49,7 @@ public class TelefoneServico extends Servico
     }
 
     public void atualizar(Telefone telefone)
-    {              
+    {
         em.flush();
         em.merge(telefone);
     }

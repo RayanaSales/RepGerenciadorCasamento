@@ -8,14 +8,16 @@
              template="../publico/template.xhtml"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-     <h:form id="buffet">
+    <h:form id="buffet">
         <p:fieldset legend="Buffet">
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
 
                 <p:outputLabel for="valor" value="Valor:" />
-                <p:inputMask id="valor" value="#{buffetBean.buffet.valorTotalGasto}" mask="999?999"/>
-                <p:message for="valor" id="messageDatetime" severity="error"/>
+                <p:inputText id="valor" value="#{buffetBean.buffet.valorTotalGasto}">
+                    <f:validateDoubleRange minimum="0.0"/>
+                </p:inputText>
+                <p:message for="valor" id="messageValorGasto" severity="error"/>
 
             </h:panelGrid>   
 
@@ -26,7 +28,7 @@
         </p:fieldset>
 
         <br/>
-         <p:fieldset legend="Buffets cadastrados">
+        <p:fieldset legend="Buffets cadastrados">
             <p:dataTable value="#{buffetBean.buffets}" var="buffet">
                 <p:column headerText="Opções">
                     <p:commandButton id="editar" value="Editar" validateClient="true" action="#{buffetBean.editar(buffet.id)}" update="@form"></p:commandButton>

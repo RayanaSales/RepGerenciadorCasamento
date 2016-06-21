@@ -2,16 +2,12 @@ package entidades;
 
 import enumeracoes.ProdutorDeMidiaCategoria;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -23,13 +19,7 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
     @validadores.ValidaPreco
     @Column(name = "numero_preco")
     private double preco;
-
-    @NotNull
-    @Future
-    @Column(name = "dt_dataEHoraChegada")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataEHoraChegada;
-
+    
     @NotNull
     @validadores.ValidaURL
     @Column(name = "txt_linkParaRedeSocial")
@@ -44,33 +34,21 @@ public class ProdutorDeMidia extends Pessoa implements Serializable
 
     }
 
-    public ProdutorDeMidia(ProdutorDeMidiaCategoria categoria, double preco, Date horaChegada, String linkParaRedeSocial)
+    public ProdutorDeMidia(ProdutorDeMidiaCategoria categoria, double preco, String linkParaRedeSocial)
     {
         this.categoria = categoria;
-
-        this.preco = preco;
-        this.dataEHoraChegada = horaChegada;
+        this.preco = preco;        
         this.linkParaRedeSocial = linkParaRedeSocial;
     }
 
     public double getPreco()
     {
-        return preco;
+        return Math.round(preco);
     }
 
     public void setPreco(double preco)
     {
         this.preco = preco;
-    }
-
-    public Date getDataEHoraChegada()
-    {
-        return dataEHoraChegada;
-    }
-
-    public void setDataEHoraChegada(Date dataEHoraChegada)
-    {
-        this.dataEHoraChegada = dataEHoraChegada;
     }
 
     public String getLinkParaRedeSocial()

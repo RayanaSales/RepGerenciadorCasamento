@@ -18,15 +18,17 @@
                 <p:outputLabel for="produto" value="Produto:" />
                 <p:inputText id="produto" value="#{comesBebesBean.cb.produto}"/>
                 <p:message for="produto" id="messageProduto" severity="error"/>
-                
+
                 <p:outputLabel for="quantidade" value="Quantidade: " />
                 <p:inputMask id="quantidade" value="#{comesBebesBean.cb.quantidade}" mask="99?999"/>
                 <p:message for="quantidade" id="messageQuantidade" severity="error"/>
-               
-                <p:outputLabel for="valorUnid" value="Valor (unidade):" />
-                <p:inputMask id="valorUnid" value="#{comesBebesBean.cb.valor}" mask="9?9"/>
-                <p:message for="valorUnid" id="messageValorUnid" severity="error"/>
-                
+
+                <p:outputLabel for="valorUnid" value="Valor (unidade):" />                
+                <p:inputText id="valorUnid" value="#{comesBebesBean.cb.valor}">
+                    <f:validateDoubleRange minimum="0.0"/>
+                </p:inputText>
+                <p:message for="valorUnid" id="messageValorGasto" severity="error"/>
+
                 <p:outputLabel for="categoria" value="Categoria:" />
                 <p:selectOneMenu id="categoria" value="#{comesBebesBean.cb.categoria}">
                     <f:selectItems value="#{comesBebesBean.categorias}"   />
@@ -67,7 +69,7 @@
                 <p:column headerText="Buffet" sortBy="#{cb.buffet}">
                     <h:outputText value="#{cb.buffet.valorTotalGasto}"></h:outputText>
                 </p:column>
-             </p:dataTable>
+            </p:dataTable>
         </p:fieldset>
     </h:form>
 </ui:decorate>

@@ -23,10 +23,7 @@
                 <p:inputMask id="phone" value="#{telefoneBean.telefone.numero}" mask="999999999"/>
                 <p:message for="phone" id="messageFone" severity="error"/>
 
-                <p:outputLabel for="categoria" value="Categoria:" />
-                <p:selectOneMenu id="categoria" value="#{telefoneBean.telefone.categoria}">
-                    <f:selectItems value="#{telefoneBean.categorias}"   />
-                </p:selectOneMenu>
+              
 
                 <br/>               
                 <p:outputLabel for="pessoa" value="Pessoa:" />
@@ -45,7 +42,7 @@
 
         <br/>
         <p:fieldset legend="Celulares cadastrados">
-            <p:dataTable value="#{telefoneBean.telefones}" var="telefone">
+            <p:dataTable value="#{telefoneBean.buscarTelefonesCelulares()}" var="telefone">
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" immediate="true" value="Deletar" action="#{telefoneBean.remover(telefone)}" update="@form"></p:commandButton>
                 </p:column>

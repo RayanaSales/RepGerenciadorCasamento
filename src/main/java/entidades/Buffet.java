@@ -56,7 +56,7 @@ public class Buffet implements Serializable
 
     public double getValorTotalGasto()
     {
-        return valorTotalGasto;
+        return Math.round(valorTotalGasto);
     }
 
     public void setValorTotalGasto(double valorTotalGasto)

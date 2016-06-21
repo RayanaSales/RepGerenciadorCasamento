@@ -47,7 +47,7 @@
         <br/>
         <p:fieldset legend="Telefones cadastrados">
 
-            <p:dataTable value="#{telefoneBean.telefones}" var="telefone">
+            <p:dataTable value="#{telefoneBean.buscarTelefonesFixos()}" var="telefone">
                 <p:column headerText="Opções">
                     <p:commandButton id="deletar" value="Deletar" immediate="true" action="#{telefoneBean.remover(telefone)}" update="@form"></p:commandButton>
                 </p:column>

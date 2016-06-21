@@ -37,7 +37,6 @@ create table pessoa
 
 create table produtorDeMidia
 (
-	dt_dataEHoraChegada timestamp,
 	numero_preco real,
         categoria varchar(30),
 	txt_linkParaRedeSocial varchar(100),

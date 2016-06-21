@@ -1,6 +1,8 @@
 package jsf_beans;
 
 import entidades.Loja;
+import entidades.Telefone;
+import enumeracoes.TelefoneCategoria;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -9,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import servico.LojaServico;
-import servico.PresenteServico;
+import servico.TelefoneServico;
 
 @ManagedBean
 @SessionScoped
@@ -19,10 +21,11 @@ public class LojaBean implements Serializable
     private LojaServico lojaServico;
 
     @EJB
-    private PresenteServico presenteServico;
+    private TelefoneServico telefoneServico;
 
     public List<Loja> lojas;
     public Loja loja;
+    public List<Telefone> telefonesEmpresariais;
 
     public LojaBean()
     {
@@ -77,6 +80,13 @@ public class LojaBean implements Serializable
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja não existe!");
         }
+    }
+    
+    public List<Telefone> getTelefonesEmpresariais()
+    {
+        telefonesEmpresariais = telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.empresarial);
+        
+        return telefonesEmpresariais;
     }
 
     public List<Loja> getLojas()

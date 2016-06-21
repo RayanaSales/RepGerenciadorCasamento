@@ -27,7 +27,7 @@
                 <br/>
                 <p:outputLabel for="telefone" value="Telefone :"/>
                 <p:selectOneMenu id="telefone" converter="telefoneConverter" value="#{lojaBean.loja.telefone}">
-                    <f:selectItems value="#{telefoneBean.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="(#{telefone.ddd})#{telefone.numero}"  />
+                    <f:selectItems value="#{lojaBean.telefonesEmpresariais}" var="telefone" itemValue="#{telefone}" itemLabel="(#{telefone.ddd})#{telefone.numero}"  />
                 </p:selectOneMenu>
                 <br/>
                 <p:outputLabel for="presente" value="Presente :"/>

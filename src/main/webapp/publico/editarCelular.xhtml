@@ -23,11 +23,7 @@
                 <p:message for="phone" id="messageFone" severity="error"/>
 
                 <p:outputLabel for="categoria" value="Categoria:" />
-
-                <p:selectOneMenu id="categoria" value="#{telefoneBean.telefone.categoria}">
-                    <f:selectItems value="#{telefoneBean.categorias}"   />
-                </p:selectOneMenu>
-
+               
             </h:panelGrid>                
 
             <p:toolbarGroup>
@@ -39,7 +35,7 @@
         <br/>
         <p:fieldset legend="Telefones cadastrados">
 
-            <p:dataTable value="#{telefoneBean.telefones}" var="telefone">
+            <p:dataTable value="#{telefoneBean.buscarTelefonesCelulares()}" var="telefone">
                 <p:column headerText="Opções">
                     <p:commandButton id="editar" value="Editar" action="#{telefoneBean.editar(telefone.id)}" update="@form"></p:commandButton>
                 </p:column>
