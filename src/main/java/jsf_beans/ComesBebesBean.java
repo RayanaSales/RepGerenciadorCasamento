@@ -33,23 +33,23 @@ public class ComesBebesBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-        if (!cbs.contains(cb))
-        {
-            //sete no buffet, a lista de come e bebes
-            cbs.add(cb);
+//        if (!cbs.contains(cb))
+//        {
+//            //sete no buffet, a lista de come e bebes
+//            cbs.add(cb);
             Buffet b = cb.getBuffet();
             if (b != null)
             {
                 b.setComesBebes(cbs);
                 cb.setBuffet(b);
             }
-
             comesBebesServico.salvar(cb);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Comes e bebes já existe!");
-        }
+            
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//        } else
+//        {
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Comes e bebes já existe!");
+//        }
 
         cb = new ComesBebes(); //renove a instancia, para o proximo elemento
     }

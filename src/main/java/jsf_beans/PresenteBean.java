@@ -36,8 +36,8 @@ public class PresenteBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-        if (!presentes.contains(presente))
-        {
+//        if (!presentes.contains(presente))
+//        {
             //seta os presentes la na cerimonia
             presentes.add(presente);
             Cerimonia c = presente.getCerimonia();
@@ -46,13 +46,12 @@ public class PresenteBean implements Serializable
                 c.setPresentes(presentes);
                 presente.setCerimonia(c);
             }
-
             presenteServico.salvar(presente);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente já existe!");
-        }
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//        } else
+//        {
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente já existe!");
+//        }
 
         presente = new Presente(); //renove a instancia, para o proximo elemento
     }

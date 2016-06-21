@@ -42,22 +42,13 @@ public class CerimoniaBean implements Serializable
     {
         if (validaObjeto(cerimonia) == true)
         {
-            listar(); //atualize a minha lista
-            if (!cerimonias.contains(cerimonia))
-            {
-                cerimoniaServico.salvar(cerimonia);
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-            } else
-            {
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia já existe!");
-            }
+            cerimoniaServico.salvar(cerimonia);
             cerimonia = new Cerimonia(); //renove a instancia, para o proximo elemento
 
         } else
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
         }
-
     }
 
     public void editar(int id)
@@ -84,11 +75,15 @@ public class CerimoniaBean implements Serializable
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia não existe!");
             }
         }
-        
-        if(!cerimonia.getPessoas().isEmpty())
+
+        if (!cerimonia.getPessoas().isEmpty())
+        {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Essa cerimonia não pode ser excluida. Ela possui pessoas.");
-        if(!cerimonia.getPresentes().isEmpty())
+        }
+        if (!cerimonia.getPresentes().isEmpty())
+        {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Essa cerimonia não pode ser excluida. Ela possui presentes.");
+        }
     }
 
     public void listar()

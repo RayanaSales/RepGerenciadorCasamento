@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Convidado;
 import entidades.RoupaDosNoivos;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -7,6 +8,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.TypedQuery;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -17,7 +19,9 @@ public class RoupaDosNoivosServico extends Servico
     public void salvar(RoupaDosNoivos roupa)
     {
         em.flush();
-        em.persist(roupa);
+        
+        if(existente(roupa.getRoupa()) == false)
+            em.persist(roupa);
     }
 
     public List<RoupaDosNoivos> listar()
@@ -37,8 +41,18 @@ public class RoupaDosNoivosServico extends Servico
         em.merge(roupa);
     }
 
-    public boolean existente(RoupaDosNoivos roupa)
-    {
-        return listar().contains(roupa);
+    private boolean existente(String roupa)
+    {       
+        TypedQuery<RoupaDosNoivos> query;
+        query = em.createQuery("select b from RoupaDosNoivos b where b.roupa like ?1", RoupaDosNoivos.class);
+        query.setParameter(1, roupa);
+        List<RoupaDosNoivos> pessoas = query.getResultList();
+
+        if (pessoas.isEmpty())
+        {
+            return false;
+        }
+
+        return true;
     }
 }

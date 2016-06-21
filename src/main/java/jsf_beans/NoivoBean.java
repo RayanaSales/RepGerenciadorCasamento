@@ -50,8 +50,8 @@ public class NoivoBean implements Serializable
     public void salvar()
     {
         listar(); //atualize a minha lista
-        if (!noivos.contains(noivo))
-        {
+//        if (!noivos.contains(noivo))
+//        {
             //setar o noivo, na lista de novasPessoas em cerimonia.
             Cerimonia cerimonia = noivo.getCerimonia();
             List<Pessoa> novasPessoas = new ArrayList<>();
@@ -63,11 +63,11 @@ public class NoivoBean implements Serializable
             noivo.setCerimonia(cerimonia);
 
             noivoServico.salvar(noivo);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Noivo já existe!");
-        }
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//        } else
+//        {
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Noivo já existe!");
+//        }
         noivo = new Noivo(); //renove a instancia, para o proximo elemento
     }
 

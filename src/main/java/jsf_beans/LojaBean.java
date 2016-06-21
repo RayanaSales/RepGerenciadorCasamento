@@ -44,8 +44,7 @@ public class LojaBean implements Serializable
         /* SE EU FIZER ASSIM, ELE SALVA CERTO. MAS ESSA MERDA VEM NUL, DO XHTML.        
         Presente p = presenteServico.buscar(2);
         System.out.println("PRESENTE NO BANCO: " + p.getNome());
-        loja.setPresente(p);  */
-        
+        loja.setPresente(p);  */        
         
         boolean salvou =  lojaServico.salvar(loja);
         if(salvou)

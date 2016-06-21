@@ -31,7 +31,7 @@ public class RoupaDosNoivos implements Serializable {
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.RoupaDosNoivos.roupa}")
     @Column(name = "txt_roupa")
-    private String roupa;
+    private String roupa; //chave secundaria
     
     @NotNull
     @validadores.ValidaPreco

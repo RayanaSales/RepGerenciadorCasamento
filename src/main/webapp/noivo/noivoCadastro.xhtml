@@ -15,6 +15,10 @@
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
                 <p:message for="nome" id="messageDatetime" severity="error"/>
+                
+                <p:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{noivoBean.noivo.email}"/>
+                <p:message for="email" id="messageEmail" severity="error"/>
 
                 <p:outputLabel for="senha" value="Senha:" />
                 <p:password id="senha" value="#{noivoBean.noivo.senha}" feedback="true"/>
@@ -44,6 +48,9 @@
                 <p:column headerText="Nome" sortBy="#{noivo.nome}">
                     <h:outputText value="#{noivo.nome}"></h:outputText>
                 </p:column>
+                 <p:column headerText="Email" sortBy="#{noivo.email}">
+                    <h:outputText value="#{noivo.email}"></h:outputText>
+                </p:column> 
                 <p:column headerText="Senha" sortBy="#{noivo.senha}">
                     <h:outputText value="#{noivo.senha}"></h:outputText>
                 </p:column>
@@ -51,11 +58,11 @@
                     <h:outputText value="#{noivo.cerimonia.dataHora}"></h:outputText>
                 </p:column>
                     
-                <p:column headerText="Telefones" >
+              <!--  <p:column headerText="Telefones" >
                      <p:selectOneMenu id="telefone" value="#{noivo.telefones}">
                          <f:selectItems value="#{noivo.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
                     </p:selectOneMenu> 
-                </p:column>
+                </p:column> -->
                 
                 <p:column headerText="Roupas" >
                     <p:selectOneMenu id="roupas" value="#{noivo.roupaDosNoivos}">

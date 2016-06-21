@@ -31,7 +31,7 @@ public class ComesBebes implements Serializable
     @Column(name = "txt_produto")
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.ComesBebes.produto}")
-    private String produto;
+    private String produto; //chave secundaria
     
     @NotNull
     @Column(name = "numero_quantidade")

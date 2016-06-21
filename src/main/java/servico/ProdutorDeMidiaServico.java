@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Convidado;
 import entidades.ProdutorDeMidia;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -17,8 +18,10 @@ public class ProdutorDeMidiaServico extends Servico
     public void salvar(ProdutorDeMidia produtor)
     {
         em.flush();
-        em.persist(produtor);
-        em.flush();
+        
+        if(existente(produtor.getEmail()) == false)
+            em.persist(produtor);
+        
     }
 
     public List<ProdutorDeMidia> listar()
@@ -46,5 +49,20 @@ public class ProdutorDeMidiaServico extends Servico
     {
         em.flush();
         return listar().contains(produtor);
+    }
+    
+     private boolean existente(String email)
+    {       
+        TypedQuery<ProdutorDeMidia> query;
+        query = em.createQuery("select b from Pessoa b where b.email like ?1", ProdutorDeMidia.class);
+        query.setParameter(1, email);
+        List<ProdutorDeMidia> produtores = query.getResultList();
+
+        if (produtores.isEmpty())
+        {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -33,7 +33,7 @@ public class Cerimonia implements Serializable
     @Future
     @Column(name = "dt_dataHora")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dataHora;
+    private Date dataHora; //chave secundaria
 
     //Relacionamentos:    
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, optional = false)

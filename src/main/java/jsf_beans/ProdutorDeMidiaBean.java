@@ -44,8 +44,8 @@ public class ProdutorDeMidiaBean implements Serializable
     public void salvar()
     {
         listar(); //atualize a minha lista
-        if (!produtores.contains(produtor))
-        {
+//        if (!produtores.contains(produtor))
+//        {
             //setar o produtor, na lista de novasPessoas em cerimonia.
             Cerimonia cerimonia = produtor.getCerimonia();
             List<Pessoa> novasPessoas = new ArrayList<>();
@@ -58,11 +58,11 @@ public class ProdutorDeMidiaBean implements Serializable
             produtor.setCerimonia(cerimonia);
 
             produtorServico.salvar(produtor);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Produtor já existe!");
-        }
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//        } else
+//        {
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Produtor já existe!");
+//        }
         produtor = new ProdutorDeMidia(); //renove a instancia, para o proximo elemento
     }
 

@@ -34,8 +34,8 @@ public class RoupaDosNoivosBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-        if (!roupas.contains(roupa))
-        {
+//        if (!roupas.contains(roupa))
+//        {
             //seta em noivo , a lista de roupas
             roupas.add(roupa);
             Noivo n = roupa.getNoivo();
@@ -46,11 +46,11 @@ public class RoupaDosNoivosBean implements Serializable
             }
             
             roupaServico.salvar(roupa);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Roupa já existe!");
-        }
+//          adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//        } else
+//        {
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Roupa já existe!");
+//        }
         
         roupa = new RoupaDosNoivos(); //renove a instancia, para o proximo elemento
     }

@@ -55,8 +55,8 @@ public class TelefoneBean implements Serializable
             telefone.setCategoria(TelefoneCategoria.celular);
         }
 
-        if (!telefones.contains(telefone))
-        {
+//        if (!telefones.contains(telefone))
+//        {
             telefones.add(telefone);
 
             //seta a pessoa no telefone
@@ -70,11 +70,11 @@ public class TelefoneBean implements Serializable
                 }
             }
             telefoneServico.salvar(telefone);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone já existe!");
-        }
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//        } else
+//        {
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone já existe!");
+//        }
 
         telefone = new Telefone(); //renove a instancia, para o proximo elemento
     }

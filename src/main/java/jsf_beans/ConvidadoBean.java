@@ -37,14 +37,6 @@ public class ConvidadoBean implements Serializable
         convidado = new Convidado();
     }
 
-    public void onRowEdit(RowEditEvent event)
-    {
-        System.out.println("jsf_beans.ConvidadoBean.onRowEdit()");
-        Convidado c = (Convidado) event.getObject();
-        editar(c.getId());
-        System.out.println("NOVO NOME CONVIDADO: " + c.getNome());
-    }
-
     public void listar()
     {
         convidados = convidadoServico.listar();
@@ -60,8 +52,8 @@ public class ConvidadoBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-        if (!convidados.contains(convidado))
-        {
+//        if (!convidados.contains(convidado))
+//        {
             //setar o produtor, na lista de novasPessoas em cerimonia.
             Cerimonia cerimonia = convidado.getCerimonia();
             List<Pessoa> novasPessoas = new ArrayList<>();
@@ -74,11 +66,11 @@ public class ConvidadoBean implements Serializable
             convidado.setCerimonia(cerimonia);
 
             convidadoServico.salvar(convidado);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Convidado já existe!");
-        }
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//        } else
+//        {
+//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Convidado já existe!");
+//        }
 
         convidado = new Convidado(); //renove a instancia, para o proximo elemento
     }

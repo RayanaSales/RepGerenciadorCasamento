@@ -45,25 +45,25 @@ public class LocalizacaoBean implements Serializable
 
     public void salvar()
     {
-//        if (validaObjeto(localizacao) == true)
-//        {
+        if (validaObjeto(localizacao) == true)
+        {
             listar(); //atualize a minha lista
 
-            if (!locais.contains(localizacao))
-            {
+//            if (!locais.contains(localizacao))
+//            {
                 localizacaoServico.salvar(localizacao);
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-            } else
-            {
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Local já existe!");
-            }
+//                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
+//            } else
+//            {
+//                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Local já existe!");
+//            }
 
             localizacao = new Localizacao(); //renove a instancia, para o proximo elemento
 
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
-//        }
+        } else
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
+        }
     }
 
     public void editar(int id)

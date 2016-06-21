@@ -43,7 +43,7 @@ public class Pessoa implements Serializable
     @Size(min = 5, max = 40)
     @Email
     @Column(name = "txt_email")
-    protected String email;
+    protected String email; //chave secundaria
 
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)

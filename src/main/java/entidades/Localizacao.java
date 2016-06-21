@@ -26,7 +26,7 @@ public class Localizacao implements Serializable
     @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.logradouro}")
     @Column(name = "txt_logradouro")
-    private String logradouro;
+    private String logradouro; //chave secundaria
     
     @NotNull
     @Size(min = 3, max = 40)
@@ -41,8 +41,8 @@ public class Localizacao implements Serializable
     private String cidade;
    
     @NotNull
-    @Size(min = 3, max = 10)
-    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.complemento}")
+    @Size(min = 3, max = 40)
+    @Pattern(regexp = "[a-zA-Z0-9 ]+", message = "{entidades.Localizacao.complemento}")
     @Column(name = "txt_complemento")
     private String complemento;
     
@@ -174,9 +174,7 @@ public class Localizacao implements Serializable
             {
                 Localizacao outra = (Localizacao) o;
 
-                if (this.logradouro.equals(outra.logradouro) && this.bairro.equals(outra.bairro) && this.cidade.equals(outra.cidade)
-                        && this.complemento.equals(outra.complemento) && this.cep.equals(outra.cep) //&& this.numero == outra.numero
-                        && this.estado.equals(outra.estado))
+                if (this.id == outra.getId())
                 {
                     return true;
                 }

@@ -16,6 +16,10 @@
                 <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
                 <p:message for="nome" id="messageDatetime" severity="error"/>
                 
+                <p:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{noivoBean.noivo.email}"/>
+                <p:message for="email" id="messageEmail" severity="error"/>
+                
                 <p:outputLabel for="senha" value="Senha:" />
                 <p:password id="senha" value="#{noivoBean.noivo.senha}" feedback="true"/>
                 <p:message for="senha" id="messageSenha" severity="error"/>
@@ -43,6 +47,9 @@
                 <p:column headerText="Nome" sortBy="#{noivo.nome}">
                     <h:outputText value="#{noivo.nome}"></h:outputText>
                 </p:column>
+                 <p:column headerText="Email" sortBy="#{noivo.email}">
+                    <h:outputText value="#{noivo.email}"></h:outputText>
+                </p:column> 
                 <p:column headerText="Senha" sortBy="#{noivo.senha}">
                     <h:outputText value="#{noivo.senha}"></h:outputText>
                 </p:column>

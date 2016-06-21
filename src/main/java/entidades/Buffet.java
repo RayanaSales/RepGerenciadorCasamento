@@ -27,7 +27,7 @@ public class Buffet implements Serializable
     @NotNull
     @validadores.ValidaPreco
     @Column(name = "numero_valorTotal")
-    private double valorTotalGasto;
+    private double valorTotalGasto; //chave secundaria
 
     @OneToMany(mappedBy = "buffet", fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE, orphanRemoval = true)

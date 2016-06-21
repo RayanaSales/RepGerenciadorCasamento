@@ -20,7 +20,7 @@ public class BuffetBean implements Serializable
 
     @EJB
     private BuffetServico buffetServico;
-    
+
     @EJB
     private CerimoniaServico cerimoniaServico;
 
@@ -41,16 +41,7 @@ public class BuffetBean implements Serializable
     public void salvar()
     {
         listar(); //atualize a minha lista
-
-        if (!buffets.contains(buffet))
-        {
-            buffetServico.salvar(buffet);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-        } else
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Buffet já existe!");
-        }
-
+        buffetServico.salvar(buffet);
         buffet = new Buffet(); //renove a instancia, para o proximo elemento        
     }
 
@@ -78,13 +69,15 @@ public class BuffetBean implements Serializable
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Buffet não existe!");
             }
         }
-        
-        if(!buffet.getComesBebes().isEmpty())//tem roupas, nao pode excluir esse noivo
+
+        if (!buffet.getComesBebes().isEmpty())//tem roupas, nao pode excluir esse noivo
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Esse buffet não pode ser excluido. Ele possui comes e bebes.");
         }
-        if(algumaCerimoniaMeTem(buffet) == true)
+        if (algumaCerimoniaMeTem(buffet) == true)
+        {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Pertenço a uma cerimonia. Não me exclua.");
+        }
     }
 
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
@@ -123,15 +116,17 @@ public class BuffetBean implements Serializable
     {
         this.buffet = buffet;
     }
-    
+
     private boolean algumaCerimoniaMeTem(Buffet buffet)
     {
         List<Cerimonia> cerimonias = cerimoniaServico.listar();
-        
-        for(Cerimonia cerimonia: cerimonias)
+
+        for (Cerimonia cerimonia : cerimonias)
         {
-            if (cerimonia.getBuffet().getId().equals(buffet.getId()))            
-               return true;                         
+            if (cerimonia.getBuffet().getId().equals(buffet.getId()))
+            {
+                return true;
+            }
         }
         return false;
     }

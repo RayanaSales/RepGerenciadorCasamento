@@ -1,6 +1,7 @@
 package servico;
 
 import entidades.Cerimonia;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -16,7 +17,9 @@ public class CerimoniaServico extends Servico
 {
     public void salvar(Cerimonia cerimonia)
     {
-        em.persist(cerimonia);
+        if(existente(cerimonia.getDataHora()) == false)
+            em.persist(cerimonia);
+        
         em.flush();
     }
 
@@ -41,9 +44,18 @@ public class CerimoniaServico extends Servico
         em.merge(cerimonia);
     }
 
-    public boolean existente(Cerimonia cerimonia)
-    {
-        em.flush();
-        return listar().contains(cerimonia);
+    private boolean existente(Date dataHora)
+    {        
+        TypedQuery<Cerimonia> query;
+        query = em.createQuery("select b from Cerimonia b where b.dataHora = ?1", Cerimonia.class);
+        query.setParameter(1, dataHora);
+        List<Cerimonia> cerimonias = query.getResultList();
+
+        if (cerimonias.isEmpty())
+        {
+            return false;
+        }
+
+        return true;
     }
 }

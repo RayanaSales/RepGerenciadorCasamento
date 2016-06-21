@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Presente;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
 import java.util.ArrayList;
@@ -9,17 +10,19 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.TypedQuery;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TelefoneServico extends Servico
 {
-
     public void salvar(Telefone telefone)
     {
         em.flush();
-        em.persist(telefone);
+        
+        if(existente(telefone.getNumero()) == false)
+            em.persist(telefone);
     }
     
     public List<Telefone> listarTelefonesPorCategoria(TelefoneCategoria categoria)
@@ -54,4 +57,18 @@ public class TelefoneServico extends Servico
         em.merge(telefone);
     }
 
+    private boolean existente(String numero)
+    {       
+        TypedQuery<Telefone> query;
+        query = em.createQuery("select b from Telefone b where b.numero like ?1", Telefone.class);
+        query.setParameter(1, numero);
+        List<Telefone> telefones = query.getResultList();
+
+        if (telefones.isEmpty())
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

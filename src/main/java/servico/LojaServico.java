@@ -1,5 +1,6 @@
 package servico;
 
+import entidades.Convidado;
 import entidades.Loja;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -24,7 +25,10 @@ public class LojaServico extends Servico {
 
             return false;
         } catch (Exception e) {
-            em.persist(loja);
+            
+            if(existente(loja.getCnpj()) == false)
+                em.persist(loja);
+            
             em.flush();
             return true;
         }
@@ -59,9 +63,19 @@ public class LojaServico extends Servico {
         }
 
     }
+    
+    private boolean existente(String cnpj)
+    {       
+        TypedQuery<Loja> query;
+        query = em.createQuery("select b from Loja b where b.cnpj like ?1", Loja.class);
+        query.setParameter(1, cnpj);
+        List<Loja> lojas = query.getResultList();
 
-    public boolean existente(Loja loja) {
-        em.flush();
-        return listar().contains(loja);
+        if (lojas.isEmpty())
+        {
+            return false;
+        }
+
+        return true;
     }
 }
