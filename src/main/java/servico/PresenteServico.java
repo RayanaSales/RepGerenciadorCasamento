@@ -1,6 +1,5 @@
 package servico;
 
-import entidades.Convidado;
 import entidades.Presente;
 import excecao.ExcecaoNegocio;
 import java.util.List;
@@ -29,10 +28,14 @@ public class PresenteServico extends Servico
         return em.createQuery("select p from Presente AS p", Presente.class).getResultList();
     }
 
-    public void remover(Presente presente)
+    public void remover(Presente presente) throws ExcecaoNegocio
     {
+        if(presente.associado() == false)
+        {
         Presente t = (Presente) em.find(Presente.class, presente.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(t);
+        em.remove(t);            
+        }
+        else throw new ExcecaoNegocio(ExcecaoNegocio.PRESENTE_ASSOCIADO);
     }
 
     public void atualizar(Presente presente) throws ExcecaoNegocio

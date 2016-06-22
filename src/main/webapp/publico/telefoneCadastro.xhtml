@@ -59,7 +59,10 @@
                 </p:column>
                 <p:column headerText="Categoria" sortBy="#{telefone.categoria}">
                     <h:outputText value="#{telefone.categoria}"></h:outputText>
-                </p:column>   
+                </p:column>  
+                <p:column headerText="Loja" sortBy="#{telefone.loja.nome}">
+                    <h:outputText value="#{telefone.loja.nome}"></h:outputText>
+                </p:column>
                 
             </p:dataTable>
         </p:fieldset>

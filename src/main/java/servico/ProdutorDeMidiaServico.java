@@ -34,8 +34,7 @@ public class ProdutorDeMidiaServico extends Servico
     public void remover(ProdutorDeMidia produtor)
     {
         ProdutorDeMidia c = (ProdutorDeMidia) em.find(ProdutorDeMidia.class, produtor.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(c);
-        em.flush();
+        em.remove(c);       
     }
 
     public void atualizar(ProdutorDeMidia produtor) throws ExcecaoNegocio

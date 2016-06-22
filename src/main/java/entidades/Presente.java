@@ -137,6 +137,13 @@ public class Presente implements Serializable
     {
         return lojas;
     }
+    
+    public boolean associado()
+    {
+        if(cerimonia == null && lojas.isEmpty())
+            return false;
+        return true;
+    }
 
     @Override
     public boolean equals(Object o)

@@ -17,7 +17,8 @@ import servico.PresenteServico;
 
 @ManagedBean
 @SessionScoped
-public class PresenteBean implements Serializable {
+public class PresenteBean implements Serializable
+{
 
     @EJB
     private PresenteServico presenteServico;
@@ -25,32 +26,40 @@ public class PresenteBean implements Serializable {
     public List<Presente> presentes;
     public Presente presente;
 
-    public PresenteBean() {
+    public PresenteBean()
+    {
         presente = new Presente();
     }
 
-    public void setar() {
+    public void setar()
+    {
 
     }
 
-    public void salvar() {
+    public void salvar()
+    {
         listar(); //atualize a minha lista
 
         //seta os presentes la na cerimonia
         presentes.add(presente);
         Cerimonia c = presente.getCerimonia();
-        if (c != null) {
+        if (c != null)
+        {
             c.setPresentes(presentes);
             presente.setCerimonia(c);
         }
 
-        try {
+        try
+        {
             presenteServico.salvar(presente);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-        } catch (ExcecaoNegocio ex) {
+        } catch (ExcecaoNegocio ex)
+        {
             adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) {
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
                 MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
@@ -59,16 +68,21 @@ public class PresenteBean implements Serializable {
         presente = new Presente(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(int id) {
+    public void editar(int id)
+    {
         listar(); //atualize a minha lista
         presente.setId(id);
-        try {
+        try
+        {
             presenteServico.atualizar(presente);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
-        } catch (ExcecaoNegocio ex) {
+        } catch (ExcecaoNegocio ex)
+        {
             adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) {
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
                 MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
@@ -77,44 +91,53 @@ public class PresenteBean implements Serializable {
         presente = new Presente();
     }
 
-    public void remover(Presente presente) {
-        listar(); //atualize a minha lista
-
-        if (presente.getLojas().isEmpty()) //se nao tiver lojas
+    public void remover(Presente presente)
+    {
+        try
         {
-            if (presentes.contains(presente)) {
-                presenteServico.remover(presente);
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
-            } else {
-                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente não existe!");
+            presenteServico.remover(presente);
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
-        } else {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente não pode ser excluido. Possui lojas.");
         }
     }
 
-    public void listar() {
+    public void listar()
+    {
         presentes = presenteServico.listar();
     }
 
-    public List<Presente> getPresentes() {
+    public List<Presente> getPresentes()
+    {
         listar(); //atualize a minha lista
         return presentes;
     }
 
-    public Presente getPresente() {
+    public Presente getPresente()
+    {
         return presente;
     }
 
-    public void setPresente(Presente presente) {
+    public void setPresente(Presente presente)
+    {
         this.presente = presente;
     }
 
-    public void setPresenteServico(PresenteServico presenteServico) {
+    public void setPresenteServico(PresenteServico presenteServico)
+    {
         this.presenteServico = presenteServico;
     }
 
-    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem) {
+    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
+    {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }

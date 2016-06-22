@@ -28,11 +28,14 @@ public class LocalizacaoServico extends Servico
         return em.createQuery("select t from Localizacao AS t", Localizacao.class).getResultList();
     }
 
-    public void remover(Localizacao localizacao)
+    public void remover(Localizacao localizacao) throws ExcecaoNegocio
     {
+        if(localizacao.associada() == false)
+        {
         Localizacao t = (Localizacao) em.find(Localizacao.class, localizacao.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(t);
-        em.flush();
+        em.remove(t);  
+        }
+        else throw new ExcecaoNegocio(ExcecaoNegocio.LOCAL_ASSOCIADO);
     }
 
     public void atualizar(Localizacao localizacao) throws ExcecaoNegocio

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -43,6 +44,10 @@ public class Telefone implements Serializable
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id")
     private Pessoa pessoa;
+    
+    //one to one bidirecional
+    @OneToOne(mappedBy = "telefone")
+    private Loja loja;
 
     public Telefone()
     {
@@ -65,6 +70,16 @@ public class Telefone implements Serializable
         this.id = id;
     }
 
+    public Loja getLoja()
+    {
+        return loja;
+    }
+
+    public void setLoja(Loja loja)
+    {
+        this.loja = loja;
+    }
+    
     public TelefoneCategoria getCategoria()
     {
         return categoria;
@@ -128,5 +143,13 @@ public class Telefone implements Serializable
         int hash = 5;
         hash = 71 * hash + this.id;
         return hash;
+    }
+    
+    public boolean associado()
+    {       
+        if(pessoa == null && loja == null)
+            return false;
+        
+        return true;       
     }
 }

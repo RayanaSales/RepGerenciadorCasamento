@@ -19,7 +19,8 @@ import servico.TelefoneServico;
 
 @ManagedBean
 @SessionScoped
-public class TelefoneBean implements Serializable {
+public class TelefoneBean implements Serializable
+{
 
     @EJB
     private TelefoneServico telefoneServico;
@@ -28,15 +29,18 @@ public class TelefoneBean implements Serializable {
 
     public Telefone telefone;
 
-    public TelefoneBean() {
+    public TelefoneBean()
+    {
         telefone = new Telefone();
     }
 
-    public List<Telefone> buscarTelefonesCelulares() {
+    public List<Telefone> buscarTelefonesCelulares()
+    {
         return telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.celular);
     }
 
-    public List<Telefone> buscarTelefonesFixos() {
+    public List<Telefone> buscarTelefonesFixos()
+    {
         List<Telefone> fixos = new ArrayList<>();
 
         fixos.addAll(telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.residencial));
@@ -45,26 +49,33 @@ public class TelefoneBean implements Serializable {
         return fixos;
     }
 
-    public void salvar() {
+    public void salvar()
+    {
         listar(); //atualize a minha lista
 
         //SE N TEM CATEGORIA, EH PQ EH UM CELULAR
-        if (telefone.getCategoria() == null) {
+        if (telefone.getCategoria() == null)
+        {
             telefone.setCategoria(TelefoneCategoria.celular);
             Pessoa pessoa = telefone.getPessoa(); //se houver pessoa, sete a pessoa no telefone
-            if (pessoa != null) {
+            if (pessoa != null)
+            {
                 pessoa.setTelefones(telefones);
                 telefone.setPessoa(pessoa);
             }
         }
 
-        try {
+        try
+        {
             telefoneServico.salvar(telefone);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-        } catch (ExcecaoNegocio ex) {
+        } catch (ExcecaoNegocio ex)
+        {
             adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) {
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
                 MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
@@ -72,19 +83,25 @@ public class TelefoneBean implements Serializable {
         telefone = new Telefone(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(int id) throws ExcecaoNegocio {
+    public void editar(int id) throws ExcecaoNegocio
+    {
         listar(); //atualize a minha lista      
 
         telefone.setId(id);
-        if (telefone.getCategoria() == null) {
+        if (telefone.getCategoria() == null)
+        {
             telefone.setCategoria(TelefoneCategoria.celular);
-            try {
+            try
+            {
                 telefoneServico.atualizar(telefone);
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
-            } catch (ExcecaoNegocio ex) {
+            } catch (ExcecaoNegocio ex)
+            {
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-            } catch (EJBException ex) {
-                if (ex.getCause() instanceof ConstraintViolationException) {
+            } catch (EJBException ex)
+            {
+                if (ex.getCause() instanceof ConstraintViolationException)
+                {
                     MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                     adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
                 }
@@ -94,39 +111,55 @@ public class TelefoneBean implements Serializable {
         }
     }
 
-    public void remover(Telefone tel) {
+    public void remover(Telefone tel)
+    {
         listar(); //atualize a minha lista
 
-        if (telefones.contains(tel)) {
+        try
+        {
             telefoneServico.remover(tel);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
-        } else {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone não existe!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
         }
     }
 
-    public void listar() {
+    public void listar()
+    {
         telefones = telefoneServico.listar();
     }
 
-    public List<Telefone> getTelefones() {
+    public List<Telefone> getTelefones()
+    {
         listar(); //atualize a minha lista
         return telefones;
     }
 
-    public Telefone getTelefone() {
+    public Telefone getTelefone()
+    {
         return telefone;
     }
 
-    public void setTelefone(Telefone telefone) {
+    public void setTelefone(Telefone telefone)
+    {
         this.telefone = telefone;
     }
 
-    public void setTelefoneServico(TelefoneServico telefoneServico) {
+    public void setTelefoneServico(TelefoneServico telefoneServico)
+    {
         this.telefoneServico = telefoneServico;
     }
 
-    public TelefoneCategoria[] getCategorias() {
+    public TelefoneCategoria[] getCategorias()
+    {
         TelefoneCategoria[] categorias = new TelefoneCategoria[2];
 
         categorias[0] = TelefoneCategoria.empresarial;
@@ -135,7 +168,8 @@ public class TelefoneBean implements Serializable {
         return categorias;
     }
 
-    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem) {
+    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
+    {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }

@@ -1,0 +1,13 @@
+ENTIDADES DOMINANTES:
+Pessoa, Loja, Cerimonia, Buffet.
+
+ENTIDADES DOMINADAS:
+ComesBebes, Local, Presente, Roupa, Telefone.
+
+- REMOÇÃO: LEVANTAMENTO DE EXCEÇÃO 
+Obs: Entidades dominantes podem ser excluidas se estiverem relacionadas as dominadas. Nese caso 
+exclue todo mundo envolvido na transação. Ex: Se excluir noivo, exclue tudo que tá relacionado a ele.
+
+Obs2: Entidades dominadas não podem ser excluidas se estiverem relacionadas as dominantes. Nese caso 
+levanta uma exceção de negócio. Ex: Se excluir um telefone que tá associado a um noivo, uma mensagem 
+aparece "não pode excluir, ta associado a pessoa".

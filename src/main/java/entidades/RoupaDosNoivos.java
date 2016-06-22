@@ -88,6 +88,14 @@ public class RoupaDosNoivos implements Serializable {
         this.valor = valor;
     }
     
+    public boolean associado()
+    {
+        if(noivo == null)
+            return false;
+        
+        return true;
+    }
+    
     @Override
     public boolean equals(Object o)
     {

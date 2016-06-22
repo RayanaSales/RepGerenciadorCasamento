@@ -45,8 +45,7 @@ public class ComesBebes implements Serializable
     @NotNull
     @Enumerated(EnumType.STRING)
     ComesBebesCategoria categoria;
-  
-    
+      
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;
@@ -140,6 +139,13 @@ public class ComesBebes implements Serializable
     public void setProduto(String produto)
     {
         this.produto = produto;
+    }
+    
+    public boolean associado()
+    {
+        if(buffet == null)
+            return false;
+        return true;
     }
 
     @Override

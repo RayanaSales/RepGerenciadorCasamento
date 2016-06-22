@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -51,14 +52,20 @@ public class Localizacao implements Serializable
     @Pattern(regexp = "[0-9]+", message = "{entidades.Localizacao.cep}")
     @Column(name = "txt_cep")
     private String cep;
-    
-    // PROBLEMA AO USAR O PATTERN COM INTEIROS.
-    //@Pattern(regexp = "[0-9]+", message = "{entidades.Convidado.numero}")
+        
     @Column(name = "numero_numero")
     private int numero;
 
     @Enumerated(EnumType.STRING)
     EstadosDoBrasil estado;
+    
+    //one to one bidirecional
+    @OneToOne(mappedBy = "localizacao")
+    private Cerimonia cerimonia;
+    
+    //one to one bidirecional
+    @OneToOne(mappedBy = "localizacao")
+    private Loja loja;
 
     public Localizacao()
     {
@@ -165,6 +172,33 @@ public class Localizacao implements Serializable
         this.estado = estado;
     }
 
+    public Cerimonia getCerimonia()
+    {
+        return cerimonia;
+    }
+
+    public void setCerimonia(Cerimonia cerimonia)
+    {
+        this.cerimonia = cerimonia;
+    }
+
+    public Loja getLoja()
+    {
+        return loja;
+    }
+
+    public void setLoja(Loja loja)
+    {
+        this.loja = loja;
+    }    
+    
+    public boolean associada()
+    {
+        if(loja == null && cerimonia == null)
+            return false;
+        return true;
+    }
+    
     @Override
     public boolean equals(Object o)
     {

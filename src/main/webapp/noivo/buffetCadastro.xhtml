@@ -37,7 +37,10 @@
                 </p:column>
                 <p:column headerText="Valor" sortBy="#{buffet.valorTotalGasto}">
                     <h:outputText value="#{buffet.valorTotalGasto}"></h:outputText>
-                </p:column> 
+                </p:column>
+                <p:column headerText="Cerimonia" sortBy="#{buffet.cerimonia}">
+                    <h:outputText value="#{buffet.cerimonia.dataHora}"></h:outputText>
+                </p:column>
                 <p:column headerText="Comes e Bebes" >
                     <p:selectOneMenu id="comesBebes" >
                         <f:selectItems value="#{buffet.comesBebes}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />

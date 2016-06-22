@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
@@ -19,7 +20,6 @@ import javax.validation.constraints.NotNull;
 @SequenceGenerator(name = "BUFFET_SEQUENCE", sequenceName = "BUFFET_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Buffet implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BUFFET_SEQUENCE")
     private int id;
@@ -32,6 +32,10 @@ public class Buffet implements Serializable
     @OneToMany(mappedBy = "buffet", fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<ComesBebes> comesBebes;
+    
+    //one to one bidirecional
+    @OneToOne(mappedBy = "buffet")
+    private Cerimonia cerimonia;
 
     public Buffet()
     {
@@ -85,6 +89,25 @@ public class Buffet implements Serializable
         return comesBebes;
     }
 
+    public Cerimonia getCerimonia()
+    {
+        return cerimonia;
+    }
+
+    public void setCerimonia(Cerimonia cerimonia)
+    {
+        this.cerimonia = cerimonia;
+    }
+        
+    public boolean associado()
+    {       
+        //A CERIMONIA, E DOMINANTE, EU TB, POREM CERIMONIA, EH MAIS IMPORTANTE Q EU. ENTAO ELA ME EXCLUE.
+        if(cerimonia == null) 
+            return false;
+        
+        return true;       
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -95,27 +118,7 @@ public class Buffet implements Serializable
                 Buffet outra = (Buffet) o;
 
                 if (Objects.equals(this.valorTotalGasto, outra.valorTotalGasto)) //confere atributos
-                {
-                    /* int tamanhoLista = outra.getComesBebes().size();
-                    int loops = 0;
-
-                    for (ComesBebes cb1 : this.comesBebes)//confere itens da lista
-                    {
-                        for (ComesBebes cb2 : outra.comesBebes)
-                        {
-                            if (cb1.getProduto().equals(cb2.getProduto()) && cb1.getCategoria().equals(cb2.getCategoria())
-                                    && cb1.getBuffet().getId() == cb2.getBuffet().getId() && cb1.getLoja().equals(cb2.getLoja())
-                                    && cb1.getQuantidade() == cb2.getQuantidade() && cb1.getValor() == cb2.getValor())
-                            {
-                                loops++;
-                            }
-                        }
-                    }
-                    if (loops == tamanhoLista)
-                    {
-                        return true;
-                    } */
-
+                {                   
                     return true; //qd descomentar o de cima, tira essa linha
                 }
             }

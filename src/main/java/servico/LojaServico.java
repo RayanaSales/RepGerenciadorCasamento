@@ -15,33 +15,16 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class LojaServico extends Servico
 {
-
     public void salvar(Loja loja) throws ExcecaoNegocio
-    {
-        // Quando o objeto não existe no banco o getSingleResult() lança uma exceção, por isso
-        // o código está dessa forma, ai entra no catch e salva.
-       /* try
+    {       
+        em.flush();
+        if (existente(loja.getCnpj()) == false)
         {
-            TypedQuery query = em.createQuery("SELECT c FROM Loja c WHERE c.cnpj = ?1 ", Loja.class);
-            query.setParameter(1, loja.getCnpj());
-            Loja l = (Loja) query.getSingleResult();
-
-            return false;
-        } catch (Exception e)
-        {
-
-            if (existente(loja.getCnpj()) == false)
-            {
-                em.persist(loja);
-            }
-
-            em.flush();
-            return true;
-        } */
-        em.flush();        
-        if(existente(loja.getCnpj()) == false)
             em.persist(loja);
-        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        } else
+        {
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        }
     }
 
     public List<Loja> listar()
@@ -56,18 +39,19 @@ public class LojaServico extends Servico
     {
         Loja c = (Loja) em.find(Loja.class, loja.getId()); //se n tiver isso, o jpa acha que n deatachou        
         em.remove(c);
-        em.flush();
     }
 
     public void atualizar(Loja loja) throws ExcecaoNegocio
     {
-
-        
-        em.flush();        
-        if(existente(loja.getCnpj()) == false)
+        em.flush();
+        if (existente(loja.getCnpj()) == false)
+        {
             em.merge(loja);
-        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
-        
+        } else
+        {
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        }
+
         /*
         
         try
@@ -83,8 +67,7 @@ public class LojaServico extends Servico
             em.merge(loja);
             return true;
         }
-*/
-
+         */
     }
 
     private boolean existente(String cnpj)

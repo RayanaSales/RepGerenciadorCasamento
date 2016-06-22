@@ -20,10 +20,13 @@ public class TelefoneServico extends Servico
     public void salvar(Telefone telefone) throws ExcecaoNegocio
     {
         em.flush();
-        if (existente(telefone.getNumero()) == false)        
-            em.persist(telefone);        
-        else         
-            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);        
+        if (existente(telefone.getNumero()) == false)
+        {
+            em.persist(telefone);
+        } else
+        {
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        }
     }
 
     public List<Telefone> listarTelefonesPorCategoria(TelefoneCategoria categoria)
@@ -46,19 +49,28 @@ public class TelefoneServico extends Servico
         return em.createQuery("select t from Telefone AS t", Telefone.class).getResultList();
     }
 
-    public void remover(Telefone telefone)
+    public void remover(Telefone telefone) throws ExcecaoNegocio
     {
-        Telefone t = (Telefone) em.find(Telefone.class, telefone.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(t);
+        if (telefone.associado() == false)
+        {
+            Telefone t = (Telefone) em.find(Telefone.class, telefone.getId()); //se n tiver isso, o jpa acha que n deatachou        
+            em.remove(t);
+        } else
+        {
+            throw new ExcecaoNegocio(ExcecaoNegocio.TELEFONE_ASSOCIADO);
+        }
     }
 
     public void atualizar(Telefone telefone) throws ExcecaoNegocio
     {
         em.flush();
-        if (existente(telefone.getNumero()) == false)        
-            em.merge(telefone);        
-        else         
-            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);        
+        if (existente(telefone.getNumero()) == false)
+        {
+            em.merge(telefone);
+        } else
+        {
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        }
     }
 
     private boolean existente(String numero)

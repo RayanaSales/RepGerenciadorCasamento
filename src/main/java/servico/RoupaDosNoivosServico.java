@@ -1,6 +1,5 @@
 package servico;
 
-import entidades.Convidado;
 import entidades.RoupaDosNoivos;
 import excecao.ExcecaoNegocio;
 import java.util.List;
@@ -30,10 +29,14 @@ public class RoupaDosNoivosServico extends Servico
         return em.createQuery("select t from RoupaDosNoivos AS t", RoupaDosNoivos.class).getResultList();
     }
 
-    public void remover(RoupaDosNoivos roupa)
+    public void remover(RoupaDosNoivos roupa) throws ExcecaoNegocio
     {
+        if(roupa.associado() == false)
+        {
         RoupaDosNoivos r = (RoupaDosNoivos) em.find(RoupaDosNoivos.class, roupa.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(r);
+        em.remove(r);            
+        }
+        else throw new ExcecaoNegocio(ExcecaoNegocio.ROUPA_ASSOCIADO);
     }
 
     public void atualizar(RoupaDosNoivos roupa) throws ExcecaoNegocio

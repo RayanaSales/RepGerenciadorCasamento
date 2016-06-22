@@ -70,6 +70,15 @@ public class Noivo extends Pessoa implements Serializable //botar superclasse pe
         this.senha = senha;
     }
     
+//    @Override
+//    public boolean associado()
+//    {
+//        if (super.associado() == false && roupaDosNoivos.isEmpty())
+//            return false;
+//        
+//        return true;
+//    }
+    
      @Override
     public boolean equals(Object o)
     {

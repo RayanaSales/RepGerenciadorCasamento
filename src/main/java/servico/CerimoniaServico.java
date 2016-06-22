@@ -35,8 +35,7 @@ public class CerimoniaServico extends Servico
     public void remover(Cerimonia cerimonia)
     {
         Cerimonia c = (Cerimonia) em.find(Cerimonia.class, cerimonia.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(c);
-        em.flush();
+        em.remove(c);        
     }
 
     public void atualizar(Cerimonia cerimonia) throws ExcecaoNegocio

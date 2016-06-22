@@ -148,6 +148,15 @@ public class Pessoa implements Serializable
     {
         this.cerimonia = cerimonia;
     }
+    
+    
+//    public boolean associado()
+//    {
+//        if(telefones.isEmpty() && cerimonia == null)
+//            return false;
+//                    
+//        return true;
+//    }
 
     @Override
     public boolean equals(Object o)

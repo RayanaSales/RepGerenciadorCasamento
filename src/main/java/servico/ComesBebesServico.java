@@ -28,10 +28,14 @@ public class ComesBebesServico extends Servico
         return em.createQuery("select t from ComesBebes AS t", ComesBebes.class).getResultList();
     }
 
-    public void remover(ComesBebes cb)
+    public void remover(ComesBebes cb) throws ExcecaoNegocio
     {
+        if(cb.associado() == false)
+        {
         ComesBebes t = (ComesBebes) em.find(ComesBebes.class, cb.getId()); //se n tiver isso, o jpa acha que n deatachou        
         em.remove(t);
+        }
+        else throw new ExcecaoNegocio(ExcecaoNegocio.COMESBEBES_ASSOCIADO);
     }
 
     public void atualizar(ComesBebes cb) throws ExcecaoNegocio

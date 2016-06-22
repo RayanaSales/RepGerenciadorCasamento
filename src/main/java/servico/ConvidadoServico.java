@@ -34,8 +34,7 @@ public class ConvidadoServico extends Servico
     public void remover(Convidado convidado)
     {
         Convidado c = (Convidado) em.find(Convidado.class, convidado.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(c);
-        em.flush();
+        em.remove(c);        
     }
 
     public void atualizar(Convidado convidado) throws ExcecaoNegocio

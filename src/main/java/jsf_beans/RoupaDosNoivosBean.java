@@ -18,7 +18,8 @@ import servico.RoupaDosNoivosServico;
 
 @ManagedBean
 @SessionScoped
-public class RoupaDosNoivosBean implements Serializable {
+public class RoupaDosNoivosBean implements Serializable
+{
 
     @EJB
     private RoupaDosNoivosServico roupaServico;
@@ -29,28 +30,35 @@ public class RoupaDosNoivosBean implements Serializable {
     public List<RoupaDosNoivos> roupas;
     public RoupaDosNoivos roupa;
 
-    public RoupaDosNoivosBean() {
+    public RoupaDosNoivosBean()
+    {
         roupa = new RoupaDosNoivos();
     }
 
-    public void salvar() {
+    public void salvar()
+    {
         listar(); //atualize a minha lista
 
         //seta em noivo , a lista de roupas
         roupas.add(roupa);
         Noivo n = roupa.getNoivo();
-        if (n != null) {
+        if (n != null)
+        {
             n.setRoupaDosNoivos(roupas);
             roupa.setNoivo(n);
         }
 
-        try {
+        try
+        {
             roupaServico.salvar(roupa);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-        } catch (ExcecaoNegocio ex) {
+        } catch (ExcecaoNegocio ex)
+        {
             adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) {
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
                 MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
@@ -58,17 +66,22 @@ public class RoupaDosNoivosBean implements Serializable {
         roupa = new RoupaDosNoivos(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(int id) {
+    public void editar(int id)
+    {
         listar(); //atualize a minha lista      
 
         roupa.setId(id);
-        try {
+        try
+        {
             roupaServico.atualizar(roupa);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
-        } catch (ExcecaoNegocio ex) {
+        } catch (ExcecaoNegocio ex)
+        {
             adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex) {
-            if (ex.getCause() instanceof ConstraintViolationException) {
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
                 MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
@@ -77,48 +90,64 @@ public class RoupaDosNoivosBean implements Serializable {
         roupa = new RoupaDosNoivos();
     }
 
-    public void remover(RoupaDosNoivos roupa) {
-        listar(); //atualize a minha lista
-
-        if (roupas.contains(roupa)) {
+    public void remover(RoupaDosNoivos roupa)
+    {
+        try
+        {
             roupaServico.remover(roupa);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
-        } else {
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone não existe!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
         }
     }
 
-    public void listar() {
+    public void listar()
+    {
         roupas = roupaServico.listar();
     }
 
-    public List<RoupaDosNoivos> getRoupas() {
+    public List<RoupaDosNoivos> getRoupas()
+    {
         listar(); //atualize a minha lista
         return roupas;
     }
 
-    public RoupaDosNoivos getRoupa() {
+    public RoupaDosNoivos getRoupa()
+    {
         return roupa;
     }
 
-    public RoupaDosNoivosServico getRoupaDosNoivosServico() {
+    public RoupaDosNoivosServico getRoupaDosNoivosServico()
+    {
         return roupaServico;
     }
 
-    public void setRoupaDosNoivos(RoupaDosNoivos roupa) {
+    public void setRoupaDosNoivos(RoupaDosNoivos roupa)
+    {
         this.roupa = roupa;
     }
 
-    public void setRoupaDosNoivosServico(RoupaDosNoivosServico roupaServico) {
+    public void setRoupaDosNoivosServico(RoupaDosNoivosServico roupaServico)
+    {
         this.roupaServico = roupaServico;
     }
 
-    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem) {
+    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
+    {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public List<Noivo> listarNoivos() {
+    public List<Noivo> listarNoivos()
+    {
         return noivoServico.listar();
     }
 }
