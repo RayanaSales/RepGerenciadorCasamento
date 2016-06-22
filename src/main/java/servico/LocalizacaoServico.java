@@ -28,23 +28,25 @@ public class LocalizacaoServico extends Servico
         return em.createQuery("select t from Localizacao AS t", Localizacao.class).getResultList();
     }
 
-    public void remover(Localizacao telefone)
+    public void remover(Localizacao localizacao)
     {
-        Localizacao t = (Localizacao) em.find(Localizacao.class, telefone.getId()); //se n tiver isso, o jpa acha que n deatachou        
+        Localizacao t = (Localizacao) em.find(Localizacao.class, localizacao.getId()); //se n tiver isso, o jpa acha que n deatachou        
         em.remove(t);
         em.flush();
     }
 
-    public void atualizar(Localizacao telefone)
+    public void atualizar(Localizacao localizacao) throws ExcecaoNegocio
     {
-        em.merge(telefone);
-        //       em.flush();
+       em.flush();
+        if (existente(localizacao.getLogradouro()) == false)        
+            em.merge(localizacao);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
-    public boolean existente(Localizacao telefone)
+    public boolean existente(Localizacao localizacao)
     {
         em.flush();
-        return listar().contains(telefone);
+        return listar().contains(localizacao);
     }
 
     private boolean existente(String logradouro)

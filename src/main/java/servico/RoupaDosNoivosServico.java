@@ -36,10 +36,12 @@ public class RoupaDosNoivosServico extends Servico
         em.remove(r);
     }
 
-    public void atualizar(RoupaDosNoivos roupa)
+    public void atualizar(RoupaDosNoivos roupa) throws ExcecaoNegocio
     {              
-        em.flush();
-        em.merge(roupa);
+       em.flush();        
+        if(existente(roupa.getRoupa()) == false)
+            em.merge(roupa);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);  
     }
 
     private boolean existente(String roupa)

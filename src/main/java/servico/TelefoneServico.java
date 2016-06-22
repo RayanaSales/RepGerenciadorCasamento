@@ -55,7 +55,10 @@ public class TelefoneServico extends Servico
     public void atualizar(Telefone telefone) throws ExcecaoNegocio
     {
         em.flush();
-        em.merge(telefone);
+        if (existente(telefone.getNumero()) == false)        
+            em.merge(telefone);        
+        else         
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);        
     }
 
     private boolean existente(String numero)

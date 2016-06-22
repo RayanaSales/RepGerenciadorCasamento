@@ -59,9 +59,17 @@ public class LojaServico extends Servico
         em.flush();
     }
 
-    public boolean atualizar(Loja loja)
+    public void atualizar(Loja loja) throws ExcecaoNegocio
     {
 
+        
+        em.flush();        
+        if(existente(loja.getCnpj()) == false)
+            em.merge(loja);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        
+        /*
+        
         try
         {
             TypedQuery query = em.createQuery("SELECT c FROM Loja c WHERE c.cnpj = ?1 ", Loja.class);
@@ -75,6 +83,7 @@ public class LojaServico extends Servico
             em.merge(loja);
             return true;
         }
+*/
 
     }
 

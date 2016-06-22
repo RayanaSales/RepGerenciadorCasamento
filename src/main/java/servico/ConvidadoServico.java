@@ -38,10 +38,12 @@ public class ConvidadoServico extends Servico
         em.flush();
     }
 
-    public void atualizar(Convidado convidado)
+    public void atualizar(Convidado convidado) throws ExcecaoNegocio
     {
         em.flush();
-        em.merge(convidado);
+        if(existente(convidado.getEmail()) == false)
+            em.merge(convidado);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
     public boolean existente(Convidado convidado)

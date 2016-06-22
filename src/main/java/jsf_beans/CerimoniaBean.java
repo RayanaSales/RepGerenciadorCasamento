@@ -22,8 +22,7 @@ import servico.CerimoniaServico;
 
 @ManagedBean
 @SessionScoped
-public class CerimoniaBean implements Serializable
-{
+public class CerimoniaBean implements Serializable {
 
     @EJB
     public CerimoniaServico cerimoniaServico;
@@ -31,131 +30,116 @@ public class CerimoniaBean implements Serializable
     public List<Cerimonia> cerimonias;
     public Cerimonia cerimonia;
 
-    public CerimoniaBean()
-    {
+    public CerimoniaBean() {
         cerimonia = new Cerimonia();
     }
 
-    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
-    {
+    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem) {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void salvar()
-    {
-        if (validaObjeto(cerimonia) == true)
-        {
-            try
-            {
+    public void salvar() {
+        if (validaObjeto(cerimonia) == true) {
+            try {
                 cerimoniaServico.salvar(cerimonia);
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-            } catch (ExcecaoNegocio ex)
-            {
+            } catch (ExcecaoNegocio ex) {
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-            } catch (EJBException ex)
-            {
-                if (ex.getCause() instanceof ConstraintViolationException)
-                {
+            } catch (EJBException ex) {
+                if (ex.getCause() instanceof ConstraintViolationException) {
                     MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                     adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
                 }
             }
             cerimonia = new Cerimonia(); //renove a instancia, para o proximo elemento
 
-        } else
-        {
+        } else {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
         }
     }
 
-    public void editar(int id)
-    {
+    public void editar(int id) {
         listar(); //atualize a minha lista
         cerimonia.setId(id);
-        cerimoniaServico.atualizar(cerimonia);
-        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        try {
+            cerimoniaServico.atualizar(cerimonia);
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        } catch (ExcecaoNegocio ex) {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex) {
+            if (ex.getCause() instanceof ConstraintViolationException) {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
+
         cerimonia = new Cerimonia();
     }
 
-    public void remover(Cerimonia cerimonia)
-    {
+    public void remover(Cerimonia cerimonia) {
         listar(); //atualize a minha lista
 
         if (cerimonia.getPessoas().isEmpty() && cerimonia.getPresentes().isEmpty()) //se não tiver nada nas listas
         {
-            if (cerimonias.contains(cerimonia))
-            {
+            if (cerimonias.contains(cerimonia)) {
                 cerimoniaServico.remover(cerimonia);
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
-            } else
-            {
+            } else {
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cerimonia não existe!");
             }
         }
 
-        if (!cerimonia.getPessoas().isEmpty())
-        {
+        if (!cerimonia.getPessoas().isEmpty()) {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Essa cerimonia não pode ser excluida. Ela possui pessoas.");
         }
-        if (!cerimonia.getPresentes().isEmpty())
-        {
+        if (!cerimonia.getPresentes().isEmpty()) {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Essa cerimonia não pode ser excluida. Ela possui presentes.");
         }
     }
 
-    public void listar()
-    {
+    public void listar() {
         cerimonias = cerimoniaServico.listar();
     }
 
-    public List<Cerimonia> getCerimonias()
-    {
+    public List<Cerimonia> getCerimonias() {
         listar(); //atualize a minha lista
 
         return cerimonias;
     }
 
-    public Cerimonia getCerimonia()
-    {
+    public Cerimonia getCerimonia() {
         return cerimonia;
     }
 
-    public CerimoniaServico getCerimoniaServico()
-    {
+    public CerimoniaServico getCerimoniaServico() {
         return cerimoniaServico;
     }
 
-    public void setCerimonia(Cerimonia cerimonia)
-    {
+    public void setCerimonia(Cerimonia cerimonia) {
         this.cerimonia = cerimonia;
     }
 
-    public void setTelefoneServico(CerimoniaServico cerimoniaServico)
-    {
+    public void setTelefoneServico(CerimoniaServico cerimoniaServico) {
         this.cerimoniaServico = cerimoniaServico;
     }
 
-    public boolean validaObjeto(Cerimonia c)
-    {
+    public boolean validaObjeto(Cerimonia c) {
         boolean valido = false;
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Cerimonia>> constraintViolations = validator.validate(c);
-        if (constraintViolations.size() > 0)
-        {
+        if (constraintViolations.size() > 0) {
             Iterator<ConstraintViolation<Cerimonia>> iterator = constraintViolations.iterator();
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 ConstraintViolation<Cerimonia> cv = iterator.next();
                 System.out.println(cv.getMessage());
                 System.out.println(cv.getPropertyPath());
             }
         }
 
-        if (constraintViolations.isEmpty())
-        {
+        if (constraintViolations.isEmpty()) {
             valido = true;
         }
 

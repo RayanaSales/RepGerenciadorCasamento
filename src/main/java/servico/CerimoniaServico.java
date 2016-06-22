@@ -39,10 +39,12 @@ public class CerimoniaServico extends Servico
         em.flush();
     }
 
-    public void atualizar(Cerimonia cerimonia)
+    public void atualizar(Cerimonia cerimonia) throws ExcecaoNegocio
     {
-        em.flush();
-        em.merge(cerimonia);
+       em.flush();
+        if(existente(cerimonia.getDataHora()) == false)
+            em.merge(cerimonia);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
     private boolean existente(Date dataHora)

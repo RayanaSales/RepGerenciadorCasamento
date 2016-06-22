@@ -34,10 +34,12 @@ public class ComesBebesServico extends Servico
         em.remove(t);
     }
 
-    public void atualizar(ComesBebes cb)
+    public void atualizar(ComesBebes cb) throws ExcecaoNegocio
     {              
-        em.flush();
-        em.merge(cb);
+         em.flush();        
+        if(existente(cb.getProduto()) == false)
+            em.merge(cb);
+         else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
     
     private boolean existente(String produto)

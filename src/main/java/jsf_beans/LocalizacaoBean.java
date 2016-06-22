@@ -23,8 +23,7 @@ import servico.LocalizacaoServico;
 
 @ManagedBean
 @SessionScoped
-public class LocalizacaoBean implements Serializable
-{
+public class LocalizacaoBean implements Serializable {
 
     @EJB
     private LocalizacaoServico localizacaoServico;
@@ -32,39 +31,30 @@ public class LocalizacaoBean implements Serializable
     public List<Localizacao> locais;
     public Localizacao localizacao;
 
-    public LocalizacaoBean()
-    {
+    public LocalizacaoBean() {
         localizacao = new Localizacao();
     }
 
-    public void listar()
-    {
+    public void listar() {
         locais = localizacaoServico.listar();
     }
 
-    public List<Localizacao> getLocais()
-    {
+    public List<Localizacao> getLocais() {
         listar(); //atualize a minha lista
         return locais;
     }
 
-    public void salvar()
-    {
-        if (validaObjeto(localizacao) == true)
-        {
+    public void salvar() {
+        if (validaObjeto(localizacao) == true) {
             listar(); //atualize a minha lista
 
-            try
-            {
+            try {
                 localizacaoServico.salvar(localizacao);
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-            } catch (ExcecaoNegocio ex)
-            {
+            } catch (ExcecaoNegocio ex) {
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-            } catch (EJBException ex)
-            {
-                if (ex.getCause() instanceof ConstraintViolationException)
-                {
+            } catch (EJBException ex) {
+                if (ex.getCause() instanceof ConstraintViolationException) {
                     MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                     adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
                 }
@@ -72,90 +62,84 @@ public class LocalizacaoBean implements Serializable
 
             localizacao = new Localizacao(); //renove a instancia, para o proximo elemento
 
-        } else
-        {
+        } else {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Objeto invalido");
         }
     }
 
-    public void editar(int id)
-    {
+    public void editar(int id) {
         listar(); //atualize a minha lista
         localizacao.setId(id);
-        localizacaoServico.atualizar(localizacao);
-        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        try {
+            localizacaoServico.atualizar(localizacao);
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        } catch (ExcecaoNegocio ex) {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex) {
+            if (ex.getCause() instanceof ConstraintViolationException) {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
+
         localizacao = new Localizacao();
     }
 
-    public void remover(Localizacao tel)
-    {
+    public void remover(Localizacao tel) {
         listar(); //atualize a minha lista
 
-        if (locais.contains(tel))
-        {
+        if (locais.contains(tel)) {
             localizacaoServico.remover(tel);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
-        } else
-        {
+        } else {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone não existe!");
         }
     }
 
-    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
-    {
+    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem) {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public Localizacao getLocalizacao()
-    {
+    public Localizacao getLocalizacao() {
         return localizacao;
     }
 
-    public LocalizacaoServico getLocalizacaoServico()
-    {
+    public LocalizacaoServico getLocalizacaoServico() {
         return localizacaoServico;
     }
 
-    public EstadosDoBrasil[] getEstados()
-    {
+    public EstadosDoBrasil[] getEstados() {
         return EstadosDoBrasil.values();
     }
 
-    public void setLocalizacao(Localizacao localizacao)
-    {
+    public void setLocalizacao(Localizacao localizacao) {
         this.localizacao = localizacao;
     }
 
-    public void setLocalizacaoServico(LocalizacaoServico localizacaoServico)
-    {
+    public void setLocalizacaoServico(LocalizacaoServico localizacaoServico) {
         this.localizacaoServico = localizacaoServico;
     }
 
-    public boolean validaObjeto(Localizacao c)
-    {
+    public boolean validaObjeto(Localizacao c) {
         boolean valido = false;
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Localizacao>> constraintViolations = validator.validate(c);
-        if (constraintViolations.size() > 0)
-        {
+        if (constraintViolations.size() > 0) {
             Iterator<ConstraintViolation<Localizacao>> iterator = constraintViolations.iterator();
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 ConstraintViolation<Localizacao> cv = iterator.next();
                 System.out.println(cv.getMessage());
                 System.out.println(cv.getPropertyPath());
             }
         }
 
-        if (constraintViolations.isEmpty())
-        {
+        if (constraintViolations.isEmpty()) {
             valido = true;
             System.out.println("LOCAL VALIDO");
-        } else
-        {
+        } else {
             System.out.println("LOCAL INVALIDOOOOOOOOOOOOOOOOOO");
         }
 

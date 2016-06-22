@@ -37,10 +37,12 @@ public class NoivoServico extends Servico
         else System.out.println("Noivo não existe");
     }
 
-    public void atualizar(Noivo noivo)
+    public void atualizar(Noivo noivo) throws ExcecaoNegocio
     {
-        em.flush();
-        em.merge(noivo);        
+      em.flush();        
+        if(existente(noivo.getEmail()) == false)
+            em.merge(noivo); 
+         else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);  
     }
     
     public boolean existente(Noivo noivo)

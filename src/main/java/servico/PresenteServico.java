@@ -35,10 +35,12 @@ public class PresenteServico extends Servico
         em.remove(t);
     }
 
-    public void atualizar(Presente presente)
+    public void atualizar(Presente presente) throws ExcecaoNegocio
     {              
-        em.flush();
-        em.merge(presente);
+       em.flush();
+        if(existente(presente.getNome()) == false)
+            em.merge(presente);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
     
     public Presente buscar(int id)

@@ -38,10 +38,12 @@ public class ProdutorDeMidiaServico extends Servico
         em.flush();
     }
 
-    public void atualizar(ProdutorDeMidia produtor)
+    public void atualizar(ProdutorDeMidia produtor) throws ExcecaoNegocio
     {
-        em.flush();
-        em.merge(produtor);
+        em.flush();        
+        if(existente(produtor.getEmail()) == false)
+            em.merge(produtor);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
     public boolean existente(ProdutorDeMidia produtor)

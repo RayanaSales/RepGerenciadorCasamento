@@ -20,8 +20,7 @@ import servico.ProdutorDeMidiaServico;
 
 @ManagedBean
 @SessionScoped
-public class ProdutorDeMidiaBean implements Serializable
-{
+public class ProdutorDeMidiaBean implements Serializable {
 
     @EJB
     public ProdutorDeMidiaServico produtorServico;
@@ -29,47 +28,38 @@ public class ProdutorDeMidiaBean implements Serializable
     public List<ProdutorDeMidia> produtores;
     public ProdutorDeMidia produtor;
 
-    public ProdutorDeMidiaBean()
-    {
+    public ProdutorDeMidiaBean() {
         produtor = new ProdutorDeMidia();
     }
 
-    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
-    {
+    protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem) {
         FacesMessage message = new FacesMessage(severity, mensagem, "");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void listar()
-    {
+    public void listar() {
         produtores = produtorServico.listar();
     }
 
-    public void salvar()
-    {
+    public void salvar() {
         listar(); //atualize a minha lista
 
         //seta o produto na cerimonia
         Cerimonia cerimonia = produtor.getCerimonia();
         List<Pessoa> novasPessoas = new ArrayList<>();
         novasPessoas.add(produtor);
-        if (cerimonia != null)
-        {
+        if (cerimonia != null) {
             cerimonia.setPessoas(novasPessoas);
         }
         produtor.setCerimonia(cerimonia);
 
-        try
-        {
+        try {
             produtorServico.salvar(produtor);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-        } catch (ExcecaoNegocio ex)
-        {
+        } catch (ExcecaoNegocio ex) {
             adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex)
-        {
-            if (ex.getCause() instanceof ConstraintViolationException)
-            {
+        } catch (EJBException ex) {
+            if (ex.getCause() instanceof ConstraintViolationException) {
                 MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
                 adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
             }
@@ -78,60 +68,59 @@ public class ProdutorDeMidiaBean implements Serializable
         produtor = new ProdutorDeMidia(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(int id)
-    {
+    public void editar(int id) {
         listar(); //atualize a minha lista
 
         produtor.setId(id);
-        produtorServico.atualizar(produtor);
-        adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        try {
+            produtorServico.atualizar(produtor);
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Alterado com sucesso!");
+        } catch (ExcecaoNegocio ex) {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex) {
+            if (ex.getCause() instanceof ConstraintViolationException) {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
+
         produtor = new ProdutorDeMidia();
     }
 
-    public void remover(ProdutorDeMidia produtor)
-    {
+    public void remover(ProdutorDeMidia produtor) {
         listar(); //atualize a minha lista
 
-        if (produtor.getTelefones().isEmpty())
-        { //nao tem, pode excluir
+        if (produtor.getTelefones().isEmpty()) { //nao tem, pode excluir
 
-            if (produtores.contains(produtor))
-            {
+            if (produtores.contains(produtor)) {
                 produtorServico.remover(produtor);
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
-            } else
-            {
+            } else {
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Produtor não existe!");
             }
-        } else
-        {
+        } else {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Esse produtor não pode ser excluido. Ele possui celulares.");
         }
     }
 
-    public ProdutorDeMidiaServico getProdutorServico()
-    {
+    public ProdutorDeMidiaServico getProdutorServico() {
         return produtorServico;
     }
 
-    public List<ProdutorDeMidia> getProdutores()
-    {
+    public List<ProdutorDeMidia> getProdutores() {
         listar(); //atualize a minha lista
         return produtores;
     }
 
-    public ProdutorDeMidia getProdutor()
-    {
+    public ProdutorDeMidia getProdutor() {
         return produtor;
     }
 
-    public void setProdutor(ProdutorDeMidia produtor)
-    {
+    public void setProdutor(ProdutorDeMidia produtor) {
         this.produtor = produtor;
     }
 
-    public ProdutorDeMidiaCategoria[] getCategorias()
-    {
+    public ProdutorDeMidiaCategoria[] getCategorias() {
         return ProdutorDeMidiaCategoria.values();
     }
 }

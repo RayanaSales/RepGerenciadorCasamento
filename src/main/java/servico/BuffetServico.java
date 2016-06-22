@@ -1,6 +1,7 @@
 package servico;
 
 import entidades.Buffet;
+import excecao.ExcecaoNegocio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -15,7 +16,7 @@ import javax.persistence.TypedQuery;
 public class BuffetServico extends Servico
 {
 
-    public void salvar(Buffet buffet)
+    public void salvar(Buffet buffet) throws ExcecaoNegocio
     {
         em.flush();
 
@@ -23,6 +24,7 @@ public class BuffetServico extends Servico
         {
             em.persist(buffet);
         }
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
 
         em.flush();
     }
@@ -39,10 +41,16 @@ public class BuffetServico extends Servico
         em.remove(t);
     }
 
-    public void atualizar(Buffet buffet)
+    public void atualizar(Buffet buffet) throws ExcecaoNegocio
     {
-        em.flush();
-        em.merge(buffet);
+         em.flush();
+
+        if (existente(buffet.getValorTotalGasto()) == false)
+        {
+            em.merge(buffet);
+        }
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+      
     }
 
     public Buffet buscar(int id)
