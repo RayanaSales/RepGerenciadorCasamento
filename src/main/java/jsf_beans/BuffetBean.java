@@ -7,11 +7,13 @@ import excecao.ExcecaoNegocio;
 import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
 import servico.BuffetServico;
@@ -27,23 +29,26 @@ public class BuffetBean implements Serializable {
     @EJB
     private CerimoniaServico cerimoniaServico;
 
-    public List<Buffet> buffets;
-    public Buffet buffet;
+    private List<Buffet> buffets;
+    
+    private Buffet buffet;
 
     public BuffetBean() {
         buffet = new Buffet();
     }
-
+    
+    /*
     public List<ComesBebes> buscarComesEBebes(int idBuffet) {
-        buffet = buffetServico.buscar(idBuffet); //trouxe a lista de comes e bebes        
+        Buffet buffet = buffetServico.buscar(idBuffet); //trouxe a lista de comes e bebes        
         return buffet.getComesBebes();
-    }
+    }*/
 
     public void salvar() {
 
         listar();
 
         try {
+            //buffet.setId(0);
             buffetServico.salvar(buffet);
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
         } catch (ExcecaoNegocio ex) {

@@ -29,7 +29,7 @@ public class Buffet implements Serializable
     @Column(name = "numero_valorTotal")
     private double valorTotalGasto; //chave secundaria
 
-    @OneToMany(mappedBy = "buffet", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "buffet", fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<ComesBebes> comesBebes;
 

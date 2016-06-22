@@ -39,8 +39,8 @@
                     <h:outputText value="#{buffet.valorTotalGasto}"></h:outputText>
                 </p:column> 
                 <p:column headerText="Comes e Bebes" >
-                    <p:selectOneMenu id="comesBebes" value="#{buffetBean.buffet.comesBebes}">
-                        <f:selectItems value="#{buffetBean.buscarComesEBebes(buffet.id)}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />
+                    <p:selectOneMenu id="comesBebes" >
+                        <f:selectItems value="#{buffet.comesBebes}" var="comesBebes" itemValue="#{comesBebes}" itemLabel="#{comesBebes.produto}"  />
                     </p:selectOneMenu> 
                 </p:column>
             </p:dataTable>

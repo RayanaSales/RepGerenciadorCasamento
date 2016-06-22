@@ -18,7 +18,7 @@ public class BuffetServico extends Servico
 
     public void salvar(Buffet buffet) throws ExcecaoNegocio
     {
-        em.flush();
+       
 
         if (existente(buffet.getValorTotalGasto()) == false)
         {
@@ -26,7 +26,7 @@ public class BuffetServico extends Servico
         }
         else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
 
-        em.flush();
+        
     }
 
     public List<Buffet> listar()
@@ -34,6 +34,13 @@ public class BuffetServico extends Servico
         em.flush();
         return em.createQuery("select t from Buffet AS t", Buffet.class).getResultList();
     }
+    
+    public List<Buffet> listarComComesBebes()
+    {
+        em.flush(); 
+        return em.createQuery("select t from Buffet AS t JOIN FETCH t.comesBebes", Buffet.class).getResultList();
+    }
+
 
     public void remover(Buffet buffet)
     {
