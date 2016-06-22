@@ -17,8 +17,10 @@
                 <p:message for="roupa" id="messageRoupa" severity="error"/>
 
                 <p:outputLabel for="valor" value="Valor:" />
-                <p:inputMask id="valor" value="#{roupaDosNoivosBean.roupa.valor}" mask="999?999"/>
-                <p:message for="valor" id="messageDatetime" severity="error"/>
+                <p:inputText id="valor" value="#{roupaDosNoivosBean.roupa.valor}">
+                    <f:validateDoubleRange minimum="0.0"/>
+                </p:inputText>
+                <p:message for="valor" id="messageValor" severity="error"/>
 
                 <p:outputLabel for="noivos" value="Noivo:" />
                 <p:selectOneMenu id="noivos" converter="noivoConverter" value="#{roupaDosNoivosBean.roupa.noivo}">

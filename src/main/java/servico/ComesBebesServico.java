@@ -1,7 +1,7 @@
 package servico;
 
-import entidades.Buffet;
 import entidades.ComesBebes;
+import excecao.ExcecaoNegocio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -15,12 +15,12 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class ComesBebesServico extends Servico
 {
-    public void salvar(ComesBebes cb)
+    public void salvar(ComesBebes cb) throws ExcecaoNegocio
     {
-        em.flush();
-        
+        em.flush();        
         if(existente(cb.getProduto()) == false)
             em.persist(cb);
+         else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
     public List<ComesBebes> listar()

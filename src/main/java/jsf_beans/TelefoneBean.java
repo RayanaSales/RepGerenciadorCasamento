@@ -3,14 +3,18 @@ package jsf_beans;
 import entidades.Pessoa;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolationException;
 import servico.TelefoneServico;
 
 @ManagedBean
@@ -29,7 +33,7 @@ public class TelefoneBean implements Serializable
     {
         telefone = new Telefone();
     }
-    
+
     public List<Telefone> buscarTelefonesCelulares()
     {
         return telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.celular);
@@ -41,7 +45,7 @@ public class TelefoneBean implements Serializable
 
         fixos.addAll(telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.residencial));
         fixos.addAll(telefoneServico.listarTelefonesPorCategoria(TelefoneCategoria.empresarial));
-                
+
         return fixos;
     }
 
@@ -53,33 +57,33 @@ public class TelefoneBean implements Serializable
         if (telefone.getCategoria() == null)
         {
             telefone.setCategoria(TelefoneCategoria.celular);
+            Pessoa pessoa = telefone.getPessoa(); //se houver pessoa, sete a pessoa no telefone
+            if (pessoa != null)
+            {
+                pessoa.setTelefones(telefones);
+                telefone.setPessoa(pessoa);
+            }
         }
 
-//        if (!telefones.contains(telefone))
-//        {
-            telefones.add(telefone);
-
-            //seta a pessoa no telefone
-            if (telefone.getCategoria() == TelefoneCategoria.celular || telefone.getCategoria() == TelefoneCategoria.residencial) //eh uma pessoa?
-            {
-                Pessoa pessoa = telefone.getPessoa();
-                if (pessoa != null)
-                {
-                    pessoa.setTelefones(telefones);
-                    telefone.setPessoa(pessoa);
-                }
-            }
+        try
+        {
             telefoneServico.salvar(telefone);
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Telefone já existe!");
-//        }
-
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {            
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());               
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
         telefone = new Telefone(); //renove a instancia, para o proximo elemento
     }
 
-    public void editar(int id)
+    public void editar(int id) throws ExcecaoNegocio
     {
         listar(); //atualize a minha lista      
 

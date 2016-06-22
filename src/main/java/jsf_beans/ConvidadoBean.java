@@ -4,17 +4,21 @@ import entidades.Cerimonia;
 import entidades.Convidado;
 import entidades.Pessoa;
 import enumeracoes.ConvidadoCategoria;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -52,25 +56,32 @@ public class ConvidadoBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-//        if (!convidados.contains(convidado))
-//        {
-            //setar o produtor, na lista de novasPessoas em cerimonia.
-            Cerimonia cerimonia = convidado.getCerimonia();
-            List<Pessoa> novasPessoas = new ArrayList<>();
-            novasPessoas.add(convidado);
+        //setar o produtor, na lista de novasPessoas em cerimonia.
+        Cerimonia cerimonia = convidado.getCerimonia();
+        List<Pessoa> novasPessoas = new ArrayList<>();
+        novasPessoas.add(convidado);
 
-            if (cerimonia != null)
-            {
-                cerimonia.setPessoas(novasPessoas);
-            }
-            convidado.setCerimonia(cerimonia);
+        if (cerimonia != null)
+        {
+            cerimonia.setPessoas(novasPessoas);
+        }
+        convidado.setCerimonia(cerimonia);
 
+        try
+        {
             convidadoServico.salvar(convidado);
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Convidado já existe!");
-//        }
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
 
         convidado = new Convidado(); //renove a instancia, para o proximo elemento
     }

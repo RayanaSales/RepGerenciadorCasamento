@@ -1,16 +1,20 @@
 package jsf_beans;
 
 import entidades.Cerimonia;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -42,7 +46,21 @@ public class CerimoniaBean implements Serializable
     {
         if (validaObjeto(cerimonia) == true)
         {
-            cerimoniaServico.salvar(cerimonia);
+            try
+            {
+                cerimoniaServico.salvar(cerimonia);
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+            } catch (ExcecaoNegocio ex)
+            {
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+            } catch (EJBException ex)
+            {
+                if (ex.getCause() instanceof ConstraintViolationException)
+                {
+                    MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                    adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+                }
+            }
             cerimonia = new Cerimonia(); //renove a instancia, para o proximo elemento
 
         } else

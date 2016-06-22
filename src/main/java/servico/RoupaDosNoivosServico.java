@@ -2,6 +2,7 @@ package servico;
 
 import entidades.Convidado;
 import entidades.RoupaDosNoivos;
+import excecao.ExcecaoNegocio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -16,12 +17,12 @@ import javax.persistence.TypedQuery;
 public class RoupaDosNoivosServico extends Servico
 {
 
-    public void salvar(RoupaDosNoivos roupa)
+    public void salvar(RoupaDosNoivos roupa) throws ExcecaoNegocio
     {
-        em.flush();
-        
+        em.flush();        
         if(existente(roupa.getRoupa()) == false)
             em.persist(roupa);
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);  
     }
 
     public List<RoupaDosNoivos> listar()

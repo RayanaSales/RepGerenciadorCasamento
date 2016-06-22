@@ -2,13 +2,17 @@ package jsf_beans;
 
 import entidades.Cerimonia;
 import entidades.Presente;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolationException;
 import servico.PresenteServico;
 
 @ManagedBean
@@ -36,22 +40,30 @@ public class PresenteBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-//        if (!presentes.contains(presente))
-//        {
-            //seta os presentes la na cerimonia
-            presentes.add(presente);
-            Cerimonia c = presente.getCerimonia();
-            if (c != null)
-            {
-                c.setPresentes(presentes);
-                presente.setCerimonia(c);
-            }
+        //seta os presentes la na cerimonia
+        presentes.add(presente);
+        Cerimonia c = presente.getCerimonia();
+        if (c != null)
+        {
+            c.setPresentes(presentes);
+            presente.setCerimonia(c);
+        }
+
+        try
+        {
             presenteServico.salvar(presente);
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Presente já existe!");
-//        }
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
 
         presente = new Presente(); //renove a instancia, para o proximo elemento
     }

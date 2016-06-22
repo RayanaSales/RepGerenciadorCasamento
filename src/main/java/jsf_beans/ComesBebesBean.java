@@ -3,14 +3,18 @@ package jsf_beans;
 import entidades.Buffet;
 import entidades.ComesBebes;
 import enumeracoes.ComesBebesCategoria;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolationException;
 import servico.ComesBebesServico;
 
 @ManagedBean
@@ -33,23 +37,29 @@ public class ComesBebesBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-//        if (!cbs.contains(cb))
-//        {
-//            //sete no buffet, a lista de come e bebes
-//            cbs.add(cb);
-            Buffet b = cb.getBuffet();
-            if (b != null)
-            {
-                b.setComesBebes(cbs);
-                cb.setBuffet(b);
-            }
+        //sete no buffet, a lista de come e bebes
+        Buffet b = cb.getBuffet();
+        if (b != null)
+        {
+            b.setComesBebes(cbs);
+            cb.setBuffet(b);
+        }
+
+        try
+        {
             comesBebesServico.salvar(cb);
-            
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Comes e bebes já existe!");
-//        }
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
 
         cb = new ComesBebes(); //renove a instancia, para o proximo elemento
     }

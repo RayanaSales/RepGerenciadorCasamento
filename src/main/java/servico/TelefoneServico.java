@@ -1,8 +1,8 @@
 package servico;
 
-import entidades.Presente;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
+import excecao.ExcecaoNegocio;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -17,14 +17,15 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TelefoneServico extends Servico
 {
-    public void salvar(Telefone telefone)
+    public void salvar(Telefone telefone) throws ExcecaoNegocio
     {
         em.flush();
-        
-        if(existente(telefone.getNumero()) == false)
-            em.persist(telefone);
+        if (existente(telefone.getNumero()) == false)        
+            em.persist(telefone);        
+        else         
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);        
     }
-    
+
     public List<Telefone> listarTelefonesPorCategoria(TelefoneCategoria categoria)
     {
         List<Telefone> telefonesTotais = listar();
@@ -51,14 +52,14 @@ public class TelefoneServico extends Servico
         em.remove(t);
     }
 
-    public void atualizar(Telefone telefone)
+    public void atualizar(Telefone telefone) throws ExcecaoNegocio
     {
         em.flush();
         em.merge(telefone);
     }
 
     private boolean existente(String numero)
-    {       
+    {
         TypedQuery<Telefone> query;
         query = em.createQuery("select b from Telefone b where b.numero like ?1", Telefone.class);
         query.setParameter(1, numero);

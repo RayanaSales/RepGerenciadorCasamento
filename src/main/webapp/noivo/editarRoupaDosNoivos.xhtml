@@ -7,7 +7,7 @@
              template="/publico/template.xhtml"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-   <h:form id="roupa">
+    <h:form id="roupa">
         <p:fieldset legend="Roupa dos noivos">
             <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
@@ -16,9 +16,11 @@
                 <p:message for="roupa" id="messageRoupa" severity="error"/>
 
                 <p:outputLabel for="valor" value="Valor:" />
-                <p:inputMask id="valor" value="#{roupaDosNoivosBean.roupa.valor}" mask="999"/>
-                <p:message for="valor" id="messageDatetime" severity="error"/>
-
+                <p:inputText id="valor" value="#{roupaDosNoivosBean.roupa.valor}">
+                    <f:validateDoubleRange minimum="0.0"/>
+                </p:inputText>
+                <p:message for="valor" id="messageValor" severity="error"/>
+                
                 <p:outputLabel for="noivos" value="Noivo:" />
                 <p:selectOneMenu id="noivos" converter="noivoConverter" value="#{roupaDosNoivosBean.roupa.noivo}">
                     <f:selectItems value="#{noivoBean.noivos}" var="noivo" itemValue="#{noivo}" itemLabel="#{noivo.nome}" />
@@ -27,9 +29,9 @@
             <p:toolbarGroup>
                 <p:commandButton value="Listar" action="#{roupaDosNoivosBean.listar()}" update="@form" ajax="false"/>
             </p:toolbarGroup>
-   </p:fieldset>
+        </p:fieldset>
 
-      <p:fieldset legend="Roupas cadastradas">
+        <p:fieldset legend="Roupas cadastradas">
             <p:dataTable value="#{roupaDosNoivosBean.roupas}" var="roupa">
                 <p:column headerText="Opções">
                     <p:commandButton id="editar" value="Editar" action="#{roupaDosNoivosBean.editar(roupa.id)}" update="@form"></p:commandButton>

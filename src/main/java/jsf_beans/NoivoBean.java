@@ -3,20 +3,25 @@ package jsf_beans;
 import entidades.Cerimonia;
 import entidades.Noivo;
 import entidades.Pessoa;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolationException;
 import servico.NoivoServico;
 
 @ManagedBean
 @SessionScoped
 public class NoivoBean implements Serializable
 {
+
     @EJB
     private NoivoServico noivoServico;
 
@@ -50,24 +55,33 @@ public class NoivoBean implements Serializable
     public void salvar()
     {
         listar(); //atualize a minha lista
-//        if (!noivos.contains(noivo))
-//        {
-            //setar o noivo, na lista de novasPessoas em cerimonia.
-            Cerimonia cerimonia = noivo.getCerimonia();
-            List<Pessoa> novasPessoas = new ArrayList<>();
-            novasPessoas.add(noivo);
-            if (cerimonia != null)
-            {
-                cerimonia.setPessoas(novasPessoas);
-            }
-            noivo.setCerimonia(cerimonia);
 
+        //seta o noivo na cerimonia
+        Cerimonia cerimonia = noivo.getCerimonia();
+        List<Pessoa> novasPessoas = new ArrayList<>();
+        novasPessoas.add(noivo);
+        if (cerimonia != null)
+        {
+            cerimonia.setPessoas(novasPessoas);
+        }
+        noivo.setCerimonia(cerimonia);
+
+        try
+        {
             noivoServico.salvar(noivo);
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Noivo já existe!");
-//        }
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
+
         noivo = new Noivo(); //renove a instancia, para o proximo elemento
     }
 
@@ -94,14 +108,14 @@ public class NoivoBean implements Serializable
             {
                 adicionarMessagem(FacesMessage.SEVERITY_INFO, "Noivo não existe!");
             }
-        } 
-        
-        if(!noivo.getRoupaDosNoivos().isEmpty()) //tem roupas, nao pode excluir esse noivo
+        }
+
+        if (!noivo.getRoupaDosNoivos().isEmpty()) //tem roupas, nao pode excluir esse noivo
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Esse noivo não pode ser excluido. Ele possui roupas.");
         }
-        
-        if(!noivo.getTelefones().isEmpty()) //tem roupas, nao pode excluir esse noivo
+
+        if (!noivo.getTelefones().isEmpty()) //tem roupas, nao pode excluir esse noivo
         {
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Esse noivo não pode ser excluido. Ele possui celulares.");
         }

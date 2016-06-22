@@ -4,14 +4,18 @@ import entidades.Cerimonia;
 import entidades.Pessoa;
 import entidades.ProdutorDeMidia;
 import enumeracoes.ProdutorDeMidiaCategoria;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolationException;
 import servico.ProdutorDeMidiaServico;
 
 @ManagedBean
@@ -44,25 +48,33 @@ public class ProdutorDeMidiaBean implements Serializable
     public void salvar()
     {
         listar(); //atualize a minha lista
-//        if (!produtores.contains(produtor))
-//        {
-            //setar o produtor, na lista de novasPessoas em cerimonia.
-            Cerimonia cerimonia = produtor.getCerimonia();
-            List<Pessoa> novasPessoas = new ArrayList<>();
-            novasPessoas.add(produtor);
 
-            if (cerimonia != null)
-            {
-                cerimonia.setPessoas(novasPessoas);
-            }
-            produtor.setCerimonia(cerimonia);
+        //seta o produto na cerimonia
+        Cerimonia cerimonia = produtor.getCerimonia();
+        List<Pessoa> novasPessoas = new ArrayList<>();
+        novasPessoas.add(produtor);
+        if (cerimonia != null)
+        {
+            cerimonia.setPessoas(novasPessoas);
+        }
+        produtor.setCerimonia(cerimonia);
 
+        try
+        {
             produtorServico.salvar(produtor);
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-//        } else
-//        {
-//            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Produtor já existe!");
-//        }
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }
+
         produtor = new ProdutorDeMidia(); //renove a instancia, para o proximo elemento
     }
 
@@ -80,7 +92,7 @@ public class ProdutorDeMidiaBean implements Serializable
     {
         listar(); //atualize a minha lista
 
-        if (produtor.getTelefones().isEmpty()) 
+        if (produtor.getTelefones().isEmpty())
         { //nao tem, pode excluir
 
             if (produtores.contains(produtor))

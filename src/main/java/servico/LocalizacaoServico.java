@@ -1,7 +1,7 @@
 package servico;
 
-import entidades.Convidado;
 import entidades.Localizacao;
+import excecao.ExcecaoNegocio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -15,16 +15,12 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class LocalizacaoServico extends Servico
 {
-
-    public void salvar(Localizacao localizacao)
+    public void salvar(Localizacao localizacao) throws ExcecaoNegocio
     {
         em.flush();
-
-        if (existente(localizacao.getLogradouro()) == false)
-        {
+        if (existente(localizacao.getLogradouro()) == false)        
             em.persist(localizacao);
-        }
-
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
     public List<Localizacao> listar()

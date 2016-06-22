@@ -1,7 +1,7 @@
 package servico;
 
-import entidades.Convidado;
 import entidades.ProdutorDeMidia;
+import excecao.ExcecaoNegocio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -15,13 +15,12 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class ProdutorDeMidiaServico extends Servico
 {
-    public void salvar(ProdutorDeMidia produtor)
+    public void salvar(ProdutorDeMidia produtor) throws ExcecaoNegocio
     {
-        em.flush();
-        
+        em.flush();        
         if(existente(produtor.getEmail()) == false)
             em.persist(produtor);
-        
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
     public List<ProdutorDeMidia> listar()

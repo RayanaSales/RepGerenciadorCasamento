@@ -2,6 +2,7 @@ package servico;
 
 import entidades.Convidado;
 import entidades.Noivo;
+import excecao.ExcecaoNegocio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -12,13 +13,12 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(CONTAINER)
 public class NoivoServico extends Servico
 {
-    public void salvar(Noivo noivo)
+    public void salvar(Noivo noivo) throws ExcecaoNegocio
     {       
-        em.flush();
-        
+        em.flush();        
         if(existente(noivo.getEmail()) == false)
-            em.persist(noivo);   
-        
+            em.persist(noivo); 
+         else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);        
     }
     
     public List<Noivo> listar()

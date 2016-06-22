@@ -1,6 +1,7 @@
 package servico;
 
 import entidades.Cerimonia;
+import excecao.ExcecaoNegocio;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -15,12 +16,12 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class CerimoniaServico extends Servico
 {
-    public void salvar(Cerimonia cerimonia)
+    public void salvar(Cerimonia cerimonia) throws ExcecaoNegocio
     {
+        em.flush();
         if(existente(cerimonia.getDataHora()) == false)
             em.persist(cerimonia);
-        
-        em.flush();
+        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
     }
 
     public List<Cerimonia> listar()

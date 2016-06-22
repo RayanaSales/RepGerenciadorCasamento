@@ -2,16 +2,20 @@ package jsf_beans;
 
 import entidades.Localizacao;
 import enumeracoes.EstadosDoBrasil;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -21,6 +25,7 @@ import servico.LocalizacaoServico;
 @SessionScoped
 public class LocalizacaoBean implements Serializable
 {
+
     @EJB
     private LocalizacaoServico localizacaoServico;
 
@@ -29,7 +34,7 @@ public class LocalizacaoBean implements Serializable
 
     public LocalizacaoBean()
     {
-        localizacao = new Localizacao();        
+        localizacao = new Localizacao();
     }
 
     public void listar()
@@ -49,14 +54,21 @@ public class LocalizacaoBean implements Serializable
         {
             listar(); //atualize a minha lista
 
-//            if (!locais.contains(localizacao))
-//            {
+            try
+            {
                 localizacaoServico.salvar(localizacao);
-//                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
-//            } else
-//            {
-//                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Local já existe!");
-//            }
+                adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+            } catch (ExcecaoNegocio ex)
+            {
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+            } catch (EJBException ex)
+            {
+                if (ex.getCause() instanceof ConstraintViolationException)
+                {
+                    MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                    adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+                }
+            }
 
             localizacao = new Localizacao(); //renove a instancia, para o proximo elemento
 
@@ -104,7 +116,7 @@ public class LocalizacaoBean implements Serializable
     {
         return localizacaoServico;
     }
-    
+
     public EstadosDoBrasil[] getEstados()
     {
         return EstadosDoBrasil.values();
@@ -142,8 +154,10 @@ public class LocalizacaoBean implements Serializable
         {
             valido = true;
             System.out.println("LOCAL VALIDO");
+        } else
+        {
+            System.out.println("LOCAL INVALIDOOOOOOOOOOOOOOOOOO");
         }
-        else System.out.println("LOCAL INVALIDOOOOOOOOOOOOOOOOOO");
 
         return valido;
     }

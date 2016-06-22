@@ -3,13 +3,17 @@ package jsf_beans;
 import entidades.Loja;
 import entidades.Telefone;
 import enumeracoes.TelefoneCategoria;
+import excecao.ExcecaoNegocio;
+import excecao.MensagemExcecao;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolationException;
 import servico.LojaServico;
 import servico.TelefoneServico;
 
@@ -46,11 +50,27 @@ public class LojaBean implements Serializable
         System.out.println("PRESENTE NO BANCO: " + p.getNome());
         loja.setPresente(p);  */        
         
-        boolean salvou =  lojaServico.salvar(loja);
+     /*   boolean salvou =  lojaServico.salvar(loja);
         if(salvou)
             adicionarMessagem(FacesMessage.SEVERITY_INFO, "Salvo com sucesso!");
         else
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja já existe!");
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Loja já existe!"); */
+     
+        try
+        {
+            lojaServico.salvar(loja);
+            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
+        } catch (ExcecaoNegocio ex)
+        {
+            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
+        } catch (EJBException ex)
+        {
+            if (ex.getCause() instanceof ConstraintViolationException)
+            {
+                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
+                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
+            }
+        }    
         loja = new Loja(); //renove a instancia, para o proximo elemento
     }
 
