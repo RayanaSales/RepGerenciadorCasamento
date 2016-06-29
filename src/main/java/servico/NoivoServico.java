@@ -1,6 +1,5 @@
 package servico;
 
-import entidades.Convidado;
 import entidades.Noivo;
 import excecao.ExcecaoNegocio;
 import java.util.List;
@@ -49,13 +48,7 @@ public class NoivoServico extends Servico
         }
     }
 
-    public boolean existente(Noivo noivo)
-    {
-        em.flush();
-        return listar().contains(noivo);
-    }
-
-    private boolean existente(String email)
+    public boolean existente(String email)
     {
         TypedQuery<Noivo> query;
         query = em.createQuery("select b from Pessoa b where b.email like ?1", Noivo.class);

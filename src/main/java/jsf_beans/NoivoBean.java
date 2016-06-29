@@ -23,20 +23,18 @@ import servico.NoivoServico;
 @SessionScoped
 public class NoivoBean implements Serializable
 {
-
     @EJB
     private NoivoServico noivoServico;
 
     public List<Noivo> noivos;
     public Noivo noivo;
-    public Grupo grupo = new Grupo();
+    public Grupo grupo;
 
     public String[] roupasSelecionadas;
     Encripta encripta;
 
     public NoivoBean()
-    {
-        grupo = new Grupo();
+    {        
         noivo = new Noivo();
         encripta = new Encripta();
     }
@@ -73,13 +71,13 @@ public class NoivoBean implements Serializable
         noivo.setCerimonia(cerimonia);
 
         //seta o grupo
-//        if (grupo != null)
-//        {
-//            List<Grupo> grupos = new ArrayList<>();
-//            grupos.add(grupo);
-//            noivo.setGrupos(grupos);
-//        }
-
+        if (grupo != null)//se houver um grupo
+        {
+            List<Grupo> grupos = new ArrayList<>();
+            grupos.add(grupo);
+            noivo.setGrupos(grupos);
+        }
+      
         //criptografa senha
         String senha = noivo.getSenha();
         noivo.setNumeroAleatorio(encripta.Sorteia());
@@ -168,6 +166,7 @@ public class NoivoBean implements Serializable
 
     public Grupo getGrupo()
     {
+        grupo = new Grupo();
         return grupo;
     }
 
