@@ -31,8 +31,7 @@ public class LoginBean implements Serializable
         } catch (ServletException ex)
         {
             System.out.println("Causa do erro: " + ex.getCause());
-            ex.printStackTrace();       
-                     
+            ex.printStackTrace();                       
             return "falha";
         }
     }
