@@ -14,7 +14,7 @@
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
-                <p:message for="nome" id="messageDatetime" severity="error"/>
+                <p:message for="nome" id="messageNome" severity="error"/>
                 
                 <p:outputLabel for="email" value="Email:" />
                 <p:inputText id="email" value="#{noivoBean.noivo.email}"/>
@@ -27,6 +27,11 @@
                 <p:outputLabel for="cerimonia" value="Cerimônia :"/>
                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{noivoBean.noivo.cerimonia}">
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
+                </p:selectOneMenu>
+                <br/>
+                <p:outputLabel for="grupo" value="Grupo :"/>
+                <p:selectOneMenu id="grupo" converter="grupoConverter" value="#{noivoBean.grupo}">
+                    <f:selectItems value="#{grupoBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"  />
                 </p:selectOneMenu>
                 
             </h:panelGrid>   
@@ -57,7 +62,7 @@
                 <p:column headerText="Cerimonia" >
                     <h:outputText value="#{noivo.cerimonia.dataHora}"></h:outputText>
                 </p:column>
-                    
+                                    
                 <p:column headerText="Telefones" >
                      <p:selectOneMenu id="telefone" value="#{noivo.telefones}">
                          <f:selectItems value="#{noivo.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
@@ -68,7 +73,13 @@
                     <p:selectOneMenu id="roupas" value="#{noivo.roupaDosNoivos}">
                         <f:selectItems value="#{noivo.roupaDosNoivos}"  />
                     </p:selectOneMenu> 
-                </p:column>                
+                </p:column>     
+                
+                <p:column headerText="Grupos" >
+                    <p:selectOneMenu id="grupos" value="#{noivo.grupos}">
+                        <f:selectItems value="#{noivo.grupos}"  />
+                    </p:selectOneMenu> 
+                </p:column>  
             </p:dataTable>            
         </p:fieldset>
     </h:form>

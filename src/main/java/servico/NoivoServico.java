@@ -16,7 +16,7 @@ public class NoivoServico extends Servico
 
     public void salvar(Noivo noivo) throws ExcecaoNegocio
     {
-        em.flush();
+       
         if (existente(noivo.getEmail()) == false)
         {
             em.persist(noivo);
@@ -57,10 +57,10 @@ public class NoivoServico extends Servico
 
     private boolean existente(String email)
     {
-        TypedQuery<Convidado> query;
-        query = em.createQuery("select b from Pessoa b where b.email like ?1", Convidado.class);
+        TypedQuery<Noivo> query;
+        query = em.createQuery("select b from Pessoa b where b.email like ?1", Noivo.class);
         query.setParameter(1, email);
-        List<Convidado> pessoas = query.getResultList();
+        List<Noivo> pessoas = query.getResultList();
 
         if (pessoas.isEmpty())
         {

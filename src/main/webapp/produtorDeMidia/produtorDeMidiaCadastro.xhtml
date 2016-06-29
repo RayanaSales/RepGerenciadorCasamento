@@ -20,6 +20,9 @@
                 <p:inputText id="email" value="#{produtorDeMidiaBean.produtor.email}"/>
                 <p:message for="email" id="messageEmail" severity="error"/>
 
+                <p:outputLabel for="senha" value="Senha:" />
+                <p:password id="senha" value="#{produtorDeMidiaBean.produtor.senha}" feedback="true"/>
+                <p:message for="senha" id="messageSenha" severity="error"/>
                 
                 <p:outputLabel for="valor" value="Valor:" />
                 <p:inputText id="valor" value="#{produtorDeMidiaBean.produtor.preco}">
@@ -69,6 +72,9 @@
                 <p:column headerText="Email" sortBy="#{produtor.email}">
                     <h:outputText value="#{produtor.email}"></h:outputText>
                 </p:column> 
+                <p:column headerText="Senha" sortBy="#{produtor.senha}">
+                    <h:outputText value="#{produtor.senha}"></h:outputText>
+                </p:column>
                 <p:column headerText="Valor" sortBy="#{produtor.preco}">
                     <h:outputText value="#{produtor.preco}"></h:outputText>
                 </p:column> 

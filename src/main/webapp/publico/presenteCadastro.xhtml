@@ -61,9 +61,6 @@
                 <p:column headerText="Cerimonia" >
                     <h:outputText value="#{presente.cerimonia.dataHora}"></h:outputText>
                 </p:column>
-
-
-
                 <p:column headerText="Lojas" >
                     <p:selectOneMenu id="lojas" value="#{presente.lojas}">
                         <f:selectItems value="#{presente.lojas}" var="loja" itemValue="#{loja}" itemLabel="#{loja.nome}"  />

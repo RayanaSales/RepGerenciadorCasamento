@@ -31,6 +31,8 @@ create table pessoa
         disc_pessoa varchar(1),
         txt_nome varchar(100),
 	txt_email varchar(100),
+	txt_senha varchar(500),
+	numero_numeroAleatorio int,
 
         id_cerimonia int references cerimonia(id)
 );
@@ -54,14 +56,12 @@ create table presente
 );
 
 create table noivo
-(
-	txt_senha varchar(100),
+(	
         id_pessoa int references pessoa(id)
 );
 
 create table convidado
 (
-
         categoria varchar(30) NOT NULL,
         numero_quantidadeSenhas int NOT NULL ,
 
@@ -108,6 +108,21 @@ create table roupaDosNoivos
     numero_valor real NOT NULL,
     id_pessoa int references pessoa(id)
 );
+
+create table grupo
+(
+	id serial primary key,
+	txt_nome varchar(20) NOT NULL
+);
+
+create table pessoa_grupo
+(
+	id_pessoa int references pessoa(id),
+	id_grupo int references grupo(id)
+);
+
+CREATE SEQUENCE GRUPO_SEQUENCE INCREMENT BY 1
+    MINVALUE 1 MAXVALUE 99999999 START WITH 1;
 
 CREATE SEQUENCE PESSOA_SEQUENCE INCREMENT BY 1
     MINVALUE 1 MAXVALUE 99999999 START WITH 1;

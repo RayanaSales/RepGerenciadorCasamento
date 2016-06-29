@@ -1,6 +1,8 @@
 package jsf_beans;
 
+import criptografia.Encripta;
 import entidades.Cerimonia;
+import entidades.Grupo;
 import entidades.Noivo;
 import entidades.Pessoa;
 import excecao.ExcecaoNegocio;
@@ -27,12 +29,16 @@ public class NoivoBean implements Serializable
 
     public List<Noivo> noivos;
     public Noivo noivo;
+    public Grupo grupo = new Grupo();
 
     public String[] roupasSelecionadas;
+    Encripta encripta;
 
     public NoivoBean()
     {
+        grupo = new Grupo();
         noivo = new Noivo();
+        encripta = new Encripta();
     }
 
     public void setRoupasSelecionadas(String[] roupasSelecionadas)
@@ -58,13 +64,27 @@ public class NoivoBean implements Serializable
 
         //seta o noivo na cerimonia
         Cerimonia cerimonia = noivo.getCerimonia();
-        List<Pessoa> novasPessoas = new ArrayList<>();
-        novasPessoas.add(noivo);
         if (cerimonia != null)
         {
+            List<Pessoa> novasPessoas = new ArrayList<>();
+            novasPessoas.add(noivo);
             cerimonia.setPessoas(novasPessoas);
         }
         noivo.setCerimonia(cerimonia);
+
+        //seta o grupo
+//        if (grupo != null)
+//        {
+//            List<Grupo> grupos = new ArrayList<>();
+//            grupos.add(grupo);
+//            noivo.setGrupos(grupos);
+//        }
+
+        //criptografa senha
+        String senha = noivo.getSenha();
+        noivo.setNumeroAleatorio(encripta.Sorteia());
+        senha = encripta.encriptar(senha, noivo.getNumeroAleatorio());
+        noivo.setSenha(senha);
 
         try
         {
@@ -75,6 +95,7 @@ public class NoivoBean implements Serializable
             adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
         } catch (EJBException ex)
         {
+            ex.getCause();
             if (ex.getCause() instanceof ConstraintViolationException)
             {
                 MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
@@ -143,6 +164,16 @@ public class NoivoBean implements Serializable
     public void setNoivo(Noivo noivo)
     {
         this.noivo = noivo;
+    }
+
+    public Grupo getGrupo()
+    {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo)
+    {
+        this.grupo = grupo;
     }
 
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)

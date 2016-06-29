@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -29,7 +31,6 @@ import org.hibernate.validator.constraints.Email;
 @SequenceGenerator(name = "PESSOA_SEQUENCE", sequenceName = "PESSOA_SEQUENCE", allocationSize = 1, initialValue = 1)
 public class Pessoa implements Serializable
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQUENCE")
     protected int id;
@@ -44,6 +45,13 @@ public class Pessoa implements Serializable
     @Email
     @Column(name = "txt_email")
     protected String email; //chave secundaria
+    
+    @NotNull       
+    @Column(name = "txt_senha")
+    private String senha; 
+    
+    @Column(name = "numero_numeroAleatorio")
+    private int numeroAleatorio;
 
     @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
@@ -52,10 +60,16 @@ public class Pessoa implements Serializable
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     protected Cerimonia cerimonia;
+        
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(name = "pessoa_grupo", joinColumns = @JoinColumn(name = "id_pessoa"),
+            inverseJoinColumns = @JoinColumn(name = "id_grupo"))    
+    public List<Grupo> grupos;
 
     public Pessoa()
     {
         telefones = new ArrayList<>();
+        grupos = new ArrayList<>();
     }
 
     public Pessoa(String nome, String email, Cerimonia cerimonia)
@@ -74,6 +88,16 @@ public class Pessoa implements Serializable
     public void setId(int id)
     {
         this.id = id;
+    }
+    
+    public String getSenha()
+    {
+        return senha;
+    }
+
+    public void setSenha(String senha)
+    {
+        this.senha = senha;
     }
 
     public List<Telefone> getTelefones()
@@ -139,6 +163,16 @@ public class Pessoa implements Serializable
         this.email = email;
     }
 
+    public int getNumeroAleatorio()
+    {
+        return numeroAleatorio;
+    }
+
+    public void setNumeroAleatorio(int numeroAleatorio)
+    {
+        this.numeroAleatorio = numeroAleatorio;
+    }
+    
     public Cerimonia getCerimonia()
     {
         return cerimonia;
@@ -148,6 +182,27 @@ public class Pessoa implements Serializable
     {
         this.cerimonia = cerimonia;
     }
+
+    public List<Grupo> getGrupos()
+    {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> novosGrupos)
+    {
+        if (novosGrupos != null)
+        {
+            for (Grupo grupo : novosGrupos)
+            {
+                if (!grupos.contains(grupo))
+                {
+                    grupos.add(grupo);
+                }
+            }
+        }
+    }
+    
+    
     
     
 //    public boolean associado()

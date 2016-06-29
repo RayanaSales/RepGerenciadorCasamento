@@ -21,7 +21,6 @@ import servico.ComesBebesServico;
 @SessionScoped
 public class ComesBebesBean implements Serializable
 {
-
     @EJB
     private ComesBebesServico comesBebesServico;
 

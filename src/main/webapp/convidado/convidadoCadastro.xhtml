@@ -20,29 +20,33 @@
                 <p:inputText id="email" value="#{convidadoBean.convidado.email}"/>
                 <p:message for="email" id="messageEmail" severity="error"/>
 
+                <p:outputLabel for="senha" value="Senha:" />
+                <p:password id="senha" value="#{convidadoBean.convidado.senha}" feedback="true"/>
+                <p:message for="senha" id="messageSenha" severity="error"/>
+
                 <p:outputLabel for="quantidadeSenhas" value="Quantidade de senhas: " />
                 <p:inputMask id="quantidadeSenhas" value="#{convidadoBean.convidado.quantidadeSenhas}" mask="9?9"/>
                 <p:message for="quantidadeSenhas" id="messageSenhas" severity="error"/>
 
-                 <p:outputLabel for="cerimonia" value="Cerimônia :"/>
-                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
+                <p:outputLabel for="cerimonia" value="Cerimônia :"/>
+                <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{convidadoBean.convidado.cerimonia}">
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
                 </p:selectOneMenu>
-                
-                 <br/>
+
+                <br/>
                 <p:outputLabel for="categoria" value="Categoria: " />
                 <p:selectOneMenu id="categoria" value="#{convidadoBean.convidado.categoria}">
                     <f:selectItems value="#{convidadoBean.categorias}"   />
                 </p:selectOneMenu>
-                
+
             </h:panelGrid>   
 
             <p:toolbarGroup>
                 <p:commandButton action="#{convidadoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" action="#{convidadoBean.listar()}" update="@form" ajax="false"/>
-                 <h:commandButton action="editarConvidado?faces-redirect=true" immediate="true" value="Editar" />
-        
+                <h:commandButton action="editarConvidado?faces-redirect=true" immediate="true" value="Editar" />
+
             </p:toolbarGroup>
         </p:fieldset>
 
@@ -58,6 +62,9 @@
                 <p:column headerText="Email" sortBy="#{convidado.email}">
                     <h:outputText value="#{convidado.email}"></h:outputText>
                 </p:column> 
+                <p:column headerText="Senha" sortBy="#{convidado.senha}">
+                    <h:outputText value="#{convidado.senha}"></h:outputText>
+                </p:column>
                 <p:column headerText="Categoria" sortBy="#{convidado.categoria}">
                     <h:outputText value="#{convidado.categoria}"></h:outputText>
                 </p:column> 
@@ -67,10 +74,10 @@
                 <p:column headerText="Cerimonia" >
                     <h:outputText value="#{convidado.cerimonia.dataHora}"></h:outputText>
                 </p:column>
-                
-                 <p:column headerText="Telefones" >
-                     <p:selectOneMenu id="telefone" value="#{convidado.telefones}">
-                         <f:selectItems value="#{convidado.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
+
+                <p:column headerText="Telefones" >
+                    <p:selectOneMenu id="telefone" value="#{convidado.telefones}">
+                        <f:selectItems value="#{convidado.telefones}" var="telefone" itemValue="#{telefone}" itemLabel="#{telefone.numero}"  />
                     </p:selectOneMenu> 
                 </p:column>
             </p:dataTable>
