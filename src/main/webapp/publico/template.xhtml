@@ -30,6 +30,9 @@
                 <p:menuitem value="Loja" url="/faces/noivo/lojaCadastro.xhtml"></p:menuitem>
                 <p:menuitem value="Comes e bebes" url="/faces/noivo/comesBebesCadastro.xhtml"></p:menuitem>
                 <p:menuitem value="Grupo" url="/faces/noivo/grupoCadastro.xhtml"></p:menuitem>
+                <p:menuitem value="Sair" action="#{loginBean.logout()}" 
+                    immediate="true"
+                    icon="ui-icon-home"/>
             </p:menubar>            
         </h:form>
         <hr/>

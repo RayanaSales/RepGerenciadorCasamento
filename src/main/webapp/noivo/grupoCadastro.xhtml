@@ -16,7 +16,7 @@
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{grupoBean.grupo.nome}"/>
                 <p:message for="nome" id="messageNome" severity="error"/>
-                
+
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -25,12 +25,14 @@
             </p:toolbarGroup>
         </p:fieldset>
 
-        <br/>
+    </h:form>
+    <br/>
+    <h:form>
         <p:fieldset legend="Grupos cadastrados">
             <p:dataTable value="#{grupoBean.grupos}" var="grupo">
-<!--                <p:column headerText="Opções">
-                    <p:commandButton id="deletar" value="Deletar" ajax="false" immediate="true" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
-                </p:column>-->
+                <!--                <p:column headerText="Opções">
+                                    <p:commandButton id="deletar" value="Deletar" ajax="false" immediate="true" action="#{buffetBean.remover(buffet)}" update="@form"></p:commandButton>
+                                </p:column>-->
                 <p:column headerText="Nome" sortBy="#{grupo.nome}">
                     <h:outputText value="#{grupo.nome}"></h:outputText>
                 </p:column>               

@@ -76,7 +76,7 @@
                 </p:column>     
                 
                 <p:column headerText="Grupos" >
-                    <p:selectOneMenu id="grupos" required="false" value="#{noivo.grupos}">
+                    <p:selectOneMenu id="grupos" immediate="true" value="#{noivo.grupos}">
                         <f:selectItems value="#{noivo.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
                     </p:selectOneMenu> 
                 </p:column>  

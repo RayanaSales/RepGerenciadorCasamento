@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Encripta
 {
+
     public int Sorteia()
     {
         Random random = new Random();
@@ -24,18 +25,14 @@ public class Encripta
             char ch = texto.charAt(i);
             int asc = (int) ch + numeroAleatorio;
             nova += Integer.toString(asc);
-
-            System.out.println("letra: " + texto.charAt(i) + " asc: " + (int) ch);
         }
-        System.out.println("Nova string: " + nova);
+
         return nova;
     }
 
     public String encriptar(String texto, int numeroAleatorio)
     {
-        //monta nova String numerica:
         texto = novaString(texto, numeroAleatorio);
-        System.out.println("ENCRIPTANDO");
 
         String senhahexAdmin = "";
         try

@@ -18,6 +18,8 @@ public class NoivoServico extends Servico
        
         if (existente(noivo.getEmail()) == false)
         {
+//            Grupo grupo = grupoService.getGrupo();
+//            noivo.setGrupos(novosGrupos);
             em.persist(noivo);
         } else
         {

@@ -9,6 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @ManagedBean
 @RequestScoped
 public class LoginBean implements Serializable
@@ -34,6 +42,18 @@ public class LoginBean implements Serializable
             ex.printStackTrace();                       
             return "falha";
         }
+    }
+    
+    public String logout() throws ServletException {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        
+        HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();        
+        request.logout();
+        return "sair";
     }
 
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)

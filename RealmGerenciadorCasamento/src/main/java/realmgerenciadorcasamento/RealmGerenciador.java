@@ -71,11 +71,15 @@ public class RealmGerenciador extends AppservRealm
     public Enumeration getGroupNames(String username) throws InvalidOperationException, NoSuchUserException
     {
         List<String> groupsList = this.getGroupList(username);
+
+        System.out.println("realmgerenciadorcasamento, no groupsList: " + groupsList.get(0));
         return Collections.enumeration(groupsList);
     }
 
     public List<String> getGroupList(String username)
     {
+        System.out.println("no realmgerenciadorcasamento - metodo getGroupList: inicio");
+
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -84,18 +88,22 @@ public class RealmGerenciador extends AppservRealm
         try
         {
             conn = getConnection();
-            stmt = conn.prepareStatement("SELECT g.nome FROM Pessoa p, Grupo g WHERE p.email like ?1");
+            stmt = conn.prepareStatement("Select g.txt_nome from grupo as g, pessoa as p, pessoa_grupo as pg where p.id = pg.id_pessoa and g.id = pg.id_grupo and p.txt_email like ?");
             stmt.setString(1, username);
             rs = stmt.executeQuery();
+
+            System.out.println("no realmgerenciadorcasamento - metodo getGroupList: executou query");
 
             while (rs.next())
             {
                 String group = rs.getString(1);
+                System.out.println("no realmgerenciadorcasamento - metodo getGroupList: grupo: " + group);
+
                 groups.add(group);
             }
         } catch (SQLException ex)
         {
-            System.out.println("Causa: " + ex.getCause());
+            System.out.println("no realmgerenciadorcasamento - metodo getGroupList: catch SQLException, causa do erro " + ex.getCause());
             ex.getStackTrace();
         } finally
         {
@@ -107,6 +115,8 @@ public class RealmGerenciador extends AppservRealm
 
     public boolean authenticateUser(String _username, String _password)
     {
+        System.out.println("no realmgerenciadorcasamento - metodo authenticateUser: inicio");
+
         Encripta encripta = new Encripta();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -116,33 +126,28 @@ public class RealmGerenciador extends AppservRealm
         try
         {
             conn = getConnection();
-            System.out.println("realm gerenciadorCasamento conectou com o banco");                        
-            stmt = conn.prepareStatement("select txt_senha, numero_numeroAleatorio from Pessoa where txt_email like ?");
-            System.out.println("realm gerenciadorCasamento preparei statement");    
+            stmt = conn.prepareStatement("Select p.txt_senha, p.numero_numeroAleatorio from pessoa as p where p.txt_email like ?");
             stmt.setString(1, _username);
-            System.out.println("setei o parametro: " + _username +" na query");            
             rs = stmt.executeQuery();
-            System.out.println("executei a query");
+
+            System.out.println("no realmgerenciadorcasamento - metodo authenticateUser: executou query");
 
             if (rs.next())
             {
-                System.out.println("entrei no if");
-                
+
                 String senhaAtual = rs.getString("txt_senha"); //senha no banco criptografada
-                System.out.println("SENHA ATUAL: " + senhaAtual);
-                System.out.println("SENHA Digitada pelo usuario: " + _password);
-
-                int numeroAleatorio = rs.getInt("numero_numeroAleatorio");              
-                System.out.println("NUMERO ALEATORIO NO BANCO: " + numeroAleatorio);
-
+                int numeroAleatorio = rs.getInt("numero_numeroAleatorio");
                 String senhaDigitada = encripta.encriptar(_password, numeroAleatorio);
-                System.out.println("Senha digitada encriptada: " + senhaDigitada);
 
                 if (senhaDigitada.equals(senhaAtual))
                 {
-                    System.out.println("a senha digitada eh compativel com a do bd");
+                    System.out.println("no realmgerenciadorcasamento - metodo authenticateUser: SENHAS COMPATIVEIS");
                     result = true;
+                } else
+                {
+                    System.out.println("no realmgerenciadorcasamento - metodo authenticateUser: SENHAS DIFERENTES");
                 }
+
             }
         } catch (SQLException ex)
         {

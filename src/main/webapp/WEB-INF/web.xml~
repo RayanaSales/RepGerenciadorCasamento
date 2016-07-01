@@ -22,6 +22,12 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    
+    <error-page>
+        <error-code>403</error-code>
+        <location>/faces/publico/erro.xhtml</location>
+    </error-page> 
+    
     <session-config>
         <session-timeout>
             30
@@ -77,4 +83,46 @@
         </user-data-constraint>              
     </security-constraint> 
     
+    <security-constraint>
+        <display-name>Pg noivos</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Convidado Area</web-resource-name>
+            <description>Protected Convidado Area</description>
+            <url-pattern>/faces/convidado/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>            
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>convidado</role-name>
+        </auth-constraint>  
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>              
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>Pg Publicas</display-name>
+        <web-resource-collection>
+            <web-resource-name>Public Area</web-resource-name>
+            <description>Public Area</description>
+            <url-pattern>/faces/publico/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>            
+        </web-resource-collection> 
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>   
+    </security-constraint>
+   
 </web-app>

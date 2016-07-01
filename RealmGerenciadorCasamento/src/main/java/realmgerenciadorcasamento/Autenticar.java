@@ -18,7 +18,8 @@ public class Autenticar extends AppservPasswordLoginModule
             for (String group : groupsList)
             {
                 groups[i++] = group;
-            }
+                System.out.println("NO AUTENTTICA, GRUPO: " + group);
+            }            
             commitUserAuthentication(groups);
         } else
         {
