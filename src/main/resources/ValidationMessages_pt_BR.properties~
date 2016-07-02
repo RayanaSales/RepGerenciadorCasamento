@@ -4,6 +4,7 @@ entidades.Telefone.numero = Os numeros devem comecar com 9, 8, 7 ou 3.
 
 entidades.Pessoa.nome = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
 entidades.Pessoa.email = Deve possuir: texto + @ + texto + . + texto. Pode ter numeros. Min: 5 Max: 40
+entidades.Pessoa.senha = A senha deve estar entre 6 e 16 caracteres.
 
 entidades.Buffet.valorTotalGasto = Insira numeros.
 
@@ -25,11 +26,9 @@ entidades.Presente.ondeEncontrar = Deve possuir apenas letras, no maximo 1 maius
 
 entidades.ProdutorDeMidia.preco = Deve ser maior que 0.
 entidades.ProdutorDeMidia.linkParaRedeSocial = Sintax: www. + texto + .com + (.br opcional).
-entidades.ProdutorDeMidia.ProdutorDeMidia = O produtor de midia, tem que chegar horas antes, da hora de inicio da cerimonia.
 
 entidades.RoupaDosNoivos.valor = Deve ser maior que 0. Pode conter ponto.
 entidades.RoupaDosNoivos.roupa = Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.
-entidades.Noivo.senha = A senha deve estar entre 6 e 16 caracteres.
 
 entidades.Convidado.quantidadeSenhas = A quantidade tem que ser maior que zero.
-entidades.Loja.cnpj = O cnpj deve possuir 14 n\u00fameros.
+entidades.Loja.cnpj = Insira um cnpj valido.

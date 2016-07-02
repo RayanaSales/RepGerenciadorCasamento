@@ -29,29 +29,7 @@ public class GrupoBean implements Serializable
         grupo = new Grupo();
         grupos = new ArrayList<>();
     }
-    
-    public void salvar()
-    {
-        listar(); //atualize a minha lista
-
-        try
-        {
-            grupoServico.salvar(grupo);
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Cadastro realizado com sucesso!");
-        } catch (ExcecaoNegocio ex)
-        {
-            adicionarMessagem(FacesMessage.SEVERITY_WARN, ex.getMessage());
-        } catch (EJBException ex)
-        {
-            if (ex.getCause() instanceof ConstraintViolationException)
-            {
-                MensagemExcecao mensagemExcecao = new MensagemExcecao(ex.getCause());
-                adicionarMessagem(FacesMessage.SEVERITY_WARN, mensagemExcecao.getMensagem());
-            }
-        }
-        grupo = new Grupo(); //renove a instancia, para o proximo elemento
-    }
-
+   
     public GrupoServico getGrupoServico()
     {
         return grupoServico;

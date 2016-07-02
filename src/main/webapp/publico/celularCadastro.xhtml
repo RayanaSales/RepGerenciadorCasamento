@@ -23,7 +23,7 @@
                 <p:inputMask id="phone" value="#{telefoneBean.telefone.numero}" mask="999999999"/>
                 <p:message for="phone" id="messageFone" severity="error"/>
 
-              
+
 
                 <br/>               
                 <p:outputLabel for="pessoa" value="Pessoa:" />
@@ -40,7 +40,8 @@
             </p:toolbarGroup>
         </p:fieldset>
 
-        <br/>
+    </h:form>
+    <h:form id="celularListar"> 
         <p:fieldset legend="Celulares cadastrados">
             <p:dataTable value="#{telefoneBean.buscarTelefonesCelulares()}" var="telefone">
                 <p:column headerText="Opções">

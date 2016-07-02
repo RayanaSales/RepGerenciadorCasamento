@@ -1,17 +1,11 @@
 package jsf_beans;
 
-import java.io.Serializable;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +15,7 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class LoginBean implements Serializable
 {
+
     @NotBlank
     String username;
     @NotBlank
@@ -39,19 +34,21 @@ public class LoginBean implements Serializable
         } catch (ServletException ex)
         {
             System.out.println("Causa do erro: " + ex.getCause());
-            ex.printStackTrace();                       
+            ex.printStackTrace();
             return "falha";
         }
     }
-    
-    public String logout() throws ServletException {
+
+    public String logout() throws ServletException
+    {
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-        if (session != null) {
+        if (session != null)
+        {
             session.invalidate();
         }
-        
-        HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();        
+
+        HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
         request.logout();
         return "sair";
     }

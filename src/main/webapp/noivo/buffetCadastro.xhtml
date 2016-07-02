@@ -18,7 +18,7 @@
                     <f:validateDoubleRange minimum="0.0"/>
                 </p:inputText>
                 <p:message for="valor" id="messageValorGasto" severity="error"/>
-                
+
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -29,7 +29,8 @@
             </p:toolbarGroup>
         </p:fieldset>
 
-        <br/>
+    </h:form>
+    <h:form id="buffetListar"> 
         <p:fieldset legend="Buffets cadastrados">
             <p:dataTable value="#{buffetBean.buffets}" var="buffet">
                 <p:column headerText="Opções">

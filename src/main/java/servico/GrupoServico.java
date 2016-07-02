@@ -1,8 +1,10 @@
 package servico;
 
+import entidades.Convidado;
 import entidades.Grupo;
-import entidades.Localizacao;
-import excecao.ExcecaoNegocio;
+import entidades.Noivo;
+import entidades.ProdutorDeMidia;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -16,14 +18,36 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class GrupoServico extends Servico
 {
-    public void salvar(Grupo grupo) throws ExcecaoNegocio
+    public void associarGrupoNoivo(Noivo pessoa)
     {
-        em.flush();
-        if (existente(grupo.getNome()) == false)        
-            em.persist(grupo);
-        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        List<Grupo> gruposDaPessoa = new ArrayList<>();
+        Grupo grupoPessoa = buscar(1);
+        gruposDaPessoa.add(grupoPessoa);
+        
+        pessoa.setGrupos(gruposDaPessoa);     
+        em.merge(pessoa);
     }
     
+    public void associarGrupoConvidado(Convidado pessoa)
+    {
+        List<Grupo> gruposDaPessoa = new ArrayList<>();
+        Grupo grupoPessoa = buscar(3);
+        gruposDaPessoa.add(grupoPessoa);
+        
+        pessoa.setGrupos(gruposDaPessoa);     
+        em.merge(pessoa);
+    }
+    
+    public void associarGrupoProdutor(ProdutorDeMidia pessoa)
+    {
+        List<Grupo> gruposDaPessoa = new ArrayList<>();
+        Grupo grupoPessoa = buscar(2);
+        gruposDaPessoa.add(grupoPessoa);
+        
+        pessoa.setGrupos(gruposDaPessoa);     
+        em.merge(pessoa);
+    }
+
     private boolean existente(String nome)
     {
         TypedQuery<Grupo> query;
@@ -41,6 +65,11 @@ public class GrupoServico extends Servico
 
     public List<Grupo> listar()
     {
-       return em.createQuery("select g from Grupo AS g", Grupo.class).getResultList();   
+        return em.createQuery("select g from Grupo AS g", Grupo.class).getResultList();
+    }
+
+    public Grupo buscar(int id)
+    {
+        return em.find(Grupo.class, id);
     }
 }

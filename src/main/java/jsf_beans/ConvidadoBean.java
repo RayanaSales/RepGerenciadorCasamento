@@ -1,5 +1,6 @@
 package jsf_beans;
 
+import criptografia.Encripta;
 import entidades.Cerimonia;
 import entidades.Convidado;
 import entidades.Pessoa;
@@ -29,16 +30,17 @@ import servico.ConvidadoServico;
 @SessionScoped
 public class ConvidadoBean implements Serializable
 {
-
     @EJB
     private ConvidadoServico convidadoServico;
 
     public List<Convidado> convidados;
     public Convidado convidado;
+    Encripta encripta;
 
     public ConvidadoBean()
     {
         convidado = new Convidado();
+        encripta = new Encripta();
     }
 
     public void listar()
@@ -66,6 +68,12 @@ public class ConvidadoBean implements Serializable
             cerimonia.setPessoas(novasPessoas);
         }
         convidado.setCerimonia(cerimonia);
+        
+        //criptografa senha
+        String senha = convidado.getSenha();
+        convidado.setNumeroAleatorio(encripta.Sorteia());
+        senha = encripta.encriptar(senha, convidado.getNumeroAleatorio());
+        convidado.setSenha(senha);
 
         try
         {

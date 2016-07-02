@@ -1,5 +1,6 @@
 package jsf_beans;
 
+import criptografia.Encripta;
 import entidades.Cerimonia;
 import entidades.Pessoa;
 import entidades.ProdutorDeMidia;
@@ -22,16 +23,17 @@ import servico.ProdutorDeMidiaServico;
 @SessionScoped
 public class ProdutorDeMidiaBean implements Serializable
 {
-
     @EJB
     public ProdutorDeMidiaServico produtorServico;
 
     public List<ProdutorDeMidia> produtores;
     public ProdutorDeMidia produtor;
+    Encripta encripta;
 
     public ProdutorDeMidiaBean()
     {
         produtor = new ProdutorDeMidia();
+        encripta = new Encripta();
     }
 
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
@@ -58,6 +60,12 @@ public class ProdutorDeMidiaBean implements Serializable
             cerimonia.setPessoas(novasPessoas);
         }
         produtor.setCerimonia(cerimonia);
+        
+        //criptografa senha
+        String senha = produtor.getSenha();
+        produtor.setNumeroAleatorio(encripta.Sorteia());
+        senha = encripta.encriptar(senha, produtor.getNumeroAleatorio());
+        produtor.setSenha(senha);
 
         try
         {

@@ -3,6 +3,7 @@ package servico;
 import entidades.Noivo;
 import excecao.ExcecaoNegocio;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import static javax.ejb.TransactionManagementType.CONTAINER;
@@ -13,13 +14,14 @@ import javax.persistence.TypedQuery;
 public class NoivoServico extends Servico
 {
 
+    @EJB
+    private GrupoServico grupoServico;
+
     public void salvar(Noivo noivo) throws ExcecaoNegocio
     {
-       
         if (existente(noivo.getEmail()) == false)
         {
-//            Grupo grupo = grupoService.getGrupo();
-//            noivo.setGrupos(novosGrupos);
+            grupoServico.associarGrupoNoivo(noivo);
             em.persist(noivo);
         } else
         {

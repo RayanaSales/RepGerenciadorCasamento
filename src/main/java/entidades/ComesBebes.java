@@ -123,7 +123,7 @@ public class ComesBebes implements Serializable
 
     public double getValor()
     {
-        return Math.round(valor);
+        return valor;
     }
 
     public void setValor(double valor)

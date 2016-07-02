@@ -29,11 +29,7 @@
                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{noivoBean.noivo.cerimonia}">
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
                 </p:selectOneMenu>
-                
-                <p:outputLabel for="grupo" value="Grupo :"/>
-                <p:selectOneMenu id="grupo" converter="grupoConverter" value="#{noivoBean.grupo}">
-                    <f:selectItems value="#{grupoBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"  />
-                </p:selectOneMenu>
+               
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -61,11 +57,7 @@
                  <p:column headerText="Cerimonia" >
                     <h:outputText value="#{noivo.cerimonia.dataHora}"></h:outputText>
                 </p:column>
-                 <p:column headerText="Grupos" >
-                    <p:selectOneMenu id="grupos">
-                        <f:selectItems value="#{noivo.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
-                    </p:selectOneMenu> 
-                </p:column>  
+               
             </p:dataTable>
         </p:fieldset>
     </h:form>

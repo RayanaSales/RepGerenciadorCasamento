@@ -23,16 +23,12 @@
                 <p:outputLabel for="senha" value="Senha:" />
                 <p:password id="senha" value="#{produtorDeMidiaBean.produtor.senha}" feedback="true"/>
                 <p:message for="senha" id="messageSenha" severity="error"/>
-                
+
                 <p:outputLabel for="valor" value="Valor:" />
                 <p:inputText id="valor" value="#{produtorDeMidiaBean.produtor.preco}">
                     <f:validateDoubleRange minimum="0.0"/>
                 </p:inputText>
                 <p:message for="valor" id="messageValorGasto" severity="error"/>
-                
-                
-                
-                
 
                 <p:outputLabel for="url" value="Link para rede social:" />
                 <p:inputText id="url" value="#{produtorDeMidiaBean.produtor.linkParaRedeSocial}"/>
@@ -59,8 +55,8 @@
 
             </p:toolbarGroup>
         </p:fieldset>
-
-        <br/>
+    </h:form>
+    <h:form id="produtorListar"> 
         <p:fieldset legend="Produtores cadastrados">
             <p:dataTable value="#{produtorDeMidiaBean.produtores}" var="produtor">
                 <p:column headerText="Opções">

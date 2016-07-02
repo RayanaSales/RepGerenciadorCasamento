@@ -31,7 +31,7 @@
                 <p:selectOneMenu id="cerimonia" converter="cerimoniaConverter" value="#{presenteBean.presente.cerimonia}">
                     <f:selectItems value="#{cerimoniaBean.cerimonias}" var="cerimonia" itemValue="#{cerimonia}" itemLabel="#{cerimonia.localizacao.rua} nº #{cerimonia.localizacao.numero} - #{cerimonia.dataHora}"  />
                 </p:selectOneMenu>
-         
+
             </h:panelGrid>                
             <p:toolbarGroup>
                 <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="false" update="@form" 
@@ -42,8 +42,9 @@
 
         </p:fieldset>
 
-        <br/>
-    
+    </h:form>
+    <h:form id="presenteListar"> 
+
         <p:fieldset legend="Presentes cadastrados">
             <p:dataTable value="#{presenteBean.presentes}" var="presente">
                 <p:column headerText="Opções">

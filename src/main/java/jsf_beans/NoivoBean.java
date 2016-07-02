@@ -69,14 +69,6 @@ public class NoivoBean implements Serializable
             cerimonia.setPessoas(novasPessoas);
         }
         noivo.setCerimonia(cerimonia);
-
-        //seta o grupo
-        if (grupo != null)//se houver um grupo
-        {
-            List<Grupo> grupos = new ArrayList<>();
-            grupos.add(grupo);
-            noivo.setGrupos(grupos);
-        }
       
         //criptografa senha
         String senha = noivo.getSenha();

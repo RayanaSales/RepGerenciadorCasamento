@@ -19,7 +19,7 @@
                 <p:outputLabel for="cnpj" value="CNPJ: " />
                 <p:inputMask id="cnpj" value="#{lojaBean.loja.cnpj}" mask="99999999999999"/>
                 <p:message for="cnpj" id="messageCNPJ" severity="error"/>
-                
+
                 <p:outputLabel for="local" value="Localização :"/>
                 <p:selectOneMenu id="local" converter="localConverter" value="#{lojaBean.loja.localizacao}">
                     <f:selectItems value="#{localizacaoBean.locais}" var="local" itemValue="#{local}" itemLabel="#{local.logradouro}"  />
@@ -34,7 +34,7 @@
                 <p:selectOneMenu id="presente" converter="presenteConverter" value="#{lojaBean.loja.presente}">
                     <f:selectItems value="#{presenteBean.presentes}" var="presente" itemValue="#{presente}" itemLabel="#{presente.nome}"  />
                 </p:selectOneMenu>
-              <br/>
+                <br/>
             </h:panelGrid>   
 
             <p:toolbarGroup>
@@ -44,8 +44,8 @@
                 <h:commandButton action="editarLoja?faces-redirect=true" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
-
-        <br/>
+    </h:form>
+    <h:form id="lojaListar"> 
         <p:fieldset legend="Lojas cadastradas">
             <p:dataTable value="#{lojaBean.lojas}" var="loja">
                 <p:column headerText="Opções">

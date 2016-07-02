@@ -28,6 +28,8 @@
                 <p:toolbarGroup>
                     <p:commandButton action="#{noivoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                      title="Salvar" icon="ui-icon-check" validateClient="false"/>
+                    <h:commandButton action="login?faces-redirect=true" immediate="true" value="Login" />
+
                 </p:toolbarGroup>
             </p:fieldset>
         </h:form>

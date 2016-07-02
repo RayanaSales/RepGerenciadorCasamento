@@ -3,6 +3,7 @@ package servico;
 import entidades.ProdutorDeMidia;
 import excecao.ExcecaoNegocio;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -15,12 +16,20 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class ProdutorDeMidiaServico extends Servico
 {
+    @EJB
+    private GrupoServico grupoServico;
+    
     public void salvar(ProdutorDeMidia produtor) throws ExcecaoNegocio
     {
-        em.flush();        
-        if(existente(produtor.getEmail()) == false)
+        em.flush();
+        if (existente(produtor.getEmail()) == false)
+        {
+            grupoServico.associarGrupoProdutor(produtor);
             em.persist(produtor);
-        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        } else
+        {
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        }
     }
 
     public List<ProdutorDeMidia> listar()
@@ -34,15 +43,19 @@ public class ProdutorDeMidiaServico extends Servico
     public void remover(ProdutorDeMidia produtor)
     {
         ProdutorDeMidia c = (ProdutorDeMidia) em.find(ProdutorDeMidia.class, produtor.getId()); //se n tiver isso, o jpa acha que n deatachou        
-        em.remove(c);       
+        em.remove(c);
     }
 
     public void atualizar(ProdutorDeMidia produtor) throws ExcecaoNegocio
     {
-        em.flush();        
-        if(existente(produtor.getEmail()) == false)
+        em.flush();
+        if (existente(produtor.getEmail()) == false)
+        {
             em.merge(produtor);
-        else throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        } else
+        {
+            throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
+        }
     }
 
     public boolean existente(ProdutorDeMidia produtor)
@@ -50,9 +63,9 @@ public class ProdutorDeMidiaServico extends Servico
         em.flush();
         return listar().contains(produtor);
     }
-    
-     private boolean existente(String email)
-    {       
+
+    private boolean existente(String email)
+    {
         TypedQuery<ProdutorDeMidia> query;
         query = em.createQuery("select b from Pessoa b where b.email like ?1", ProdutorDeMidia.class);
         query.setParameter(1, email);
