@@ -5,11 +5,13 @@ import javax.faces.bean.RequestScoped;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import servico.GrupoServico;
 
 @ManagedBean
 @RequestScoped
@@ -21,6 +23,9 @@ public class LoginBean implements Serializable
     @NotBlank
     String senha;
 
+    @EJB
+    private GrupoServico grupoServico;
+
     public String efetuarLogin()
     {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -28,9 +33,20 @@ public class LoginBean implements Serializable
         try
         {
             request.login(username, senha); //chama indiretamente o codigo authent user  
-            System.out.println("logado");
-            adicionarMessagem(FacesMessage.SEVERITY_INFO, "Logado");
-            return "sucesso";
+
+            String grupo = grupoServico.buscarGrupoDaPessoa(username);
+            System.out.println("Logado: " + grupo);
+            switch (grupo)
+            {
+                case "noivo":
+                    return "sucessoNoivo";
+                case "produtorDeMidia":
+                    return "sucessoProdutor";
+                case "convidado":
+                    return "sucessoConvidado";
+                default:
+                    return "nenhum";
+            }
         } catch (ServletException ex)
         {
             System.out.println("Causa do erro: " + ex.getCause());

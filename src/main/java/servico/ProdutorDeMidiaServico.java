@@ -24,6 +24,7 @@ public class ProdutorDeMidiaServico extends Servico
         em.flush();
         if (existente(produtor.getEmail()) == false)
         {
+            grupoServico.associarGrupo_UsuarioProdutor(produtor);
             grupoServico.associarGrupoProdutor(produtor);
             em.persist(produtor);
         } else

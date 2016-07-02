@@ -24,6 +24,7 @@ public class ConvidadoServico extends Servico
         em.flush();
         if (existente(convidado.getEmail()) == false)
         {
+            grupoServico.associarGrupo_UsuarioConvidado(convidado);
             grupoServico.associarGrupoConvidado(convidado);
             em.persist(convidado);
         } else

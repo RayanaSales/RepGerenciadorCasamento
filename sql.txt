@@ -124,6 +124,7 @@ create table pessoa_grupo
 INSERT INTO grupo (txt_nome) VALUES ('noivo');  
 INSERT INTO grupo (txt_nome) VALUES ('produtorDeMidia');
 INSERT INTO grupo (txt_nome) VALUES ('convidado');
+INSERT INTO grupo (txt_nome) VALUES ('usuario');
 
 CREATE SEQUENCE GRUPO_SEQUENCE INCREMENT BY 1
     MINVALUE 1 MAXVALUE 99999999 START WITH 1;

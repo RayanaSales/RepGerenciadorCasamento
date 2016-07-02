@@ -21,6 +21,7 @@ public class NoivoServico extends Servico
     {
         if (existente(noivo.getEmail()) == false)
         {
+            grupoServico.associarGrupo_UsuarioNoivo(noivo);
             grupoServico.associarGrupoNoivo(noivo);
             em.persist(noivo);
         } else

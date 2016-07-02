@@ -29,6 +29,11 @@ public class GrupoBean implements Serializable
         grupo = new Grupo();
         grupos = new ArrayList<>();
     }
+    
+    public String buscarGrupoPessoa(String email)
+    {
+       return grupoServico.buscarGrupoDaPessoa(email);
+    }
    
     public GrupoServico getGrupoServico()
     {

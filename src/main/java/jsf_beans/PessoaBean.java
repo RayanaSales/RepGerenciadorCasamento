@@ -43,5 +43,10 @@ public class PessoaBean implements Serializable
         listar();
         return pessoas;
     }
+    
+    public Pessoa buscarPessoa(String email)
+    {
+        return pessoaServico.buscarPessoa(email);
+    }
 
 }

@@ -13,6 +13,10 @@
   <security-role-mapping>
     <role-name>convidado</role-name>
     <group-name>convidado</group-name>
+  </security-role-mapping>
+<security-role-mapping>
+    <role-name>usuario</role-name>
+    <group-name>usuario</group-name>
   </security-role-mapping>	
   <jsp-config>
     <property name="keepgenerated" value="true">

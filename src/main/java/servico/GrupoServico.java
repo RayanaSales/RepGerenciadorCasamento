@@ -3,9 +3,11 @@ package servico;
 import entidades.Convidado;
 import entidades.Grupo;
 import entidades.Noivo;
+import entidades.Pessoa;
 import entidades.ProdutorDeMidia;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -18,6 +20,39 @@ import javax.persistence.TypedQuery;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class GrupoServico extends Servico
 {
+    @EJB
+    PessoaServico pessoaServico;
+    
+    public void associarGrupo_UsuarioNoivo(Noivo pessoa)
+    {
+        List<Grupo> gruposDaPessoa = new ArrayList<>();
+        Grupo grupoPessoa = buscar(4);
+        gruposDaPessoa.add(grupoPessoa);
+        
+        pessoa.setGrupos(gruposDaPessoa);     
+        em.merge(pessoa);
+    }
+    
+    public void associarGrupo_UsuarioProdutor(ProdutorDeMidia pessoa)
+    {
+        List<Grupo> gruposDaPessoa = new ArrayList<>();
+        Grupo grupoPessoa = buscar(4);
+        gruposDaPessoa.add(grupoPessoa);
+        
+        pessoa.setGrupos(gruposDaPessoa);     
+        em.merge(pessoa);
+    }
+    
+    public void associarGrupo_UsuarioConvidado(Convidado pessoa)
+    {
+        List<Grupo> gruposDaPessoa = new ArrayList<>();
+        Grupo grupoPessoa = buscar(4);
+        gruposDaPessoa.add(grupoPessoa);
+        
+        pessoa.setGrupos(gruposDaPessoa);     
+        em.merge(pessoa);
+    }
+        
     public void associarGrupoNoivo(Noivo pessoa)
     {
         List<Grupo> gruposDaPessoa = new ArrayList<>();
@@ -61,6 +96,24 @@ public class GrupoServico extends Servico
         }
 
         return true;
+    }
+    
+    public String buscarGrupoDaPessoa(String email)
+    {
+        String grupoAtual = "nenhum";
+        Pessoa pessoa = pessoaServico.buscarPessoa(email);        
+        List<Grupo> grupos = pessoa.getGrupos();
+        
+        for(Grupo grupo : grupos)
+        {
+            if(grupo.getNome().equals("noivo"))
+                grupoAtual = "noivo";
+            else if(grupo.getNome().equals("produtoDeMidia"))
+                grupoAtual = "produtoDeMidia";
+            else if(grupo.getNome().equals("convidado"))
+                grupoAtual = "convidado";
+        }
+        return grupoAtual;
     }
 
     public List<Grupo> listar()

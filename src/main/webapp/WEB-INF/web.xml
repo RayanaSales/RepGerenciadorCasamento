@@ -13,6 +13,18 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <context-param>
+        <param-name>facelets.SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>  
+    <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6LerFCQTAAAAAOulI08KM5x1hsxLxhoMTRGGuBcw</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6LerFCQTAAAAAGSk9VS087sAaZtr_fgfn7MGRD3K</param-value>
+    </context-param>  
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -30,6 +42,29 @@
     <welcome-file-list>
         <welcome-file>faces/publico/login.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <security-constraint>
+        <display-name>Pg usuario</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Usuario Area</web-resource-name>
+            <description>Protected Usuario Area</description>
+            <url-pattern>/faces/usuario/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>            
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>usuario</role-name>
+        </auth-constraint>  
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>              
+    </security-constraint> 
     
     <security-constraint>
         <display-name>Pg noivos</display-name>
@@ -53,7 +88,7 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>              
     </security-constraint> 
-    
+        
     <security-constraint>
         <display-name>Pg produtor midia</display-name>
         <web-resource-collection>
@@ -104,4 +139,6 @@
         <error-code>403</error-code>
         <location>/faces/publico/erroPermissaoNegada.xhtml</location>
     </error-page>
+    
+    
 </web-app>
