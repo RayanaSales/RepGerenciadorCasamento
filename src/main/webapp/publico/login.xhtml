@@ -11,18 +11,23 @@
     <h:body>
         <h:form id="login">
             <p:fieldset legend="Login">
-                <p:outputLabel value="Username" for="username" />
-                <p:inputText id="username" value="#{loginBean.username}"/>
-                <br/>
-                <p:outputLabel value="Senha" for="senha" />
-                <p:password id="senha" value="#{loginBean.senha}" />
-                <br/>
+                <h:panelGrid columns="2">
 
-                <p:captcha label="Captcha" language="pt"/>
+                    <p:outputLabel value="E-mail: " for="username" />
+                    <p:inputText id="username" value="#{loginBean.username}"/>
 
-                <p:commandButton value="Login" action="#{loginBean.efetuarLogin()}"/>                
-                <h:commandButton action="templateCadastro?faces-redirect=true" immediate="true" value="Cadastrar" />
+                    <p:outputLabel value="Senha: " for="senha" />
+                    <p:password id="senha" value="#{loginBean.senha}" />
 
+                    <br/>
+                    <h:form>
+                        <p:messages showDetail="true"/>
+                        <p:captcha label="Captcha" language="pt" />
+                    </h:form>
+                    
+                    <p:commandButton value="Login" action="#{loginBean.efetuarLogin()}"/>
+                    <p:commandButton action="templateCadastro?faces-redirect=true" immediate="true" value="Cadastrar" />
+                </h:panelGrid>
             </p:fieldset>
         </h:form>    
     </h:body>
