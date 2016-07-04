@@ -5,6 +5,8 @@ import javax.faces.bean.RequestScoped;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -17,7 +19,6 @@ import servico.GrupoServico;
 @RequestScoped
 public class LoginBean implements Serializable
 {
-
     @NotBlank
     String username;
     @NotBlank
@@ -25,6 +26,11 @@ public class LoginBean implements Serializable
 
     @EJB
     private GrupoServico grupoServico;
+    
+    private static final Logger LOGGER = Logger.getGlobal();    
+    static {
+        LOGGER.setLevel(Level.FINEST);
+    }
 
     public String efetuarLogin()
     {
@@ -34,22 +40,12 @@ public class LoginBean implements Serializable
         {
             request.login(username, senha); //chama indiretamente o codigo authent user  
 
-            String grupo = grupoServico.buscarGrupoDaPessoa(username);
-            System.out.println("Logado: " + grupo);
-            switch (grupo)
-            {
-                case "noivo":
-                    return "sucessoNoivo";
-                case "produtorDeMidia":
-                    return "sucessoProdutor";
-                case "convidado":
-                    return "sucessoConvidado";
-                default:
-                    return "nenhum";
-            }
+            String grupo = grupoServico.buscarGrupoDaPessoa(username);            
+            LOGGER.fine("Logado: " + grupo);
+            
+            return "sucesso";
         } catch (ServletException ex)
-        {
-            System.out.println("Causa do erro: " + ex.getCause());
+        {             
             ex.printStackTrace();
             return "falha";
         }

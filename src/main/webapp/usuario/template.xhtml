@@ -11,7 +11,8 @@
 
         <h:panelGrid columns="2">
             <h:graphicImage library="imagens" name="ring1.jpg" width="100px"/>
-            <h1>Wedding club</h1>            
+            <h1>Wedding CLUB</h1>    
+            <h1>RAYANA GIT TESTE</h1>  
         </h:panelGrid>
         
         <h:form>
@@ -22,7 +23,7 @@
                 <p:menuitem value="Local" url="/faces/usuario/localizacaoCadastro.xhtml"></p:menuitem>
                 <p:menuitem value="Presente" url="/faces/usuario/presenteCadastro.xhtml"></p:menuitem>
                 <p:menuitem value="Buffet" url="/faces/noivo/buffetCadastro.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
-                <p:menuitem value="Cerimonia" url="/faces/noivo/cerimoniaCadastro.xhtml"></p:menuitem>
+                <p:menuitem value="Cerimonia" url="/faces/noivo/cerimoniaCadastro.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
                 <p:menuitem value="Noivo" url="/faces/noivo/noivoCadastro.xhtml" rendered="#{request.isUserInRole('noivo')}"></p:menuitem>
                 <p:menuitem value="Produtor" url="/faces/produtorDeMidia/produtorDeMidiaCadastro.xhtml" rendered="#{facesContext.externalContext.isUserInRole('produtorDeMidia')}"></p:menuitem>
                 <p:menuitem value="Convidado" url="/faces/convidado/convidadoCadastro.xhtml" rendered="#{facesContext.externalContext.isUserInRole('convidado')}"></p:menuitem>

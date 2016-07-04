@@ -6,6 +6,10 @@
 
     <navigation-rule>
         <from-view-id>/publico/login.xhtml</from-view-id>
+         <navigation-case>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/faces/usuario/template.xhtml</to-view-id>
+        </navigation-case> 
         <navigation-case>
             <from-outcome>sucessoNoivo</from-outcome>
             <to-view-id>/faces/noivo/menu_noivo.xhtml</to-view-id>
@@ -20,7 +24,7 @@
         </navigation-case>   
         <navigation-case>
             <from-outcome>falha</from-outcome>
-            <to-view-id>/faces/publico/erro.xhtml</to-view-id>
+            <to-view-id>/faces/publico/erroInterno.xhtml</to-view-id>
         </navigation-case> 
         <navigation-case>
             <from-outcome>nenhum</from-outcome>
