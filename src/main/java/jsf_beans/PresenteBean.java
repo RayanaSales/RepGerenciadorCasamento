@@ -138,8 +138,9 @@ public class PresenteBean implements Serializable
 
     protected void adicionarMessagem(FacesMessage.Severity severity, String mensagem)
     {
-        FacesMessage message = new FacesMessage(severity, mensagem, "");
+        FacesMessage message = new FacesMessage(severity, mensagem, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
+        System.out.println("DEU ERRO" + mensagem);
     }
 
 //    public List<Loja> listarLojas()
