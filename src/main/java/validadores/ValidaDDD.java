@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Documented
 public @interface ValidaDDD
 {
-    String message() default "{entidades.Telefone.ddd}";
+    String message() default "Insira um ddd válido";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

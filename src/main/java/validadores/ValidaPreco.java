@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Documented
 public @interface ValidaPreco
 {
-    String message() default "{entidades.ProdutorDeMidia.preco}";
+    String message() default "Deve ser maior que 0.ss";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

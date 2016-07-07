@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Documented
 public @interface ValidaNumeroTelefone
 {
-    String message() default "{entidades.Telefone.numero}";
+    String message() default "O número está incorreto. Se for telefone deve iniciar com 3, caso seja telefone deve começar com 9, 8, ou 7.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

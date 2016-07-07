@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Documented
 public @interface ValidaURL
 {
-    String message() default "{entidades.ProdutorDeMidia.linkParaRedeSocial}";
+    String message() default "Sintax: www. + texto + .com + (.br opcional).";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

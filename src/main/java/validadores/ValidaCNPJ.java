@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Documented
 public @interface ValidaCNPJ
 {
-    String message() default "{entidades.Loja.CNPJ}";
+    String message() default "Insira um cnpj válido. Todos os números não podem ser iguais";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

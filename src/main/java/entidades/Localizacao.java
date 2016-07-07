@@ -24,7 +24,7 @@ public class Localizacao implements Serializable
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 40)
+    @Size(min = 3, max = 40, message = "O logradouro deve ter entre 3 e 40 caracteres.")
     @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.logradouro}")
     @Column(name = "txt_logradouro")
     private String logradouro; //chave secundaria
