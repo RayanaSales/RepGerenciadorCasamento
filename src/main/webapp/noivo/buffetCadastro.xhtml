@@ -10,7 +10,6 @@
 
     <h:form id="buffet">
         <p:fieldset legend="Buffet">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
 
                 <p:outputLabel for="valor" value="Valor:" />
@@ -25,7 +24,7 @@
                 <p:commandButton action="#{buffetBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" immediate="true" action="#{buffetBean.listar()}" update="@form" ajax="false"/>
-                <h:commandButton action="editarBuffet?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarBuffet" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
 

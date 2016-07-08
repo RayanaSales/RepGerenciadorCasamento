@@ -29,7 +29,7 @@ public class RoupaDosNoivos implements Serializable {
     
     @NotNull
     @Size(min = 3, max = 40)
-    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.RoupaDosNoivos.roupa}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.")
     @Column(name = "txt_roupa")
     private String roupa; //chave secundaria
     

@@ -10,9 +10,6 @@
 
     <h:form id="presente">
         <p:fieldset legend="Presente">
-
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
-
             <h:panelGrid columns="3" cellpadding="5">
 
                 <p:outputLabel for="nome" value="Nome:" />
@@ -37,7 +34,7 @@
                 <p:commandButton action="#{presenteBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" action="#{presenteBean.listar()}" immediate="true" update="@form"></p:commandButton>
-                <h:commandButton action="editarPresente?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarPresente" immediate="true" value="Editar" />
             </p:toolbarGroup>
 
         </p:fieldset>

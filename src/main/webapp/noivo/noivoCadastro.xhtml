@@ -10,7 +10,6 @@
 
     <h:form id="noivo">
         <p:fieldset legend="Noivo">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{noivoBean.noivo.nome}"/>
@@ -36,7 +35,7 @@
                 <p:commandButton action="#{noivoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" immediate="true" action="#{noivoBean.listar()}" update="@form" ajax="false"/>
-                <h:commandButton action="editarNoivo?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarNoivo" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
     </h:form>

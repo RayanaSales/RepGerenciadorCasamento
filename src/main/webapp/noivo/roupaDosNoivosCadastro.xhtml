@@ -10,7 +10,6 @@
 
     <h:form id="roupa">
         <p:fieldset legend="Roupa dos noivos">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="roupa" value="Nome da roupa:" />
                 <p:inputText id="roupa" value="#{roupaDosNoivosBean.roupa.roupa}"/>
@@ -32,7 +31,7 @@
                 <p:commandButton action="#{roupaDosNoivosBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" action="#{roupaDosNoivosBean.listar()}" update="@form" ajax="false"/>
-                <h:commandButton action="editarRoupaDosNoivos?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarRoupaDosNoivos" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
 

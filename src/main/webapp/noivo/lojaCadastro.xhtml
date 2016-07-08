@@ -10,9 +10,7 @@
 
     <h:form id="loja">
         <p:fieldset legend="Loja">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
-
-            <h:panelGrid columns="3" cellpadding="5">
+             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{lojaBean.loja.nome}"/>  
                 <br/>
@@ -41,7 +39,7 @@
                 <p:commandButton action="#{lojaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" action="#{lojaBean.listar()}" update="@form" ajax="false"/>
-                <h:commandButton action="editarLoja?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarLoja" immediate="true" value="Editar" />
             </p:toolbarGroup>
         </p:fieldset>
     </h:form>

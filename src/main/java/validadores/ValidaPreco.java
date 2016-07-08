@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Documented
 public @interface ValidaPreco
 {
-    String message() default "Deve ser maior que 0.ss";
+    String message() default "Deve ser maior que 0";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

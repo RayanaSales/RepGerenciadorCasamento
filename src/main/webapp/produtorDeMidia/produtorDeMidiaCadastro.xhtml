@@ -10,7 +10,6 @@
 
     <h:form id="produtor">
         <p:fieldset legend="Produtor de mídia">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{produtorDeMidiaBean.produtor.nome}"/>
@@ -51,7 +50,7 @@
                 <p:commandButton action="#{produtorDeMidiaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" action="#{produtorDeMidiaBean.listar()}" update="@form" ajax="false"/>
-                <h:commandButton action="editarProdutorDeMidia?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarProdutorDeMidia" immediate="true" value="Editar" />
 
             </p:toolbarGroup>
         </p:fieldset>

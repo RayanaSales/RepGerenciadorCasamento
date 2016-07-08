@@ -9,9 +9,6 @@
 
     <h:form id="comesBebes">
         <p:fieldset legend="Comes e bebes">
-
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
-
             <h:panelGrid columns="3" cellpadding="5">
 
                 <p:outputLabel for="produto" value="Produto:" />
@@ -45,7 +42,7 @@
                 <p:commandButton action="#{comesBebesBean.salvar()}" value="Salvar" ajax="true" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" action="#{comesBebesBean.listar()}" update="@form"></p:commandButton>
-                <h:commandButton action="editarComesBebes?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarComesBebes" immediate="true" value="Editar" />
             </p:toolbarGroup>
 
         </p:fieldset>

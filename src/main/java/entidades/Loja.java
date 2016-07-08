@@ -26,7 +26,7 @@ public class Loja implements Serializable
     
     @NotNull
     @Size(min = 3)
-    @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Loja.nome}")
+    @Pattern(regexp = "[A-Za-z ]+", message = "Deve possuir apenas letras, no maximo 1 maiuscula. Minimo:3 Max: 40.")
     @Column(name = "txt_nome")
     private String nome;
         

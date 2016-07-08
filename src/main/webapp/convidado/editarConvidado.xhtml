@@ -10,8 +10,7 @@
 
     <h:form id="convidado">
         <p:fieldset legend="Convidado">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
-            <h:panelGrid columns="3" cellpadding="5">
+             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="nome" value="Nome:" />
                 <p:inputText id="nome" value="#{convidadoBean.convidado.nome}"/>
                 <p:message for="nome" id="messageDatetime" severity="error"/>

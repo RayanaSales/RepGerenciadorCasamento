@@ -10,7 +10,6 @@
 
     <h:form id="localizacao">
         <p:fieldset legend="Localizacao">
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
             <h:panelGrid columns="3" cellpadding="5">
                 <p:outputLabel for="logradouro" value="Logradouro:" />
                 <p:inputText id="logradouro" value="#{localizacaoBean.localizacao.logradouro}"/>
@@ -45,7 +44,7 @@
                 <p:commandButton action="#{localizacaoBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar localização" icon="ui-icon-check" validateClient="true"/>
                 <p:commandButton value="Listar" action="#{localizacaoBean.listar()}" update="@form"></p:commandButton>
-                <h:commandButton action="editarLocalizacao?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarLocalizacao" immediate="true" value="Editar" />
 
             </p:toolbarGroup>
 

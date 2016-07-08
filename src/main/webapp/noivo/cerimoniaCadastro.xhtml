@@ -10,10 +10,7 @@
 
     <h:form id="cerimonia">
         <p:fieldset legend="Cerimonia">
-
-            <p:growl id="growl" showDetail="true" life="4000" severity="info, warn"/>
-
-            <h:panelGrid columns="3" cellpadding="5">
+  <h:panelGrid columns="3" cellpadding="5">
 
                 <p:outputLabel for="datetime" value="Datetime:" />
                 <p:calendar id="datetime" value="#{cerimoniaBean.cerimonia.dataHora}" pattern="yyyy/MM/dd HH:mm:ss" />
@@ -35,7 +32,7 @@
                 <p:commandButton action="#{cerimoniaBean.salvar()}" value="Salvar" ajax="false" update="@form" 
                                  title="Salvar" icon="ui-icon-check" validateClient="false"/>
                 <p:commandButton value="Listar" immediate="true" action="#{cerimoniaBean.listar()}" update="@form" ajax="false"/>
-                <h:commandButton action="editarCerimonia?faces-redirect=true" immediate="true" value="Editar" />
+                <h:commandButton action="editarCerimonia" immediate="true" value="Editar" />
 
             </p:toolbarGroup>
         </p:fieldset>

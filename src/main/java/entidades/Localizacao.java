@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Localizacao implements Serializable
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 40, message = "O logradouro deve ter entre 3 e 40 caracteres.")
+    @Size(min = 3, max = 40)
     @Pattern(regexp = "[A-Za-z ]+", message = "{entidades.Localizacao.logradouro}")
     @Column(name = "txt_logradouro")
     private String logradouro; //chave secundaria
@@ -60,11 +61,11 @@ public class Localizacao implements Serializable
     EstadosDoBrasil estado;
     
     //one to one bidirecional
-    @OneToOne(mappedBy = "localizacao")
+    @OneToOne(mappedBy = "localizacao", fetch = FetchType.EAGER)
     private Cerimonia cerimonia;
     
     //one to one bidirecional
-    @OneToOne(mappedBy = "localizacao")
+    @OneToOne(mappedBy = "localizacao", fetch = FetchType.EAGER)
     private Loja loja;
 
     public Localizacao()
