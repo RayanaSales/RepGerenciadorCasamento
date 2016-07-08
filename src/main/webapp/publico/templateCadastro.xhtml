@@ -13,8 +13,9 @@
             <h:graphicImage library="imagens" name="ring1.jpg" width="100px"/>
             <h1>Wedding club - cadastro inicial</h1>            
         </h:panelGrid>
-        
+
         <h:form>
+            <p:growl id="growl" autoUpdate="true" globalOnly="true" showDetail="true" life="4000" severity="info, warn"/>
             <p:menubar>
                 <p:menuitem value="Noivo" url="/faces/publico/cadastroInicialNoivo.xhtml"></p:menuitem>
                 <p:menuitem value="Produtor" url="/faces/publico/cadastroInicialProdutor.xhtml"></p:menuitem>
