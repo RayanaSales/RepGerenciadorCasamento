@@ -32,7 +32,7 @@ public class NoivoServico extends Servico
 
     public List<Noivo> listar()
     {
-        return em.createQuery("select t from Noivo AS t", Noivo.class).getResultList();
+        return em.createQuery("select t from Noivo t", Noivo.class).getResultList();
     }
 
     public void remover(Noivo noivo)

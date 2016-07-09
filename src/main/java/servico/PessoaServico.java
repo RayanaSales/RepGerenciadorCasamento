@@ -18,7 +18,7 @@ public class PessoaServico extends Servico
 
     public List<Pessoa> listar()
     {
-        return em.createQuery("select p from Pessoa AS p", Pessoa.class).getResultList();
+        return em.createQuery("select p from Pessoa p", Pessoa.class).getResultList();
     }
 
     public Pessoa buscarPessoa(String email)

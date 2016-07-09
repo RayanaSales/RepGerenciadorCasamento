@@ -44,12 +44,12 @@ public class Presente implements Serializable
     private String ondeEncontrar;
 
     //uma cerimonia contem uma lista de presentes
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_cerimonia", referencedColumnName = "id")
     private Cerimonia cerimonia;
 
     //Um presente pode ser encontrado em uma lista de lojas
-    @OneToMany(mappedBy = "presente", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "presente", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = false)
     private List<Loja> lojas;
 

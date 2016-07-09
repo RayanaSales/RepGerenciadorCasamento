@@ -46,7 +46,7 @@ public class Telefone implements Serializable
     private Pessoa pessoa;
     
     //one to one bidirecional
-    @OneToOne(mappedBy = "telefone")
+    @OneToOne(mappedBy = "telefone", fetch = FetchType.EAGER)
     private Loja loja;
 
     public Telefone()

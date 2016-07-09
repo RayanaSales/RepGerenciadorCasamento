@@ -25,7 +25,7 @@ public class ComesBebesServico extends Servico
 
     public List<ComesBebes> listar()
     {
-        return em.createQuery("select t from ComesBebes AS t", ComesBebes.class).getResultList();
+        return em.createQuery("select t from ComesBebes t", ComesBebes.class).getResultList();
     }
 
     public void remover(ComesBebes cb) throws ExcecaoNegocio

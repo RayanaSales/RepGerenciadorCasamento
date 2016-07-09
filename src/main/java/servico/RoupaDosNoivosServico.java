@@ -26,7 +26,7 @@ public class RoupaDosNoivosServico extends Servico
 
     public List<RoupaDosNoivos> listar()
     {
-        return em.createQuery("select t from RoupaDosNoivos AS t", RoupaDosNoivos.class).getResultList();
+        return em.createQuery("select t from RoupaDosNoivos t", RoupaDosNoivos.class).getResultList();
     }
 
     public void remover(RoupaDosNoivos roupa) throws ExcecaoNegocio

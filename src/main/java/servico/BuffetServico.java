@@ -30,7 +30,7 @@ public class BuffetServico extends Servico
     public List<Buffet> listar()
     {
         em.flush();
-        return em.createQuery("select t from Buffet AS t", Buffet.class).getResultList();
+        return em.createQuery("select t from Buffet t", Buffet.class).getResultList();
     }
 
     public List<Buffet> listarComComesBebes()

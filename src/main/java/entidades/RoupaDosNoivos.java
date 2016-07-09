@@ -38,6 +38,7 @@ public class RoupaDosNoivos implements Serializable {
     @Column(name = "numero_valor")
     private double valor;
     
+    
     public RoupaDosNoivos()
     {
     

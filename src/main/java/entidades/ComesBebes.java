@@ -51,7 +51,7 @@ public class ComesBebes implements Serializable
     private Buffet buffet;
 
     //quero pedir o brigadeiro da minha vizinha, os doces finos de tal lugar, mas eu gosto da coxinha da padaria. Pede tudo de cada lugar
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "id_loja", referencedColumnName = "id")
     private Loja loja;
 

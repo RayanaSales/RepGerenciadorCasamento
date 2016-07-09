@@ -25,7 +25,7 @@ public class LocalizacaoServico extends Servico
 
     public List<Localizacao> listar()
     {
-        return em.createQuery("select t from Localizacao AS t", Localizacao.class).getResultList();
+        return em.createQuery("select t from Localizacao t", Localizacao.class).getResultList();
     }
 
     public void remover(Localizacao localizacao) throws ExcecaoNegocio

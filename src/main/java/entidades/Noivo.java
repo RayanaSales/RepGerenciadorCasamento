@@ -18,7 +18,7 @@ import javax.persistence.SequenceGenerator;
 public class Noivo extends Pessoa implements Serializable
 {
 
-    @OneToMany(mappedBy = "noivo", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "noivo", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RoupaDosNoivos> roupaDosNoivos;
 

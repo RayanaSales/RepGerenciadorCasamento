@@ -40,17 +40,17 @@ public class Cerimonia implements Serializable
     @JoinColumn(name = "id_localizacao", referencedColumnName = "id")
     private Localizacao localizacao;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "id_buffet", referencedColumnName = "id")
     private Buffet buffet;
 
     //lista de presentes que o casal cria
-    @OneToMany(mappedBy = "cerimonia", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "cerimonia", fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Presente> presentes;
 
     //uma cerimonia to many pessoas (noivos, convidados, produtorDeMidia)
-    @OneToMany(mappedBy = "cerimonia", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "cerimonia", fetch = FetchType.EAGER,
             cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Pessoa> pessoas;
 

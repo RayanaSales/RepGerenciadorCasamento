@@ -25,7 +25,7 @@ public class PresenteServico extends Servico
 
     public List<Presente> listar()
     {
-        return em.createQuery("select p from Presente AS p", Presente.class).getResultList();
+        return em.createQuery("select p from Presente p", Presente.class).getResultList();
     }
 
     public void remover(Presente presente) throws ExcecaoNegocio

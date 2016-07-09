@@ -46,7 +46,7 @@ public class TelefoneServico extends Servico
 
     public List<Telefone> listar()
     {
-        return em.createQuery("select t from Telefone AS t", Telefone.class).getResultList();
+        return em.createQuery("select t from Telefone t", Telefone.class).getResultList();
     }
 
     public void remover(Telefone telefone) throws ExcecaoNegocio

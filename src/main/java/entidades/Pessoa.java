@@ -53,7 +53,7 @@ public class Pessoa implements Serializable
     @Column(name = "numero_numeroAleatorio")
     private int numeroAleatorio;
 
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
     protected List<Telefone> telefones;
 

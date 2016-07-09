@@ -21,7 +21,7 @@
                 <p:outputLabel for="phone" value="Phone:" />
                 <p:inputMask id="phone" value="#{telefoneBean.telefone.numero}" mask="999999999"/>
                 <p:message for="phone" id="messageFone" severity="error"/>
-                <br/>               
+                         
                 <p:outputLabel for="pessoa" value="Pessoa:" />
                 <p:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{telefoneBean.telefone.pessoa}">
                     <f:selectItems value="#{pessoaBean.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
