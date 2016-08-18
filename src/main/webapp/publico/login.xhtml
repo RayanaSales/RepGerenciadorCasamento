@@ -19,12 +19,6 @@
                     <p:outputLabel value="Senha: " for="senha" />
                     <p:password id="senha" value="#{loginBean.senha}" />
 
-                    <br/>
-                    <h:form>
-                        <p:messages showDetail="true"/>
-                        <p:captcha label="Captcha" language="pt" />
-                    </h:form>
-                    
                     <p:commandButton value="Login" action="#{loginBean.efetuarLogin()}"/>
                     <p:commandButton action="templateCadastro?faces-redirect=true" immediate="true" value="Cadastrar" />
                 </h:panelGrid>
