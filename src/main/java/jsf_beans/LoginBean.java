@@ -1,5 +1,6 @@
 package jsf_beans;
 
+import entidades.Pessoa;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import org.hibernate.validator.constraints.NotBlank;
@@ -14,11 +15,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import servico.GrupoServico;
+import servico.PessoaServico;
 
 @ManagedBean
 @RequestScoped
 public class LoginBean implements Serializable
 {
+    @EJB
+    private PessoaServico pessoaServico;
+    
     @NotBlank
     String username;
     @NotBlank
@@ -39,8 +44,14 @@ public class LoginBean implements Serializable
         try
         {
             request.login(username, senha); //chama indiretamente o codigo authent user  
+//chama indiretamente o codigo authent user  
 
-            String grupo = grupoServico.buscarGrupoDaPessoa(username);            
+            String grupo = grupoServico.buscarGrupoDaPessoa(username);   
+            
+            //seta pessoa na sessão
+            Pessoa pessoaLogada = pessoaServico.buscarPessoa(username);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", pessoaLogada);
+            
             LOGGER.fine("Logado: " + grupo);
             
             return "sucesso";

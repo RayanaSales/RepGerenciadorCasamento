@@ -44,10 +44,10 @@ public class NoivoServico extends Servico
     public void atualizar(Noivo noivo) throws ExcecaoNegocio
     {
         em.flush();
-        if (existente(noivo.getEmail()) == false)
+        if (existente(noivo.getEmail()) == true)
         {
             em.merge(noivo);
-        } else
+        } else if (existente(noivo.getEmail()) == false)
         {
             throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
         }

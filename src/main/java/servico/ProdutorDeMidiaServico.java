@@ -50,10 +50,10 @@ public class ProdutorDeMidiaServico extends Servico
     public void atualizar(ProdutorDeMidia produtor) throws ExcecaoNegocio
     {
         em.flush();
-        if (existente(produtor.getEmail()) == false)
+        if (existente(produtor.getEmail()) == true)
         {
             em.merge(produtor);
-        } else
+        } else if (existente(produtor.getEmail()) == false)
         {
             throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
         }

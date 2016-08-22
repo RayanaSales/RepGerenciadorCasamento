@@ -2,6 +2,7 @@ package jsf_beans;
 
 import criptografia.Encripta;
 import entidades.Cerimonia;
+import entidades.Noivo;
 import entidades.Pessoa;
 import entidades.ProdutorDeMidia;
 import enumeracoes.ProdutorDeMidiaCategoria;
@@ -17,6 +18,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
+import org.primefaces.event.RowEditEvent;
 import servico.ProdutorDeMidiaServico;
 
 @ManagedBean
@@ -28,11 +30,13 @@ public class ProdutorDeMidiaBean implements Serializable
 
     public List<ProdutorDeMidia> produtores;
     public ProdutorDeMidia produtor;
+    public ProdutorDeMidia produtorLogado;
     Encripta encripta;
 
     public ProdutorDeMidiaBean()
     {
         produtor = new ProdutorDeMidia();
+        produtorLogado = new ProdutorDeMidia();
         encripta = new Encripta();
     }
 
@@ -86,6 +90,11 @@ public class ProdutorDeMidiaBean implements Serializable
         produtor = new ProdutorDeMidia(); //renove a instancia, para o proximo elemento
     }
 
+    public void editar(RowEditEvent editEvent) {
+        produtor = (ProdutorDeMidia) editEvent.getObject();
+        editar(produtor.getId());
+    }
+    
     public void editar(int id)
     {
         listar(); //atualize a minha lista
@@ -132,6 +141,11 @@ public class ProdutorDeMidiaBean implements Serializable
         return produtor;
     }
 
+    public ProdutorDeMidia getProdutorLogado() {
+         produtorLogado = (ProdutorDeMidia) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");     
+        return produtorLogado;
+    }
+    
     public void setProdutor(ProdutorDeMidia produtor)
     {
         this.produtor = produtor;

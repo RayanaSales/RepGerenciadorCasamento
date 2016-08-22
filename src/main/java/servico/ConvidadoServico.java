@@ -50,10 +50,10 @@ public class ConvidadoServico extends Servico
     public void atualizar(Convidado convidado) throws ExcecaoNegocio
     {
         em.flush();
-        if (existente(convidado.getEmail()) == false)
+        if (existente(convidado.getEmail()) == true)
         {
             em.merge(convidado);
-        } else
+        } else if (existente(convidado.getEmail()) == false)
         {
             throw new ExcecaoNegocio(ExcecaoNegocio.OBJETO_EXISTENTE);
         }

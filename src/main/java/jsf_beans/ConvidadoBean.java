@@ -3,6 +3,7 @@ package jsf_beans;
 import criptografia.Encripta;
 import entidades.Cerimonia;
 import entidades.Convidado;
+import entidades.Noivo;
 import entidades.Pessoa;
 import enumeracoes.ConvidadoCategoria;
 import excecao.ExcecaoNegocio;
@@ -35,11 +36,13 @@ public class ConvidadoBean implements Serializable
 
     public List<Convidado> convidados;
     public Convidado convidado;
+    public Convidado convidadoLogado;
     Encripta encripta;
 
     public ConvidadoBean()
     {
         convidado = new Convidado();
+        convidadoLogado = new Convidado();
         encripta = new Encripta();
     }
 
@@ -93,6 +96,11 @@ public class ConvidadoBean implements Serializable
 
         convidado = new Convidado(); //renove a instancia, para o proximo elemento
     }
+    
+    public void editar(RowEditEvent editEvent) {
+        convidado = (Convidado) editEvent.getObject();
+        editar(convidado.getId());
+    }
 
     public void editar(int id)
     {
@@ -135,6 +143,11 @@ public class ConvidadoBean implements Serializable
         return convidado;
     }
 
+    public Convidado getConvidadoLogado() {
+         convidadoLogado = (Convidado) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");        
+        return convidadoLogado;
+    }
+    
     public ConvidadoServico getConvidadoServico()
     {
         return convidadoServico;

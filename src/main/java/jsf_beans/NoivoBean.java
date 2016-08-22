@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.validation.ConstraintViolationException;
 import org.primefaces.event.RowEditEvent;
 import servico.NoivoServico;
@@ -29,6 +30,7 @@ public class NoivoBean implements Serializable
 
     public List<Noivo> noivos;
     public Noivo noivo;
+    public Noivo noivoLogado;
     public Grupo grupo;
 
     public String[] roupasSelecionadas;
@@ -37,6 +39,7 @@ public class NoivoBean implements Serializable
     public NoivoBean()
     {        
         noivo = new Noivo();
+        noivoLogado = new Noivo();
         encripta = new Encripta();
     }
 
@@ -104,7 +107,7 @@ public class NoivoBean implements Serializable
 
     public void editar(int id)
     {
-        listar(); //atualize a minha lista
+       // listar(); //atualize a minha lista
         noivo.setId(id);
         try
         {
@@ -125,10 +128,13 @@ public class NoivoBean implements Serializable
         noivo = new Noivo();
     }
 
-    public void remover(Noivo noivo)
+    public void remover(Noivo noivo) throws ServletException
     {
         noivoServico.remover(noivo);
         adicionarMessagem(FacesMessage.SEVERITY_INFO, "Removido com sucesso!");
+        
+        LoginBean loginBean = new LoginBean();
+        loginBean.logout();
     }
 
     public NoivoServico getNoivoServico()
@@ -154,8 +160,13 @@ public class NoivoBean implements Serializable
 
     public Noivo getNoivo()
     {
-        return noivo;
+         return noivo;
     }
+
+    public Noivo getNoivoLogado() {
+        noivoLogado = (Noivo) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLogado");    
+        return noivoLogado;
+    } 
 
     public void setNoivo(Noivo noivo)
     {

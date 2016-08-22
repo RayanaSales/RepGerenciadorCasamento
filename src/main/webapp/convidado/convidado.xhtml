@@ -8,68 +8,55 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <p:tabView id="abas">        
-        <p:tab title="Equipe de midia" id="equipeMidia">
-            <h:form id="formularioEquipeMidias">
+        <p:tab title="Gerenciar cadastro" id="painelConvidado">
+            <h:form id="formularioConvidado">
                 <p:messages id="messagesEdicao" severity="error" autoUpdate="true" closable="true"/>
-                <p:dataTable id="tabelaProdutor" editable="true"  var="produtor" value="#{produtorDeMidiaBean.produtorLogado}" paginator="true" rows="5" emptyMessage="Nenhum produtor cadastrado">
-                    <f:facet name="header">Produtores</f:facet>
+                <p:dataTable id="tabelaConvidado" editable="true"  var="convidado" value="#{convidadoBean.convidadoLogado}" paginator="true" rows="5" emptyMessage="Nenhum convidado cadastrado">
+                    <f:facet name="header">Convidados</f:facet>
 
-                    <p:ajax event="rowEdit" listener="#{produtorDeMidiaBean.editar}"  />
+                    <p:ajax event="rowEdit" listener="#{convidadoBean.editar}"  />
 
-                    <p:column headerText="Nome" filterMatchMode="startsWith" filterBy="#{produtor.nome}" sortBy="#{produtor.nome}">
+                    <p:column headerText="Nome" filterMatchMode="startsWith" filterBy="#{convidado.nome}" sortBy="#{convidado.nome}">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{produtor.nome}" />
+                                <h:outputText value="#{convidado.nome}" />
                             </f:facet>
                             <f:facet name="input">
-                                <p:inputText value="#{produtor.nome}" required="true" />
+                                <p:inputText value="#{convidado.nome}" required="true" />
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="E-mail" filterMatchMode="startsWith" filterBy="#{produtor.email}" sortBy="#{produtor.email}">
+                    <p:column headerText="E-mail" filterMatchMode="startsWith" filterBy="#{convidado.email}" sortBy="#{convidado.email}">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{produtor.email}" />
+                                <h:outputText value="#{convidado.email}" />
                             </f:facet>
                             <f:facet name="input">
-                                <p:inputText value="#{produtor.email}" required="true" />
+                                <p:inputText value="#{convidado.email}" required="true" />
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Rede social" filterMatchMode="startsWith" filterBy="#{produtor.linkParaRedeSocial}" sortBy="#{produtor.linkParaRedeSocial}">
+                    <p:column headerText="Senhas" filterMatchMode="startsWith" filterBy="#{convidado.quantidadeSenhas}" sortBy="#{convidado.quantidadeSenhas}">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{produtor.linkParaRedeSocial}" />
-                            </f:facet>
-                            <f:facet name="input">
-                                <p:inputText value="#{produtor.linkParaRedeSocial}" required="true" />
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Preço" filterMatchMode="startsWith" filterBy="#{produtor.preco}" sortBy="#{produtor.preco}">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{produtor.preco}" />
+                                <h:outputText value="#{convidado.quantidadeSenhas}" />
                             </f:facet>
                             <f:facet name="input">                              
-                                <p:inputText id="valor" value="#{produtor.preco}">
-                                    <f:validateDoubleRange minimum="0.0"/>
-                                </p:inputText>
+                                <p:inputMask id="quantidadeSenhas" value="#{convidado.quantidadeSenhas}" mask="9?9"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Categoria" filterMatchMode="startsWith" filterBy="#{produtor.categoria}" sortBy="#{produtor.categoria}">
+                    <p:column headerText="Categoria" filterMatchMode="startsWith" filterBy="#{convidado.categoria}" sortBy="#{convidado.categoria}">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{produtor.categoria}" />
+                                <h:outputText value="#{convidado.categoria}" />
                             </f:facet>
                             <f:facet name="input">                              
-                                <p:selectOneMenu id="categoria" value="#{produtor.categoria}">
-                                    <f:selectItems value="#{produtorDeMidiaBean.categorias}"   />
+                                <p:selectOneMenu id="categoria" value="#{convidado.categoria}">
+                                    <f:selectItems value="#{convidadoBean.categorias}"   />
                                 </p:selectOneMenu>
                             </f:facet>
                         </p:cellEditor>
@@ -81,7 +68,7 @@
                         <p:rowEditor />
                     </p:column>
                     <p:column>
-                        <p:commandLink styleClass="ui-icon ui-icon-trash"  action="#{produtorDeMidiaBean.remover(produtor)}" process="@this" update="tabelaProdutor">
+                        <p:commandLink styleClass="ui-icon ui-icon-trash"  action="#{convidadoBean.remover(convidado)}" process="@this" update="tabelaConvidado">
                             <p:confirm header="Confirmação" message="Tem certeza ?" icon="ui-icon-alert" />
                         </p:commandLink>
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
