@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.validation.ConstraintViolationException;
+import org.primefaces.event.RowEditEvent;
 import servico.NoivoServico;
 
 @ManagedBean
@@ -94,6 +95,11 @@ public class NoivoBean implements Serializable
         }
 
         noivo = new Noivo(); //renove a instancia, para o proximo elemento
+    }
+    
+     public void editar(RowEditEvent editEvent) {
+        noivo = (Noivo) editEvent.getObject();
+        editar(noivo.getId());
     }
 
     public void editar(int id)
